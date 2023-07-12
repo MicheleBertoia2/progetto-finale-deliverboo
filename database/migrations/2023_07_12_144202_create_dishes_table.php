@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('image_path');
             $table->decimal('price', 8, 2);
             $table->text('ingredients');
-            $table->int('vote');
+            $table->float('vote',2,1);
             $table->text('description')->nullable();
 
             $table->timestamps();
