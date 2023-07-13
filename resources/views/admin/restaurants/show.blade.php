@@ -7,9 +7,9 @@
 
     {{-- @dump($restaurant); --}}
     <h1 class="py-4">{{ $restaurant->name }}</h1>
-    <img src="{{ $restaurant->image ? asset('storage/' . $restaurant->image) : Vite::asset('resources/img/placeholder-img.png') }}" class="py-2 w-25" alt="{{ $restaurant->image == false ? "No image" : $restaurant->name }}">
+    {{-- <img src="{{ $restaurant->image ? asset('storage/' . $restaurant->image) : Vite::asset('resources/img/placeholder-img.png') }}" class="py-2 w-25" alt="{{ $restaurant->image == false ? "No image" : $restaurant->name }}"> --}}
     {{-- ! oppure --}}
-    {{-- <img src="{{ $restaurant->image_path ? asset('storage/' . $restaurant->image_path) : Vite::asset('resources/img/placeholder-img.png') }}" class="py-2 w-25" alt="{{ $restaurant->image_path == false ? "No image" : $restaurant->name }}"> --}}
+    <img src="{{ $restaurant->image_path ? asset('storage/' . $restaurant->image_path) : Vite::asset('resources/img/placeholder-img.png') }}" class="py-2 w-25" alt="{{ $restaurant->image_path == false ? "No image" : $restaurant->name }}">
     <h6 class="py-2"><strong class="text-decoration-underline">Id:</strong> {{ $restaurant->id }}</h6>
     <h6 class="py-2"><strong class="text-decoration-underline">Nome:</strong> {{ $restaurant->nome }}</h6>
     <h6 class="py-2"><strong class="text-decoration-underline">Indirizzo:</strong> {{ $restaurant->address }}</h6>

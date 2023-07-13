@@ -11,7 +11,7 @@
         </div>
     @endif --}}
 
-    <h1 class="py-4">Restaurants</h1>
+    <h1 class="py-4">Ristoranti</h1>
 
     <table class="table table-hover">
         <thead class="thead-dark">

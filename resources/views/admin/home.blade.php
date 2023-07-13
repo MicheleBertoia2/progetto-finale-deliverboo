@@ -7,6 +7,7 @@
         Home dashboard
         </h2>
 
+        <a href="{{ route('admin.restaurants.create') }}" class="btn btn-primary mt-2">Aggiungi un nuovo ristorante</a>
     </div>
 
 

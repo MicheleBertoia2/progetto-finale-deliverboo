@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Restaurant;
-
+use Illuminate\Support\Facades\Storage;
+//* Requests per la validazione degli errori
+use App\Http\Requests\RestaurantRequest;
 
 class RestaurantController extends Controller
 {
@@ -32,7 +34,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.restaurants.create');
     }
 
     /**
@@ -41,9 +43,34 @@ class RestaurantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RestaurantRequest $request)
     {
-        //
+        //* per creare un nuovo progetto e salvare i dati nel database al click del button submit del form in create
+        $form_data = $request->all();
+
+        $new_restaurant = new Restaurant();
+
+        //* IMMAGINI
+        if (array_key_exists('image', $form_data)) {
+
+            //* CARICARE UN IMMAGINE mantendo lo stesso nome
+            // prima di salvare l'immagine salvo il nome
+            $form_data['image_original_name'] = $request->file('image')->getClientOriginalName();
+            // salvo l'immagine nella cartella uploads (public\storage\uploads) e in $form_data['image_path'] salvo il percorso //! il nome originale viene salvato nel db ma nel percorso del db e nella cartella uploads non viene salvato il nome originale
+            $form_data['image_path'] = Storage::put('uploads', $form_data['image']);
+        }
+
+        //*soluzione con fillable (collegata al model Restaurant.php)
+        // lo slug deve essere generato in modo automatico ogni volta che viene creato un nuovo prodotto quindi è stata creata un funzione nel model
+        $form_data['slug'] = Restaurant::generateSlug($form_data['name']);
+        // con fill i dati vengono salvati tramite le chiavi salvate nel model in protected $fillable in modo da fare l'associazione chiave-valore automaticamente
+        $new_restaurant->fill($form_data);
+
+        // dd($request->all());
+        $new_restaurant->save();
+
+        //* redirect al progetto appena generato
+        return redirect()->route('admin.restaurants.show', $new_restaurant);
     }
 
     /**
