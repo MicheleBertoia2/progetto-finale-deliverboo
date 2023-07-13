@@ -20,7 +20,8 @@ return new class extends Migration
             $table->foreign('dish_id')
                     ->references('id')
                     ->on('dishes')
-                    ->onDelete('set null');
+                    ->cascadeOnDelete();
+
 
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')

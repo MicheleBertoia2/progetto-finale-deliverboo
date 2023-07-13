@@ -17,6 +17,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('restaurant_id')->after('id');
             $table->foreign('restaurant_id')
+                    ->constraint()
                     ->references('id')
                     ->on('restaurants')
                     ->cascadeOnDelete();

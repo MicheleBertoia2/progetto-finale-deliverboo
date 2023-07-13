@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 use App\Models\Restaurant;
+use App\Models\User;
 use Illuminate\Support\Str;
 
 
@@ -121,10 +122,11 @@ class RestaurantTableSeeder extends Seeder
             ]
 
             ];
-
-        foreach ($data as $restaurant){
+            $users = User::all();
+        foreach ($data as $index=>$restaurant){
             $new_restaurant = New Restaurant();
             $new_restaurant->name = $restaurant['name'];
+            $new_restaurant->user_id  = $users[$index]->id;
             $new_restaurant->address = $restaurant['address'];
             $new_restaurant->slug = Restaurant::generateSlug($new_restaurant->name);
             $new_restaurant->vat_number = $faker->randomNumber(9, true);
