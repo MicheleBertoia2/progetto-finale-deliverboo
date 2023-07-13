@@ -32,6 +32,7 @@ class Dish extends Model
         return $slug;
     }
 
+    //creo le relazioni con  le  altre  tabelle
     public function restaurant(){
         return $this->belongsTo(Restaurant::class);
     }
