@@ -3,6 +3,7 @@
 <nav>
     <ul>
         <li><a href="{{ route('admin.home') }}"> Dashboard</a></li>
+        <li><a href="{{ route('admin.dishes.index') }}"> Dishes</a></li>
 
     </ul>
 </nav>

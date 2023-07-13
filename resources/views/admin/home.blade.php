@@ -6,7 +6,9 @@
         <h2 class="fs-4 text-secondary my-4">
         Home dashboard
         </h2>
-
+        <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio deleniti consequuntur saepe neque possimus nemo laborum ut libero esse ullam alias beatae modi eius et soluta tempora, voluptatem temporibus illo!
+        </p>
     </div>
 
 
