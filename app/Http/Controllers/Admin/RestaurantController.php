@@ -18,10 +18,9 @@ class RestaurantController extends Controller
     public function index()
     {
         //* vengono mostrati tutti progetti in una volta
-        $restaurants = Restaurant::all();
+        // $restaurants = Restaurant::all();
         //* vengono mostrati 10 progetti alla volta (per far ciò è necessario importare bootstrap in AppServiceProvider)
-        // $restaurants = Restaurant::paginate(10);
-        // $restaurants = Restaurant::paginate(2);
+        $restaurants = Restaurant::paginate(10);
 
         return view('admin.restaurants.index', compact('restaurants'));
     }

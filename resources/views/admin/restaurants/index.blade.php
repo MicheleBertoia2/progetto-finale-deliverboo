@@ -39,6 +39,9 @@
         </tbody>
     </table>
 
+    <div>
+        {{ $restaurants->links() }}
+    </div>
 
 </div>
 
