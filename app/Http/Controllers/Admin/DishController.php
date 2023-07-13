@@ -25,7 +25,7 @@ class DishController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.dish.create');
     }
 
     /**
@@ -36,7 +36,16 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $form_data = $request->all();
+        $form_data['slug'] = Dish::generateSlug($form_data['name']);
+        //valore di default di user_id solo per adesso che non ho le relazioni
+        $form_data['user_id'] = 0;
+
+        $new_dish = new Dish();
+        $new_dish->fill($form_data);
+        $new_dish->save();
+
+        return redirect()->route('admin.dishes.show', $new_dish);
     }
 
     /**

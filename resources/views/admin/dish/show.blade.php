@@ -1,10 +1,18 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>index dish</h1>
+    <div class="container my-ctn">
+        <h1>show details</h1>
 
-    <div class="container ">
-        <h1>ciao gianni</h1>
+
+        <div class="card d-flex align-items-center" style="width: 18rem;">
+            <img src="{{$dish->image_path}}" class="{{$dish->name}}" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{$dish->name}}</h5>
+                <p class="card-text">{{$dish->ingredients}}</p>
+            </div>
+        </div>
+
     </div>
 
 @endsection
