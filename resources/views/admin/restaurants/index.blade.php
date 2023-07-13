@@ -30,8 +30,7 @@
                 <td>{{ $restaurant->name }}</td>
                 <td>{{ $restaurant->address }}</td>
                 <td>
-                    <a href="#" class="btn btn-primary"><i class="fa-regular fa-eye"></i></a>
-                    {{-- <a href="{{ route('admin.restaurants.show', $restaurant) }}" class="btn btn-primary"><i class="fa-regular fa-eye"></i></a> --}}
+                    <a href="{{ route('admin.restaurants.show', $restaurant) }}" class="btn btn-primary"><i class="fa-regular fa-eye"></i></a>
                 </td>
             </tr>
         @endforeach
