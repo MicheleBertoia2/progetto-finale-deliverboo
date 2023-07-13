@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Dish;
-use App\Models\User;
+use App\Models\Restaurant;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -22,7 +22,7 @@ class DishesTableSeeder extends Seeder
            $data = json_decode(file_get_contents($url)) ;
            $food = $data->meals[0];
            $dish = new Dish();
-           $dish->user_id = User::inRandomOrder()->first()->id;
+           $dish->user_id = Restaurant::inRandomOrder()->first()->id;
            $dish->name = $food->strMeal;
            $dish->slug  = Dish::generateSlug($dish->name);
            $dish->image_path = $food->strMealThumb;

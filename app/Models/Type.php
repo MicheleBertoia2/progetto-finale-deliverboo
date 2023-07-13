@@ -33,4 +33,8 @@ class Type extends Model
 
         return $slug;
     }
+
+    public function restaurants(){
+        return $this->belongsToMany(Restaurant::class);
+    }
 }
