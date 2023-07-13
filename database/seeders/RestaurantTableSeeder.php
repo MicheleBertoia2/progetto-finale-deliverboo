@@ -122,11 +122,11 @@ class RestaurantTableSeeder extends Seeder
             ]
 
             ];
-
+            $users = User::all();
         foreach ($data as $index=>$restaurant){
             $new_restaurant = New Restaurant();
             $new_restaurant->name = $restaurant['name'];
-            $new_restaurant->user_id  = User::where('id', $index  +1 );
+            $new_restaurant->user_id  = $users[$index]->id;
             $new_restaurant->address = $restaurant['address'];
             $new_restaurant->slug = Restaurant::generateSlug($new_restaurant->name);
             $new_restaurant->vat_number = $faker->randomNumber(9, true);

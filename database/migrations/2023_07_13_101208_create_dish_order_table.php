@@ -20,8 +20,7 @@ return new class extends Migration
             $table->foreign('dish_id')
                     ->references('id')
                     ->on('dishes')
-                    ->onDelete('set null');
-                    //all'eliminazione di un piatto per non dare errore  nell'ordine sarà settato nullo  per tenere traccia dei dati
+                    ->cascadeOnDelete();
 
 
             $table->unsignedBigInteger('order_id');

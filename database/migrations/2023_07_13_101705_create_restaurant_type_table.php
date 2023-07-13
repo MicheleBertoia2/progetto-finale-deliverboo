@@ -27,8 +27,7 @@ return new class extends Migration
             $table->foreign('type_id')
                     ->references('id')
                     ->on('types')
-                    ->onDelete('set null');
-                    //all'eliminazione di un tipo per non dare errore  nel  ristorante sarà settato nullo
+                    ->cascadeOnDelete();
 
             $table->timestamps();
         });

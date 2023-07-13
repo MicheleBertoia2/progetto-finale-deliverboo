@@ -23,7 +23,7 @@ class DishesTableSeeder extends Seeder
            $food = $data->meals[0];
            //uso i dati  per  popolare la tabella dei piatti
            $dish = new Dish();
-           $dish->user_id = Restaurant::inRandomOrder()->first()->id;
+           $dish->restaurant_id = Restaurant::inRandomOrder()->first()->id;
            $dish->name = $food->strMeal;
            $dish->slug  = Dish::generateSlug($dish->name);
            $dish->image_path = $food->strMealThumb;
