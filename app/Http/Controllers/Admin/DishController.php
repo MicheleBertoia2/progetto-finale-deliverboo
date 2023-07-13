@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Dish;
+use App\Http\Requests\DishRequest;
 
 class DishController extends Controller
 {
@@ -33,13 +34,18 @@ class DishController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     *
      */
-    public function store(Request $request)
+    public function store(DishRequest $request)
     {
         $form_data = $request->all();
         $form_data['slug'] = Dish::generateSlug($form_data['name']);
+
+
         //valore di default di user_id solo per adesso che non ho le relazioni
         $form_data['user_id'] = 0;
+        // da cancellare
+
 
         $new_dish = new Dish();
         $new_dish->fill($form_data);
@@ -65,9 +71,9 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Dish $dish)
     {
-        //
+        return view('admin.dish.edit', compact('dish'));
     }
 
     /**
@@ -77,9 +83,19 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DishRequest $request, Dish $dish)
     {
-        //
+        $form_data = $request->all();
+
+        if($form_data['name'] !== $dish->name){
+            $form_data['name'] = Dish::generateSlug($form_data['name']);
+        }else{
+            $form_data['slug'] = $dish->slug;
+        }
+
+        $dish->update($form_data);
+
+        return redirect()->route('admin.dishes.show', $dish);
     }
 
     /**
@@ -88,8 +104,10 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Dish $dish)
     {
-        //
+        $dish->delete();
+
+        return redirect()->route('admin.dishes.index');
     }
 }
