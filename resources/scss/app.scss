@@ -29,3 +29,14 @@ aside{
     height: calc(100vh - 60px);
 }
 
+// regole css da cancellare in seguito
+
+.my-ctn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img{
+        width: 100%;
+        border-radius: 10px;
+    }
+}
