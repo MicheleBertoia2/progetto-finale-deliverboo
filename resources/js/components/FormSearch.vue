@@ -33,10 +33,10 @@ export default {
 <template>
 
     <input
-      v-model.trim="tosearch"
-      placeholder="Cerca"
-      type="text"
-      @keyup.enter="getApi"
+    v-model.trim="tosearch"
+    placeholder="Cerca"
+    type="text"
+    @keyup.enter="getApi"
     >
     <button @click="getApi">Invia</button>
 

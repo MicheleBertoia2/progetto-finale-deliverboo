@@ -13,18 +13,18 @@ export default {
 
 <template>
 
-    <div class="container">
+    <div class="contenitore">
         <Header />
 
 
-         <router-view v-slot="{Component, route}" class="page">
+        <router-view v-slot="{Component, route}" class="page">
             <transition
                 :enter-active-class="route.meta.enterClass"
                 :leave-active-class="route.meta.leaveClass"
             >
                 <component :is="Component" />
             </transition>
-         </router-view>
+        </router-view>
 
 
     </div>
@@ -33,7 +33,9 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-    .container{
+    .contenitore{
+        padding: 0;
+        width: 100vw;
         position: relative;
         .page{
             position: absolute;
