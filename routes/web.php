@@ -25,6 +25,7 @@ Route::middleware(['auth','verified'])
     ->prefix('admin')
     ->group(function(){
         Route::get('/', [DashboardController::class, 'index'])->name('home');
+
         Route::resource('restaurants', RestaurantController::class);
     });
 

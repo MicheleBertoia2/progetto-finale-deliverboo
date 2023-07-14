@@ -31,6 +31,8 @@
                 <td>{{ $restaurant->address }}</td>
                 <td>
                     <a href="{{ route('admin.restaurants.show', $restaurant) }}" class="btn btn-primary"><i class="fa-regular fa-eye"></i></a>
+                    {{--* button per EDIT (modificare il singolo progetto) --}}
+                    <a href="{{ route('admin.restaurants.edit', $restaurant) }}" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></a>
                 </td>
             </tr>
         @endforeach
