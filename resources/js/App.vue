@@ -1,30 +1,31 @@
 
 <script>
 import Header from './components/Header.vue'
-
+import Footer from './components/Footer.vue'
 
 export default {
     name:'App',
     components: {
-        Header
+        Header,
+        Footer
     }
 }
 </script>
 
 <template>
 
-    <div class="container">
+    <div>
         <Header />
 
 
-         <router-view v-slot="{Component, route}" class="page">
+        <router-view v-slot="{Component, route}" class="page">
             <transition
                 :enter-active-class="route.meta.enterClass"
                 :leave-active-class="route.meta.leaveClass"
             >
                 <component :is="Component" />
             </transition>
-         </router-view>
+        </router-view>
 
 
     </div>
@@ -33,10 +34,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-    .container{
-        position: relative;
-        .page{
-            position: absolute;
-        }
-    }
+
+
 </style>
