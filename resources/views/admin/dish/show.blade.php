@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container my-ctn">
-        <h1>show details</h1>
+        <h1 class="py-4">{{ $dish->name }}</h1>
 
         <div class="mb-3">
             <a href="{{ route('admin.dishes.show', $dish) }}" class="btn btn-primary"><i

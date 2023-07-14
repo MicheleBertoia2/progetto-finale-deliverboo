@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Crea un nuovo piatto</h1>
+        <h1 class="py-4">Crea un nuovo piatto</h1>
 
         @if ($errors->any())
             <div class="alert alert-danger" role="alert">

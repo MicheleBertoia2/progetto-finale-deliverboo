@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-danger">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="{{ route('admin.home')}}">
-                 Progetto finale
+                Progetto finale
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -30,7 +30,7 @@
                             </li>
                         @endif
                     @else
-                        <li class="nav-item dropdown d-flex">
+                        <li class="nav-item dropdown d-flex align-items-center">
 
                             <span class="text-white me-2">{{ Auth::user()->name }}</span>
 
