@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 //* Requests per la validazione degli errori
 use App\Http\Requests\RestaurantRequest;
 
+use Illuminate\Support\Facades\Auth;
+
 class RestaurantController extends Controller
 {
     /**
@@ -45,20 +47,17 @@ class RestaurantController extends Controller
      */
     public function store(RestaurantRequest $request)
     {
+
         //* per creare un nuovo progetto e salvare i dati nel database al click del button submit del form in create
         $form_data = $request->all();
+        $form_data['user_id'] = Auth::id();
+
+        if(array_key_exists('image', $form_data)){
+            $form_data['image'] = Storage::put('uploads', $form_data['image']);
+            // dd($form_data);
+        }
 
         $new_restaurant = new Restaurant();
-
-        //* IMMAGINI
-        if (array_key_exists('image', $form_data)) {
-
-            //* CARICARE UN IMMAGINE mantendo lo stesso nome
-            // prima di salvare l'immagine salvo il nome
-            $form_data['image_original_name'] = $request->file('image')->getClientOriginalName();
-            // salvo l'immagine nella cartella uploads (public\storage\uploads) e in $form_data['image_path'] salvo il percorso //! il nome originale viene salvato nel db ma nel percorso del db e nella cartella uploads non viene salvato il nome originale
-            $form_data['image_path'] = Storage::put('uploads', $form_data['image']);
-        }
 
         //*soluzione con fillable (collegata al model Restaurant.php)
         // lo slug deve essere generato in modo automatico ogni volta che viene creato un nuovo prodotto quindi è stata creata un funzione nel model
@@ -123,16 +122,12 @@ class RestaurantController extends Controller
         if (array_key_exists('image', $form_data)) {
 
             //* se l'immagine esiste (NEL DB) vuol dire che ne ho caricata una nuova e quindi ELIMINO quella precedente
-            if ($restaurant->image_path) {
+            if ($restaurant->image) {
                 // se è presente sul disco in public ed elimina l'immagine già presente
-                Storage::disk('public')->delete($restaurant->image_path);
+                Storage::disk('public')->delete($restaurant->image);
             }
 
-            //* (MIGLIORE) soluzione PER CARICARE UN IMMAGINE mantendo lo stesso nome
-            // prima di salvare l'immagine salvo il nome
-            $form_data['image_original_name'] = $request->file('image')->getClientOriginalName();
-            // salvo l'immagine nella cartella uploads (public\storage\uploads) e in $form_data['image_path'] salvo il percorso //! il nome originale viene salvato nel db ma nel percorso del db e nella cartella uploads non viene salvato il nome originale
-            $form_data['image_path'] = Storage::put('uploads', $form_data['image']);
+            $form_data['image'] = Storage::put('uploads', $form_data['image']);
         }
 
         //* aggiorno i dati
