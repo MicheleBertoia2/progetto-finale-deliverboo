@@ -6,7 +6,14 @@
         <div class="row">
         @foreach ($dishes as $dish)
             <div class="card m-1" style="width: 18rem;">
-                <img src="{{ $dish->image_path }}" class="{{ $dish->name }}" alt="{{ $dish->name }}">
+
+                <img src="{{ $dish->image_path }}"
+                class="{{ $dish->name }}" alt="">
+                @if (asset("storage/".$dish->image_path))
+                <img src="{{asset("storage/".$dish->image_path)}}"
+                class="{{ $dish->name }}" alt="{{ $dish->name }}">
+                @endif
+
                 <div class="card-body">
                     <h5 class="card-title">{{ $dish->name }}</h5>
                     <p class="card-text">{{ $dish->ingredients }}</p>

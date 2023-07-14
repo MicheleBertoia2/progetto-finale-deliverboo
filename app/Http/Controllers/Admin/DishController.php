@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Dish;
 use App\Http\Requests\DishRequest;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class DishController extends Controller
 {
@@ -43,8 +45,12 @@ class DishController extends Controller
 
 
         //valore di default di user_id solo per adesso che non ho le relazioni
-        $form_data['user_id'] = 0;
+        $form_data['restaurant_id'] = Auth::id();
         // da cancellare
+
+        if(array_key_exists('image_path', $form_data)){
+            $form_data['image_path'] = Storage::put('uploads',  $form_data['image_path']);
+        };
 
 
         $new_dish = new Dish();
@@ -93,6 +99,20 @@ class DishController extends Controller
             $form_data['slug'] = $dish->slug;
         }
 
+                if ($dish->image_path) {
+                    Storage::disk('public')->delete($dish->image_path);
+                }
+                if (array_key_exists('image_path', $form_data)) {
+                    if ($dish->image_path) {
+                        Storage::disk('public')->delete($dish->image_path);
+                    }
+                    $form_data['image_path'] = Storage::put('uploads', $form_data['image_path']);
+                }
+
+
+
+
+
         $dish->update($form_data);
 
         return redirect()->route('admin.dishes.show', $dish);
@@ -106,6 +126,7 @@ class DishController extends Controller
      */
     public function destroy(Dish $dish)
     {
+        Storage::disk('public')->delete($dish->image_path);
         $dish->delete();
 
         return redirect()->route('admin.dishes.index');
