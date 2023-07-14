@@ -147,8 +147,13 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Restaurant $restaurant)
     {
-        //
+        //* eliminazione progetto
+        $restaurant->delete();
+
+        //* REINDIRIZZAMENTO alla pagina index e mostro il messaggio di avvenuta eliminazione con il metodo WITH
+        //* with(chiave , valore)  accetta 2 parametri. il primo è la CHIAVE della VARIABILE di SESSIONE e il secondo è il VALORE (in questo caso la frase)
+        return redirect()->route('admin.restaurants.index')->with('deleted', "Il ristorante: $restaurant->name è stato eliminato con successo");
     }
 }
