@@ -67,11 +67,10 @@
                 @enderror
             </div>
 
-            <div class="mb-3">
-                <label for="image_path" class="form-label">Url Immagine</label>
-                <input id="image_path" class="form-control @error('image_path') is-invalid @enderror" name="image_path"
-                    type="text" placeholder="Url"
-                    value="{{ old('image_path',$dish->image_path) }}">
+            <div class="mb-3" style="width: 150vh; max-width: 73vw;">
+                <label for="image_path" class="form-label">Immagine</label>
+                <input onchange="showImagePreview(event)" type="file" value="{{ old('image_path',$dish->image_path) }}" class="form-control @error('image_path') is-invalid @enderror" id="image_path" name="image_path">
+                <img height="300px" class="mt-3 bg-white px-5" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt="">
                 @error('image_path')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -83,4 +82,14 @@
 
     </div>
 
+    <script>
+        function showImagePreview(event){
+            const tagImage = document.getElementById('prev-img');
+            tagImage.src = URL.createObjectURL(event.target.files[0]);
+
+            if(tagImage){
+            tagImage.classList.remove("px-5");
+            }
+        }
+    </script>
 @endsection

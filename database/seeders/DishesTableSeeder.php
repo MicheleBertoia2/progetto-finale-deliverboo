@@ -19,15 +19,15 @@ class DishesTableSeeder extends Seeder
         for ($i=0; $i < 20; $i++) {
             //recuperro una ricetta di  un piatto  a random da questa api
             $url = 'https://www.themealdb.com/api/json/v1/1/random.php';
-           $data = json_decode(file_get_contents($url)) ;
-           $food = $data->meals[0];
-           //uso i dati  per  popolare la tabella dei piatti
-           $dish = new Dish();
-           $dish->restaurant_id = Restaurant::inRandomOrder()->first()->id;
-           $dish->name = $food->strMeal;
-           $dish->slug  = Dish::generateSlug($dish->name);
-           $dish->image_path = $food->strMealThumb;
-           $dish->price  = rand(1,40) + (rand(0,100)/100);
+            $data = json_decode(file_get_contents($url)) ;
+            $food = $data->meals[0];
+            //uso i dati  per  popolare la tabella dei piatti
+            $dish = new Dish();
+            $dish->restaurant_id = Restaurant::inRandomOrder()->first()->id;
+            $dish->name = $food->strMeal;
+            $dish->slug  = Dish::generateSlug($dish->name);
+            $dish->image_path = $food->strMealThumb;
+            $dish->price  = rand(1,40) + (rand(0,100)/100);
 
             $dish->ingredients = $food->strIngredient1 . ', ' . $food->strIngredient2  . ', ' . $food->strIngredient3 . ', ' . $food->strIngredient4 ;
             $dish->vote = rand(1,5);
