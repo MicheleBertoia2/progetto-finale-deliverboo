@@ -19,6 +19,14 @@ export default defineComponent({
             snapAlign: 'center',
         },
         breakpoints: {
+            400: {
+                itemsToShow: 2,
+                snapAlign: 'center',
+            },
+            500: {
+                itemsToShow: 3,
+                snapAlign: 'center',
+            },
             700: {
                 itemsToShow: 3.5,
                 snapAlign: 'center',
@@ -52,7 +60,6 @@ export default defineComponent({
 
     img {
         height: 80px;
-
     }
 }
 </style>

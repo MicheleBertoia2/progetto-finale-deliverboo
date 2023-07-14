@@ -2,12 +2,14 @@
 
 import Restaurant from '../components/Restaurant.vue'
 import Slider from '../components/Slider.vue'
+import Footer from '../components/Footer.vue'
 
 export default {
     name:'Home',
     components: {
         Restaurant,
-        Slider
+        Slider,
+        Footer
     }
 }
 </script>
@@ -27,6 +29,8 @@ export default {
             </div>
         </div>
     </div>
+
+    <Footer />
 </template>
 
 
@@ -42,7 +46,6 @@ export default {
 .container-inner{
     background-color: white;
     min-height: 400px;
-    margin: 20px 0;
     width: 100%;
 }
 .badge{

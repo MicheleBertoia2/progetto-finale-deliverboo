@@ -1,19 +1,20 @@
 
 <script>
 import Header from './components/Header.vue'
-
+import Footer from './components/Footer.vue'
 
 export default {
     name:'App',
     components: {
-        Header
+        Header,
+        Footer
     }
 }
 </script>
 
 <template>
 
-    <div class="contenitore">
+    <div>
         <Header />
 
 
@@ -33,12 +34,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-    .contenitore{
-        padding: 0;
-        width: 100vw;
-        position: relative;
-        .page{
-            position: absolute;
-        }
-    }
+
+
 </style>
