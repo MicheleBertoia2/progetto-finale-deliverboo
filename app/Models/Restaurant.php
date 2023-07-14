@@ -10,6 +10,13 @@ class Restaurant extends Model
 {
     use HasFactory;
 
+    //* array utilizzato per centralizzare i campi della tabella in modo da rendere più leggibile store() in PageController.php (per creare un nuovo progetto)
+    protected $fillable = [
+        'name',
+        'slug',
+        'address',
+        'vat_number',
+    ];
 
     public static function generateSlug($str){
 

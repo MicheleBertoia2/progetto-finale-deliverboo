@@ -1,14 +1,14 @@
 
 <script>
 export default {
-  name:'Loader'
+name:'Loader'
 }
 </script>
 
 <template>
-  <div class="container d-flex justify-content-center my-5">
+<div class="container d-flex justify-content-center my-5">
     <div class="lds-hourglass"></div>
-  </div>
+</div>
 
 </template>
 
@@ -17,10 +17,10 @@ export default {
 
 
 .lds-hourglass {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
+display: inline-block;
+position: relative;
+width: 80px;
+height: 80px;
 }
 .lds-hourglass:after {
   content: " ";

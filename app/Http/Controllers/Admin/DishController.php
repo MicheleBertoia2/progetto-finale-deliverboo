@@ -44,9 +44,8 @@ class DishController extends Controller
         $form_data['slug'] = Dish::generateSlug($form_data['name']);
 
 
-        //valore di default di user_id solo per adesso che non ho le relazioni
         $form_data['restaurant_id'] = Auth::id();
-        // da cancellare
+
 
         if(array_key_exists('image_path', $form_data)){
             $form_data['image_path'] = Storage::put('uploads',  $form_data['image_path']);

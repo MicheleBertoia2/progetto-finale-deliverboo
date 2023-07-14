@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container ">
-        <h1>index dish</h1>
+        <h1 class="py-4">Piatti</h1>
         <div class="row">
         @foreach ($dishes as $dish)
             <div class="card m-1" style="width: 18rem;">

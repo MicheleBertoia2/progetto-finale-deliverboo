@@ -1,8 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
 
-header{
-    height: 60px;
-}
+
 
 aside{
     height: 100%;
@@ -12,6 +10,9 @@ aside{
             list-style: none;
             li{
                 margin-bottom: 8px;
+                i{
+                    text-decoration:  none;
+                }
                 a{
                     color: white;
                     text-decoration:  none;
@@ -27,6 +28,10 @@ aside{
 
 .main-wrapper{
     height: calc(100vh - 60px);
+}
+
+.custom-paragraph{
+    font-size: 1.4rem;
 }
 
 // regole css da cancellare in seguito
