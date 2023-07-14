@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Dish;
 use App\Http\Requests\DishRequest;
+use Illuminate\Support\Facades\Auth;
 
 class DishController extends Controller
 {
@@ -42,9 +43,9 @@ class DishController extends Controller
         $form_data['slug'] = Dish::generateSlug($form_data['name']);
 
 
-        //valore di default di user_id solo per adesso che non ho le relazioni
-        $form_data['user_id'] = 0;
-        // da cancellare
+
+        $form_data['restaurant_id'] = Auth::id();
+
 
 
         $new_dish = new Dish();
