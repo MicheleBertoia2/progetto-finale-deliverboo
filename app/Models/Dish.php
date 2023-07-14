@@ -11,7 +11,7 @@ class Dish extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name','slug','image_path','price','ingredients','vote','description','user_id',
+        'name','slug','image_path','price','ingredients','vote','description','restaurant_id',
     ];
 
     public static function generateSlug($str){
@@ -32,7 +32,12 @@ class Dish extends Model
         return $slug;
     }
 
-    public function user(){
-        return $this->belongsTo(User::class);
+    //creo le relazioni con  le  altre  tabelle
+    public function restaurant(){
+        return $this->belongsTo(Restaurant::class);
+    }
+
+    public function orders(){
+        return $this->belongsToMany(Order::class);
     }
 }

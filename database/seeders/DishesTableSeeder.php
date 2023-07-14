@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Dish;
-use App\Models\User;
+use App\Models\Restaurant;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -17,12 +17,13 @@ class DishesTableSeeder extends Seeder
     public function run()
     {
         for ($i=0; $i < 20; $i++) {
-
+            //recuperro una ricetta di  un piatto  a random da questa api
             $url = 'https://www.themealdb.com/api/json/v1/1/random.php';
            $data = json_decode(file_get_contents($url)) ;
            $food = $data->meals[0];
+           //uso i dati  per  popolare la tabella dei piatti
            $dish = new Dish();
-           $dish->user_id = User::inRandomOrder()->first()->id;
+           $dish->restaurant_id = Restaurant::inRandomOrder()->first()->id;
            $dish->name = $food->strMeal;
            $dish->slug  = Dish::generateSlug($dish->name);
            $dish->image_path = $food->strMealThumb;
