@@ -25,7 +25,7 @@ class DishRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'image_path' => 'required|max:255',
+            'image_path' => 'required',
             'price' => 'required',
             'ingredients' => 'required',
             'vote' => 'required|max:5',
@@ -37,7 +37,6 @@ class DishRequest extends FormRequest
             'name.required' => 'Il nome è un campo obbligatorio',
             'name.max' => 'Il nome non può avere piu di :max',
             'image_path.required' => 'il percorso della immagine  è un campo obbligatorio',
-            'image_path.max' => 'Il percorso della immagine non può avere piu di :max caratteri',
             'price.required' => 'Il prezzo è un campo obbligatorio',
             'ingredients.required' => 'Ingredienti è un campo obbligatorio',
             'vote.required' => 'il voto è un campo obbligatorio',

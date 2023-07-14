@@ -25,7 +25,7 @@
                 class="{{ $dish->name }}" alt="">
                 @if (asset("storage/".$dish->image_path))
                 <img src="{{asset("storage/".$dish->image_path)}}"
-                class="{{ $dish->name }}" alt="{{ $dish->name }}">
+                class="{{ $dish->name }}" alt="">
                 @endif
 
             <div class="card-body">
