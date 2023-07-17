@@ -69,11 +69,20 @@
 
             <div class="mb-3" style="width: 150vh; max-width: 73vw;">
                 <label for="image_path" class="form-label">Immagine</label>
-                <input onchange="showImagePreview(event)" type="file" value="{{ old('image_path',$dish->image_path) }}" class="form-control @error('image_path') is-invalid @enderror" id="image_path" name="image_path">
-                <img height="300px" class="mt-3 bg-white px-5" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt="">
+                <input onchange="showImagePreview(event)" type="file" value="{{Storage::path($dish?->image_path)}}" class="form-control @error('image_path') is-invalid @enderror" id="image_path" name="image_path">
+                <img height="300px"  class="mt-3 bg-white px-5" id="prev-img" src="{{ asset('storage/' . $dish?->image_path) }}" alt="">
                 @error('image_path')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="is_visible" class="form-label">Seleziona Visibilità</label>
+                <select class="form-select" name="is_visible">
+                    <option selected disabled>Seleziona</option>
+                    <option value="1">Visibile</option>
+                    <option value="0">Non Visibile</option>
+                </select>
             </div>
 
             <button type="submit" class="btn btn-success">Crea Piatto</button>

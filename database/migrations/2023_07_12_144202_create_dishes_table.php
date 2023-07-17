@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('slug')->nullable()->unique();
-            $table->string('image_path');
+            $table->string('image_path')->nullable();
             $table->decimal('price', 8, 2);
             $table->text('ingredients');
             $table->float('vote',2,1);
