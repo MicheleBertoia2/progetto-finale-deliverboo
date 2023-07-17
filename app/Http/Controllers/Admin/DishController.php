@@ -100,15 +100,13 @@ class DishController extends Controller
             $form_data['slug'] = $dish->slug;
         }
 
-                if ($dish->image_path) {
-                    Storage::disk('public')->delete($dish->image_path);
-                }
-                if (array_key_exists('image_path', $form_data)) {
-                    if ($dish->image_path) {
-                        Storage::disk('public')->delete($dish->image_path);
-                    }
-                    $form_data['image_path'] = Storage::put('uploads', $form_data['image_path']);
-                }
+
+        if (array_key_exists('image_path', $form_data)) {
+            if ($dish->image_path) {
+                Storage::disk('public')->delete($dish->image_path);
+            }
+            $form_data['image_path'] = Storage::put('uploads', $form_data['image_path']);
+        }
 
 
 
