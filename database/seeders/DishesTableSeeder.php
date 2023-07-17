@@ -32,6 +32,7 @@ class DishesTableSeeder extends Seeder
             $dish->ingredients = $food->strIngredient1 . ', ' . $food->strIngredient2  . ', ' . $food->strIngredient3 . ', ' . $food->strIngredient4 ;
             $dish->vote = rand(1,5);
             $dish->description  = 'descrizione prodotto';
+            $dish->is_visible  = true;
             $dish->save();
         }
 

@@ -17,6 +17,7 @@ class DishController extends Controller
      */
     public function index()
     {
+
         $dishes = Dish::all();
         return view('admin.dish.index', compact('dishes'));
     }
@@ -28,7 +29,8 @@ class DishController extends Controller
      */
     public function create()
     {
-        return view('admin.dish.create');
+        $dishes = Dish::all();
+        return view('admin.dish.create', compact('dishes'));
     }
 
     /**
