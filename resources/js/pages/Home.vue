@@ -15,6 +15,9 @@ export default {
 </script>
 
 <template>
+
+
+
     <div class="container-inner ">
 
         <Slider />
@@ -37,11 +40,8 @@ export default {
 
 <style lang="scss" scoped>
 
-.slider{
-    margin: 30px;
-    background-color: yellow;
-    height: 100px;
-}
+
+
 
 .container-inner{
     background-color: white;

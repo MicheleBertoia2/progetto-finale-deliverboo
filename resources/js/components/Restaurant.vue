@@ -9,7 +9,7 @@ export default {
 <template>
     <div class="restaurant">
         <div class="bg-restaurant">
-            <div class="text center">CICCIOGAMER89</div>
+            <div class="text center">RISTORANTE</div>
         </div>
         <div class="info">
             <p><i class="fa-solid fa-star"></i></p>
@@ -24,12 +24,26 @@ export default {
 
 <style lang="scss" scoped>
 
+@media (min-width: 1200px) {
+    .restaurant{
+        margin: 10px;
+        background-color: white;
+        height: 450px;
+        width: 350px;
+
+}
+}
+
+
 .restaurant{
         margin: 10px;
         background-color: white;
-            max-height: 390px;
-            max-width: 400px;
-            min-width: 400px;
+        min-width: 350px;
+        max-width: 450px;
+        max-height: 390px;
+        min-height: 250px;
+        height: 30%;
+        width: 30%;
         .info{
             margin-top: 10px;
             display: flex;
@@ -51,9 +65,12 @@ export default {
             .text{
                 font-size: 25px;
                 font-weight: bold;
-                color:black;
+                color:rgb(0, 0, 0);
                 position: absolute;
             }
         }
     }
 </style>
+
+
+
