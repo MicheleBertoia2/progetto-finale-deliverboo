@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="container my-ctn">
+        <a href="{{ route('admin.dishes.index') }}"
+    class="btn btn-primary mt-2 me-4 torna">Torna ai tuoi Piatti</a>
         <h1 class="py-4">{{ $dish->name }}</h1>
 
         <div class="mb-3">
-            <a href="{{ route('admin.dishes.show', $dish) }}" class="btn btn-primary"><i
-                class="fa-solid fa-eye"></i>
-            </a>
+
             <a href="{{ route('admin.dishes.edit', $dish) }}" class="btn btn-primary"><i
                 class="fa-solid fa-pencil"></i>
             </a>

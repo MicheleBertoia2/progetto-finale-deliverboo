@@ -2,7 +2,13 @@
 
 @section('content')
     <div class="container ">
-        <h1 class="py-4">Piatti</h1>
+        <div class="py-4">
+            <h1 class="d-inline-block"> Piatti</h1>
+            <a href="{{ route('admin.dishes.create') }}" class="btn btn-primary m-3">Nuovo Piatto <i
+                class="fa-solid fa-plus"></i>
+            </a>
+        </div>
+
         <div class="row">
         @foreach ($dishes as $dish)
             <div class="card m-1" style="width: 18rem;">
