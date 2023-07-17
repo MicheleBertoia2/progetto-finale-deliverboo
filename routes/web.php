@@ -7,8 +7,7 @@ use App\Http\Controllers\Admin\DashboardController;
 
 use App\Http\Controllers\Admin\RestaurantController;
 use App\Http\Controllers\Admin\DishController;
-
-
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +20,64 @@ use App\Http\Controllers\Admin\DishController;
 |
 */
 
-Route::get('/', [PageController::class, 'index'])->name('home');
+Route::get('/checkback', function (){
+    $gateway = new Braintree\Gateway ([
+            'environment' => 'sandbox',
+            'merchantId' => 'rntzhj86v4qk7kgg',
+            'publicKey' => 't2w3mtyt57nkq88m',
+            'privateKey' => 'c00c3934fa1742f2cfbc08d2be2643a9'
+            // 'environment' => config('services.braintree.environment'),
+            // 'merchantId' => config('services.braintree.merchantId'),
+            // 'publicKey' => config('services.braintree.publicKey'),
+            // 'privateKey' => config('services.braintree.privateKey')
+        ]);
+
+        $token = $gateway->clientToken()->generate();
+
+        return view('guest.checkout', compact('token'));
+});
+
+Route::post('/checkout', function(Request $request){
+
+    $gateway = new Braintree\Gateway ([
+        'environment' => 'sandbox',
+        'merchantId' => 'rntzhj86v4qk7kgg',
+        'publicKey' => 't2w3mtyt57nkq88m',
+        'privateKey' => 'c00c3934fa1742f2cfbc08d2be2643a9'
+        // 'environment' => config('services.braintree.environment'),
+        // 'merchantId' => config('services.braintree.merchantId'),
+        // 'publicKey' => config('services.braintree.publicKey'),
+        // 'privateKey' => config('services.braintree.privateKey')
+    ]);
+
+    $amount = $request->amount;
+    $nonce = $request->payment_method_nonce;
+
+    $result = $gateway->transaction()->sale([
+        'amount' => $amount,
+        'paymentMethodNonce' => $nonce,
+        'options' => [
+            'submitForSettlement' => true
+        ]
+    ]);
+
+    if ($result->success) {
+        $transaction = $result->transaction;
+        // header("Location: " . $baseUrl . "transaction.php?id=" . $transaction->id);
+        return back()->with('success_message', 'Transazione andata a buon fine! ID:'  . $transaction->id);
+    } else {
+        $errorString = "";
+
+        foreach($result->errors->deepAll() as $error) {
+            $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
+        }
+
+        // $_SESSION["errors"] = $errorString;
+        // header("Location: " . $baseUrl . "index.php");
+
+        return back()->withErrors('Errore! Messaggio:'  . $result->message);
+    }
+});
 
 Route::middleware(['auth','verified'])
     ->name('admin.')

@@ -17,6 +17,8 @@
         "@vitejs/plugin-vue": "^4.2.3",
         "animate.css": "^4.1.1",
         "bootstrap": "^5.2.2",
+        "braintree": "^3.16.0",
+        "braintree-web": "^3.96.0",
         "vue": "^3.2.36",
         "vue-router": "^4.2.2",
         "vue3-carousel": "^0.3.1"
