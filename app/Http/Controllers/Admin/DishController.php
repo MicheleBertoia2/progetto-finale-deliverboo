@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Dish;
+use App\Models\User;
+use App\Models\Restaurant;
 use App\Http\Requests\DishRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +20,8 @@ class DishController extends Controller
     public function index()
     {
 
-        $dishes = Dish::all();
+        $dishes = Dish::all()->where('restaurant_id', Auth::id());
+
         return view('admin.dish.index', compact('dishes'));
     }
 
@@ -109,13 +112,11 @@ class DishController extends Controller
         }
 
 
-
-
-
         $dish->update($form_data);
 
         return redirect()->route('admin.dishes.show', $dish);
-    }
+                }
+
 
     /**
      * Remove the specified resource from storage.

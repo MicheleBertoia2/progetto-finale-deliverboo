@@ -1,7 +1,15 @@
 @import '~bootstrap/scss/bootstrap';
 
 
-
+.container{
+    height: 100%;
+    position: relative;
+    .torna{
+        position: absolute;
+        left: 0px;
+        top: 20px;
+    }
+}
 aside{
     height: 100%;
     width: 280px;
