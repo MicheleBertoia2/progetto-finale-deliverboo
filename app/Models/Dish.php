@@ -11,7 +11,7 @@ class Dish extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name','slug','image_path','price','ingredients','vote','description','restaurant_id',
+        'name','slug','image_path','price','ingredients','vote','description','restaurant_id','is_visible'
     ];
 
     public static function generateSlug($str){

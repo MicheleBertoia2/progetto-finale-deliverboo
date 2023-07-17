@@ -7,12 +7,8 @@
         @foreach ($dishes as $dish)
             <div class="card m-1" style="width: 18rem;">
 
-                <img src="{{ $dish->image_path }}"
-                class="{{ $dish->name }}" alt="">
-                @if (asset("storage/".$dish->image_path))
-                <img src="{{asset("storage/".$dish->image_path)}}"
-                class="{{ $dish->name }}" alt="">
-                @endif
+
+                <img src="{{ asset('storage/' . $dish?->image_path) }}" alt="">
 
                 <div class="card-body">
                     <h5 class="card-title">{{ $dish->name }}</h5>
@@ -21,6 +17,9 @@
                         <span class="badge bg-success ">
                             prezzo:{{$dish->price}}</span>
                         <span class="badge bg-success">voto:{{$dish->vote}}</span>
+                        <span class="badge bg-success">Visibile:
+                            {{ $dish->is_visible ? 'Si' : 'No' }}
+                    </span>
                     </div>
                     <div>
                         <a href="{{ route('admin.dishes.show', $dish) }}" class="btn btn-primary"><i

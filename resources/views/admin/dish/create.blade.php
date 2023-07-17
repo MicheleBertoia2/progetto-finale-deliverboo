@@ -72,6 +72,16 @@
                 @enderror
             </div>
 
+            <div class="mb-3">
+                <label for="is_visible" class="form-label">Seleziona Visibilità</label>
+                <select class="form-select" name="is_visible">
+                    <option selected disabled>Seleziona</option>
+                    <option value="1">Visibile</option>
+                    <option value="0">Non Visibile</option>
+                </select>
+            </div>
+
+
             <button type="submit" class="btn btn-success">Crea Piatto</button>
 
         </form>

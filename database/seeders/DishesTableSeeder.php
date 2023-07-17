@@ -6,6 +6,7 @@ use App\Models\Dish;
 use App\Models\Restaurant;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class DishesTableSeeder extends Seeder
 {
@@ -26,12 +27,13 @@ class DishesTableSeeder extends Seeder
             $dish->restaurant_id = Restaurant::inRandomOrder()->first()->id;
             $dish->name = $food->strMeal;
             $dish->slug  = Dish::generateSlug($dish->name);
-            $dish->image_path = $food->strMealThumb;
+            $dish->image_path = Storage::url('uploads/'. $food->strMealThumb);
             $dish->price  = rand(1,40) + (rand(0,100)/100);
 
             $dish->ingredients = $food->strIngredient1 . ', ' . $food->strIngredient2  . ', ' . $food->strIngredient3 . ', ' . $food->strIngredient4 ;
             $dish->vote = rand(1,5);
             $dish->description  = 'descrizione prodotto';
+            $dish->is_visible  = true;
             $dish->save();
         }
 
