@@ -24,7 +24,7 @@ export default {
 
             <div class="wrapper mx-5">
 
-                <Restaurant v-for="restaurant in 9" :key="restaurant"  />
+                <Restaurant v-for="restaurant in 9" :key="restaurant"/>
 
             </div>
         </div>

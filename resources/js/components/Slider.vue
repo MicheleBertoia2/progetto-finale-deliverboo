@@ -42,8 +42,14 @@ export default defineComponent({
 
 <template>
     <Carousel v-bind="settings" :breakpoints="breakpoints" class="carousel">
-        <Slide v-for="slide in 10" :key="slide">
-            <div class="carousel__item"><img src="img/pasta.png" alt="pasta"></div>
+        <Slide v-for="slide in 2" :key="slide">
+            <div class="carousel__item">
+                <img src="img/pizza.png" alt="pizza">
+
+            </div>
+            <div class="carousel__item">
+                <img src="img/shushi.png" alt="sushi">
+            </div>
         </Slide>
 
         <template #addons>

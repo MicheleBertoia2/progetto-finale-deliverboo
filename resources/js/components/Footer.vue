@@ -29,11 +29,11 @@ export default {
         <div class="bottom d-flex justify-content-evenly mt-4">
             <p>Powered by Class 94 Team 3</p>
             <div class="social">
-            <i class="fa-brands fa-instagram"></i>
-            <i class="fa-brands fa-facebook"></i>
-            <i class="fa-brands fa-twitter"></i>
-            <i class="fa-brands fa-pinterest"></i>
-            <i class="fa-brands fa-youtube"></i>
+            <i class="fa-brands fa-square-instagram"></i>
+            <i class="fa-brands fa-square-facebook"></i>
+            <i class="fa-brands fa-square-twitter"></i>
+            <i class="fa-brands fa-square-pinterest"></i>
+            <i class="fa-brands fa-square-youtube"></i>
         </div>
         </div>
 
@@ -52,6 +52,7 @@ footer{
         justify-content: center;
         i{
             font-size: 35px;
+            margin: 2px;
         }
     }
 }
