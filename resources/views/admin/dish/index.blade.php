@@ -7,12 +7,6 @@
         @foreach ($dishes as $dish)
             <div class="card m-1" style="width: 18rem;">
 
-                {{-- <img src="{{ $dish->image_path }}"
-                class="{{ $dish->name }}" alt="">
-                @if (asset("storage/".$dish->image_path))
-                <img src="{{asset("storage/".$dish->image_path)}}"
-                class="{{ $dish->name }}" alt="">
-                @endif --}}
 
                 <img src="{{ asset('storage/' . $dish?->image_path) }}" alt="">
 
