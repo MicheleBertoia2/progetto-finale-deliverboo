@@ -56,6 +56,16 @@
                 @enderror
             </div>
 
+{{-- * da eliminare --}}
+            <div class="mb-3">
+                <label for="vote" class="form-label">Voto prodotto</label>
+                <input id="vote" class="form-control @error('vote') is-invalid @enderror" name="vote" value="{{ old('vote', $dish->vote) }}" type="number"
+                    placeholder="inserisci un numero da 1 a 5">
+                @error('vote')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+
             <div class="mb-3">
                 <label for="image_path" class="form-label">Immagine</label>
                 <input type="text" value="{{ old('image_path', $dish?->image_path) }}" class="form-control @error('image_path') is-invalid @enderror" id="text_input" name="image_path" style="opacity: 0; border: none; height: 0; width: 0;">
@@ -99,6 +109,11 @@
             document.getElementById("text_input").name = '';                        //sotituire dove c'è scritto oppure
             //* oppure
             // document.getElementById("text_input").classList.add("d-none");
+
+            // document.getElementById("file_input").value = (event.target.value == "") ? '$dish?->image_path' : '';
+            // document.getElementById("file_input").value = (event.target.value == "" || event.target.value == null || event.target.value == undefined) ? "URL.createObjectURL(event.target.files[0])" : "";
+            document.getElementById("file_input").value = (event.target.value == "" || event.target.value == null || event.target.value == undefined) ? "" : "null";
+
         }
 
     </script>

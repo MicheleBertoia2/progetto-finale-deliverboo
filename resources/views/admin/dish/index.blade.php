@@ -13,8 +13,11 @@
         @foreach ($dishes as $dish)
             <div class="card m-1" style="width: 18rem;">
 
-
-                <img src="{{ asset('storage/' . $dish?->image_path) }}" alt="">
+                @if(str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))
+                    <img src="{{  $dish?->image_path }}" alt="">
+                @else
+                    <img src="{{ asset('storage/' . $dish?->image_path) }}" alt="">
+                @endif
 
                 <div class="card-body">
                     <h5 class="card-title">{{ $dish->name }}</h5>

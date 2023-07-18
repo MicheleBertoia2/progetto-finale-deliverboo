@@ -22,7 +22,11 @@
         </div>
         <div class="card d-flex align-items-center" style="width: 18rem;">
 
+            @if(str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))
+                <img src="{{  $dish?->image_path }}" alt="">
+            @else
                 <img src="{{ asset('storage/' . $dish?->image_path) }}" alt="">
+            @endif
 
             <div class="card-body">
                 <h5 class="card-title">{{$dish->name}}</h5>
