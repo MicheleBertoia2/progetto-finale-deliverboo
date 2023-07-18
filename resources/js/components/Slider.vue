@@ -31,47 +31,78 @@ export default {
         :loop="true"
         :centered-slides="true"
         :pagination="{ hideOnClick: true }"
-        :breakpoints="{ 880: { slidesPerView: 4, },
+        :breakpoints="{ 880: { slidesPerView: 6, },
                         620: { slidesPerView: 3 ,}}"
         :updateOnWindowResize="true"
         @progress="onProgress"
         @slidechange="onSlideChange">
         <swiper-slide>
-            <div class="kebab"><img src="img/kebab.png" alt="kebab"></div>
+            <div class="kebab">
+                <img src="img/kebab.png" alt="kebab">
+                <span>Kebab</span>
+            </div>
         </swiper-slide>
         <swiper-slide>
-            <div class="sushi"><img src="img/sushi.png" alt="sushi"></div>
+            <div class="sushi">
+                <img src="img/sushi.png" alt="sushi">
+                <span>Sushi</span>
+            </div>
         </swiper-slide>
         <swiper-slide>
-            <div class="pizza"><img src="img/pizza.png" alt="pizza"></div>
+            <div class="pizza">
+                <img src="img/pizza.png" alt="pizza">
+                <span>Pizza</span>
+            </div>
         </swiper-slide>
         <swiper-slide>
-            <div class="thai"><img src="img/thai.png" alt="thai"></div>
+            <div class="thai">
+                <img src="img/thai.png" alt="thai">
+                <span>Thai</span>
+            </div>
         </swiper-slide>
         <swiper-slide>
-            <div class="messicano"><img src="img/messicano.png" alt="messicano"></div>
+            <div class="messicano">
+                <img src="img/messicano.png" alt="messicano">
+                <span>Messicano</span>
+            </div>
         </swiper-slide>
         <swiper-slide>
-            <div class="indiano"><img src="img/indiano.png" alt="indiano"></div>
+            <div class="indiano">
+                <img src="img/indiano.png" alt="indiano">
+                <span>Indiano</span>
+            </div>
         </swiper-slide>
         <swiper-slide>
-            <div class="greco"><img src="img/greco.png" alt="greco"></div>
+            <div class="greco">
+                <img src="img/greco.png" alt="greco">
+                <span>Greco</span>
+            </div>
         </swiper-slide>
         <swiper-slide>
-            <div class="cinese"><img src="img/cinese.png" alt="cinese"></div>
+            <div class="cinese">
+                <img src="img/cinese.png" alt="cinese">
+                <span>Cinese</span>
+            </div>
         </swiper-slide>
         <swiper-slide>
-            <div class="americano"><img src="img/americano.png" alt="americano"></div>
+            <div class="americano"
+            ><img src="img/americano.png" alt="americano">
+            <span>Americano</span>
+        </div>
         </swiper-slide>
     </swiper-container>
 </template>
 
 <style lang="scss" scoped>
+
+swiper-container{
+    background-color: #3abfb4;
+}
+
 swiper-slide {
     margin-top: 30px;
-
     margin-bottom: 30px;
-
+    padding: 50px 0 50px 0;
 }
 
 img {
@@ -79,6 +110,14 @@ img {
     height: 200px;
     width: 200px;
 }
+
+span{
+        position: absolute;
+        transform: translate(-50%,-50%);
+        top: 130%;
+        left: 50%;
+        font-size: 21px;
+    }
 
 .kebab {
     background-color: #efc4ff;
@@ -93,6 +132,7 @@ img {
         width: 200px;
         transform: translateY(-20%);
     }
+
 }
 
 .sushi {
