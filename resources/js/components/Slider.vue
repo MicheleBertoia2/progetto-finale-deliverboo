@@ -31,7 +31,9 @@ export default {
         :loop="true"
         :centered-slides="true"
         :pagination="{ hideOnClick: true }"
-        :breakpoints="{ 880: { slidesPerView: 6, },
+        :breakpoints="{ 1250: { slidesPerView: 6,},
+                        1100: { slidesPerView: 5,},
+                        880: { slidesPerView: 4 ,},
                         620: { slidesPerView: 3 ,}}"
         :updateOnWindowResize="true"
         @progress="onProgress"
