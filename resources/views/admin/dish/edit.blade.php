@@ -69,7 +69,7 @@
 
             <div class="mb-3">
                 <label for="image_path" class="form-label">Immagine</label>
-                <input onchange="" type="text" value="{{ old('image_path', $dish?->image_path) }}" class="form-control @error('image_path') is-invalid @enderror" id="text_input" name="image_path">
+                <input type="text" value="{{ old('image_path', $dish?->image_path) }}" class="form-control @error('image_path') is-invalid @enderror" id="text_input" name="image_path" style="opacity: 0; border: none; height: 0; width: 0;">
                 <input onchange="showImagePreview(event), handleFileSelection(event)" type="file" value="{{ old('image_path', $dish?->image_path) }}" class="form-control @error('image_path') is-invalid @enderror" id="file_input" name="">
                 @if(str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))
                 <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ $dish->image_path ? $dish->image_path : Vite::asset('resources\img\placeholder-img.png') }}" alt="">
@@ -94,13 +94,14 @@
         }
 
         function handleFileSelection(event) {
-            // Imposta il valore dell'input di tipo "text" su uno spazio vuoto ("")
-            document.getElementById("text_input").value = "";             //sotituire dove c'è scritto oppure
             // Imposta il valore dell'attributo name dell'input in base alla condizione
             document.getElementById("file_input").name = (event.target.value == "") ? '' : 'image_path';
-            document.getElementById("text_input").name = '';             //sotituire dove c'è scritto oppure
+            // Imposta il valore dell'input di tipo "text" su uno spazio vuoto ("")
+            document.getElementById("text_input").value = "";                       //sotituire dove c'è scritto oppure
+            // Imposta il name dell'input di tipo "text" su uno spazio vuoto ("")
+            document.getElementById("text_input").name = '';                        //sotituire dove c'è scritto oppure
             //* oppure
-            document.getElementById("text_input").classList.add("d-none");
+            // document.getElementById("text_input").classList.add("d-none");
         }
 
     </script>
