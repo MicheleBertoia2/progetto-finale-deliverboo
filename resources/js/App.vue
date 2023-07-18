@@ -30,6 +30,8 @@ export default {
 
     </div>
 
+    <Footer />
+
 
 </template>
 
