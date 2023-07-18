@@ -30,7 +30,6 @@
                 <div>
                     <span class="badge bg-success ">
                         prezzo:{{$dish->price}}</span>
-                    <span class="badge bg-success">voto:{{$dish->vote}}</span>
                     <span class="badge bg-success">Visibile:
                         {{ $dish->is_visible ? 'Si' : 'No' }}
                 </span>
