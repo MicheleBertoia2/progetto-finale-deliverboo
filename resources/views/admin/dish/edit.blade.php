@@ -29,13 +29,11 @@
 
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione Prodotto</label>
-                <textarea id="description" rows="4" class="form-control @error('description') is-invalid @enderror "
-                    name=" 	description" type="text" placeholder="Descrizione Prodotto"
-                    value="{{ old('description',$dish->description) }}">
-                @error('description')
+                <textarea id="description"  rows="4" class="form-control @error('description') is-invalid @enderror "
+                    name="description" value="{{ old('description') }}" type="text" placeholder="Descrizione piatto"></textarea>
+                    @error('description')
                     <p class="text-danger">{{ $message }}</p>
-                @enderror
-                </textarea>
+                    @enderror
             </div>
 
             <div class="mb-3">
@@ -54,16 +52,6 @@
                     type="text" placeholder="Ingredienti"
                     value="{{ old('ingredients',$dish->ingredients) }}">
                 @error('ingredients')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div class="mb-3">
-                <label for="vote" class="form-label">Voto prodotto</label>
-                <input id="vote" class="form-control @error('vote') is-invalid @enderror" name="vote" type="number"
-                    placeholder="inserisci un numero da 1 a 5"
-                    value="{{ old('vote',$dish->vote) }}">
-                @error('vote')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
