@@ -9,7 +9,7 @@ export default {
 <template>
     <div class="restaurant">
         <div class="bg-restaurant">
-            <div class="text center">RISTORANTE</div>
+            <div class="badge text center">RISTORANTE</div>
         </div>
         <div class="info">
             <p><i class="fa-solid fa-star"></i></p>
@@ -24,26 +24,24 @@ export default {
 
 <style lang="scss" scoped>
 
-@media (min-width: 1200px) {
-    .restaurant{
-        margin: 10px;
-        background-color: white;
-        height: 450px;
-        width: 350px;
+// @media (min-width: 1200px) {
+//     .restaurant{
+//         margin: 15px;
+//         border-radius: 10%;
+//         background-color: white;
+//         width: 500px;
+//     }
+// }
 
-}
-}
 
 
 .restaurant{
-        margin: 10px;
+        margin: 15px;
+        border-radius: 10%;
         background-color: white;
-        min-width: 350px;
         max-width: 450px;
-        max-height: 390px;
-        min-height: 250px;
-        height: 30%;
-        width: 30%;
+
+        flex: 1 0 380px;
         .info{
             margin-top: 10px;
             display: flex;
@@ -52,10 +50,13 @@ export default {
             height: 30px;
             }
         .bg-restaurant{
+            border-top-left-radius: 10%;
+            border-top-right-radius: 10%;
             background-image: url('img/prova-ristorante.png');
             background-size: cover;
             height: 340px;
             position: relative;
+
 
             .center {
                 top: 50%;
@@ -67,6 +68,10 @@ export default {
                 font-weight: bold;
                 color:rgb(0, 0, 0);
                 position: absolute;
+            }
+            .badge{
+                border-radius: 10%;
+                background-color: rgba(255, 255, 255, 0.051);
             }
         }
     }

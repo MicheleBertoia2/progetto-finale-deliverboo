@@ -4,7 +4,7 @@ import Home from './pages/Home.vue'
 import Contacts from './pages/Contacts.vue'
 import About from './pages/About.vue'
 import Error404 from './pages/Error404.vue'
-
+import RestaurantDetail from './pages/RestaurantDetail.vue'
 
 const meta = {
     enterClass: 'animate__animated animate__bounceInLeft',
@@ -33,6 +33,12 @@ const router = createRouter({
             path: '/chi-siamo',
             name: 'about',
             component: About,
+            meta
+        },
+        {
+            path: '/ristorante/slug',
+            name: 'Ristorante',
+            component: RestaurantDetail,
             meta
         },
 
