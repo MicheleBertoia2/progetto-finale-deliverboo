@@ -67,11 +67,15 @@
                 @enderror
             </div>
 
-            <div class="mb-3" style="width: 150vh; max-width: 73vw;">
+            <div class="mb-3">
                 <label for="image_path" class="form-label">Immagine</label>
                 <input onchange="" type="text" value="{{ old('image_path', $dish?->image_path) }}" class="form-control @error('image_path') is-invalid @enderror" id="text_input" name="image_path">
                 <input onchange="showImagePreview(event), handleFileSelection(event)" type="file" value="{{ old('image_path', $dish?->image_path) }}" class="form-control @error('image_path') is-invalid @enderror" id="file_input" name="">
-                <img height="300px" class="mt-3 bg-white px-5" id="prev-img" src="{{ $dish->image_path ? asset('storage/' . $dish->image_path) : Vite::asset('resources\img\placeholder-img.png') }}" alt="">
+                @if(str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))
+                <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ $dish->image_path ? $dish->image_path : Vite::asset('resources\img\placeholder-img.png') }}" alt="">
+                @else
+                <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ $dish->image_path ? asset('storage/' . $dish->image_path) : Vite::asset('resources\img\placeholder-img.png') }}" alt="">
+                @endif
                 @error('image_path')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -87,10 +91,6 @@
         function showImagePreview(event){
             const tagImage = document.getElementById('prev-img');
             tagImage.src = URL.createObjectURL(event.target.files[0]);
-
-            if(tagImage){
-            tagImage.classList.remove("px-5");
-            }
         }
 
         function handleFileSelection(event) {
