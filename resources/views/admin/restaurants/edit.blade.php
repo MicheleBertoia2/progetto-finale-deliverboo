@@ -36,7 +36,7 @@
 
         <div class="mb-3" style="width: 73vw; max-width: 73vw;">
             <label for="name" class="form-label">Nome</label>
-            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Pizzeria Roma" value="{{ old('name', $restaurant?->name)}}">
+            <input type="text" required minlength="2" maxlength="255" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Pizzeria Roma" value="{{ old('name', $restaurant?->name)}}">
         </div>
         @error('name')
         <p class="text-danger">{{ $message }}</p>
@@ -49,14 +49,14 @@
         </div>
         <div class="mb-3">
             <label for="address" class="form-label">Indirizzo</label>
-            <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" placeholder="Via Roma n. 1" value="{{ old('address', $restaurant?->address)}}">
+            <input type="text" required minlength="2" maxlength="255" class="form-control @error('address') is-invalid @enderror" id="address" name="address" placeholder="Via Roma n. 1" value="{{ old('address', $restaurant?->address)}}">
         </div>
         @error('address')
         <p class="text-danger">{{ $message }}</p>
         @enderror
         <div class="mb-3">
             <label for="vat_number" class="form-label">Numero Partita IVA:</label>
-            <input type="number" class="form-control @error('vat_number') is-invalid @enderror" id="vat_number" name="vat_number" placeholder="12345678901" value="{{ old('vat_number', $restaurant?->vat_number)}}">
+            <input type="number" required min="10000000" max="99999999999"  class="form-control @error('vat_number') is-invalid @enderror" id="vat_number" name="vat_number" placeholder="12345678901" value="{{ old('vat_number', $restaurant?->vat_number)}}">
         </div>
         @error('vat_number')
         <p class="text-danger">{{ $message }}</p>
