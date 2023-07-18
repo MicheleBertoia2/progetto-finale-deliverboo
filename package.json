@@ -17,6 +17,7 @@
         "@vitejs/plugin-vue": "^4.2.3",
         "animate.css": "^4.1.1",
         "bootstrap": "^5.2.2",
+        "swiper": "^10.0.4",
         "vue": "^3.2.36",
         "vue-router": "^4.2.2",
         "vue3-carousel": "^0.3.1"
