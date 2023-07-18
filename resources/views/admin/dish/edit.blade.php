@@ -29,12 +29,13 @@
 
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione Prodotto</label>
-                <input id="description" class="form-control @error('description') is-invalid @enderror "
+                <textarea id="description" rows="4" class="form-control @error('description') is-invalid @enderror "
                     name=" 	description" type="text" placeholder="Descrizione Prodotto"
                     value="{{ old('description',$dish->description) }}">
                 @error('description')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
+                </textarea>
             </div>
 
             <div class="mb-3">
