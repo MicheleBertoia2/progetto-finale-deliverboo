@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->decimal('total_price', $precision = 8, $scale = 2);
-            $table->string('customer_name', 45);
-            $table->string('customer_address', 255);
-            $table->string('customer_mail', 255);
-            $table->string('customer_phone', 15);
+            $table->decimal('total_price', $precision = 8, $scale = 2)->nullable()->unsigned();
+            $table->string('customer_name', 45)->nullable();
+            $table->string('customer_address', 255)->nullable();
+            $table->string('customer_mail', 255)->nullable();
+            $table->string('customer_phone', 15)->nullable();
             $table->timestamps();
         });
     }
