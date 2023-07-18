@@ -53,12 +53,13 @@
                             </div>
                         </div>
 
-                        <div class="mb-4 row">
+                        <div class="mb-4 row d-flex justify-content-center">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
+                            <span id="password-error" class="badge bg-danger mt-3 w-50 ">Le password non corispondono!</span>
                         </div>
 
                         <div class="mb-4 row mb-0">
@@ -67,6 +68,7 @@
                                     {{ __('Register') }}
                                 </button>
                             </div>
+
                         </div>
                     </form>
                 </div>
@@ -74,4 +76,25 @@
         </div>
     </div>
 </div>
+<script>
+    const password_input = document.getElementById('password');
+    const password_confr = document.getElementById('password-confirm');
+    const password_error = document.getElementById('password-error');
+
+
+    password_confr.addEventListener('input', () => {
+        const password = password_input.value;
+        const confirmed_password = password_confr.value;
+
+        if (password !== confirmed_password) {
+            password_error.style.display = 'block';
+        }else{
+            password_error.style.display = 'none';
+        }
+    });
+</script>
+<script>
+    window.onload = checkPasswords;
+</script>
+
 @endsection
