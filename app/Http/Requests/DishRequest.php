@@ -28,7 +28,6 @@ class DishRequest extends FormRequest
             'image_path' => 'required',
             'price' => 'required',
             'ingredients' => 'required',
-            'vote' => 'required|max:5',
         ];
     }
 
@@ -39,8 +38,6 @@ class DishRequest extends FormRequest
             'image_path.required' => 'il percorso della immagine  è un campo obbligatorio',
             'price.required' => 'Il prezzo è un campo obbligatorio',
             'ingredients.required' => 'Ingredienti è un campo obbligatorio',
-            'vote.required' => 'il voto è un campo obbligatorio',
-            'vote.max' => 'Il voto non può avere piu di :max come valore',
         ];
     }
 }

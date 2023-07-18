@@ -57,14 +57,14 @@
             </div>
 
 {{-- * da eliminare --}}
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label for="vote" class="form-label">Voto prodotto</label>
                 <input id="vote" class="form-control @error('vote') is-invalid @enderror" name="vote" value="{{ old('vote', $dish->vote) }}" type="number"
                     placeholder="inserisci un numero da 1 a 5">
                 @error('vote')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
-            </div>
+            </div> --}}
 
             <div class="mb-3">
                 <label for="image_path" class="form-label">Immagine</label>
