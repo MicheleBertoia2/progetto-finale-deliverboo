@@ -20,7 +20,7 @@
 
             <div class="mb-3">
                 <label for="name" class="form-label">Nome Piatto</label>
-                <input id="name" class="form-control @error('name') is-invalid @enderror" name="name" type="text"
+                <input required id="name" minlength="2" maxlength="255" class="form-control @error('name') is-invalid @enderror" name="name" type="text"
                     placeholder="Nome Piatto" value="{{ old('name',$dish->name) }}">
                 @error('name')
                     <p class="text-danger">{{ $message }}</p>
@@ -40,7 +40,7 @@
 
             <div class="mb-3">
                 <label for="price" class="form-label">Prezzo</label>
-                <input id="price" class="form-control @error('price') is-invalid @enderror" name="price"
+                <input id="price" required min="1" class="form-control @error('price') is-invalid @enderror" name="price"
                     type="number" placeholder="inserisci il prezzo utilizzando il punto al posto della virgola"
                     value="{{ old('price',$dish->price) }}">
                 @error('price')
@@ -50,7 +50,7 @@
 
             <div class="mb-3">
                 <label for="ingredients" class="form-label">Ingredienti</label>
-                <input id="ingredients" class="form-control @error('ingredients') is-invalid @enderror" name="ingredients"
+                <input id="ingredients" required class="form-control @error('ingredients') is-invalid @enderror" name="ingredients"
                     type="text" placeholder="Ingredienti"
                     value="{{ old('ingredients',$dish->ingredients) }}">
                 @error('ingredients')
@@ -70,7 +70,7 @@
 
             <div class="mb-3">
                 <label for="image_path" class="form-label">Immagine</label>
-                <input type="text" value="{{ old('image_path', $dish?->image_path) }}" class="form-control @error('image_path') is-invalid @enderror" id="text_input" name="image_path" style="opacity: 0; border: none; height: 0; width: 0;">
+                <input  type="text" value="{{ old('image_path', $dish?->image_path) }}" class="form-control @error('image_path') is-invalid @enderror" id="text_input" name="image_path" style="opacity: 0; border: none; height: 0; width: 0;">
                 <input onchange="showImagePreview(event), handleFileSelection(event)" type="file" value="{{ old('image_path', $dish?->image_path) }}" class="form-control @error('image_path') is-invalid @enderror" id="file_input" name="">
                 @if(str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))
                 <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ $dish->image_path ? $dish->image_path : Vite::asset('resources\img\placeholder-img.png') }}" alt="">
