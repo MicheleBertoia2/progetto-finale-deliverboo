@@ -19,7 +19,7 @@ class OrdersTableSeeder extends Seeder
     public function run(Faker $faker)
     {
         // $restaurants = Restaurant::with(['dishes'])->get();
-        for ($i=1; $i < 5 ; $i++) {
+        for ($i=1; $i < 12 ; $i++) {
             $order = new Order();
             $order->restaurant_id = Restaurant::inRandomOrder()->first()->id;
             // $dishes = Dish::where('id', $order->restaurant_id);
