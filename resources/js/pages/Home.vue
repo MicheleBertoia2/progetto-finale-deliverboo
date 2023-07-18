@@ -25,7 +25,7 @@ export default {
         <div class="container-restaurant">
             <span class="badge bg-pink">Tutti i locali</span>
 
-            <div class="wrapper mx-5">
+            <div class="wrapper">
 
                 <Restaurant v-for="restaurant in 9" :key="restaurant"/>
 
@@ -66,6 +66,7 @@ export default {
 .wrapper{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     padding-bottom: 50px;
     height: 100%;
     width: 100%;
