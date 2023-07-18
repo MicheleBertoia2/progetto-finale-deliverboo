@@ -110,10 +110,6 @@
             //* oppure
             // document.getElementById("text_input").classList.add("d-none");
 
-            // document.getElementById("file_input").value = (event.target.value == "") ? '$dish?->image_path' : '';
-            // document.getElementById("file_input").value = (event.target.value == "" || event.target.value == null || event.target.value == undefined) ? "URL.createObjectURL(event.target.files[0])" : "";
-            document.getElementById("file_input").value = (event.target.value == "" || event.target.value == null || event.target.value == undefined) ? "" : "null";
-
         }
 
     </script>

@@ -17,9 +17,13 @@
             <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
         </form>
     </h1>
+    @if(str_contains($restaurant->image, 'http://') || str_contains($restaurant->image, 'https://'))
+    <img src="{{ $restaurant->image ? $restaurant->image : Vite::asset('resources/img/placeholder-img.png') }}" class="py-2 w-25" alt="{{ $restaurant->image == false ? "Nessuna immagine" : $restaurant->name }}">
+    @else
     <img src="{{ $restaurant->image ? asset('storage/'. $restaurant->image) : Vite::asset('resources/img/placeholder-img.png') }}" class="py-2 w-25" alt="{{ $restaurant->image == false ? "Nessuna immagine" : $restaurant->name }}">
+    @endif
     <h6 class="py-2"><strong class="text-decoration-underline">Id:</strong> {{ $restaurant->id }}</h6>
-    <h6 class="py-2"><strong class="text-decoration-underline">Nome:</strong> {{ $restaurant->nome }}</h6>
+    <h6 class="py-2"><strong class="text-decoration-underline">Nome:</strong> {{ $restaurant->name }}</h6>
     <h6 class="py-2"><strong class="text-decoration-underline">Indirizzo:</strong> {{ $restaurant->address }}</h6>
     <h6 class="py-2"><strong class="text-decoration-underline">Numero Partita IVA:</strong> {{ $restaurant->vat_number }}</h6>
 
