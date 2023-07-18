@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1 class="py-4">Crea un nuovo piatto</h1>
+        <h1 class="py-4">Modifica piatto: {{ $dish->name }}</h1>
 
         @if ($errors->any())
             <div class="alert alert-danger" role="alert">
@@ -69,23 +69,15 @@
 
             <div class="mb-3" style="width: 150vh; max-width: 73vw;">
                 <label for="image_path" class="form-label">Immagine</label>
-                <input onchange="showImagePreview(event)" type="file" value="{{Storage::path($dish?->image_path)}}" class="form-control @error('image_path') is-invalid @enderror" id="image_path" name="image_path">
-                <img height="300px"  class="mt-3 bg-white px-5" id="prev-img" src="{{ asset('storage/' . $dish?->image_path) }}" alt="">
+                <input onchange="" type="text" value="{{ old('image_path', $dish?->image_path) }}" class="form-control @error('image_path') is-invalid @enderror" id="text_input" name="image_path">
+                <input onchange="showImagePreview(event), handleFileSelection(event)" type="file" value="{{ old('image_path', $dish?->image_path) }}" class="form-control @error('image_path') is-invalid @enderror" id="file_input" name="">
+                <img height="300px" class="mt-3 bg-white px-5" id="prev-img" src="{{ $dish->image_path ? asset('storage/' . $dish->image_path) : Vite::asset('resources\img\placeholder-img.png') }}" alt="">
                 @error('image_path')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
 
-            <div class="mb-3">
-                <label for="is_visible" class="form-label">Seleziona Visibilità</label>
-                <select class="form-select" name="is_visible">
-                    <option selected disabled>Seleziona</option>
-                    <option value="1">Visibile</option>
-                    <option value="0">Non Visibile</option>
-                </select>
-            </div>
-
-            <button type="submit" class="btn btn-success">Crea Piatto</button>
+            <button class="btn btn-success" type="submit">Modifica Piatto</button>
 
         </form>
 
@@ -100,5 +92,16 @@
             tagImage.classList.remove("px-5");
             }
         }
+
+        function handleFileSelection(event) {
+            // Imposta il valore dell'input di tipo "text" su uno spazio vuoto ("")
+            document.getElementById("text_input").value = "";             //sotituire dove c'è scritto oppure
+            // Imposta il valore dell'attributo name dell'input in base alla condizione
+            document.getElementById("file_input").name = (event.target.value == "") ? '' : 'image_path';
+            document.getElementById("text_input").name = '';             //sotituire dove c'è scritto oppure
+            //* oppure
+            document.getElementById("text_input").classList.add("d-none");
+        }
+
     </script>
 @endsection

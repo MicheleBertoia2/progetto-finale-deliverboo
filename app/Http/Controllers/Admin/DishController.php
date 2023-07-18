@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Dish;
-use App\Models\User;
-use App\Models\Restaurant;
 use App\Http\Requests\DishRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -19,9 +17,7 @@ class DishController extends Controller
      */
     public function index()
     {
-
-        $dishes = Dish::all()->where('restaurant_id', Auth::id());
-
+        $dishes = Dish::all();
         return view('admin.dish.index', compact('dishes'));
     }
 
@@ -32,8 +28,7 @@ class DishController extends Controller
      */
     public function create()
     {
-        $dishes = Dish::all();
-        return view('admin.dish.create', compact('dishes'));
+        return view('admin.dish.create');
     }
 
     /**
@@ -103,20 +98,24 @@ class DishController extends Controller
             $form_data['slug'] = $dish->slug;
         }
 
+        //* edit per l'IMMAGINE (FUNZIONANTE ANCHE SE L'IMMAGINE è STATA PRESA DA UN API)
+        //* se è stata caricata un immagine (dal campo di input nel form) e se il value dell'input(/il percorso dell'immagine) non contiene http:// o https:// quindi l'immagine NON è STATA PRESA DALL'API
+        if (array_key_exists('image_path', $form_data) && !(str_contains($form_data['image_path'], 'http://') || str_contains($form_data['image_path'], 'https://'))){
 
-        if (array_key_exists('image_path', $form_data)) {
-            if ($dish->image_path) {
+            //* se l'immagine esiste (NEL DB) vuol dire che ne ho caricata una nuova E NON è STATA PRESA DALL'API (NEL DB) e quindi ELIMINO quella precedente
+            if ($dish->image_path && !(str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))) {
+                // se è presente sul disco in public ed elimina l'immagine già presente
                 Storage::disk('public')->delete($dish->image_path);
             }
+
+            // l'immagine viene salvata nel db con il percorso(uploads/WQZmcTvnkWAVcb35NKprvhlCQfRE2VXRTpSytd8C.jpg)
             $form_data['image_path'] = Storage::put('uploads', $form_data['image_path']);
         }
-
 
         $dish->update($form_data);
 
         return redirect()->route('admin.dishes.show', $dish);
-                }
-
+    }
 
     /**
      * Remove the specified resource from storage.
