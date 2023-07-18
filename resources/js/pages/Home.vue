@@ -66,9 +66,7 @@ export default {
 .wrapper{
     display: flex;
     flex-wrap: wrap;
-    // padding-left: 50px;
-    // padding-right: 50px;
-    // padding-bottom: 50px;
+    padding-bottom: 50px;
     height: 100%;
     width: 100%;
 }

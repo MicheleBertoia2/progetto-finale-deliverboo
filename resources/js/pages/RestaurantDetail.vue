@@ -5,14 +5,14 @@
 export default {
     name:'RestaurantDetail',
     components: {
-        Restaurant,
-        Slider,
-        Footer
+
     }
 }
 </script>
 
 <template>
+
+
 
 
 
