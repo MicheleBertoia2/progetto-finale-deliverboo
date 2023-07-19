@@ -30,7 +30,7 @@
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione Prodotto</label>
                 <textarea id="description"  rows="4" class="form-control @error('description') is-invalid @enderror "
-                    name="description" value="{{ old('description') }}" type="text" placeholder="Descrizione piatto"></textarea>
+                    name="description" value="{{ old('description', $dish->description) }}" type="text" placeholder="Descrizione piatto"></textarea>
                     @error('description')
                     <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -56,16 +56,6 @@
                 @enderror
             </div>
 
-{{-- * da eliminare --}}
-            {{-- <div class="mb-3">
-                <label for="vote" class="form-label">Voto prodotto</label>
-                <input id="vote" class="form-control @error('vote') is-invalid @enderror" name="vote" value="{{ old('vote', $dish->vote) }}" type="number"
-                    placeholder="inserisci un numero da 1 a 5">
-                @error('vote')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div> --}}
-
             <div class="mb-3">
                 <label for="image_path" class="form-label">Immagine</label>
                 <input type="text" value="{{ old('image_path', $dish?->image_path) }}" class="form-control" id="text_input" name="image_path" style="opacity: 0; border: none; height: 0; width: 0;">
@@ -80,6 +70,7 @@
                         <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ $dish->image_path ? asset('storage/' . $dish->image_path) : Vite::asset('resources\img\placeholder-img.png') }}" alt="{{ $dish->name }}">
                         @endif
                     </div>
+                    {{-- con l'input ratio è funzionante per eliminazione dell'immagine ma non è bello graficamente --}}
                     {{-- <div class="fa-solid fa-trash btn btn-danger mt-3">
                         <input type="radio" name="noImage" class="" onchange="deleteImage()">
                         <label for="">Elimina immagine</label>
@@ -132,99 +123,23 @@
             document.getElementById("inputDeleteImage").value = "";
         }
 
-        function nameInput(){
-            // rimuovo il name noImage
-            document.getElementById("inputDeleteImage").name = "noImage";
-            document.getElementById("inputDeleteImage").value = "resources/img/placeholder-img.png";
-            // document.getElementById('file_input').value = "";
-            // document.getElementById('file_input').name = "";
-            // document.getElementById('file_input').value = "resources/img/placeholder-img.png";
-            // document.getElementById('file_input').name = "image_path";
-            // document.getElementById('file_input').value = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
-            // document.getElementById('file_input').name = "image_path";
-
-// test 1 giacomo
-            const inputText = document.getElementById('text_input');
-            inputFile.name = '';
-
-
-            const inputFile = document.getElementById('file_input');
-            inputFile.name = 'image_path';
-            inputFile.value = 'ciao';
-
-            // Creare un nuovo elemento di input file
-            const newInput = document.createElement('input');
-            newInput.type = 'file';
-            newInput.name = 'image_path';
-            // newInput.value = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
-            newInput.value = "ciao";
-
-            inputFile.parentNode.replaceChild(newInput, inputFile);
-// fine test 1 giacomo
-        }
-
         function deleteImage(){
 
-            // imageInput.value = "";
             const tagImage = document.getElementById('prev-img');
             tagImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
-            // const imageInput = document.getElementById('file_input');
-            // l'input con id = file_input viene assegnato il name noImage
-            // imageInput.name = 'noImage';
-            // imageInput.value = "resources/img/placeholder-img.png";
-            // imageInput.name = '';
-
-//test 1 giacomo
-            // document.getElementById('file_input').value = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
-            // document.getElementById('file_input').name = "image_path";
-
-            // const inputText = document.getElementById('text_input');
-            // inputFile.name = '';
-            // document.getElementById('file_input').name = '';
-            // document.getElementById('file_input').value = '';
-
-
-            // const inputFile = document.getElementById('file_input');
-            // inputFile.name = 'image_path';
-            // inputFile.value = 'ciaooooooooooo';
+            //svuoto entrambi gli input
+            document.getElementById('text_input').name = '';
+            document.getElementById('text_input').value = '';
 
             document.getElementById('file_input').name = 'image_path';
             document.getElementById('file_input').value = '';
 
-            // Creare un nuovo elemento di input file
-            // const newInput = document.createElement('input');
-            // newInput.type = 'file';
-            // newInput.name = 'image_path';
-            // newInput.value = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
-            // newInput.value = "";
-
-            // inputFile.parentNode.replaceChild(newInput, inputFile);
-// fine test 1 giacomo
-
-// test 2 giacomo
-        // if (inputFile.parentNode) {
-        // inputFile.parentNode.removeChild(inputFile);
-        // }
-        // inputFile.parentNode.removeChild(inputFile);
-// fine test 2 giacomo
-
-
-            // document.getElementById('file_input').value = "resources/img/placeholder-img.png";
-            // document.getElementById('file_input').name = "image_path";
-
-            // todo sistemare le condizioni occhio ai !
-// * sistemare le condizioni occhio ai !
-            // imageInput.name += 'test';
-
             // rimuovo il name noImage
-            document.getElementById("inputDeleteImage").name = "noImage";
-            document.getElementById("inputDeleteImage").value = "resources/img/placeholder-img.png";
+            // document.getElementById("inputDeleteImage").name = "noImage";
+            // document.getElementById("inputDeleteImage").value = "resources/img/placeholder-img.png";
 
-            // // Imposta il valore dell'input di tipo "text" su uno spazio vuoto ("")
-            // // Imposta il name dell'input di tipo "text" su uno spazio vuoto ("")
-            // document.getElementById("text_input").name = 'noImage';
-            // document.getElementById("text_input").value = "";                       //sotituire dove c'è scritto oppure
-            // document.getElementById("text_input").name = '';
+            //imposto un valore che sarà uguale a quello passato al controller //* utile per quando l'immagine non è obbligatoria (cioè nullable) in questo caso l'immagune non è obbligatoria
+            document.getElementById("inputDeleteImage").value = "delete";
 
             // Disabilito il button
             const buttonDelete = document.getElementById("deleteButton");
