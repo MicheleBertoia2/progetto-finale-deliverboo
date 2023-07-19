@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\RestaurantController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::namespace('Api')
+        ->prefix('restaurants')
+        ->group(function(){
+            Route::get('/',[RestaurantController::class, 'index']);
+            // Route::get('/categories',[PostController::class, 'getCategories']);
+            // Route::get('/tags',[PostController::class, 'getTags']);
+            // Route::get('/post-category/{id}',[PostController::class, 'getPostsByCategory']);
+            // Route::get('/post-tag/{id}',[PostController::class, 'getPostsByTag']);
+            // Route::get('/{slug}',[PostController::class, 'getPostDetail']);
+            // Route::get('/search/{tosearch}',[PostController::class, 'search']);
+        });
 

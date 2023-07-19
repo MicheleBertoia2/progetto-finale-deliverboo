@@ -1,15 +1,44 @@
 <script>
 
-import Restaurant from '../components/Restaurant.vue'
-import Slider from '../components/Slider.vue'
+import Restaurant from '../components/Restaurant.vue';
+import Slider from '../components/Slider.vue';
+import axios from 'axios';
+import Loader from '../components/Loader.vue';
+import { store } from '../store/store';
 
 
 export default {
     name:'Home',
+
+    data(){
+        return{
+            store
+        }
+    },
+
     components: {
         Restaurant,
+        Loader,
         Slider,
 
+    },
+
+    methods:{
+
+        getApi(endpoint = store.apiUrl + 'restaurants'){
+            store.loaded = false;
+            axios.get(endpoint)
+                .then(res => {
+                    console.log(res.data, endpoint);
+                    store.loaded = true;
+                })
+
+            }
+
+    },
+
+    mounted(){
+        this.getApi()
     }
 }
 </script>
@@ -21,8 +50,9 @@ export default {
     <div class="container-inner ">
 
         <Slider />
+        <Loader v-if="!store.loaded" />
 
-        <div class="container-restaurant">
+        <div v-else class="container-restaurant">
             <span class="badge bg-pink">Tutti i locali</span>
 
             <div class="wrapper">
