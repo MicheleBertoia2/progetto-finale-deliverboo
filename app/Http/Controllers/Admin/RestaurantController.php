@@ -133,13 +133,20 @@ class RestaurantController extends Controller
                 //* verifica se i name noImage e image esistono nel form e se noImage ha come valore 'delete' //* UTILE DOVE LE IMMAGINI SONO NULLABLE (CIOè NON SONO OBBLIGATORIE) ed INUTILE DOVE SONO OBBLIGATORIE
     // if((array_key_exists('noImage', $form_data)) && ($form_data['noImage'] == 'delete') && (array_key_exists('image', $form_data))){
     // if((array_key_exists('noImage', $form_data)) && ($form_data['noImage'] == 'delete') && (array_key_exists('image', $form_data)) && ($form_data['image'] == '')){
-    if((array_key_exists('noImage', $form_data)) && ($form_data['noImage'] == 'delete')){
+    if((array_key_exists('noImage', $form_data)) && ($form_data['noImage'] == 'delete') && !(array_key_exists('image', $form_data))){
         // if((array_key_exists('noImage', $form_data)) && ($form_data['noImage'] == 'delete') && ($form_data['image'] == '')){
             Storage::disk('public')->delete($restaurant->image);
             // salva limmagine del placeholder nel database quando viene cliccato elimina immagine //* UTILE DOVE LE IMMAGINI SONO NULLABLE (CIOè NON SONO OBBLIGATORIE) ES. PER I RISTORANTI
             $form_data['image'] = "resources/img/placeholder-img.png";
         }
-        else if ($request->hasFile('image') && (($form_data['image'] != 'resources/img/placeholder-img.png') || ($form_data['image'] != ''))) {
+        // else if(!(array_key_exists('image', $form_data)) && (array_key_exists('noImage', $form_data)))
+        else if((array_key_exists('noImage', $form_data)) && ($form_data['noImage'] == 'empty'))
+        {
+            // Mantieni l'immagine precedente
+            $restaurant->image = $oldImagePath;
+        }
+        // else if ($request->hasFile('image') && (($form_data['image'] != 'resources/img/placeholder-img.png') || ($form_data['image'] != ''))) {
+        else if ($request->hasFile('image') && (array_key_exists('image', $form_data))) {
         // if ($request->hasFile('image')) {
 
             // //* verifica se i name noImage e image esistono nel form e se noImage ha come valore 'delete' //* UTILE DOVE LE IMMAGINI SONO NULLABLE (CIOè NON SONO OBBLIGATORIE) ed INUTILE DOVE SONO OBBLIGATORIE
