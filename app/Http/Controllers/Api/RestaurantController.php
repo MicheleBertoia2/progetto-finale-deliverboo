@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Restaurant;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
+
 
 class RestaurantController extends Controller
 {
@@ -21,6 +23,15 @@ class RestaurantController extends Controller
 
         return  response()->json(compact('restaurants', 'types'));
 
+    }
+
+    public function getByType($slug){
+        $restaurants = Restaurant::with('types')
+                    ->whereHas('types', function(Builder $query) use($slug){
+                        $query->where('slug',$slug);
+                    })->get();
+
+        return  response()->json(compact('restaurants'));
     }
 
     /**

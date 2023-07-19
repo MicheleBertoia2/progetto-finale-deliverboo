@@ -42,9 +42,17 @@ export default {
 
             },
 
-        getRestaurantsType(){
-            //store.loaded = false;
-            console.log('cliccato');
+        getRestaurantsType($slug){
+            store.loaded = false;
+            axios.get(store.apiUrl + 'restaurants/type/' + $slug)
+                .then(res => {
+                    this.restaurants = res.data.restaurants;
+                    this.title = 'Risultati per tipo: ' + $slug;
+
+                    store.loaded = true;
+
+                })
+            //console.log('cliccato');
 
         }
 
@@ -65,8 +73,8 @@ export default {
         <Slider />
         <ul class="d-flex bg-dark py-3">
             <li v-for="resType in this.resTypes" :key="resType.id"
-                class="badge badge-success text-white cursor-pointer"
-                @click="getRestaurantsType()">{{ resType.name }}</li>
+                class="badge badge-success text-white "
+                @click="getRestaurantsType(resType.slug)">{{ resType.name }}</li>
         </ul>
         <Loader v-if="!store.loaded" />
 
@@ -101,6 +109,12 @@ export default {
     color: black;
     font-size: 30px;
     margin: 50px;
+}
+
+ul{
+    li{
+        cursor: pointer;
+    }
 }
 
 

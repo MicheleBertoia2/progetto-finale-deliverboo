@@ -19,6 +19,7 @@ Route::namespace('Api')
         ->prefix('restaurants')
         ->group(function(){
             Route::get('/',[RestaurantController::class, 'index']);
+            Route::get('/type/{slug}',[RestaurantController::class, 'getByType']);
             // Route::get('/categories',[PostController::class, 'getCategories']);
             // Route::get('/tags',[PostController::class, 'getTags']);
             // Route::get('/post-category/{id}',[PostController::class, 'getPostsByCategory']);

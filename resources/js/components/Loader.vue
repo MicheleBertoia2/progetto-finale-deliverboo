@@ -9,7 +9,7 @@ name:'Loader'
     <div class="wrapper-mb">
         <div class="loader-container">
             <div class="ghost-loader">
-            <img src="img/logo.png" alt="Fantasma">
+            <img src="img/loader.png" alt="Fantasma">
 
             </div>
   </div>
@@ -20,14 +20,14 @@ name:'Loader'
 /* Rimuovi la definizione per il corpo del fantasma */
 .wrapper-mb {
     position: relative;
-  height: 200px;
+  height: 400px;
 }
 
 .ghost-loader {
   width: 160px;
   height: 70px;
   position: absolute;
-  top: 65px;
+  top: 160px;
   left: 45%;
   transform: translateX(-50%);
   animation: float 2s ease-in-out infinite, rotate 3s linear infinite;
@@ -41,18 +41,18 @@ name:'Loader'
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-15px);
+    transform: translateY(-85px);
   }
   100% {
     transform: translateY(0);
   }
 }
-@keyframes rotate {
-  0% {
-    transform: rotate(0);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+// @keyframes rotate {
+//   0% {
+//     transform: rotate(0);
+//   }
+//   100% {
+//     transform: rotate(360deg);
+//   }
+// }
 </style>
