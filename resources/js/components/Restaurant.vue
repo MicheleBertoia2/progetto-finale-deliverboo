@@ -23,24 +23,11 @@ export default {
 
 
 <style lang="scss" scoped>
-
-// @media (min-width: 1200px) {
-//     .restaurant{
-//         margin: 15px;
-//         border-radius: 10%;
-//         background-color: white;
-//         width: 500px;
-//     }
-// }
-
-
-
 .restaurant{
         margin: 15px;
         border-radius: 10%;
         background-color: white;
         max-width: 450px;
-
         flex: 1 0 380px;
         .info{
             margin-top: 10px;
