@@ -4,9 +4,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Guest\PageController;
 use App\Http\Controllers\Admin\DashboardController;
-
 use App\Http\Controllers\Admin\RestaurantController;
 use App\Http\Controllers\Admin\DishController;
+use App\Http\Controllers\Admin\OrderController;
 
 
 
@@ -30,6 +30,7 @@ Route::middleware(['auth','verified'])
         Route::get('/', [DashboardController::class, 'index'])->name('home');
         Route::resource('restaurants', RestaurantController::class);
         Route::resource('dishes', DishController::class);
+        Route::resource('orders', OrderController::class);
 
     });
 
