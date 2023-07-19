@@ -15,7 +15,7 @@ export default {
             store,
             restaurants : [],
             title : 'Ecco una selezione di ristoranti per te',
-            types : [],
+            resTypes : [],
         }
     },
 
@@ -35,12 +35,18 @@ export default {
                     console.log(res.data,);
 
                     this.restaurants = res.data.restaurants;
-                    this.types = res.data.types;
+                    this.resTypes = res.data.types;
 
                     store.loaded = true;
                 })
 
-            }
+            },
+
+        getRestaurantsType(){
+            //store.loaded = false;
+            console.log('cliccato');
+
+        }
 
     },
 
@@ -57,6 +63,11 @@ export default {
     <div class="container-inner ">
 
         <Slider />
+        <ul class="d-flex bg-dark py-3">
+            <li v-for="resType in this.resTypes" :key="resType.id"
+                class="badge badge-success text-white cursor-pointer"
+                @click="getRestaurantsType()">{{ resType.name }}</li>
+        </ul>
         <Loader v-if="!store.loaded" />
 
         <div v-else class="container-restaurant">
@@ -64,7 +75,7 @@ export default {
 
             <div class="wrapper">
 
-                <Restaurant v-for="restaurant in this.restaurants" :key="restaurant"/>
+                <Restaurant v-for="restaurant in this.restaurants" :key="restaurant" :restaurant="restaurant"/>
 
             </div>
         </div>

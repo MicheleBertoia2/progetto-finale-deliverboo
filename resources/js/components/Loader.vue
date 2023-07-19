@@ -6,46 +6,53 @@ name:'Loader'
 </script>
 
 <template>
-<div class="container d-flex justify-content-center my-5">
-    <div class="lds-hourglass"></div>
-</div>
+    <div class="wrapper-mb">
+        <div class="loader-container">
+            <div class="ghost-loader">
+            <img src="img/logo.png" alt="Fantasma">
 
+            </div>
+  </div>
+    </div>
 </template>
 
 <style lang="scss" scoped>
-
-
-
-.lds-hourglass {
-display: inline-block;
-position: relative;
-width: 80px;
-height: 80px;
+/* Rimuovi la definizione per il corpo del fantasma */
+.wrapper-mb {
+    position: relative;
+  height: 200px;
 }
-.lds-hourglass:after {
-  content: " ";
-  display: block;
-  border-radius: 50%;
-  width: 0;
-  height: 0;
-  margin: 8px;
-  box-sizing: border-box;
-  border: 32px solid black;
-  border-color: black transparent black transparent;
-  animation: lds-hourglass 1.2s infinite;
+
+.ghost-loader {
+  width: 160px;
+  height: 70px;
+  position: absolute;
+  top: 65px;
+  left: 45%;
+  transform: translateX(-50%);
+  animation: float 2s ease-in-out infinite, rotate 3s linear infinite;
 }
-@keyframes lds-hourglass {
+
+/* Modifica la posizione degli occhi, se necessario */
+
+
+@keyframes float {
   0% {
-    transform: rotate(0);
-    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    transform: translateY(0);
   }
   50% {
-    transform: rotate(900deg);
-    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: translateY(-15px);
   }
   100% {
-    transform: rotate(1800deg);
+    transform: translateY(0);
   }
 }
-
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 </style>
