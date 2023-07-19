@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <div class="container overflow-auto p-5 " style="max-height: calc(100vh - 70.24px);">
+    <div class="container overflow-auto p-5 " >
 
         <h1>Modifica Ristorante: {{ $restaurant->name }}
             <form action="{{ route('admin.restaurants.destroy', $restaurant) }}" method="POST" class="d-inline"
