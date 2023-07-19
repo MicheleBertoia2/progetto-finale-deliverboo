@@ -30,6 +30,9 @@ export default {
                         <li class="nav-item">
                             <router-link :to="{ name: 'contacts' }" class="nav-link">contatti</router-link>
                         </li>
+                        <li class="nav-item">
+                            <router-link :to="{ name: 'Ristorante' }" class="nav-link">ristorante</router-link>
+                        </li>
                     </ul>
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
@@ -63,15 +66,11 @@ export default {
 }
 
 .jumbotron {
-    display: block;
     height: 550px;
     width: 100vw;
-
-
     img {
         height: 100%;
         width: 100%;
-
     }
 }
 </style>

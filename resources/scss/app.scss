@@ -1,5 +1,9 @@
 @import '~bootstrap/scss/bootstrap';
-
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 .container{
     height: 100%;
@@ -53,3 +57,9 @@ aside{
         border-radius: 10px;
     }
 }
+
+
+#password-error{
+    opacity: 0;
+}
+

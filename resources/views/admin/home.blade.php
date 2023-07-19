@@ -7,17 +7,12 @@
         <div class="home">
 
             <h1 class="mt-2 my-4">
-                Ristoranti: {{ $n_restaurant }}
-                Piatti: {{ $n_dish }}
+
             </h1>
 
-            <a href="{{ route('admin.dishes.create') }}"
-                class="btn btn-primary mt-2 me-4 {{ $n_restaurant == 0 ? 'd-none' : '' }}">Aggiungi un nuovo Piatto</a>
 
-            <a href="{{ route('admin.dishes.index') }}"
-                class="btn btn-primary mt-2 me-4 {{ $n_restaurant == 0 ? 'd-none' : '' }}">I tuoi Piatti</a>
 
-            <a href="{{ route('admin.restaurants.create') }}" class="btn btn-primary mt-2 {{ $n_restaurant !== 0 ? 'd-none' : '' }}">Aggiungi il tuo ristorante</a>
+            <a href="{{ route('admin.restaurants.create') }}" class="btn btn-primary mt-2 ">Aggiungi il tuo ristorante</a>
 
             <p class="paragraph my-4">
                 Benvenuti su Deliveboo, il sito ideale per gestire i tuoi ristoranti e piatti in modo facile ed efficiente.

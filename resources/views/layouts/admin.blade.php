@@ -34,8 +34,10 @@
 
     <div class="main-wrapper @auth d-flex @endauth">
 
+        @auth
+            @include('admin.partials.aside')
 
-
+        @endauth
 
         <main class="overflow-auto w-100">
             @yield('content')

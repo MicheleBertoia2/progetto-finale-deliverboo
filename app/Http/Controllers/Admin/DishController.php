@@ -17,9 +17,12 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dishes = Dish::all()->where('restaurant_id', Auth::id());
+        $user = Auth::user();
+        $res_id  = $user->restaurant->id;
+        $dishes = Dish::where('restaurant_id', $res_id)->get();
         return view('admin.dish.index', compact('dishes'));
     }
+
 
     /**
      * Show the form for creating a new resource.

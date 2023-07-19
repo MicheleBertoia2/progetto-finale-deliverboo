@@ -7,6 +7,13 @@
 
     {{-- @dump($restaurant); --}}
     <h1 class="py-4">{{ $restaurant->name }}
+        <div class="d-flex  justify-content-between">
+            <a href="{{ route('admin.dishes.create') }}"
+                class="btn btn-primary mt-2 me-4 ">Aggiungi un nuovo Piatto</a>
+
+            <a href="{{ route('admin.dishes.index') }}"
+                class="btn btn-primary mt-2 me-4">I tuoi Piatti</a>
+        </div>
 
 
         <a href="{{ route('admin.restaurants.edit', $restaurant) }}" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></a>

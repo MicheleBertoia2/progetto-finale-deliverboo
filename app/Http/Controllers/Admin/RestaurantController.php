@@ -80,8 +80,11 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-
-
+        $user = Auth::user();
+        $restaurant = $user->restaurant;
+        // if(!$restaurant->id === $exact_restaurant_id){
+        //     $restaurant->id = $exact_restaurant_id;
+        // }
         return view('admin.restaurants.show', compact('restaurant'));
     }
 

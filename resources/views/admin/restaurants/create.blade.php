@@ -27,7 +27,7 @@
 
         <div class="mb-3" style="width: 73vw; max-width: 73vw;">
             <label for="name" class="form-label">Nome</label>
-            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Pizzeria Roma" value="{{ old('name')}}">
+            <input type="text" required minlength="2" maxlength="255" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Pizzeria Roma" value="{{ old('name')}}">
         </div>
         @error('name')
         <p class="text-danger">{{ $message }}</p>
@@ -40,14 +40,14 @@
         </div>
         <div class="mb-3">
             <label for="address" class="form-label">Indirizzo</label>
-            <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" placeholder="Via Roma n. 1" value="{{ old('address')}}">
+            <input type="text" required minlength="2" maxlength="255" class="form-control @error('address') is-invalid @enderror" id="address" name="address" placeholder="Via Roma n. 1" value="{{ old('address')}}">
         </div>
         @error('address')
         <p class="text-danger">{{ $message }}</p>
         @enderror
         <div class="mb-3">
             <label for="vat_number" class="form-label">Numero Partita IVA:</label>
-            <input type="number" class="form-control @error('vat_number') is-invalid @enderror" id="vat_number" name="vat_number" placeholder="12345678901" value="{{ old('vat_number')}}">
+            <input type="text" pattern="[0-9]*" required minlength="8" maxlength="11" class="form-control @error('vat_number') is-invalid @enderror" id="vat_number" name="vat_number" placeholder="12345678901" value="{{ old('vat_number')}}">
         </div>
         @error('vat_number')
         <p class="text-danger">{{ $message }}</p>

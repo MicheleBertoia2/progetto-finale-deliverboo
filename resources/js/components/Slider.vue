@@ -28,7 +28,9 @@ export default {
 <template>
     <swiper-container
         :slides-per-view="2"
+        :loopedSlides="2"
         :loop="true"
+        :autoplay="true"
         :centered-slides="true"
         :pagination="{ hideOnClick: true }"
         :breakpoints="{ 1250: { slidesPerView: 6,},
@@ -99,6 +101,7 @@ export default {
 
 swiper-container{
     background-color: #3abfb4;
+    width: 100vw;
 }
 
 swiper-slide {

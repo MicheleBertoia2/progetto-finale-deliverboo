@@ -20,7 +20,7 @@
 
             <div class="mb-3">
                 <label for="name" class="form-label">Nome Piatto</label>
-                <input id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" type="text"
+                <input required id="name" minlength="2" maxlength="255" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" type="text"
                     placeholder="Nome Piatto">
                 @error('name')
                     <p class="text-danger">{{ $message }}</p>
@@ -29,8 +29,9 @@
 
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione Prodotto</label>
+
                 <textarea id="description"  rows="4" class="form-control @error('description') is-invalid @enderror "
-                    name="description" value="{{ old('description') }}" type="text" placeholder="Descrizione piatto"></textarea>
+                    name="description" type="text" placeholder="Descrizione piatto">{!! old('description') !!}</textarea>
                     @error('description')
                     <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -38,7 +39,7 @@
 
             <div class="mb-3">
                 <label for="price" class="form-label">Prezzo</label>
-                <input id="price" class="form-control @error('price') is-invalid @enderror" name="price"
+                <input id="price" required min="1" class="form-control @error('price') is-invalid @enderror" name="price"
                     type="number" value="{{ old('price') }}" placeholder="inserisci il prezzo utilizzando il punto al posto della virgola">
                 @error('price')
                     <p class="text-danger">{{ $message }}</p>
@@ -47,7 +48,7 @@
 
             <div class="mb-3">
                 <label for="ingredients" class="form-label">Ingredienti</label>
-                <input id="ingredients" class="form-control @error('ingredients') is-invalid @enderror" name="ingredients"
+                <input id="ingredients" required class="form-control @error('ingredients') is-invalid @enderror" name="ingredients"
                     type="text" value="{{ old('ingredients') }}" placeholder="Ingredienti">
                 @error('ingredients')
                     <p class="text-danger">{{ $message }}</p>
@@ -56,7 +57,7 @@
 
             <div class="mb-3" style="width: 150vh; max-width: 73vw;">
                 <label for="image_path" class="form-label">Immagine</label>
-                <input onchange="showImagePreview(event)" type="file" value="{{ old('image_path') }}" class="form-control @error('image_path') is-invalid @enderror" id="image_path" name="image_path">
+                <input required onchange="showImagePreview(event)" type="file" value="{{ old('image_path') }}" class="form-control @error('image_path') is-invalid @enderror" id="image_path" name="image_path">
                 <img height="300px" class="mt-3 bg-white px-5" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt="">
                 @error('image_path')
                     <p class="text-danger">{{ $message }}</p>
