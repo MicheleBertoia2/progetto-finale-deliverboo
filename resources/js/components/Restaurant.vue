@@ -1,7 +1,10 @@
 
 <script>
 export default {
-    name: 'Restaurant'
+    name: 'Restaurant',
+    props:{
+        restaurant : Object
+    }
 }
 </script>
 
@@ -9,7 +12,7 @@ export default {
 <template>
     <div class="restaurant">
         <div class="bg-restaurant">
-            <div class="badge text center">RISTORANTE</div>
+            <div class="badge text center">{{ restaurant.name }}</div>
         </div>
         <div class="info">
             <p><i class="fa-solid fa-star"></i></p>
