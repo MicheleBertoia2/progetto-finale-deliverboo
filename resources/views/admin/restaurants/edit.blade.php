@@ -61,7 +61,7 @@
         @enderror
         <div class="mb-3">
             <label for="vat_number" class="form-label">Numero Partita IVA:</label>
-            <input type="number" required min="10000000" max="99999999999"  class="form-control @error('vat_number') is-invalid @enderror" id="vat_number" name="vat_number" placeholder="12345678901" value="{{ old('vat_number', $restaurant?->vat_number)}}">
+            <input type="text" pattern="[0-9]*" required minlength="8" maxlength="11"  class="form-control @error('vat_number') is-invalid @enderror" id="vat_number" name="vat_number" placeholder="12345678901" value="{{ old('vat_number', $restaurant?->vat_number)}}">
         </div>
         @error('vat_number')
         <p class="text-danger">{{ $message }}</p>
