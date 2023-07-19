@@ -137,11 +137,11 @@
             document.getElementById('file_input').name = 'image_path';
             document.getElementById('file_input').value = '';
 
-            // rimuovo il name noImage
+            // aggiungo il name noImage
             // document.getElementById("inputDeleteImage").name = "noImage";
             // document.getElementById("inputDeleteImage").value = "resources/img/placeholder-img.png";
 
-            //imposto un valore che sarà uguale a quello passato al controller //* utile per quando l'immagine non è obbligatoria (cioè nullable) in questo caso l'immagune non è obbligatoria
+            //imposto un valore che sarà uguale a quello passato al controller //* utile per quando l'immagine non è obbligatoria (cioè nullable) in questo caso l'immagune è obbligatoria
             document.getElementById("inputDeleteImage").value = "delete";
 
             // Disabilito il button
