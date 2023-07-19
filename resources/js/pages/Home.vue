@@ -16,7 +16,9 @@ export default {
 
 <template>
 
-
+    <div class="jumbotron">
+            <img src="img/jumbo.png" alt="jumbotron">
+        </div>
 
     <div class="container-inner ">
 
@@ -40,7 +42,14 @@ export default {
 
 <style lang="scss" scoped>
 
-
+.jumbotron {
+    height: 550px;
+    width: 100vw;
+    img {
+        height: 100%;
+        width: 100%;
+    }
+}
 
 
 .container-inner{

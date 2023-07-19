@@ -1,20 +1,19 @@
 
 <script>
 export default {
-    name: 'Restaurant'
+    name: 'Dish'
 }
 </script>
 
 
 <template>
-    <div class="restaurant">
-        <div class="bg-restaurant">
-            <div class="badge text center">RISTORANTE</div>
-        </div>
+    <div class="dish">
+        <div class="bg-dish"></div>
         <div class="info">
-            <p><i class="fa-solid fa-star"></i></p>
-            <p><i class="fa-solid fa-truck"></i></p>
-            <p>tempo</p>
+            <h3>Nome Piatto</h3>
+            <p>Ingredienti: cipolle, carote, mele, banane, spinaci... </p>
+            <p class="d-flex justify-content-between">Prezzo: 150€<button type="button" class="btn btn-primary">Aggiungi</button></p>
+
         </div>
     </div>
 
@@ -23,25 +22,25 @@ export default {
 
 
 <style lang="scss" scoped>
-.restaurant{
+.dish{
         margin: 15px;
         border-radius: 10%;
         background-color: white;
-        max-width: 450px;
-        flex: 1 0 380px;
+        max-width: 350px;
+        flex: 1 0 280px;
         .info{
             margin-top: 10px;
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            height: 30px;
+            margin-left: 15px;
+            margin-right: 15px;
+            margin-bottom: 5px;
+            height: 150px;
             }
-        .bg-restaurant{
+        .bg-dish{
             border-top-left-radius: 10%;
             border-top-right-radius: 10%;
-            background-image: url('img/prova-ristorante.png');
+            background-image: url('/img/prova-ristorante.png');
             background-size: cover;
-            height: 340px;
+            height: 200px;
             position: relative;
 
 
