@@ -12,7 +12,10 @@ export default {
 
     data(){
         return{
-            store
+            store,
+            restaurants : [],
+            title : 'Ecco una selezione di ristoranti per te',
+            types : [],
         }
     },
 
@@ -29,7 +32,11 @@ export default {
             store.loaded = false;
             axios.get(endpoint)
                 .then(res => {
-                    console.log(res.data, endpoint);
+                    console.log(res.data,);
+
+                    this.restaurants = res.data.restaurants;
+                    this.types = res.data.types;
+
                     store.loaded = true;
                 })
 
@@ -53,11 +60,11 @@ export default {
         <Loader v-if="!store.loaded" />
 
         <div v-else class="container-restaurant">
-            <span class="badge bg-pink">Tutti i locali</span>
+            <span class="badge bg-pink">{{ title }}</span>
 
             <div class="wrapper">
 
-                <Restaurant v-for="restaurant in 9" :key="restaurant"/>
+                <Restaurant v-for="restaurant in this.restaurants" :key="restaurant"/>
 
             </div>
         </div>
