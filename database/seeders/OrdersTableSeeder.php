@@ -18,15 +18,14 @@ class OrdersTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        // $restaurants = Restaurant::with(['dishes'])->get();
-        for ($i=1; $i < 12 ; $i++) {
+        for ($i=1; $i < 10 ; $i++) {
             $order = new Order();
-            $order->restaurant_id = Restaurant::inRandomOrder()->first()->id;
+            $order->restaurant_id = Restaurant::inRandomOrder()->first()->id;;
             // $dishes = Dish::where('id', $order->restaurant_id);
             // dd(is_array($dishes));
             $n = rand(1,10);
             $total = 0;
-            for ($i=0; $i < $n ; $i++) {
+            for ($pd=0; $pd < $n ; $pd++) {
                 $dish = Dish::where('id', $order->restaurant_id)->inRandomOrder()->first();
                 $total += $dish?->price;
             }

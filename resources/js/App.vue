@@ -15,6 +15,7 @@ export default {
 <template>
 
     <div>
+
         <Header />
 
 
@@ -29,6 +30,8 @@ export default {
 
 
     </div>
+
+    <Footer />
 
 
 </template>

@@ -2,14 +2,14 @@
 
 import Restaurant from '../components/Restaurant.vue'
 import Slider from '../components/Slider.vue'
-import Footer from '../components/Footer.vue'
+
 
 export default {
     name:'Home',
     components: {
         Restaurant,
         Slider,
-        Footer
+
     }
 }
 </script>
@@ -25,7 +25,7 @@ export default {
         <div class="container-restaurant">
             <span class="badge bg-pink">Tutti i locali</span>
 
-            <div class="wrapper mx-5">
+            <div class="wrapper">
 
                 <Restaurant v-for="restaurant in 9" :key="restaurant"/>
 
@@ -33,7 +33,7 @@ export default {
         </div>
     </div>
 
-    <Footer />
+
 </template>
 
 
@@ -66,8 +66,7 @@ export default {
 .wrapper{
     display: flex;
     flex-wrap: wrap;
-    padding-left: 50px;
-    padding-right: 50px;
+    justify-content: center;
     padding-bottom: 50px;
     height: 100%;
     width: 100%;

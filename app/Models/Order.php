@@ -12,6 +12,10 @@ class Order extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = [
+        'total_price', 'customer_name', 'customer_address', 'customer_mail', 'customer_phone', 'restaurant_id'
+    ];
+
     protected $dates = ['deleted_at'];
 
     public  function  dishes(){

@@ -46,6 +46,7 @@ export default {
 footer{
     background-color: #3abfb4;
     padding: 30px;
+    width: 100vw;
 
     .social{
         display: flex;
