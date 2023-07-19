@@ -2,8 +2,8 @@
 
 @section('content')
 
-
-<div class="container overflow-auto p-5 d-flex flex-column align-items-center" style="max-height: calc(100vh - 70.24px);">
+{{-- style="max-height: calc(100vh - 70.24px);" --}}
+<div class="container overflow-auto p-5 ">
 
     <h1>Nuovo Ristorante</h1>
 
@@ -53,7 +53,14 @@
         <p class="text-danger">{{ $message }}</p>
         @enderror
 
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+            @foreach ($types as $type)
+            <input type="checkbox" class="btn-check" id="{{$type->id}}" autocomplete="off" name="types[]" value="{{$type->id}}">
+            <label class="btn btn-outline-primary" for="{{$type->id}}">{{$type->name}}</label>
+            @endforeach
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3 d-block">Submit</button>
 
     </form>
 
