@@ -25,6 +25,7 @@
                 <img src="{{ asset('storage/' . $dish?->image_path) }}" alt="">
 
             <div class="card-body">
+                <p class="card-text">{{$dish->description}}</p>
                 <h5 class="card-title">{{$dish->name}}</h5>
                 <p class="card-text">{{$dish->ingredients}}</p>
                 <div>
