@@ -7,7 +7,14 @@
 
     {{-- @dump($restaurant); --}}
     <h1 class="py-4">{{ $restaurant->name }}
-        <a class="torna btn btn-primary" href="{{route('admin.home')}}">Torna alla Home</a>
+        <div class="d-flex  justify-content-between">
+            <a href="{{ route('admin.dishes.create') }}"
+                class="btn btn-primary mt-2 me-4 ">Aggiungi un nuovo Piatto</a>
+
+            <a href="{{ route('admin.dishes.index') }}"
+                class="btn btn-primary mt-2 me-4">I tuoi Piatti</a>
+        </div>
+
 
         <a href="{{ route('admin.restaurants.edit', $restaurant) }}" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></a>
         <form action="{{ route('admin.restaurants.destroy', $restaurant) }}" method="POST" class="d-inline" onsubmit="return confirm('Confermi l\'eliminazione del ristorante: {{ $restaurant->name }} ?')">
