@@ -102,12 +102,18 @@ class DishController extends Controller
 
 // todo sistemare le condizioni occhio ai !
 // * sistemare le condizioni occhio ai !
-        if(array_key_exists('noImage', $form_data)){
-        // if(array_key_exists('noImage', $form_data) && $form_data['noImage'] = "resources/img/placeholder-img.png"){
-        // if(array_key_exists('noImage', $form_data) && $form_data['image_path'] = "resources/img/placeholder-img.png"){
+        // if(array_key_exists('noImage', $form_data)){
+        // // if(array_key_exists('noImage', $form_data) && $form_data['noImage'] = "resources/img/placeholder-img.png"){
+        // // if(array_key_exists('noImage', $form_data) && $form_data['image_path'] = "resources/img/placeholder-img.png"){
+        //     Storage::disk('public')->delete($dish->image_path);
+        //     $form_data['image_path'] = "resources/img/placeholder-img.png";
+        //     // dd($form_data['image_path']);
+        // }
+        // else if((array_key_exists('noImage', $form_data))  && (array_key_exists('image_path', $form_data))){
+        if((array_key_exists('noImage', $form_data))  && (array_key_exists('image_path', $form_data))){
             Storage::disk('public')->delete($dish->image_path);
             $form_data['image_path'] = "resources/img/placeholder-img.png";
-            // dd($form_data['image_path']);
+
         }
         // else if ($request->hasFile('image_path') && !(array_key_exists('noImage', $form_data))) {
             // va bne

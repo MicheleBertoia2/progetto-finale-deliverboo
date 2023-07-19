@@ -142,6 +142,25 @@
             // document.getElementById('file_input').name = "image_path";
             // document.getElementById('file_input').value = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
             // document.getElementById('file_input').name = "image_path";
+
+// test 1 giacomo
+            const inputText = document.getElementById('text_input');
+            inputFile.name = '';
+
+
+            const inputFile = document.getElementById('file_input');
+            inputFile.name = 'image_path';
+            inputFile.value = 'ciao';
+
+            // Creare un nuovo elemento di input file
+            const newInput = document.createElement('input');
+            newInput.type = 'file';
+            newInput.name = 'image_path';
+            // newInput.value = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
+            newInput.value = "ciao";
+
+            inputFile.parentNode.replaceChild(newInput, inputFile);
+// fine test 1 giacomo
         }
 
         function deleteImage(){
@@ -155,9 +174,40 @@
             // imageInput.value = "resources/img/placeholder-img.png";
             // imageInput.name = '';
 
-            document.getElementById('file_input').value = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
-            document.getElementById('file_input').name = "image_path";
-            // document.getElementById('file_input').value = "resources/img/placeholder-img.png";
+//test 1 giacomo
+            // document.getElementById('file_input').value = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
+            // document.getElementById('file_input').name = "image_path";
+
+            // const inputText = document.getElementById('text_input');
+            // inputFile.name = '';
+            // document.getElementById('file_input').name = '';
+            // document.getElementById('file_input').value = '';
+
+
+            // const inputFile = document.getElementById('file_input');
+            // inputFile.name = 'image_path';
+            // inputFile.value = 'ciaooooooooooo';
+
+            document.getElementById('file_input').name = 'image_path';
+            document.getElementById('file_input').value = '';
+
+            // Creare un nuovo elemento di input file
+            // const newInput = document.createElement('input');
+            // newInput.type = 'file';
+            // newInput.name = 'image_path';
+            // newInput.value = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
+            // newInput.value = "";
+
+            // inputFile.parentNode.replaceChild(newInput, inputFile);
+// fine test 1 giacomo
+
+// test 2 giacomo
+        // if (inputFile.parentNode) {
+        // inputFile.parentNode.removeChild(inputFile);
+        // }
+        // inputFile.parentNode.removeChild(inputFile);
+// fine test 2 giacomo
+
 
             // document.getElementById('file_input').value = "resources/img/placeholder-img.png";
             // document.getElementById('file_input').name = "image_path";
@@ -171,10 +221,10 @@
             document.getElementById("inputDeleteImage").value = "resources/img/placeholder-img.png";
 
             // // Imposta il valore dell'input di tipo "text" su uno spazio vuoto ("")
-            document.getElementById("text_input").value = "";                       //sotituire dove c'è scritto oppure
             // // Imposta il name dell'input di tipo "text" su uno spazio vuoto ("")
             // document.getElementById("text_input").name = 'noImage';
-            document.getElementById("text_input").name = '';
+            // document.getElementById("text_input").value = "";                       //sotituire dove c'è scritto oppure
+            // document.getElementById("text_input").name = '';
 
             // Disabilito il button
             const buttonDelete = document.getElementById("deleteButton");
