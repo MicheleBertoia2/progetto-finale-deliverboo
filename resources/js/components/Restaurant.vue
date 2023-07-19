@@ -1,7 +1,10 @@
 
 <script>
 export default {
-    name: 'Restaurant'
+    name: 'Restaurant',
+    props:{
+
+    }
 }
 </script>
 
