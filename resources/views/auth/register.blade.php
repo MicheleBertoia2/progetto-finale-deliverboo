@@ -53,13 +53,15 @@
                             </div>
                         </div>
 
-                        <div class="mb-4 row d-flex justify-content-center">
+                        <div class="mb-4 row ">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
-                            <span id="password-error" class="badge bg-danger mt-3 w-50 ">Le password non corispondono!</span>
+                            <div class="d-flex justify-content-center">
+                                <span id="password-error" class="badge bg-danger mt-3 w-50 ">Le password non corispondono!</span>
+                            </div>
                         </div>
 
                         <div class="mb-4 row mb-0">
