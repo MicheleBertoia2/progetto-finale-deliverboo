@@ -10,7 +10,7 @@
 
             <li>
                 <a href="{{ route('admin.orders.index') }}">
-                    <i class="fa-solid fa-house"></i> Orders
+                    <i class="fa-solid fa-book-open"></i> Orders
                 </a>
             </li>
 
