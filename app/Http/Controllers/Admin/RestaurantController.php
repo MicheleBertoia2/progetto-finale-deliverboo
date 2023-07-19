@@ -120,23 +120,31 @@ class RestaurantController extends Controller
             $form_data['slug'] = $restaurant->slug;
         }
 
-        //* edit per l'IMMAGINE
-        // verificare se è stata caricata un immagine (dal campo di input nel form)
-        if (array_key_exists('image', $form_data)) {
+        $oldImagePath = $restaurant->image;
 
-            //* se l'immagine esiste (NEL DB) vuol dire che ne ho caricata una nuova e quindi ELIMINO quella precedente
-            if ($restaurant->image) {
-                // se è presente sul disco in public ed elimina l'immagine già presente
-                Storage::disk('public')->delete($restaurant->image);
+        if ($request->hasFile('image')) {
+
+            //* edit per l'IMMAGINE
+            // verificare se è stata caricata un immagine (dal campo di input nel form)
+            if (array_key_exists('image', $form_data)) {
+
+                //* se l'immagine esiste (NEL DB) vuol dire che ne ho caricata una nuova e quindi ELIMINO quella precedente
+                if ($restaurant->image) {
+                    // se è presente sul disco in public ed elimina l'immagine già presente
+                    Storage::disk('public')->delete($restaurant->image);
+                }
+
+                $form_data['image'] = Storage::put('uploads', $form_data['image']);
             }
-
-            $form_data['image'] = Storage::put('uploads', $form_data['image']);
+        } else {
+            // Mantieni l'immagine precedente
+            $restaurant->image = $oldImagePath;
         }
 
         //* aggiorno i dati
         $restaurant->update($form_data);
 
-        return redirect()->route('admin.restaurants.show', compact('restaurant'));
+        return redirect()->route('admin.restaurants.show', compact('restaurant', 'oldImagePath'));
     }
 
     /**

@@ -101,23 +101,44 @@ class DishController extends Controller
             $form_data['slug'] = $dish->slug;
         }
 
-        //* edit per l'IMMAGINE (FUNZIONANTE ANCHE SE L'IMMAGINE è STATA PRESA DA UN API)
-        //* se è stata caricata un immagine (dal campo di input nel form) e se il value dell'input(/il percorso dell'immagine) non contiene http:// o https:// quindi l'immagine NON è STATA PRESA DALL'API
-        if (array_key_exists('image_path', $form_data) && !(str_contains($form_data['image_path'], 'http://') || str_contains($form_data['image_path'], 'https://'))){
+        $oldImagePath = $dish->image_path;
 
-            //* se l'immagine esiste (NEL DB) vuol dire che ne ho caricata una nuova E NON è STATA PRESA DALL'API (NEL DB) e quindi ELIMINO quella precedente
-            if ($dish->image_path && !(str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))) {
-                // se è presente sul disco in public ed elimina l'immagine già presente
-                Storage::disk('public')->delete($dish->image_path);
+        //* verifica se i name noImage e image_path esistono nel form e se noImage ha come valore 'delete' //* UTILE DOVE LE IMMAGINI SONO NULLABLE (CIOè NON SONO OBBLIGATORIE) ed INUTILE DOVE SONO OBBLIGATORIE
+        if((array_key_exists('noImage', $form_data)) && ($form_data['noImage'] == 'delete') && (array_key_exists('image_path', $form_data))){
+            Storage::disk('public')->delete($dish->image_path);
+            // salva limmagine del placeholder nel database quando viene cliccato elimina immagine //* UTILE DOVE LE IMMAGINI SONO NULLABLE (CIOè NON SONO OBBLIGATORIE) ES. PER I RISTORANTI
+            $form_data['image_path'] = "resources/img/placeholder-img.png";
+        }
+        //* verifica se i name noImage e image_path esistono nel form
+        else if((array_key_exists('noImage', $form_data)) && (array_key_exists('image_path', $form_data))){
+            //* NEL CASO NON DOVESSE ESSERCI L'IMMAGINE, SUCCESSIVAMENTE COMPARE L'ERRORE CHE NESSUNA IMMAGINE è STATA INSERITA E VIENE CLICCATO DIRETTAMENTE IL BUTTON SUBMIT SENZA INSERIRE UN IMMAGINE, VIENE SEMPLICEMENTE RICARICATO NEL DB LO STESSO VALORE CHE ERA GIà PRESENTE NEL DB
+            // $form_data['image_path'] = $dish->image_path;
+            // oppure
+            $form_data['image_path'] = $oldImagePath;
+        }
+        // Verifica se l'input di tipo "file" per l'immagine è vuoto
+        else if ($request->hasFile('image_path') && !(array_key_exists('noImage', $form_data))) {
+            //* edit per l'IMMAGINE (FUNZIONANTE ANCHE SE L'IMMAGINE è STATA PRESA DA UN API)
+            //* se è stata caricata un immagine (dal campo di input nel form) e se il value dell'input(/il percorso dell'immagine) non contiene http:// o https:// quindi l'immagine NON è STATA PRESA DALL'API
+            if (array_key_exists('image_path', $form_data) && !(str_contains($form_data['image_path'], 'http://') || str_contains($form_data['image_path'], 'https://'))){
+
+                //* se l'immagine esiste (NEL DB) vuol dire che ne ho caricata una nuova E NON è STATA PRESA DALL'API (NEL DB) e quindi ELIMINO quella precedente
+                if ($dish->image_path && !(str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))) {
+                    // se è presente sul disco in public ed elimina l'immagine già presente
+                    Storage::disk('public')->delete($dish->image_path);
+                }
+
+                // l'immagine viene salvata nel db con il percorso(uploads/WQZmcTvnkWAVcb35NKprvhlCQfRE2VXRTpSytd8C.jpg)
+                $form_data['image_path'] = Storage::put('uploads', $form_data['image_path']);
             }
-
-            // l'immagine viene salvata nel db con il percorso(uploads/WQZmcTvnkWAVcb35NKprvhlCQfRE2VXRTpSytd8C.jpg)
-            $form_data['image_path'] = Storage::put('uploads', $form_data['image_path']);
+        } else {
+            // Mantieni l'immagine precedente
+            $dish->image_path = $oldImagePath;
         }
 
+        // dd($form_data);
         $dish->update($form_data);
-
-        return redirect()->route('admin.dishes.show', $dish);
+        return redirect()->route('admin.dishes.show', compact('dish', 'oldImagePath'));
     }
 
     /**

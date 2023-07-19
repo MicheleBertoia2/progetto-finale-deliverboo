@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('dishes', function (Blueprint $table) {
-            $table->boolean('is_visible')->default(true)->after('description');
+            // vote è stato reso nullable al posto di obbligatorio
+            $table->float('vote', 2, 1)->nullable()->change();
         });
     }
 
@@ -26,7 +27,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('dishes', function (Blueprint $table) {
-            $table->dropColumn('is_visible');
+            $table->float('vote', 2, 1)->nullable(false)->change();
         });
     }
 };

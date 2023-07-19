@@ -29,9 +29,12 @@
 
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione Prodotto</label>
-                <textarea id="description" name="description"  placeholder="Descrizione Prodotto" rows="4" class="form-control">
-                    {{ old('description', $dish->description) }}
-                </textarea>
+
+                <textarea id="description"  rows="4" class="form-control @error('description') is-invalid @enderror "
+                    name="description" type="text" placeholder="Descrizione piatto">{!! old('description', $dish->description) !!}</textarea>
+                    @error('description')
+                    <p class="text-danger">{{ $message }}</p>
+                    @enderror
             </div>
 
             <div class="mb-3">
@@ -55,24 +58,29 @@
             </div>
 
             <div class="mb-3">
-                <label for="vote" class="form-label">Voto prodotto</label>
-                <input id="vote" class="form-control @error('vote') is-invalid @enderror" name="vote" type="number"
-                    placeholder="inserisci un numero da 1 a 5"
-                    value="{{ old('vote',$dish->vote) }}">
-                @error('vote')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div class="mb-3">
                 <label for="image_path" class="form-label">Immagine</label>
+
                 <input  type="text" value="{{ old('image_path', $dish?->image_path) }}" class="form-control @error('image_path') is-invalid @enderror" id="text_input" name="image_path" style="opacity: 0; border: none; height: 0; width: 0;">
+
                 <input onchange="showImagePreview(event), handleFileSelection(event)" type="file" value="{{ old('image_path', $dish?->image_path) }}" class="form-control @error('image_path') is-invalid @enderror" id="file_input" name="">
-                @if(str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))
-                <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ $dish->image_path ? $dish->image_path : Vite::asset('resources\img\placeholder-img.png') }}" alt="">
-                @else
-                <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ $dish->image_path ? asset('storage/' . $dish->image_path) : Vite::asset('resources\img\placeholder-img.png') }}" alt="">
-                @endif
+                <div class="d-flex align-items-end">
+                    <div>
+                        @if(str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))
+                        <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ $dish->image_path ? $dish->image_path : Vite::asset('resources\img\placeholder-img.png') }}" alt="{{ $dish->name }}">
+                        @elseif(str_contains($dish->image_path, "resources/img/placeholder-img.png" ))
+                        <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ Vite::asset($dish->image_path) }}" alt="{{ $dish->name }}">
+                        @else
+                        <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ $dish->image_path ? asset('storage/' . $dish->image_path) : Vite::asset('resources\img\placeholder-img.png') }}" alt="{{ $dish->name }}">
+                        @endif
+                    </div>
+                    {{-- con l'input ratio è funzionante per eliminazione dell'immagine ma non è bello graficamente --}}
+                    {{-- <div class="fa-solid fa-trash btn btn-danger mt-3">
+                        <input type="radio" name="noImage" class="" onchange="deleteImage()">
+                        <label for="">Elimina immagine</label>
+                    </div> --}}
+                    {{-- * il button deve essere type="button" oppure diverrà automaticamnete type="submit" --}}
+                    <button type="button" class="btn btn-danger ms-3 mt-3" id="deleteButton" onclick="deleteImage()" style="width: 180px; height: 70px;"><span class="fa-solid fa-trash"></span> Elimina immagine <input id="inputDeleteImage" type="hidden" name="noImage" style="opacity: 0; border: none; height: 0; width: 0;"></button>
+                </div>
                 @error('image_path')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -107,7 +115,41 @@
             document.getElementById("text_input").name = '';                        //sotituire dove c'è scritto oppure
             //* oppure
             // document.getElementById("text_input").classList.add("d-none");
+
+            // abilito il button
+            const buttonDelete = document.getElementById("deleteButton");
+            buttonDelete.disabled = false;
+            buttonDelete.classList.remove('disabled');
+
+            // rimuovo il name noImage
+            document.getElementById("inputDeleteImage").name = "";
+            document.getElementById("inputDeleteImage").value = "";
         }
+
+        function deleteImage(){
+
+            const tagImage = document.getElementById('prev-img');
+            tagImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
+            //svuoto entrambi gli input
+            document.getElementById('text_input').name = '';
+            document.getElementById('text_input').value = '';
+
+            document.getElementById('file_input').name = 'image_path';
+            document.getElementById('file_input').value = '';
+
+            // rimuovo il name noImage
+            // document.getElementById("inputDeleteImage").name = "noImage";
+            // document.getElementById("inputDeleteImage").value = "resources/img/placeholder-img.png";
+
+            //imposto un valore che sarà uguale a quello passato al controller //* utile per quando l'immagine non è obbligatoria (cioè nullable) in questo caso l'immagune non è obbligatoria
+            document.getElementById("inputDeleteImage").value = "delete";
+
+            // Disabilito il button
+            const buttonDelete = document.getElementById("deleteButton");
+            buttonDelete.disabled = true;
+            buttonDelete.classList.add('disabled');
+        }
+
 
     </script>
 @endsection

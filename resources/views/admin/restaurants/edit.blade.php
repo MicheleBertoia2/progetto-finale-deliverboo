@@ -45,7 +45,12 @@
             <label for="image" class="form-label">Immagine</label>
             <input onchange="showImagePreview(event)" type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" value="{{ old('image', $restaurant?->image) }}">
             {{-- <img height="300px" class="mt-3 bg-white px-5" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt=""> --}}
-            <img class="w-25 mt-3 bg-white {{ $restaurant->image ? '' : 'px-5'}}" id="prev-img" src="{{ $restaurant->image ? asset('storage/' . $restaurant->image) : Vite::asset('resources\img\placeholder-img.png') }}" alt="{{ $restaurant->image == false ? "Nessuna immagine" : $restaurant->name }}">
+            {{-- <img class="w-25 mt-3 bg-white {{ $restaurant->image ? '' : 'px-5'}}" id="prev-img" src="{{ $restaurant->image ? asset('storage/' . $restaurant->image) : Vite::asset('resources\img\placeholder-img.png') }}" alt="{{ $restaurant->image == false ? "Nessuna immagine" : $restaurant->name }}"> --}}
+            @if(str_contains($restaurant->image, 'http://') || str_contains($restaurant->image, 'https://'))
+                <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ $restaurant->image ? $restaurant->image : Vite::asset('resources\img\placeholder-img.png') }}" alt="{{ $restaurant->image == false ? "Nessuna immagine" : $restaurant->name }}">
+            @else
+                <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ $restaurant->image ? asset('storage/' . $restaurant->image) : Vite::asset('resources\img\placeholder-img.png') }}" alt="{{ $restaurant->image == false ? "Nessuna immagine" : $restaurant->name }}">
+            @endif
         </div>
         <div class="mb-3">
             <label for="address" class="form-label">Indirizzo</label>
@@ -75,9 +80,9 @@
         tagImage.src = URL.createObjectURL(event.target.files[0]);
 
         // condizione non necessaria solo per rimuovere il padding alle images inserite
-        if(tagImage){
-        tagImage.classList.remove("px-5");
-        }
+        // if(tagImage){
+        // tagImage.classList.remove("px-5");
+        // }
 
     }
 </script>

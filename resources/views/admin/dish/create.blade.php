@@ -29,9 +29,12 @@
 
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione Prodotto</label>
-                <textarea id="description" name="description"  placeholder="Descrizione Prodotto" rows="4" class="form-control">
-                    {{ old('description') }}
-                </textarea>
+
+                <textarea id="description"  rows="4" class="form-control @error('description') is-invalid @enderror "
+                    name="description" type="text" placeholder="Descrizione piatto">{!! old('description') !!}</textarea>
+                    @error('description')
+                    <p class="text-danger">{{ $message }}</p>
+                    @enderror
             </div>
 
             <div class="mb-3">
@@ -48,15 +51,6 @@
                 <input id="ingredients" required class="form-control @error('ingredients') is-invalid @enderror" name="ingredients"
                     type="text" value="{{ old('ingredients') }}" placeholder="Ingredienti">
                 @error('ingredients')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div class="mb-3">
-                <label for="vote" class="form-label">Voto prodotto</label>
-                <input id="vote" class="form-control @error('vote') is-invalid @enderror" name="vote" value="{{ old('vote') }}" type="number"
-                    placeholder="inserisci un numero da 1 a 5">
-                @error('vote')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
