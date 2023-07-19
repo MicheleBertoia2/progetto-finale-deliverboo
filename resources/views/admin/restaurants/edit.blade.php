@@ -44,7 +44,9 @@
             @enderror
             <div class="mb-3">
                 <label for="image" class="form-label">Immagine</label>
-                <input onchange="showImagePreview(event), handleFileSelection(event)" type="file"
+                {{-- <input onchange="showImagePreview(event), handleFileSelection(event)" type="file" --}}
+                {{-- <input onchange="showImagePreview(event), handleFileSelection(event), emptyImagePath(event)"  type="file" --}}
+                <input onchange="emptyImagePath(event), handleFileSelection(event)"  type="file"
                     class="form-control @error('image') is-invalid @enderror" id="file_input" name="image"
                     value="{{ old('image', $restaurant?->image) }}">
                 {{-- <img height="300px" class="mt-3 bg-white px-5" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt=""> --}}
@@ -153,6 +155,52 @@
             const buttonDelete = document.getElementById("deleteButton");
             buttonDelete.disabled = true;
             buttonDelete.classList.add('disabled');
+        }
+
+        // function emptyImagePath(event){
+        //     const textInput = document.getElementById('text_input');
+        //     if(textInput.value == '' || textInput.value == null || textInput.value == undefined){
+        //         const tagImage = document.getElementById('prev-img');
+        //         tagImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
+        //     }
+        // }
+
+        // function emptyImagePath(event) {
+        //     const fileInput = event.target;
+        //     const imagePreview = document.getElementById('prev-img');
+
+        //     if (fileInput.files && fileInput.files[0]) {
+        //         const reader = new FileReader();
+
+        //         reader.onload = function (e) {
+        //         imagePreview.src = e.target.result;
+        //         };
+
+        //         reader.readAsDataURL(fileInput.files[0]);
+        //     } else {
+        //         // Se l'input di tipo file è vuoto, mostra l'immagine di placeholder
+        //         imagePreview.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
+        //     }
+        // }
+
+        // funzione per far sì che il placeholder venga mostrato quando viene inserita un immagine nell'input file e poi cliccando sull'input file non viene inserito nessun percorso e viene cliccato il pulsante "annulla"
+        function emptyImagePath(event) {
+            const imageInput = event.target;
+            const previewImage = document.getElementById('prev-img');
+
+            if (imageInput.files && imageInput.files[0]) {
+                // Se è stato selezionato un file, mostra l'immagine selezionata
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                previewImage.src = e.target.result;
+                };
+
+                reader.readAsDataURL(imageInput.files[0]);
+            } else {
+                // Se non è stato selezionato un file, mostra l'immagine di placeholder
+                previewImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
+            }
         }
     </script>
 
