@@ -30,6 +30,7 @@ Route::middleware(['auth','verified'])
         Route::get('/', [DashboardController::class, 'index'])->name('home');
         Route::resource('restaurants', RestaurantController::class);
         Route::resource('dishes', DishController::class);
+
     });
 
 
