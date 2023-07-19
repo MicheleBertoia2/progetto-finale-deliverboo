@@ -29,12 +29,8 @@
 
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione Prodotto</label>
-                <textarea id="description" rows="4" class="form-control @error('description') is-invalid @enderror "
-                    name=" 	description" type="text" placeholder="Descrizione Prodotto"
-                    value="{{ old('description',$dish->description) }}">
-                @error('description')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
+                <textarea id="description" name="description"  placeholder="Descrizione Prodotto" rows="4" class="form-control">
+                    {{ old('description', $dish->description) }}
                 </textarea>
             </div>
 
