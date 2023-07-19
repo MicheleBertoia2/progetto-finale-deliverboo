@@ -23,9 +23,11 @@
         <div class="card d-flex align-items-center" style="width: 18rem;">
 
             @if(str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))
-                <img src="{{  $dish?->image_path }}" alt="">
+                <img src="{{  $dish?->image_path }}" alt="{{ $dish->name }}">
+            @elseif(str_contains($dish->image_path, "resources/img/placeholder-img.png" ))
+                <img src="{{ Vite::asset($dish->image_path) }}" alt="{{ $dish->name }}">
             @else
-                <img src="{{ asset('storage/' . $dish?->image_path) }}" alt="">
+                <img src="{{ asset('storage/' . $dish?->image_path) }}" alt="{{ $dish->name }}">
             @endif
 
             <div class="card-body">

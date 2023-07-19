@@ -100,28 +100,40 @@ class DishController extends Controller
 
         $oldImagePath = $dish->image_path;
 
+// todo sistemare le condizioni occhio ai !
+// * sistemare le condizioni occhio ai !
+        if(array_key_exists('noImage', $form_data)){
+        // if(array_key_exists('noImage', $form_data) && $form_data['noImage'] = "resources/img/placeholder-img.png"){
+        // if(array_key_exists('noImage', $form_data) && $form_data['image_path'] = "resources/img/placeholder-img.png"){
+            Storage::disk('public')->delete($dish->image_path);
+            $form_data['image_path'] = "resources/img/placeholder-img.png";
+            // dd($form_data['image_path']);
+        }
+        // else if ($request->hasFile('image_path') && !(array_key_exists('noImage', $form_data))) {
+            // va bne
+        else if ($request->hasFile('image_path') && !(array_key_exists('noImage', $form_data))) {
         // Verifica se l'input di tipo "file" per l'immagine è vuoto
-        if ($request->hasFile('image_path')) {
-                //* edit per l'IMMAGINE (FUNZIONANTE ANCHE SE L'IMMAGINE è STATA PRESA DA UN API)
-                //* se è stata caricata un immagine (dal campo di input nel form) e se il value dell'input(/il percorso dell'immagine) non contiene http:// o https:// quindi l'immagine NON è STATA PRESA DALL'API
-                if (array_key_exists('image_path', $form_data) && !(str_contains($form_data['image_path'], 'http://') || str_contains($form_data['image_path'], 'https://'))){
+        // if ($request->hasFile('image_path') && (array_key_exists('noImage', $form_data))) {
+            //* edit per l'IMMAGINE (FUNZIONANTE ANCHE SE L'IMMAGINE è STATA PRESA DA UN API)
+            //* se è stata caricata un immagine (dal campo di input nel form) e se il value dell'input(/il percorso dell'immagine) non contiene http:// o https:// quindi l'immagine NON è STATA PRESA DALL'API
+            if (array_key_exists('image_path', $form_data) && !(str_contains($form_data['image_path'], 'http://') || str_contains($form_data['image_path'], 'https://'))){
 
-                    //* se l'immagine esiste (NEL DB) vuol dire che ne ho caricata una nuova E NON è STATA PRESA DALL'API (NEL DB) e quindi ELIMINO quella precedente
-                    if ($dish->image_path && !(str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))) {
-                        // se è presente sul disco in public ed elimina l'immagine già presente
-                        Storage::disk('public')->delete($dish->image_path);
-                    }
-
-                    // l'immagine viene salvata nel db con il percorso(uploads/WQZmcTvnkWAVcb35NKprvhlCQfRE2VXRTpSytd8C.jpg)
-                    $form_data['image_path'] = Storage::put('uploads', $form_data['image_path']);
+                //* se l'immagine esiste (NEL DB) vuol dire che ne ho caricata una nuova E NON è STATA PRESA DALL'API (NEL DB) e quindi ELIMINO quella precedente
+                if ($dish->image_path && !(str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))) {
+                    // se è presente sul disco in public ed elimina l'immagine già presente
+                    Storage::disk('public')->delete($dish->image_path);
                 }
-            } else {
-                // Mantieni l'immagine precedente
-                $dish->image_path = $oldImagePath;
+
+                // l'immagine viene salvata nel db con il percorso(uploads/WQZmcTvnkWAVcb35NKprvhlCQfRE2VXRTpSytd8C.jpg)
+                $form_data['image_path'] = Storage::put('uploads', $form_data['image_path']);
             }
+        } else {
+            // Mantieni l'immagine precedente
+            $dish->image_path = $oldImagePath;
+        }
+        // dd($form_data);
 
         $dish->update($form_data);
-
         return redirect()->route('admin.dishes.show', compact('dish', 'oldImagePath'));
     }
 
