@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-use App\Models\Restaurant;
 use Illuminate\Support\Facades\Storage;
-//* Requests per la validazione degli errori
 use App\Http\Requests\RestaurantRequest;
-
 use Illuminate\Support\Facades\Auth;
+use App\Models\Restaurant;
+use App\Models\Type;
+
 
 class RestaurantController extends Controller
 {
@@ -36,7 +35,9 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        return view('admin.restaurants.create');
+        $types = Type::all();
+
+        return view('admin.restaurants.create', compact('types'));
     }
 
     /**
@@ -68,7 +69,10 @@ class RestaurantController extends Controller
         // dd($request->all());
         $new_restaurant->save();
 
-        //* redirect al progetto appena generato
+        if(array_key_exists('types', $form_data)){
+            $new_restaurant->types()->attach($form_data['types']);
+        }
+
         return redirect()->route('admin.restaurants.show', $new_restaurant);
     }
 
@@ -96,7 +100,9 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        return view('admin.restaurants.edit', compact('restaurant'));
+        $types = Type::all();
+
+        return view('admin.restaurants.edit', compact('restaurant','types'));
     }
 
     /**
@@ -114,7 +120,7 @@ class RestaurantController extends Controller
         //* se il titolo è stato modificato
         //* genero un nuovo slug
         //* altrimenti lo slug resta lo stesso di prima
-        if ($restaurant->slug === $form_data['name']) {
+        if ($form_data['name'] !== $restaurant->name) {
             $form_data['slug'] = Restaurant::generateSlug($form_data['name']);
         } else {
             $form_data['slug'] = $restaurant->slug;
@@ -143,6 +149,12 @@ class RestaurantController extends Controller
 
         //* aggiorno i dati
         $restaurant->update($form_data);
+
+        if(array_key_exists('types', $form_data)){
+            $restaurant->types()->sync($form_data['types']);
+        }else{
+            $restaurant->types()->detach();
+        }
 
         return redirect()->route('admin.restaurants.show', compact('restaurant', 'oldImagePath'));
     }
