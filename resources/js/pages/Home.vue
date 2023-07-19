@@ -1,15 +1,65 @@
 <script>
 
-import Restaurant from '../components/Restaurant.vue'
-import Slider from '../components/Slider.vue'
+import Restaurant from '../components/Restaurant.vue';
+import Slider from '../components/Slider.vue';
+import axios from 'axios';
+import Loader from '../components/Loader.vue';
+import { store } from '../store/store';
 
 
 export default {
     name:'Home',
+
+    data(){
+        return{
+            store,
+            restaurants : [],
+            title : 'Ecco una selezione di ristoranti per te',
+            resTypes : [],
+        }
+    },
+
     components: {
         Restaurant,
+        Loader,
         Slider,
 
+    },
+
+    methods:{
+
+        getApi(endpoint = store.apiUrl + 'restaurants'){
+            store.loaded = false;
+            axios.get(endpoint)
+                .then(res => {
+                    console.log(res.data,);
+
+                    this.restaurants = res.data.restaurants;
+                    this.resTypes = res.data.types;
+
+                    store.loaded = true;
+                })
+
+            },
+
+        getRestaurantsType($slug){
+            store.loaded = false;
+            axios.get(store.apiUrl + 'restaurants/type/' + $slug)
+                .then(res => {
+                    this.restaurants = res.data.restaurants;
+                    this.title = 'Risultati per tipo: ' + $slug;
+
+                    store.loaded = true;
+
+                })
+            //console.log('cliccato');
+
+        }
+
+    },
+
+    mounted(){
+        this.getApi()
     }
 }
 </script>
@@ -23,13 +73,19 @@ export default {
     <div class="container-inner ">
 
         <Slider />
+        <ul class="d-flex bg-dark py-3">
+            <li v-for="resType in this.resTypes" :key="resType.id"
+                class="badge badge-success text-white "
+                @click="getRestaurantsType(resType.slug)">{{ resType.name }}</li>
+        </ul>
+        <Loader v-if="!store.loaded" />
 
-        <div class="container-restaurant">
-            <span class="badge bg-pink">Tutti i locali</span>
+        <div v-else class="container-restaurant">
+            <span class="badge bg-pink">{{ title }}</span>
 
             <div class="wrapper">
 
-                <Restaurant v-for="restaurant in 9" :key="restaurant"/>
+                <Restaurant v-for="restaurant in this.restaurants" :key="restaurant" :restaurant="restaurant"/>
 
             </div>
         </div>
@@ -62,6 +118,12 @@ export default {
     color: black;
     font-size: 30px;
     margin: 50px;
+}
+
+ul{
+    li{
+        cursor: pointer;
+    }
 }
 
 
