@@ -52,7 +52,6 @@ export default {
                     store.loaded = true;
 
                 })
-            //console.log('cliccato');
 
         }
 
