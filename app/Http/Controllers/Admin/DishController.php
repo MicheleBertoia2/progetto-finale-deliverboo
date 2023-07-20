@@ -49,12 +49,11 @@ class DishController extends Controller
 
         $form_data['restaurant_id'] = Auth::id();
 
-
-        if(array_key_exists('image_path', $form_data)){
+        // if(array_key_exists('image_path', $form_data) && ($form_data['image_path'] != '') && !(array_key_exists('noPathSelected', $form_data)) && ($form_data['noPathSelected'] == 'empty_input')){
+        if(array_key_exists('image_path', $form_data) && ($form_data['image_path'] != '')){
             $form_data['image_path'] = Storage::put('uploads',  $form_data['image_path']);
         };
-
-
+// dd($form_data);
         $new_dish = new Dish();
         $new_dish->fill($form_data);
         $new_dish->save();
