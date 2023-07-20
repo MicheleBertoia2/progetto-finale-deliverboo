@@ -4,12 +4,12 @@
     <div class="container ">
         <div class="py-4">
             <h1 class="d-inline-block"> Piatti</h1>
-            <a href="{{ route('admin.dishes.create') }}" class="btn btn-primary m-3">Nuovo Piatto <i
+            <a href="{{ route('admin.dishes.create') }}" class="btn mybadge m-3">Nuovo Piatto <i
                 class="fa-solid fa-plus"></i>
             </a>
         </div>
 
-        <div class="row">
+        <div class="row ms-3">
         @foreach ($dishes as $dish)
             <div class="card m-1" style="width: 18rem;">
 
@@ -25,17 +25,17 @@
                     <h5 class="card-title">{{ $dish->name }}</h5>
                     <p class="card-text">{{ $dish->ingredients }}</p>
                     <div class="mb-2">
-                        <span class="badge bg-success ">
+                        <span class="badge mybadge ">
                             prezzo:{{$dish->price}}</span>
-                        <span class="badge bg-success">Visibile:
+                        <span class="badge mybadge">Visibile:
                             {{ $dish->is_visible ? 'Si' : 'No' }}
                     </span>
                     </div>
                     <div>
-                        <a href="{{ route('admin.dishes.show', $dish) }}" class="btn btn-primary"><i
+                        <a href="{{ route('admin.dishes.show', $dish) }}" class="btn btn-dark"><i
                             class="fa-solid fa-eye"></i>
                         </a>
-                        <a href="{{ route('admin.dishes.edit', $dish) }}" class="btn btn-primary"><i
+                        <a href="{{ route('admin.dishes.edit', $dish) }}" class="btn btn-dark"><i
                             class="fa-solid fa-pencil"></i>
                         </a>
                         <form class="d-inline" action="{{ route('admin.dishes.destroy', $dish) }}"

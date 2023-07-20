@@ -106,11 +106,26 @@ aside {
 }
 
 .ristorante {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     img{
     width: 300px;
     }
 }
-
+.mybadge{
+    transition: all .5s;
+    color: black;
+    background-color: #3ABFB4 !important;
+    &:hover {
+        color: white;
+    }
+}
+.mycard{
+    img{
+        width: 300px;
+    }
+}
 #password-error {
     opacity: 0;
 }

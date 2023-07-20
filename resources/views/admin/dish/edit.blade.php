@@ -90,7 +90,7 @@
                     </div> --}}
                     {{-- * il button deve essere type="button" oppure diverrà automaticamnete type="submit" --}}
                     <button type="button" class="btn btn-danger ms-3 mt-3" id="deleteButton" onclick="deleteImage()"
-                        style="width: 180px; height: 70px;"><span class="fa-solid fa-trash"></span> Elimina immagine <input
+                        style="width: 180px; height: 70px;"><span class="fa-solid fa-trash"></span> Elimina<input
                             id="inputDeleteImage" type="hidden" name="noImage"
                             style="opacity: 0; border: none; height: 0; width: 0;"></button>
                 </div>
@@ -107,7 +107,7 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-success">Modifica Piatto</button>
+            <button type="submit" class="btn mybadge">Modifica Piatto</button>
 
         </form>
 

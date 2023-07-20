@@ -73,7 +73,7 @@
             </div>
 
 
-            <button type="submit" class="btn btn-success">Crea Piatto</button>
+            <button type="submit" class="btn mybadge">Crea Piatto</button>
 
         </form>
 
