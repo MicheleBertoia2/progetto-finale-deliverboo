@@ -2,13 +2,12 @@
 
 @section('content')
     <div class="container my-ctn">
-        <a href="{{ route('admin.dishes.index') }}"
-    class="btn btn-primary mt-2 me-4 torna">Torna ai tuoi Piatti</a>
+
         <h1 class="py-4">{{ $dish->name }}</h1>
 
         <div class="mb-3">
 
-            <a href="{{ route('admin.dishes.edit', $dish) }}" class="btn btn-primary"><i
+            <a href="{{ route('admin.dishes.edit', $dish) }}" class="btn btn-dark"><i
                 class="fa-solid fa-pencil"></i>
             </a>
             <form class="d-inline" action="{{ route('admin.dishes.destroy', $dish) }}"
@@ -20,7 +19,15 @@
                             class="fa-solid fa-trash"></i></button>
                 </form>
         </div>
-        <div class="card d-flex align-items-center" style="width: 18rem;">
+        <div class="m-3">
+            <span class="badge mybadge ">
+                prezzo:{{$dish->price}}</span>
+            <span class="badge mybadge">Visibile:
+                {{ $dish->is_visible ? 'Si' : 'No' }}
+        </span>
+        </div>
+
+        <div class="d-flex align-items-center mycard m-2" >
 
             @if(str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))
                 <img src="{{  $dish?->image_path }}" alt="{{ $dish->name }}">
@@ -30,20 +37,16 @@
                 <img src="{{ asset('storage/' . $dish?->image_path) }}" alt="{{ $dish->name }}">
             @endif
 
-            <div class="card-body">
-                <p class="card-text">{{$dish->description}}</p>
-                <h5 class="card-title">{{$dish->name}}</h5>
-                <p class="card-text">{{$dish->ingredients}}</p>
-                <div>
-                    <span class="badge bg-success ">
-                        prezzo:{{$dish->price}}</span>
-                    <span class="badge bg-success">Visibile:
-                        {{ $dish->is_visible ? 'Si' : 'No' }}
-                </span>
-                </div>
-            </div>
         </div>
+        <div class="body">
+            <p class="card-text"><strong>Descrizione:</strong>{{$dish->description}}</p>
+            <p class="card-text"><strong>Ingredienti:</strong>{{$dish->ingredients}}</p>
+        </div>
+        <a href="{{ route('admin.dishes.index') }}"
+        class="btn mybadge m-2 mt-4 ">Torna ai tuoi Piatti</a>
 
     </div>
 
 @endsection
+
+

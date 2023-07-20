@@ -1,16 +1,17 @@
-<aside class="bg-danger text-white h-100">
+<aside class=" text-dark  ">
 
     <nav>
         <ul>
             <li>
-                <a href="{{ route('admin.home') }}">
-                    <i class="fa-solid fa-house"></i> Home
+                <a  href="{{ route('admin.home') }}">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home</span>
                 </a>
             </li>
 
             <li>
                 <a href="{{ route('admin.orders.index') }}">
-                    <i class="fa-solid fa-book-open"></i> Orders
+                    <i class="fa-solid fa-truck"></i> <span>Orders</span>
                 </a>
             </li>
 

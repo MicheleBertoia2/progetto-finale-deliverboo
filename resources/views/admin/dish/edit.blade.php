@@ -31,8 +31,8 @@
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione Prodotto</label>
 
-                <textarea id="description" rows="4" class="form-control @error('description') is-invalid @enderror "
-                    name="description" type="text" placeholder="Descrizione piatto">{!! old('description', $dish->description) !!}</textarea>
+                <textarea id="description" rows="4" class="form-control m-0 @error('description') is-invalid @enderror "
+                    name="description" type="text"  >{!! old('description', $dish->description) !!}</textarea>
                 @error('description')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -93,7 +93,7 @@
                     </div> --}}
                     {{-- * il button deve essere type="button" oppure diverrà automaticamnete type="submit" --}}
                     <button type="button" class="btn btn-danger ms-3 mt-3" id="deleteButton" onclick="deleteImage()"
-                        style="width: 180px; height: 70px;"><span class="fa-solid fa-trash"></span> Elimina immagine <input
+                        style="width: 180px; height: 70px;"><span class="fa-solid fa-trash"></span> Elimina<input
                             id="inputDeleteImage" type="hidden" name="noImage"
                             style="opacity: 0; border: none; height: 0; width: 0;"></button>
                 </div>
@@ -110,7 +110,7 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-success mt-3 mb-5">Modifica Piatto</button>
+            <button type="submit" class="btn mybadge">Modifica Piatto</button>
 
         </form>
 
