@@ -39,8 +39,8 @@
 
             <div class="mb-3">
                 <label for="price" class="form-label">Prezzo</label>
-                <input id="price" required min="1" class="form-control @error('price') is-invalid @enderror" name="price"
-                    type="number" value="{{ old('price') }}" placeholder="inserisci il prezzo utilizzando il punto al posto della virgola">
+                <input id="price" required minlength="1" pattern="[0-9.]*" class="form-control @error('price') is-invalid @enderror" name="price"
+                    type="text" value="{{ old('price') }}" placeholder="inserisci il prezzo">
                 @error('price')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror

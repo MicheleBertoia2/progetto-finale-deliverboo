@@ -54,7 +54,7 @@
         @enderror
 
         <div class="mb-3">
-            <label for="address" class="form-label">Tipologie del ristorante</label>
+            <label for="types" class="form-label">Tipologie del ristorante</label>
             <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                 @foreach ($types as $type)
                 <input type="checkbox" class="btn-check" id="{{$type->id}}" autocomplete="off" name="types[]" value="{{$type->id}}">

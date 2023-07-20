@@ -14,14 +14,15 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.dishes.update', $dish) }}" method="POST" enctype="multipart/form-data">
+        <form id="myform" action="{{ route('admin.dishes.update', $dish) }}" method="POST" enctype="multipart/form-data">
             @method('PUT')
             @csrf
 
             <div class="mb-3">
                 <label for="name" class="form-label">Nome Piatto</label>
-                <input required id="name" minlength="2" maxlength="255" class="form-control @error('name') is-invalid @enderror" name="name" type="text"
-                    placeholder="Nome Piatto" value="{{ old('name',$dish->name) }}">
+                <input required id="name" minlength="2" maxlength="255"
+                    class="form-control @error('name') is-invalid @enderror" name="name" type="text"
+                    placeholder="Nome Piatto" value="{{ old('name', $dish->name) }}">
                 @error('name')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -30,18 +31,18 @@
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione Prodotto</label>
 
-                <textarea id="description"  rows="4" class="form-control @error('description') is-invalid @enderror "
+                <textarea id="description" rows="4" class="form-control @error('description') is-invalid @enderror "
                     name="description" type="text" placeholder="Descrizione piatto">{!! old('description', $dish->description) !!}</textarea>
-                    @error('description')
+                @error('description')
                     <p class="text-danger">{{ $message }}</p>
-                    @enderror
+                @enderror
             </div>
 
             <div class="mb-3">
                 <label for="price" class="form-label">Prezzo</label>
-                <input id="price" required min="1" class="form-control @error('price') is-invalid @enderror" name="price"
-                    type="number" placeholder="inserisci il prezzo utilizzando il punto al posto della virgola"
-                    value="{{ old('price',$dish->price) }}">
+                <input id="price" pattern="[0-9.]*" minlength="1" required class="form-control @error('price') is-invalid @enderror" name="price"
+                    type="text" placeholder="inserisci il prezzo"
+                    value="{{ old('price', $dish->price) }}">
                 @error('price')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -49,9 +50,9 @@
 
             <div class="mb-3">
                 <label for="ingredients" class="form-label">Ingredienti</label>
-                <input id="ingredients" required class="form-control @error('ingredients') is-invalid @enderror" name="ingredients"
-                    type="text" placeholder="Ingredienti"
-                    value="{{ old('ingredients',$dish->ingredients) }}">
+                <input id="ingredients" required class="form-control @error('ingredients') is-invalid @enderror"
+                    name="ingredients" type="text" placeholder="Ingredienti"
+                    value="{{ old('ingredients', $dish->ingredients) }}">
                 @error('ingredients')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -60,17 +61,26 @@
             <div class="mb-3">
                 <label for="image_path" class="form-label">Immagine</label>
 
-                <input  type="text" value="{{ old('image_path', $dish?->image_path) }}" class="form-control @error('image_path') is-invalid @enderror" id="text_input" name="image_path" style="opacity: 0; border: none; height: 0; width: 0;">
+                <input type="text" value="{{ old('image_path', $dish?->image_path) }}"
+                    class="form-control @error('image_path') is-invalid @enderror" id="text_input" name="image_path"
+                    style="opacity: 0; border: none; height: 0; width: 0;">
 
-                <input onchange="showImagePreview(event), handleFileSelection(event)" type="file" value="{{ old('image_path', $dish?->image_path) }}" class="form-control @error('image_path') is-invalid @enderror" id="file_input" name="">
+                <input onchange="showImagePreview(event), handleFileSelection(event)" type="file"
+                    value="{{ old('image_path', $dish?->image_path) }}"
+                    class="form-control @error('image_path') is-invalid @enderror" id="file_input" name="">
                 <div class="d-flex align-items-end">
                     <div>
-                        @if(str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))
-                        <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ $dish->image_path ? $dish->image_path : Vite::asset('resources\img\placeholder-img.png') }}" alt="{{ $dish->name }}">
-                        @elseif(str_contains($dish->image_path, "resources/img/placeholder-img.png" ))
-                        <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ Vite::asset($dish->image_path) }}" alt="{{ $dish->name }}">
+                        @if (str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))
+                            <img height="300px" class="mt-3 bg-white" id="prev-img"
+                                src="{{ $dish->image_path ? $dish->image_path : Vite::asset('resources\img\placeholder-img.png') }}"
+                                alt="{{ $dish->name }}">
+                        @elseif(str_contains($dish->image_path, 'resources/img/placeholder-img.png'))
+                            <img height="300px" class="mt-3 bg-white" id="prev-img"
+                                src="{{ Vite::asset($dish->image_path) }}" alt="{{ $dish->name }}">
                         @else
-                        <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ $dish->image_path ? asset('storage/' . $dish->image_path) : Vite::asset('resources\img\placeholder-img.png') }}" alt="{{ $dish->name }}">
+                            <img height="300px" class="mt-3 bg-white" id="prev-img"
+                                src="{{ $dish->image_path ? asset('storage/' . $dish->image_path) : Vite::asset('resources\img\placeholder-img.png') }}"
+                                alt="{{ $dish->name }}">
                         @endif
                     </div>
                     {{-- con l'input ratio è funzionante per eliminazione dell'immagine ma non è bello graficamente --}}
@@ -79,7 +89,10 @@
                         <label for="">Elimina immagine</label>
                     </div> --}}
                     {{-- * il button deve essere type="button" oppure diverrà automaticamnete type="submit" --}}
-                    <button type="button" class="btn btn-danger ms-3 mt-3" id="deleteButton" onclick="deleteImage()" style="width: 180px; height: 70px;"><span class="fa-solid fa-trash"></span> Elimina immagine <input id="inputDeleteImage" type="hidden" name="noImage" style="opacity: 0; border: none; height: 0; width: 0;"></button>
+                    <button type="button" class="btn btn-danger ms-3 mt-3" id="deleteButton" onclick="deleteImage()"
+                        style="width: 180px; height: 70px;"><span class="fa-solid fa-trash"></span> Elimina immagine <input
+                            id="inputDeleteImage" type="hidden" name="noImage"
+                            style="opacity: 0; border: none; height: 0; width: 0;"></button>
                 </div>
                 @error('image_path')
                     <p class="text-danger">{{ $message }}</p>
@@ -101,7 +114,7 @@
     </div>
 
     <script>
-        function showImagePreview(event){
+        function showImagePreview(event) {
             const tagImage = document.getElementById('prev-img');
             tagImage.src = URL.createObjectURL(event.target.files[0]);
         }
@@ -110,9 +123,9 @@
             // Imposta il valore dell'attributo name dell'input in base alla condizione
             document.getElementById("file_input").name = (event.target.value == "") ? '' : 'image_path';
             // Imposta il valore dell'input di tipo "text" su uno spazio vuoto ("")
-            document.getElementById("text_input").value = "";                       //sotituire dove c'è scritto oppure
+            document.getElementById("text_input").value = ""; //sotituire dove c'è scritto oppure
             // Imposta il name dell'input di tipo "text" su uno spazio vuoto ("")
-            document.getElementById("text_input").name = '';                        //sotituire dove c'è scritto oppure
+            document.getElementById("text_input").name = ''; //sotituire dove c'è scritto oppure
             //* oppure
             // document.getElementById("text_input").classList.add("d-none");
 
@@ -126,7 +139,7 @@
             document.getElementById("inputDeleteImage").value = "";
         }
 
-        function deleteImage(){
+        function deleteImage() {
 
             const tagImage = document.getElementById('prev-img');
             tagImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
