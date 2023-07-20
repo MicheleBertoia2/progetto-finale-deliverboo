@@ -19,6 +19,10 @@ class Order extends Model
     protected $dates = ['deleted_at'];
 
     public  function  dishes(){
-        return $this->belongsToMany(Dish::class);
+        return $this->belongsToMany(Dish::class)->withPivot('quantity');
+    }
+
+    public function restaurant(){
+        return $this->belongsTo(Restaurant::class);
     }
 }
