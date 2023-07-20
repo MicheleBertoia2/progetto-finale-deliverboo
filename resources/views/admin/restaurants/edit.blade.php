@@ -134,6 +134,10 @@
         }
 
         function handleFileSelection(event) {
+            // svuoto il valore dell'input nascosto
+            const fileInput = document.getElementById('input-no-path-selected');
+            fileInput.value = '';
+
             // Imposta il name dell'attributo nell'input = image
             document.getElementById('file_input').name = 'image';
 
@@ -148,6 +152,13 @@
         }
 
         function deleteImage(){
+            // svuoto il valore dell'input nascosto
+            const fileInput = document.getElementById('input-no-path-selected');
+            fileInput.value = 'empty_input';
+
+            // Imposta il name dell'attributo nell'input = image
+            document.getElementById('file_input').name = 'image';
+
             const tagImage = document.getElementById('prev-img');
             tagImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
             // svuoto l'input

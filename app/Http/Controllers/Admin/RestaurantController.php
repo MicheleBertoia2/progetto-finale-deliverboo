@@ -53,9 +53,24 @@ class RestaurantController extends Controller
         $form_data = $request->all();
         $form_data['user_id'] = Auth::id();
 
-        if(array_key_exists('image', $form_data)){
+        if ($request->hasFile('image') && (array_key_exists('image', $form_data))) {
             $form_data['image'] = Storage::put('uploads', $form_data['image']);
-            // dd($form_data);
+        }
+        //* edit per l'IMMAGINE
+        //* verifica se i name noImage esiste e image non esiste nel form e se noImage ha come valore 'delete' //* UTILE DOVE LE IMMAGINI SONO NULLABLE (CIOè NON SONO OBBLIGATORIE) ed INUTILE DOVE SONO OBBLIGATORIE
+        else if((array_key_exists('noImage', $form_data)) && ($form_data['noImage'] == 'delete') && !(array_key_exists('image', $form_data))
+        //* se clicco sull'input file e carico un'immagine nell'input e successivamente clicco sull'input file e non carico un'immagine nell'input ma clicco "annulla" così viene caricata l'img placeholder
+            || (array_key_exists('noPathSelected', $form_data)) && ($form_data['noPathSelected'] == 'empty_input')){
+                // salva l'immagine del placeholder nel database quando viene cliccato elimina immagine //* UTILE DOVE LE IMMAGINI SONO NULLABLE (CIOè NON SONO OBBLIGATORIE) ES. PER I RISTORANTI
+                $form_data['image'] = "resources/img/placeholder-img.png";
+            }
+        //* verifica se i name noImage esiste e se è uguale a empty (quindi se esiste il valore impostato come default)
+        else if((array_key_exists('noImage', $form_data)) && ($form_data['noImage'] == 'empty'))
+        {
+            $form_data['image'] = "resources/img/placeholder-img.png";
+        }
+        else {
+            $form_data['image'] = "resources/img/placeholder-img.png";
         }
 
         $new_restaurant = new Restaurant();
@@ -138,7 +153,7 @@ class RestaurantController extends Controller
             // salva l'immagine del placeholder nel database quando viene cliccato elimina immagine //* UTILE DOVE LE IMMAGINI SONO NULLABLE (CIOè NON SONO OBBLIGATORIE) ES. PER I RISTORANTI
             $form_data['image'] = "resources/img/placeholder-img.png";
         }
-        //* verifica se i name noImage esiste e se è uaguale a empty (quindi se esiste il valore impostato come default)
+        //* verifica se i name noImage esiste e se è uguale a empty (quindi se esiste il valore impostato come default)
         else if((array_key_exists('noImage', $form_data)) && ($form_data['noImage'] == 'empty'))
         {
             // Mantieni l'immagine precedente

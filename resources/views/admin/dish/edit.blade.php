@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container">
+    <div class="container p-5">
         <h1 class="py-4">Modifica piatto: {{ $dish->name }}</h1>
 
         @if ($errors->any())
@@ -61,6 +61,9 @@
             <div class="mb-3">
                 <label for="image_path" class="form-label">Immagine</label>
 
+                <input onchange="showImagePreview(event)" type="text" class="" id="input-no-path-selected" name="noPathSelected"
+                value="" style="opacity: 0; border: none; height: 0; width: 0;">
+
                 <input type="text" value="{{ old('image_path', $dish?->image_path) }}"
                     class="form-control @error('image_path') is-invalid @enderror" id="text_input" name="image_path"
                     style="opacity: 0; border: none; height: 0; width: 0;">
@@ -114,9 +117,30 @@
     </div>
 
     <script>
+        // * funzione per mostrare l'anteprima delle immagini
+        // funzione per far sì che il placeholder venga mostrato quando viene inserita un immagine nell'input file e poi cliccando sull'input file non viene inserito nessun percorso e viene cliccato il pulsante "annulla"
         function showImagePreview(event) {
-            const tagImage = document.getElementById('prev-img');
-            tagImage.src = URL.createObjectURL(event.target.files[0]);
+            const imageInput = event.target;
+            const previewImage = document.getElementById('prev-img');
+            const fileInput = document.getElementById('input-no-path-selected');
+
+            if (imageInput.files && imageInput.files[0]) {
+                // Se è stato selezionato un file, mostra l'immagine selezionata
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                previewImage.src = e.target.result;
+                };
+
+                reader.readAsDataURL(imageInput.files[0]);
+            } else {
+            //* se clicco sull'input file e carico un'immagine nell'input e successivamente clicco sull'input file e non carico un'immagine nell'input ma clicco "annulla" così viene caricata l'img placeholder
+                //imposto un valore che sarà uguale a quello passato al controller //* utile per quando l'immagine non è obbligatoria (cioè nullable) in questo caso l'immagine non è obbligatoria
+                // Imposta il value dell'attributo nell'input = 'empty_input'
+                fileInput.value = 'empty_input';
+                // Se non è stato selezionato un file, mostra l'immagine di placeholder
+                previewImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
+            }
         }
 
         function handleFileSelection(event) {

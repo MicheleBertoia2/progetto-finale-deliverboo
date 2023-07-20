@@ -52,7 +52,6 @@ export default {
                     store.loaded = true;
 
                 })
-            //console.log('cliccato');
 
         }
 
@@ -83,9 +82,14 @@ export default {
         <div v-else class="container-restaurant">
             <span class="badge bg-pink">{{ title }}</span>
 
-            <div class="wrapper">
+            <div v-if="restaurants.length > 0" class="wrapper">
 
                 <Restaurant v-for="restaurant in this.restaurants" :key="restaurant" :restaurant="restaurant"/>
+
+            </div>
+            <div v-else class="wrapper">
+
+                <h2>Non ci sono risultati</h2>
 
             </div>
         </div>
