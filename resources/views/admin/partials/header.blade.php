@@ -1,8 +1,8 @@
-<header class="bg-danger">
-    <nav class="navbar navbar-expand-md navbar-dark bg-danger">
+<header class="">
+    <nav class="navbar navbar-expand-md navbar-dark ">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="{{ route('admin.home')}}">
-                Home
+                <img class="logo" src="{{ asset('img/logo.png') }}" alt="">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -32,7 +32,7 @@
                     @else
                         <li class="nav-item dropdown d-flex align-items-center">
 
-                            <span class="text-white me-2">{{ Auth::user()->name }}</span>
+                            <span class="text-black me-2">{{ Auth::user()->name }}</span>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" >
                                 @csrf

@@ -31,8 +31,8 @@
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione Prodotto</label>
 
-                <textarea id="description" rows="4" class="form-control @error('description') is-invalid @enderror "
-                    name="description" type="text" placeholder="Descrizione piatto">{!! old('description', $dish->description) !!}</textarea>
+                <textarea id="description" rows="4" class="form-control m-0 @error('description') is-invalid @enderror "
+                    name="description" type="text"  >{!! old('description', $dish->description) !!}</textarea>
                 @error('description')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror

@@ -31,7 +31,7 @@
                 <label for="description" class="form-label">Descrizione Prodotto</label>
 
                 <textarea id="description"  rows="4" class="form-control @error('description') is-invalid @enderror "
-                    name="description" type="text" placeholder="Descrizione piatto">{!! old('description') !!}</textarea>
+                    name="description" type="text">{!! old('description') !!}</textarea>
                     @error('description')
                     <p class="text-danger">{{ $message }}</p>
                     @enderror
