@@ -44,9 +44,9 @@
             @enderror
             <div class="mb-3">
                 <label for="image" class="form-label">Immagine</label>
-                {{-- <input onchange="showImagePreview(event), handleFileSelection(event)" type="file" --}}
-                {{-- <input onchange="showImagePreview(event), handleFileSelection(event), emptyImagePath(event)"  type="file" --}}
-                <input onchange="emptyImagePath(event), handleFileSelection(event)"  type="file"
+                <input onchange="showImagePreview(event)" type="text" class="form-control" id="input-no-path-selected" name="noPathSelected"
+                    value="" style="opacity: 0; border: none; height: 0; width: 0;">
+                <input onchange="showImagePreview(event), handleFileSelection(event)"  type="file"
                     class="form-control @error('image') is-invalid @enderror" id="file_input" name=""
                     value="{{ old('image', $restaurant?->image) }}">
                 {{-- <img height="300px" class="mt-3 bg-white px-5" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt=""> --}}
@@ -66,7 +66,7 @@
                         @endif
                     </div>
                     {{-- * il button deve essere type="button" oppure diverrà automaticamnete type="submit" --}}
-                    <button type="button" class="btn btn-danger ms-3 mt-3" id="deleteButton" onclick="deleteImage()" style="width: 180px; height: 70px;"><span class="fa-solid fa-trash"></span> Elimina immagine <input id="inputDeleteImage" type="hidden" value="empty" name="noImage" style="opacity: 0; border: none; height: 0; width: 0;"></button>
+                    <button type="button" class="btn btn-danger ms-3 mt-3" id="deleteButton" onclick="deleteImage()" style="width: 180px; height: 70px;"><span class="fa-solid fa-trash"></span> Elimina immagine <input id="inputDeleteImage" type="text" value="empty" name="noImage" style="opacity: 0; border: none; height: 0; width: 0;"></button>
                 </div>
             </div>
             <div class="mb-3">
@@ -103,27 +103,35 @@
     </div>
 
     <script>
-        // * funzione per mostrare l'anteprima delle immagini
-        function showImagePreview(event) {
-            const tagImage = document.getElementById('prev-img');
-            tagImage.src = URL.createObjectURL(event.target.files[0]);
 
-            // condizione non necessaria solo per rimuovere il padding alle images inserite
-            // if(tagImage){
-            // tagImage.classList.remove("px-5");
-            // }
+        // * funzione per mostrare l'anteprima delle immagini
+        // funzione per far sì che il placeholder venga mostrato quando viene inserita un immagine nell'input file e poi cliccando sull'input file non viene inserito nessun percorso e viene cliccato il pulsante "annulla"
+        function showImagePreview(event) {
+            const imageInput = event.target;
+            const previewImage = document.getElementById('prev-img');
+            const fileInput = document.getElementById('input-no-path-selected');
+
+            if (imageInput.files && imageInput.files[0]) {
+                // Se è stato selezionato un file, mostra l'immagine selezionata
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                previewImage.src = e.target.result;
+                };
+
+                reader.readAsDataURL(imageInput.files[0]);
+            } else {
+            //* se clicco sull'input file e carico un'immagine nell'input e successivamente clicco sull'input file e non carico un'immagine nell'input ma clicco "annulla" così viene caricata l'img placeholder
+                //imposto un valore che sarà uguale a quello passato al controller //* utile per quando l'immagine non è obbligatoria (cioè nullable) in questo caso l'immagine non è obbligatoria
+                // Imposta il value dell'attributo nell'input = 'empty_input'
+                fileInput.value = 'empty_input';
+                // Se non è stato selezionato un file, mostra l'immagine di placeholder
+                previewImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
+            }
         }
 
         function handleFileSelection(event) {
-            // Imposta il valore dell'attributo name dell'input in base alla condizione
-            // document.getElementById("file_input").name = (event.target.value == "") ? '' : 'image';
-            // Imposta il valore dell'input di tipo "text" su uno spazio vuoto ("")
-            // document.getElementById("text_input").value = "";                       //sotituire dove c'è scritto oppure
-            // Imposta il name dell'input di tipo "text" su uno spazio vuoto ("")
-            // document.getElementById("text_input").name = '';                        //sotituire dove c'è scritto oppure
-            //* oppure
-            // document.getElementById("text_input").classList.add("d-none");
-
+            // Imposta il name dell'attributo nell'input = image
             document.getElementById('file_input').name = 'image';
 
             // abilito il button
@@ -139,68 +147,16 @@
         function deleteImage(){
             const tagImage = document.getElementById('prev-img');
             tagImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
-            //svuoto entrambi gli input
-            // document.getElementById('text_input').name = '';
-            // document.getElementById('text_input').value = '';
-
-            // document.getElementById('file_input').name = '';
+            // svuoto l'input
             document.getElementById('file_input').value = '';
-            // document.getElementById('file_input').name = 'image';
 
             //imposto un valore che sarà uguale a quello passato al controller //* utile per quando l'immagine non è obbligatoria (cioè nullable) in questo caso l'immagine non è obbligatoria
             document.getElementById("inputDeleteImage").value = "delete";
-            // document.getElementById("inputDeleteImage").value = "";
 
             // Disabilito il button
             const buttonDelete = document.getElementById("deleteButton");
             buttonDelete.disabled = true;
             buttonDelete.classList.add('disabled');
-        }
-
-        // function emptyImagePath(event){
-        //     const textInput = document.getElementById('text_input');
-        //     if(textInput.value == '' || textInput.value == null || textInput.value == undefined){
-        //         const tagImage = document.getElementById('prev-img');
-        //         tagImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
-        //     }
-        // }
-
-        // function emptyImagePath(event) {
-        //     const fileInput = event.target;
-        //     const imagePreview = document.getElementById('prev-img');
-
-        //     if (fileInput.files && fileInput.files[0]) {
-        //         const reader = new FileReader();
-
-        //         reader.onload = function (e) {
-        //         imagePreview.src = e.target.result;
-        //         };
-
-        //         reader.readAsDataURL(fileInput.files[0]);
-        //     } else {
-        //         // Se l'input di tipo file è vuoto, mostra l'immagine di placeholder
-        //         imagePreview.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
-        //     }
-        // }
-
-        // funzione per far sì che il placeholder venga mostrato quando viene inserita un immagine nell'input file e poi cliccando sull'input file non viene inserito nessun percorso e viene cliccato il pulsante "annulla"
-        function emptyImagePath(event) {
-            const imageInput = event.target;
-            const previewImage = document.getElementById('prev-img');
-
-            if (imageInput.files && imageInput.files[0]) {
-                // Se è stato selezionato un file, mostra l'immagine selezionata
-                const reader = new FileReader();
-
-                reader.onload = function (e) {
-                previewImage.src = e.target.result;
-                };
-
-                reader.readAsDataURL(imageInput.files[0]);
-            } else {
-                // Se non è stato selezionato un file, mostra l'immagine di placeholder
-                previewImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
-            }
         }
     </script>
 
