@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container">
+    <div class="container p-5">
         <h1 class="py-4">Crea un nuovo piatto</h1>
 
         @if ($errors->any())
@@ -55,25 +55,35 @@
                 @enderror
             </div>
 
-            <div class="mb-3" style="width: 150vh; max-width: 73vw;">
+            <div class="mb-3">
                 <label for="image_path" class="form-label">Immagine</label>
-                <input required onchange="showImagePreview(event)" type="file" value="{{ old('image_path') }}" class="form-control @error('image_path') is-invalid @enderror" id="image_path" name="image_path">
-                <img height="300px" class="mt-3 bg-white px-5" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt="">
+                <input onchange="showImagePreview(event)" type="text" class="" id="input-no-path-selected" name="noPathSelected"
+                value="" style="opacity: 0; border: none; height: 0; width: 0;">
+                <input required onchange="showImagePreview(event), handleFileSelection(event)" type="file" value="{{ old('image_path') }}" class="form-control @error('image_path') is-invalid @enderror" id="file_input" name="image_path">
+                <div class="d-flex align-items-end">
+                    <div>
+                        <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt="">
+                    </div>
+                    <div>
+                    {{-- * il button deve essere type="button" oppure diverrà automaticamnete type="submit" --}}
+                    <button type="button" class="btn btn-danger ms-3 mt-3" id="deleteButton" onclick="deleteImage()"
+                    style="width: 180px; height: 70px;"><span class="fa-solid fa-trash"></span> Elimina immagine <input id="inputDeleteImage" type="hidden" name="noImage" style="opacity: 0; border: none; height: 0; width: 0;"></button>
+                    </div>
+                </div>
                 @error('image_path')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
 
             <div class="mb-3">
-                <label for="is_visible" class="form-label">Seleziona Visibilità</label>
+                <label for="is_visible" class="form-label my-3">Seleziona Visibilità</label>
                 <select class="form-select" name="is_visible">
                     <option selected value="1">Visibile</option>
                     <option value="0">Non Visibile</option>
                 </select>
             </div>
 
-
-            <button type="submit" class="btn btn-success">Crea Piatto</button>
+            <button type="submit" class="btn btn-success mt-3 mb-5">Crea Piatto</button>
 
         </form>
 
@@ -82,14 +92,62 @@
 
     <script>
 
-    function showImagePreview(event){
-        const tagImage = document.getElementById('prev-img');
-        tagImage.src = URL.createObjectURL(event.target.files[0]);
+        // * funzione per mostrare l'anteprima delle immagini
+        // funzione per far sì che il placeholder venga mostrato quando viene inserita un immagine nell'input file e poi cliccando sull'input file non viene inserito nessun percorso e viene cliccato il pulsante "annulla"
+        function showImagePreview(event) {
+            const imageInput = event.target;
+            const previewImage = document.getElementById('prev-img');
+            const fileInput = document.getElementById('input-no-path-selected');
 
-        if(tagImage){
-        tagImage.classList.remove("px-5");
+            if (imageInput.files && imageInput.files[0]) {
+                // Se è stato selezionato un file, mostra l'immagine selezionata
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                previewImage.src = e.target.result;
+                };
+
+                reader.readAsDataURL(imageInput.files[0]);
+            } else {
+            //* se clicco sull'input file e carico un'immagine nell'input e successivamente clicco sull'input file e non carico un'immagine nell'input ma clicco "annulla" così viene caricata l'img placeholder
+                //imposto un valore che sarà uguale a quello passato al controller //* utile per quando l'immagine non è obbligatoria (cioè nullable) in questo caso l'immagine non è obbligatoria
+                // Imposta il value dell'attributo nell'input = 'empty_input'
+                fileInput.value = 'empty_input';
+                // Se non è stato selezionato un file, mostra l'immagine di placeholder
+                previewImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
+            }
         }
 
-    }
+        function handleFileSelection(event) {
+            // svuoto il valore dell'input nascosto
+            const fileInput = document.getElementById('input-no-path-selected');
+            fileInput.value = '';
+            // Imposta il name dell'attributo nell'input = image
+            document.getElementById('file_input').name = 'image';
+
+            // abilito il button
+            const buttonDelete = document.getElementById("deleteButton");
+            buttonDelete.disabled = false;
+            buttonDelete.classList.remove('disabled');
+        }
+
+        function deleteImage() {
+
+            // const tagImage = document.getElementById('prev-img');
+            // tagImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
+            document.getElementById('prev-img').src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
+
+            document.getElementById('file_input').name = 'image_path';
+            document.getElementById('file_input').value = '';
+
+            //imposto un valore che sarà uguale a quello passato al controller //* utile per quando l'immagine non è obbligatoria (cioè nullable) in questo caso l'immagune è obbligatoria
+            document.getElementById("inputDeleteImage").value = "delete";
+
+            // Disabilito il button
+            const buttonDelete = document.getElementById("deleteButton");
+            buttonDelete.disabled = true;
+            buttonDelete.classList.add('disabled');
+        }
+
 </script>
 @endsection
