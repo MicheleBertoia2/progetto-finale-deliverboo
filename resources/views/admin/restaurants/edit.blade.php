@@ -33,7 +33,7 @@
             {{-- * aggiungere PUT perchè non è possibile inserire PUT/PATCH nel method del form al posto di POST --}}
             @method('PUT')
 
-            <div class="mb-3" style="width: 73vw; max-width: 73vw;">
+            <div class="mb-3">
                 <label for="name" class="form-label">Nome</label>
                 <input type="text" required minlength="2" maxlength="255"
                     class="form-control @error('name') is-invalid @enderror" id="name" name="name"
@@ -42,22 +42,32 @@
             @error('name')
                 <p class="text-danger">{{ $message }}</p>
             @enderror
-            <div class="mb-3" style="width: 150vh; max-width: 73vw;">
+            <div class="mb-3">
                 <label for="image" class="form-label">Immagine</label>
-                <input onchange="showImagePreview(event)" type="file"
-                    class="form-control @error('image') is-invalid @enderror" id="image" name="image"
+                <input onchange="showImagePreview(event)" type="text" class="form-control" id="input-no-path-selected" name="noPathSelected"
+                    value="" style="opacity: 0; border: none; height: 0; width: 0;">
+                <input onchange="showImagePreview(event), handleFileSelection(event)"  type="file"
+                    class="form-control @error('image') is-invalid @enderror" id="file_input" name=""
                     value="{{ old('image', $restaurant?->image) }}">
                 {{-- <img height="300px" class="mt-3 bg-white px-5" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt=""> --}}
                 {{-- <img class="w-25 mt-3 bg-white {{ $restaurant->image ? '' : 'px-5'}}" id="prev-img" src="{{ $restaurant->image ? asset('storage/' . $restaurant->image) : Vite::asset('resources\img\placeholder-img.png') }}" alt="{{ $restaurant->image == false ? "Nessuna immagine" : $restaurant->name }}"> --}}
-                @if (str_contains($restaurant->image, 'http://') || str_contains($restaurant->image, 'https://'))
-                    <img height="300px" class="mt-3 bg-white" id="prev-img"
-                        src="{{ $restaurant->image ? $restaurant->image : Vite::asset('resources\img\placeholder-img.png') }}"
-                        alt="{{ $restaurant->image == false ? 'Nessuna immagine' : $restaurant->name }}">
-                @else
-                    <img height="300px" class="mt-3 bg-white" id="prev-img"
-                        src="{{ $restaurant->image ? asset('storage/' . $restaurant->image) : Vite::asset('resources\img\placeholder-img.png') }}"
-                        alt="{{ $restaurant->image == false ? 'Nessuna immagine' : $restaurant->name }}">
-                @endif
+                <div class="d-flex align-items-end">
+                    <div>
+                        @if (str_contains($restaurant->image, 'http://') || str_contains($restaurant->image, 'https://'))
+                            <img height="300px" class="mt-3 bg-white" id="prev-img"
+                                src="{{ $restaurant->image ? $restaurant->image : Vite::asset('resources\img\placeholder-img.png') }}"
+                                alt="{{ $restaurant->image == false ? 'Nessuna immagine' : $restaurant->name }}">
+                        @elseif(str_contains($restaurant->image, "resources/img/placeholder-img.png" ))
+                            <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ Vite::asset($restaurant->image) }}" alt="{{ $restaurant->name }}">
+                        @else
+                            <img height="300px" class="mt-3 bg-white" id="prev-img"
+                                src="{{ $restaurant->image ? asset('storage/' . $restaurant->image) : Vite::asset('resources\img\placeholder-img.png') }}"
+                                alt="{{ $restaurant->image == false ? 'Nessuna immagine' : $restaurant->name }}">
+                        @endif
+                    </div>
+                    {{-- * il button deve essere type="button" oppure diverrà automaticamnete type="submit" --}}
+                    <button type="button" class="btn btn-danger ms-3 mt-3" id="deleteButton" onclick="deleteImage()" style="width: 180px; height: 70px;"><span class="fa-solid fa-trash"></span> Elimina immagine <input id="inputDeleteImage" type="text" value="empty" name="noImage" style="opacity: 0; border: none; height: 0; width: 0;"></button>
+                </div>
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Indirizzo</label>
@@ -72,12 +82,14 @@
                 <label for="vat_number" class="form-label">Numero Partita IVA:</label>
                 <input type="text" pattern="[0-9]*" required minlength="8" maxlength="11"
                     class="form-control @error('vat_number') is-invalid @enderror" id="vat_number" name="vat_number"
-                    placeholder="12345678901" value="{{ old('vat_number', $restaurant?->vat_number) }}">
+                    placeholder="Inserire massimo 11 numeri es. 12345678901" value="{{ old('vat_number', $restaurant?->vat_number) }}">
             </div>
             @error('vat_number')
                 <p class="text-danger">{{ $message }}</p>
             @enderror
 
+        <div class="mb-3">
+            <label for="address" class="form-label">Tipologie del ristorante</label>
             <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                 @foreach ($types as $type)
                     <input type="checkbox" class="btn-check" id="{{ $type->id }}" autocomplete="off" name="types[]"
@@ -85,26 +97,69 @@
                     <label class="btn btn-outline-primary" for="{{ $type->id }}">{{ $type->name }}</label>
                 @endforeach
             </div>
+        </div>
 
-
-
-            <button type="submit" class="btn btn-primary mt-3 d-block">Submit</button>
+            <button type="submit" class="btn btn-primary mt-4 d-block">Submit</button>
 
         </form>
 
     </div>
 
     <script>
-        // {{-- * funzione per mostrare l'anteprima delle immagini
+
+        // * funzione per mostrare l'anteprima delle immagini
+        // funzione per far sì che il placeholder venga mostrato quando viene inserita un immagine nell'input file e poi cliccando sull'input file non viene inserito nessun percorso e viene cliccato il pulsante "annulla"
         function showImagePreview(event) {
+            const imageInput = event.target;
+            const previewImage = document.getElementById('prev-img');
+            const fileInput = document.getElementById('input-no-path-selected');
+
+            if (imageInput.files && imageInput.files[0]) {
+                // Se è stato selezionato un file, mostra l'immagine selezionata
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                previewImage.src = e.target.result;
+                };
+
+                reader.readAsDataURL(imageInput.files[0]);
+            } else {
+            //* se clicco sull'input file e carico un'immagine nell'input e successivamente clicco sull'input file e non carico un'immagine nell'input ma clicco "annulla" così viene caricata l'img placeholder
+                //imposto un valore che sarà uguale a quello passato al controller //* utile per quando l'immagine non è obbligatoria (cioè nullable) in questo caso l'immagine non è obbligatoria
+                // Imposta il value dell'attributo nell'input = 'empty_input'
+                fileInput.value = 'empty_input';
+                // Se non è stato selezionato un file, mostra l'immagine di placeholder
+                previewImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
+            }
+        }
+
+        function handleFileSelection(event) {
+            // Imposta il name dell'attributo nell'input = image
+            document.getElementById('file_input').name = 'image';
+
+            // abilito il button
+            const buttonDelete = document.getElementById("deleteButton");
+            buttonDelete.disabled = false;
+            buttonDelete.classList.remove('disabled');
+
+            // rimuovo il name noImage
+            document.getElementById("inputDeleteImage").name = "";
+            document.getElementById("inputDeleteImage").value = "";
+        }
+
+        function deleteImage(){
             const tagImage = document.getElementById('prev-img');
-            tagImage.src = URL.createObjectURL(event.target.files[0]);
+            tagImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
+            // svuoto l'input
+            document.getElementById('file_input').value = '';
 
-            // condizione non necessaria solo per rimuovere il padding alle images inserite
-            // if(tagImage){
-            // tagImage.classList.remove("px-5");
-            // }
+            //imposto un valore che sarà uguale a quello passato al controller //* utile per quando l'immagine non è obbligatoria (cioè nullable) in questo caso l'immagine non è obbligatoria
+            document.getElementById("inputDeleteImage").value = "delete";
 
+            // Disabilito il button
+            const buttonDelete = document.getElementById("deleteButton");
+            buttonDelete.disabled = true;
+            buttonDelete.classList.add('disabled');
         }
     </script>
 

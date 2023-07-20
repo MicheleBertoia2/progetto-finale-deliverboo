@@ -126,13 +126,27 @@ class RestaurantController extends Controller
             $form_data['slug'] = $restaurant->slug;
         }
 
+        //* edit per l'IMMAGINE
         $oldImagePath = $restaurant->image;
 
-        if ($request->hasFile('image')) {
 
-            //* edit per l'IMMAGINE
-            // verificare se è stata caricata un immagine (dal campo di input nel form)
-            if (array_key_exists('image', $form_data)) {
+    //* verifica se i name noImage esiste e image non esiste nel form e se noImage ha come valore 'delete' //* UTILE DOVE LE IMMAGINI SONO NULLABLE (CIOè NON SONO OBBLIGATORIE) ed INUTILE DOVE SONO OBBLIGATORIE
+        if((array_key_exists('noImage', $form_data)) && ($form_data['noImage'] == 'delete') && !(array_key_exists('image', $form_data))
+    //* se clicco sull'input file e carico un'immagine nell'input e successivamente clicco sull'input file e non carico un'immagine nell'input ma clicco "annulla" così viene caricata l'img placeholder
+        || (array_key_exists('noPathSelected', $form_data)) && ($form_data['noPathSelected'] == 'empty_input')){
+            Storage::disk('public')->delete($restaurant->image);
+            // salva l'immagine del placeholder nel database quando viene cliccato elimina immagine //* UTILE DOVE LE IMMAGINI SONO NULLABLE (CIOè NON SONO OBBLIGATORIE) ES. PER I RISTORANTI
+            $form_data['image'] = "resources/img/placeholder-img.png";
+        }
+        //* verifica se i name noImage esiste e se è uaguale a empty (quindi se esiste il valore impostato come default)
+        else if((array_key_exists('noImage', $form_data)) && ($form_data['noImage'] == 'empty'))
+        {
+            // Mantieni l'immagine precedente
+            $restaurant->image = $oldImagePath;
+        }
+        else if ($request->hasFile('image') && (array_key_exists('image', $form_data))) {
+
+            if (array_key_exists('image', $form_data) && !(array_key_exists('noImage', $form_data))) {
 
                 //* se l'immagine esiste (NEL DB) vuol dire che ne ho caricata una nuova e quindi ELIMINO quella precedente
                 if ($restaurant->image) {
@@ -142,11 +156,13 @@ class RestaurantController extends Controller
 
                 $form_data['image'] = Storage::put('uploads', $form_data['image']);
             }
-        } else {
+        }
+        else {
             // Mantieni l'immagine precedente
             $restaurant->image = $oldImagePath;
         }
 
+        // dd($form_data);
         //* aggiorno i dati
         $restaurant->update($form_data);
 

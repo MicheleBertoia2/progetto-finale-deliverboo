@@ -25,18 +25,18 @@
         {{-- //* token IMPORTANTE di verifica validità del form (viene utilizzato per dare una maggiore sicurezza ai dati) --}}
         @csrf
 
-        <div class="mb-3" style="width: 73vw; max-width: 73vw;">
+        <div class="mb-3">
             <label for="name" class="form-label">Nome</label>
             <input type="text" required minlength="2" maxlength="255" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Pizzeria Roma" value="{{ old('name')}}">
         </div>
         @error('name')
         <p class="text-danger">{{ $message }}</p>
         @enderror
-        <div class="mb-3" style="width: 150vh; max-width: 73vw;">
+        <div class="mb-3">
             <label for="image" class="form-label">Immagine</label>
             <input onchange="showImagePreview(event)" type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
             {{-- <img height="300px" class="mt-3 bg-white px-5" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt=""> --}}
-            <img class="w-25 mt-3 bg-white px-5" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt="img">
+            <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt="img">
         </div>
         <div class="mb-3">
             <label for="address" class="form-label">Indirizzo</label>
@@ -47,20 +47,23 @@
         @enderror
         <div class="mb-3">
             <label for="vat_number" class="form-label">Numero Partita IVA:</label>
-            <input type="text" pattern="[0-9]*" required minlength="8" maxlength="11" class="form-control @error('vat_number') is-invalid @enderror" id="vat_number" name="vat_number" placeholder="12345678901" value="{{ old('vat_number')}}">
+            <input type="text" pattern="[0-9]*" required minlength="8" maxlength="11" class="form-control @error('vat_number') is-invalid @enderror" id="vat_number" name="vat_number" placeholder="Inserire massimo 11 numeri es. 12345678901" value="{{ old('vat_number')}}">
         </div>
         @error('vat_number')
         <p class="text-danger">{{ $message }}</p>
         @enderror
 
-        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-            @foreach ($types as $type)
-            <input type="checkbox" class="btn-check" id="{{$type->id}}" autocomplete="off" name="types[]" value="{{$type->id}}">
-            <label class="btn btn-outline-primary" for="{{$type->id}}">{{$type->name}}</label>
-            @endforeach
+        <div class="mb-3">
+            <label for="address" class="form-label">Tipologie del ristorante</label>
+            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                @foreach ($types as $type)
+                <input type="checkbox" class="btn-check" id="{{$type->id}}" autocomplete="off" name="types[]" value="{{$type->id}}">
+                <label class="btn btn-outline-primary" for="{{$type->id}}">{{$type->name}}</label>
+                @endforeach
+            </div>
         </div>
 
-        <button type="submit" class="btn btn-primary mt-3 d-block">Submit</button>
+        <button type="submit" class="btn btn-primary mt-4 d-block">Submit</button>
 
     </form>
 
@@ -72,10 +75,10 @@
         const tagImage = document.getElementById('prev-img');
         tagImage.src = URL.createObjectURL(event.target.files[0]);
 
-        // condizione non necessaria solo per rimuovere il padding alle images inserite
-        if(tagImage){
-        tagImage.classList.remove("px-5");
-        }
+        // // condizione non necessaria solo per rimuovere il padding alle images inserite
+        // if(tagImage){
+        // tagImage.classList.remove("px-5");
+        // }
 
     }
 </script>
