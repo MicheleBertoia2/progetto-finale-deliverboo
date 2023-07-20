@@ -82,12 +82,14 @@
                 <label for="vat_number" class="form-label">Numero Partita IVA:</label>
                 <input type="text" pattern="[0-9]*" required minlength="8" maxlength="11"
                     class="form-control @error('vat_number') is-invalid @enderror" id="vat_number" name="vat_number"
-                    placeholder="Inserire massimo 11 numeri" value="{{ old('vat_number', $restaurant?->vat_number) }}">
+                    placeholder="Inserire massimo 11 numeri es. 12345678901" value="{{ old('vat_number', $restaurant?->vat_number) }}">
             </div>
             @error('vat_number')
                 <p class="text-danger">{{ $message }}</p>
             @enderror
 
+        <div class="mb-3">
+            <label for="address" class="form-label">Tipologie del ristorante</label>
             <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                 @foreach ($types as $type)
                     <input type="checkbox" class="btn-check" id="{{ $type->id }}" autocomplete="off" name="types[]"
@@ -95,8 +97,9 @@
                     <label class="btn btn-outline-primary" for="{{ $type->id }}">{{ $type->name }}</label>
                 @endforeach
             </div>
+        </div>
 
-            <button type="submit" class="btn btn-primary mt-3 d-block">Submit</button>
+            <button type="submit" class="btn btn-primary mt-4 d-block">Submit</button>
 
         </form>
 
