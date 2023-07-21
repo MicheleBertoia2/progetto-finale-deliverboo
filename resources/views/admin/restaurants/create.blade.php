@@ -32,6 +32,7 @@
         @error('name')
         <p class="text-danger">{{ $message }}</p>
         @enderror
+
         <label for="image" class="form-label">Immagine</label>
         <input onchange="showImagePreview(event)" type="text" class="form-control" id="input-no-path-selected" name="noPathSelected"
         value="" style="opacity: 0; border: none; height: 0; width: 0;">

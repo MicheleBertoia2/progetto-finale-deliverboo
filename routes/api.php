@@ -24,7 +24,7 @@ Route::namespace('Api')
             // Route::get('/tags',[PostController::class, 'getTags']);
             // Route::get('/post-category/{id}',[PostController::class, 'getPostsByCategory']);
             // Route::get('/post-tag/{id}',[PostController::class, 'getPostsByTag']);
-            // Route::get('/{slug}',[PostController::class, 'getPostDetail']);
+            Route::get('/{slug}',[RestaurantController::class, 'getRestaurantDetail']);
             // Route::get('/search/{tosearch}',[PostController::class, 'search']);
         });
 

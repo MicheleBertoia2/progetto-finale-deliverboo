@@ -10,15 +10,21 @@ export default {
 
 
 <template>
+
     <div class="restaurant">
-        <div class="bg-restaurant">
-            <div class="badge text center">{{ restaurant.name }}</div>
-        </div>
-        <div class="info">
-            <p><i class="fa-solid fa-star"></i></p>
-            <p><i class="fa-solid fa-truck"></i></p>
-            <p>tempo</p>
-        </div>
+        <router-link  :to="{name: 'RestaurantDetail', params:{slug: restaurant.slug}}">
+            <div class="bg-restaurant">
+                <div class="badge text dark center ">
+                    {{ restaurant.name }}
+                </div>
+            </div>
+
+        </router-link>
+            <div class="info">
+                <p><i class="fa-solid fa-star"></i></p>
+                <p><i class="fa-solid fa-truck"></i></p>
+                <!-- <p>{{restaurant.slug}} questo é lo slug</p> -->
+            </div>
     </div>
 
 </template>
@@ -60,8 +66,8 @@ export default {
                 position: absolute;
             }
             .badge{
-                border-radius: 10%;
-                background-color: rgba(255, 255, 255, 0.051);
+                border-radius: 10px;
+                background-color: rgba(255, 255, 255, 0.521);
             }
         }
     }

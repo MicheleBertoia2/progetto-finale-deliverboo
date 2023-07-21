@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Restaurant;
 use App\Models\Type;
+use App\Models\Dish;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -20,8 +21,9 @@ class RestaurantController extends Controller
     {
         $restaurants = Restaurant::inRandomOrder()->take(5)->get();
         $types = Type::all();
+        $dishes = Dish::all();
 
-        return  response()->json(compact('restaurants', 'types'));
+        return  response()->json(compact('restaurants', 'types','dishes'));
 
     }
 
@@ -47,6 +49,16 @@ class RestaurantController extends Controller
         return  response()->json(compact('restaurants'));
 
     }
+    public function getRestaurantDetail ($slug){
+        $restaurants = Restaurant::where('slug', $slug)->with('types','dishes')->first();
+
+        if($restaurants->image) $restaurants->image = asset('storage/' . $restaurants->image) ;
+        else{
+            $restaurants->image = asset('storage/uploads/placeholder-img.png');
+        }
+
+        return response()->json($restaurants);
+}
 
     /**
      * Show the form for creating a new resource.
