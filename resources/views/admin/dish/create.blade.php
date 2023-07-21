@@ -125,8 +125,8 @@
             // svuoto il valore dell'input nascosto
             const fileInput = document.getElementById('input-no-path-selected');
             fileInput.value = '';
-            // Imposta il name dell'attributo nell'input = image
-            document.getElementById('file_input').name = 'image';
+            // Imposta il name dell'attributo nell'input = image_path
+            document.getElementById('file_input').name = 'image_path';
 
             // abilito il button
             const buttonDelete = document.getElementById("deleteButton");
