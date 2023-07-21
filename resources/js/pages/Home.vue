@@ -56,14 +56,21 @@ export default {
 
         },
         eseguiRicerca() {
-            // Converto gli ID dei tipi selezionati in un array
-            const typesIds = this.typeSelected.map(type => type.id);
 
 
-            axios.get(store.apiUrl + '/restaurants-types', { params: { types : typesIds } })
+            axios.get(store.apiUrl + 'restaurants/typesearch')
             .then(response => {
-                this.restaurants = response.data.restaurants;
+
+                // prendo tutti i ristoranti
+                let allRestaurants = response.data.restaurants;
+
+                // li filtro in base agli id dei tipi selezionati
+
+                this.restaurants = allRestaurants.filter(ristorante => {
+                    return ristorante.types.some(type => this.typeSelected.includes(type.id));
+                });
                 this.title = 'risultati';
+                console.log(this.restaurants);
 
                 store.loaded = true;
             })
@@ -89,17 +96,23 @@ export default {
     <div class="container-inner ">
 
         <Slider />
+
+        <!-- VECCHIA VERSIONE RICERCA -->
+
         <!-- <ul class="d-flex bg-dark py-3">
             <li v-for="resType in this.resTypes" :key="resType.id"
                 class="badge badge-success text-white "
                 @click="getRestaurantsType(resType.slug)">{{ resType.name }}</li>
         </ul> -->
-        <!-- nuova version -->
-        <div>
-            <label v-for="resType in this.resTypes" :key="resType.id"><input type="checkbox" value="{{ resType.id }}"> {{ resType.name }}</label>
 
-            <!-- Aggiungi altri tipi di ristoranti qui -->
-            <button @click="eseguiRicerca">Cerca</button>
+
+        <!-- nuova versione RICERCA -->
+        <div>
+
+            <label v-for="resType in this.resTypes" :key="resType.id"><input type="checkbox" :id="resType.id" :value="resType.id" v-model="typeSelected" > {{ resType.name }}</label>
+
+
+            <button @click="eseguiRicerca" :disabled="(!this.typeSelected.length > 0)" >Cerca</button>
         </div>
         <Loader v-if="!store.loaded" />
 
