@@ -16,6 +16,7 @@ export default {
             restaurants : [],
             title : 'Ecco una selezione di ristoranti per te',
             resTypes : [],
+            typeSelected : [],
         }
     },
 
@@ -53,7 +54,23 @@ export default {
 
                 })
 
-        }
+        },
+        eseguiRicerca() {
+            // Converto gli ID dei tipi selezionati in un array
+            const typesIds = this.typeSelected.map(type => type.id);
+
+
+            axios.get(store.apiUrl + '/restaurants-types', { params: { types : typesIds } })
+            .then(response => {
+                this.restaurants = response.data.restaurants;
+                this.title = 'risultati';
+
+                store.loaded = true;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+  }
 
     },
 
@@ -72,11 +89,18 @@ export default {
     <div class="container-inner ">
 
         <Slider />
-        <ul class="d-flex bg-dark py-3">
+        <!-- <ul class="d-flex bg-dark py-3">
             <li v-for="resType in this.resTypes" :key="resType.id"
                 class="badge badge-success text-white "
                 @click="getRestaurantsType(resType.slug)">{{ resType.name }}</li>
-        </ul>
+        </ul> -->
+        <!-- nuova version -->
+        <div>
+            <label v-for="resType in this.resTypes" :key="resType.id"><input type="checkbox" value="{{ resType.id }}"> {{ resType.name }}</label>
+
+            <!-- Aggiungi altri tipi di ristoranti qui -->
+            <button @click="eseguiRicerca">Cerca</button>
+        </div>
         <Loader v-if="!store.loaded" />
 
         <div v-else class="container-restaurant">

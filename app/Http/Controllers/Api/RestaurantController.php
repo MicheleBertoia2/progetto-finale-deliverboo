@@ -22,10 +22,10 @@ class RestaurantController extends Controller
         $types = Type::all();
 
         return  response()->json(compact('restaurants', 'types'));
-
     }
 
-    public function getByType($slug){
+    public function getByType($slug)
+    {
         $types = Type::all();
         //ciclo tutti  i tipi di ristorante e creo  un array  con gli slug
         $enum = [];
@@ -40,12 +40,25 @@ class RestaurantController extends Controller
         }
 
         $restaurants = Restaurant::with('types')
-                    ->whereHas('types', function(Builder $query) use($slug){
-                        $query->where('slug',$slug);
-                    })->get();
+            ->whereHas('types', function (Builder $query) use ($slug) {
+                $query->where('slug', $slug);
+            })->get();
 
         return  response()->json(compact('restaurants'));
+    }
 
+    public function restaurantTypesSearch(Request $request)
+    {
+        $typesSelected = $request->input('types');
+
+        $restaurants = Restaurant::when($typesSelected, function ($query) use ($typesSelected) {
+            // Filtra i restaurants in base ai tipi selezionati
+            return $query->whereHas('types', function ($query) use ($typesSelected) {
+                $query->whereIn('types.id', $typesSelected);
+            });
+        })->get();
+
+        return response()->json($restaurants);
     }
 
     /**
