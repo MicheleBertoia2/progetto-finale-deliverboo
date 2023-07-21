@@ -39,8 +39,8 @@
 
         </div>
         <div class="body">
-            <p class="card-text"><strong>Descrizione:</strong>{{$dish->description}}</p>
-            <p class="card-text"><strong>Ingredienti:</strong>{{$dish->ingredients}}</p>
+            <p class="card-text"><strong>Descrizione: </strong>{{$dish->description}}</p>
+            <p class="card-text"><strong>Ingredienti: </strong>{{$dish->ingredients}}</p>
         </div>
         <a href="{{ route('admin.dishes.index') }}"
         class="btn mybadge m-2 mt-4 ">Torna ai tuoi Piatti</a>

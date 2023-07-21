@@ -77,7 +77,7 @@
 
                             <div class="mb-4 row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn mybadge">
+                                    <button id="button" type="submit" class="btn mybadge">
                                         {{ __('Register') }}
                                     </button>
                                 </div>
@@ -93,6 +93,7 @@
         const password_input = document.getElementById('password');
         const password_confr = document.getElementById('password-confirm');
         const password_error = document.getElementById('password-error');
+        const button  = document.getElementById('button');
 
         password_confr.addEventListener('input', () => {
             const password = password_input.value;
@@ -104,11 +105,18 @@
                 if (password !== confirmed_password) {
                     password_error.style.display = 'block';
                     password_error.style.opacity = '1';
+                    button.disabled = true;
                 } else {
                     password_error.style.display = 'none';
+                    button.disabled = false;
+
                 }
             }
         });
+
+
+
+
     </script>
     <script>
         window.onload = checkPasswords;
