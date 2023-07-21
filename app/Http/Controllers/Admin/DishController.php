@@ -46,17 +46,16 @@ class DishController extends Controller
         $form_data = $request->all();
         $form_data['slug'] = Dish::generateSlug($form_data['name']);
 
-
         $user = Auth::user();
         $res_id = $user->restaurant->id;
 
         $form_data['restaurant_id'] =  $res_id;
 
-        // if(array_key_exists('image_path', $form_data) && ($form_data['image_path'] != '') && !(array_key_exists('noPathSelected', $form_data)) && ($form_data['noPathSelected'] == 'empty_input')){
-        if(array_key_exists('image_path', $form_data) && ($form_data['image_path'] != '')){
+        if(array_key_exists('image_path', $form_data)){
             $form_data['image_path'] = Storage::put('uploads',  $form_data['image_path']);
         };
-// dd($form_data);
+
+
         $new_dish = new Dish();
         $new_dish->fill($form_data);
         $new_dish->save();

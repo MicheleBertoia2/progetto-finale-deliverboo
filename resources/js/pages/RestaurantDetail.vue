@@ -1,93 +1,62 @@
 <script>
-
-import Dish from '../components/Dish.vue'
+import axios from 'axios';
+import { store } from '../store/store';
 
 
 export default {
     name:'RestaurantDetail',
     components: {
-        Dish,
+
+    },
+
+    data(){
+        return{
+            store,
+            restaurant:[],
+        }
+    },
+    methods:{
+        getApi(){
+            axios.get(store.apiUrl + 'restaurants/'  + this.$route.params.slug)
+                .then(result => {
+                    this.restaurant = result.data;
+                    console.log(this.restaurant);
+                })
+
+        }
+    },
+    mounted(){
+        this.getApi();
     }
 }
 </script>
 
 <template>
+<div class="main-container">
 
-            <div class="jumbotron-ristorante">
-                <img src="img/jumbo.png" alt="jumbotron">
-                <div class="info">
-                    <h1>Ristorante</h1>
-                    <p>Indirizzo: Via 25 aprile, Novara</p>
-                </div>
-            </div>
-
-    <div class="container-inner">
+    <div class="container d-flex py-5">
 
 
+        <img :src="restaurant.image" alt="">
 
-        <div class="container-dishes">
+        <h1>{{ restaurant.name }}</h1>
 
-            <span class="badge bg-pink">Tutti i piatti</span>
 
-            <div class="wrapper">
-
-                <Dish v-for="dish in 9" :key="dish"/>
-
-            </div>
-        </div>
 
     </div>
 
-
+</div>
 </template>
 
 
 <style lang="scss" scoped>
 
+    .main-container{
 
-.jumbotron-ristorante{
-    height: 550px;
-    width: 100vw;
-    img {
-        height: 100%;
-        width: 100%;
-    }
-    .info{
-        background-color: #3abfb4 ;
-        border-radius: 10%;
-        position: absolute;
-        padding: 30px;
-        margin: 30px;
-        transform: translate(-50%,-50%);
-        top: 55%;
-        left: 20%;
-    }
-}
+        img{
+            width: 300px;
 
-.container-inner{
-    min-height: 400px;
-    width: 100%;
-
-    .badge{
-    background-color: #f05167;
-    color: black;
-    font-size: 30px;
-    margin: 50px;
-    }
-
-    .container-dishes{
-    background-image: url("/img/pattern-anguria.jpg");
-        h1{
-            padding: 50px;
-        }
-        .wrapper{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding-bottom: 50px;
-            height: 100%;
-            width: 100%;
         }
     }
-}
+
 </style>

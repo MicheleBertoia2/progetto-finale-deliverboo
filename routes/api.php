@@ -19,8 +19,16 @@ Route::namespace('Api')
         ->prefix('restaurants')
         ->group(function(){
             Route::get('/',[RestaurantController::class, 'index']);
+            Route::get('/type/{slug}',[RestaurantController::class, 'getByType']);
+            // Route::get('/categories',[PostController::class, 'getCategories']);
+            // Route::get('/tags',[PostController::class, 'getTags']);
+            // Route::get('/post-category/{id}',[PostController::class, 'getPostsByCategory']);
+            // Route::get('/post-tag/{id}',[PostController::class, 'getPostsByTag']);
+            Route::get('/{slug}',[RestaurantController::class, 'getRestaurantDetail']);
+            // Route::get('/search/{tosearch}',[PostController::class, 'search']);
+            //route di michele
+             Route::get('/typesearch', [RestaurantController::class, 'restaurantTypesSearch']);
 
-            Route::get('/typesearch', [RestaurantController::class, 'restaurantTypesSearch']);
 
         });
 

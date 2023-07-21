@@ -10,18 +10,21 @@ export default {
 
 
 <template>
+
     <div class="restaurant">
-        <div class="bg-restaurant">
-            <div class="text center">{{ restaurant.name }}</div>
-        </div>
-        <div class="info">
-            <div class="continer-badge">
-                <span class="badge badge-turco">Turco</span>
-                <span class="badge badge-indiano">Indiano</span>
-                <span class="badge badge-italiano">Italiano</span>
+        <router-link  :to="{name: 'RestaurantDetail', params:{slug: restaurant.slug}}">
+            <div class="bg-restaurant">
+                <div class="badge text dark center ">
+                    {{ restaurant.name }}
+                </div>
             </div>
-            <p><i class="fa-solid fa-truck"></i></p>
-        </div>
+
+        </router-link>
+            <div class="info">
+                <p><i class="fa-solid fa-star"></i></p>
+                <p><i class="fa-solid fa-truck"></i></p>
+                <!-- <p>{{restaurant.slug}} questo é lo slug</p> -->
+            </div>
     </div>
 
 </template>
@@ -105,7 +108,10 @@ export default {
                 font-weight: bold;
                 position: absolute;
             }
-
+            .badge{
+                border-radius: 10px;
+                background-color: rgba(255, 255, 255, 0.521);
+            }
         }
     }
 </style>

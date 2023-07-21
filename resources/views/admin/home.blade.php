@@ -12,7 +12,7 @@
 
 
 
-            <a href="{{ route('admin.restaurants.create') }}" class="btn btn-primary mt-2 ">Aggiungi il tuo ristorante</a>
+            <a href="{{ route('admin.restaurants.create') }}" class="btn btn-dark mt-2 ">Aggiungi il tuo ristorante</a>
 
             <p class="paragraph my-4">
                 Benvenuti su Deliveboo, il sito ideale per gestire i tuoi ristoranti e piatti in modo facile ed efficiente.

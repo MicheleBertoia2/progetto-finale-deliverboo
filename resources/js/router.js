@@ -36,24 +36,17 @@ const router = createRouter({
             meta
         },
         {
-            path: '/ristorante/slug',
-            name: 'Ristorante',
+            path: '/:slug',
+            name: 'RestaurantDetail',
             component: RestaurantDetail,
             meta
         },
-
-
-
-
-
         {
             path: '/:pathMatch(.*)*',
             component: Error404,
             meta
         }
-
     ]
-
-})
+});
 
 export { router }

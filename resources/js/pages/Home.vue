@@ -37,7 +37,7 @@ export default {
 
                     this.restaurants = res.data.restaurants;
                     this.resTypes = res.data.types;
-
+                    console.log(res.data.restaurants);
                     store.loaded = true;
                 })
 

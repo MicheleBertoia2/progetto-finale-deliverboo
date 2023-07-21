@@ -30,13 +30,11 @@ export default {
                         <li class="nav-item">
                             <router-link :to="{ name: 'contacts' }" class="nav-link">contatti</router-link>
                         </li>
-                        <li class="nav-item">
-                            <router-link :to="{ name: 'Ristorante' }" class="nav-link">ristorante</router-link>
-                        </li>
+
                     </ul>
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link">Register</a>
+                            <a class="nav-link">Registrati</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link">Login</a>
