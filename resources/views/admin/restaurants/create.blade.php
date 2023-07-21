@@ -95,6 +95,10 @@
                 };
 
                 reader.readAsDataURL(imageInput.files[0]);
+                // abilito il button
+                const buttonDelete = document.getElementById("deleteButton");
+                buttonDelete.disabled = false;
+                buttonDelete.classList.remove('d-none');
             } else {
             //* se clicco sull'input file e carico un'immagine nell'input e successivamente clicco sull'input file e non carico un'immagine nell'input ma clicco "annulla" così viene caricata l'img placeholder
                 //imposto un valore che sarà uguale a quello passato al controller //* utile per quando l'immagine non è obbligatoria (cioè nullable) in questo caso l'immagine non è obbligatoria
@@ -102,6 +106,10 @@
                 fileInput.value = 'empty_input';
                 // Se non è stato selezionato un file, mostra l'immagine di placeholder
                 previewImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
+                // Disabilito il button
+                const buttonDelete = document.getElementById("deleteButton");
+                buttonDelete.disabled = true;
+                buttonDelete.classList.add('d-none');
             }
         }
 
@@ -112,10 +120,12 @@
             // Imposta il name dell'attributo nell'input = image
             document.getElementById('file_input').name = 'image';
 
-            // abilito il button
-            const buttonDelete = document.getElementById("deleteButton");
-            buttonDelete.disabled = false;
-            buttonDelete.classList.remove('disabled');
+            if(!fileInput.value == 'empty_input'){
+                // abilito il button
+                const buttonDelete = document.getElementById("deleteButton");
+                buttonDelete.disabled = false;
+                buttonDelete.classList.remove('d-none');
+            }
 
             // rimuovo il name noImage
             document.getElementById("inputDeleteImage").name = "";
@@ -138,7 +148,7 @@
             // Disabilito il button
             const buttonDelete = document.getElementById("deleteButton");
             buttonDelete.disabled = true;
-            buttonDelete.classList.add('disabled');
+            buttonDelete.classList.add('d-none');
         }
 </script>
 
