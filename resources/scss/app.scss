@@ -4,11 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Barlow', sans-serif;
     font-family: 'Montserrat', sans-serif;
-    font-family: 'Orbitron', sans-serif;
-    font-family: 'Roboto', sans-serif;
-    font-family: 'Roboto Mono', monospace;
 }
 
 .container {
@@ -21,10 +17,17 @@
         top: 20px;
     }
 }
+.shadow{
+    -webkit-box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.88);
+box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.88);
+}
 
 header {
     background-color: #3ABFB4 !important;
+    nav{
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.7);
 
+    }
     a {
         color: black !important;
     }
