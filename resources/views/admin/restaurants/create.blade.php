@@ -3,7 +3,7 @@
 @section('content')
 
 {{-- style="max-height: calc(100vh - 70.24px);" --}}
-<div class="container overflow-auto p-5 ">
+<div class="container  p-5 ">
 
     <h1>Nuovo Ristorante</h1>
 
@@ -64,12 +64,13 @@
             <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                 @foreach ($types as $type)
                 <input type="checkbox" class="btn-check" id="{{$type->id}}" autocomplete="off" name="types[]" value="{{$type->id}}">
-                <label class="btn btn-outline-primary" for="{{$type->id}}">{{$type->name}}</label>
+                <label class="btn btn-outline-dark" for="{{$type->id}}">{{$type->name}}</label>
                 @endforeach
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary mt-4 d-block">Submit</button>
+
+        <button type="submit" class="btn mybadge mt-4 d-block">Crea</button>
 
     </form>
 

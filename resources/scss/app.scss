@@ -6,7 +6,13 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
-
+body{
+    overflow-y: hidden;
+}
+.myoverflow{
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 .container {
     height: 100%;
     position: relative;
@@ -37,6 +43,8 @@ header {
         width: 85px;
     }
 }
+
+
 
 aside {
     background-color: #3ABFB4 !important;
@@ -131,6 +139,16 @@ aside {
 }
 #password-error {
     opacity: 0;
+}
+@include media-breakpoint-down(lg) {
+    .btn-group {
+        flex-wrap: wrap;
+    }
+
+    .btn-group .btn {
+        display: block;
+        margin-bottom: 5px;
+    }
 }
 
 @include media-breakpoint-down(sm) {

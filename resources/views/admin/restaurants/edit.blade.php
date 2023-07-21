@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <div class="container overflow-auto p-5 " >
+    <div class="container  p-5 " >
 
         <h1>Modifica Ristorante: {{ $restaurant->name }}
             <form action="{{ route('admin.restaurants.destroy', $restaurant) }}" method="POST" class="d-inline"
@@ -51,7 +51,7 @@
                     value="{{ old('image', $restaurant?->image) }}">
                 {{-- <img height="300px" class="mt-3 bg-white px-5" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt=""> --}}
                 {{-- <img class="w-25 mt-3 bg-white {{ $restaurant->image ? '' : 'px-5'}}" id="prev-img" src="{{ $restaurant->image ? asset('storage/' . $restaurant->image) : Vite::asset('resources\img\placeholder-img.png') }}" alt="{{ $restaurant->image == false ? "Nessuna immagine" : $restaurant->name }}"> --}}
-                <div class="d-flex align-items-end">
+                <div class="d-flex align-items-end flex-wrap">
                     <div>
                         @if (str_contains($restaurant->image, 'http://') || str_contains($restaurant->image, 'https://'))
                             <img height="300px" class="mt-3 bg-white" id="prev-img"
@@ -66,7 +66,7 @@
                         @endif
                     </div>
                     {{-- * il button deve essere type="button" oppure diverrà automaticamnete type="submit" --}}
-                    <button type="button" class="btn btn-danger ms-3 mt-3" id="deleteButton" onclick="deleteImage()" style="width: 180px; height: 70px;"><span class="fa-solid fa-trash"></span> Elimina immagine <input id="inputDeleteImage" type="text" value="empty" name="noImage" style="opacity: 0; border: none; height: 0; width: 0;"></button>
+                    <button type="button" class="btn btn-danger ms-1 " id="deleteButton" onclick="deleteImage()" style="width: 50px; height: 50px;"><span class="fa-solid fa-trash"></span> <input id="inputDeleteImage" type="text" value="empty" name="noImage" style="opacity: 0; border: none; height: 0; width: 0;"></button>
                 </div>
             </div>
             <div class="mb-3">
@@ -94,12 +94,12 @@
                 @foreach ($types as $type)
                     <input type="checkbox" class="btn-check" id="{{ $type->id }}" autocomplete="off" name="types[]"
                         value="{{ $type->id }}" {{ $restaurant && $restaurant->types->contains($type) ? 'checked' : '' }}>
-                    <label class="btn btn-outline-primary" for="{{ $type->id }}">{{ $type->name }}</label>
+                    <label class="btn btn-outline-dark" for="{{ $type->id }}">{{ $type->name }}</label>
                 @endforeach
             </div>
         </div>
 
-            <button type="submit" class="btn btn-primary mt-4 d-block">Submit</button>
+            <button type="submit" class="btn mybadge mt-4 d-block">Modifica</button>
 
         </form>
 

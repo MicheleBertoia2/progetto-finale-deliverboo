@@ -43,7 +43,7 @@
 
         @endauth
 
-        <main class="overflow-auto w-100">
+        <main class="myoverflow w-100 mb-5">
             @yield('content')
         </main>
 
