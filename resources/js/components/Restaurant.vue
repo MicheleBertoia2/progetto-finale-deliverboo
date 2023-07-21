@@ -44,11 +44,51 @@ export default {
             justify-content: space-evenly;
             align-items: center;
             height: 30px;
+                .continer-badge{
+                    display: flex;
+                    justify-content: center;
+
+
+                    .badge{
+                        color:black;
+                        margin-left: 3px;
+                        margin-bottom: 6px;
+                    }
+
+                    .badge-turco{
+                        background-color: #efc4ff ;
+                    }
+                    .badge-giapponese{
+                        background-color: #414bb2 ;
+                    }
+                    .badge-italiano{
+                        background-color: #77e334 ;
+                    }
+                    .badge-thai{
+                        background-color: #08f6ea ;
+                    }
+                    .badge-messicano{
+                        background-color: #f5a700 ;
+                    }
+                    .badge-indiano{
+                        background-color: #dd0d1e ;
+                    }
+                    .badge-cinese{
+                        background-color: #a708f6 ;
+                    }
+                    .badge-americano{
+                        background-color: #f6088b ;
+                    }
+                }
             }
         .bg-restaurant{
             border-top-left-radius: 10%;
             border-top-right-radius: 10%;
-            background-image: url('img/prova-ristorante.png');
+            background:
+                linear-gradient(
+                rgba(0, 0, 0, 0.3),
+                rgba(0, 0, 0, 0.3)),
+                url('img/prova-ristorante.png');
             background-size: cover;
             height: 340px;
             position: relative;
@@ -60,9 +100,12 @@ export default {
                 transform: translate(-50%, -50%);
                 }
             .text{
+                display: flex;
+                justify-content: center;
+                width: 350px;
+                color: white;
                 font-size: 25px;
                 font-weight: bold;
-                color:rgb(0, 0, 0);
                 position: absolute;
             }
             .badge{

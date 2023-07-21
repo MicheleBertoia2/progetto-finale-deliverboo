@@ -93,7 +93,7 @@
                     </div> --}}
                     {{-- * il button deve essere type="button" oppure diverrà automaticamnete type="submit" --}}
                     <button type="button" class="btn btn-danger ms-3 mt-3" id="deleteButton" onclick="deleteImage()"
-                        style="width: 180px; height: 70px;"><span class="fa-solid fa-trash"></span> Elimina<input
+                        style="width: 50px; height: 50px;"><span class="fa-solid fa-trash"></span><input
                             id="inputDeleteImage" type="hidden" name="noImage"
                             style="opacity: 0; border: none; height: 0; width: 0;"></button>
                 </div>
@@ -133,6 +133,10 @@
                 };
 
                 reader.readAsDataURL(imageInput.files[0]);
+                // abilito il button
+                const buttonDelete = document.getElementById("deleteButton");
+                buttonDelete.disabled = false;
+                buttonDelete.classList.remove('d-none');
             } else {
             //* se clicco sull'input file e carico un'immagine nell'input e successivamente clicco sull'input file e non carico un'immagine nell'input ma clicco "annulla" così viene caricata l'img placeholder
                 //imposto un valore che sarà uguale a quello passato al controller //* utile per quando l'immagine non è obbligatoria (cioè nullable) in questo caso l'immagine non è obbligatoria
@@ -140,6 +144,10 @@
                 fileInput.value = 'empty_input';
                 // Se non è stato selezionato un file, mostra l'immagine di placeholder
                 previewImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
+                // Disabilito il button
+                const buttonDelete = document.getElementById("deleteButton");
+                buttonDelete.disabled = true;
+                buttonDelete.classList.add('d-none');
             }
         }
 
@@ -153,10 +161,12 @@
             //* oppure
             // document.getElementById("text_input").classList.add("d-none");
 
-            // abilito il button
-            const buttonDelete = document.getElementById("deleteButton");
-            buttonDelete.disabled = false;
-            buttonDelete.classList.remove('disabled');
+            if(!fileInput.value == 'empty_input'){
+                // abilito il button
+                const buttonDelete = document.getElementById("deleteButton");
+                buttonDelete.disabled = false;
+                buttonDelete.classList.remove('d-none');
+            }
 
             // rimuovo il name noImage
             document.getElementById("inputDeleteImage").name = "";
@@ -184,7 +194,7 @@
             // Disabilito il button
             const buttonDelete = document.getElementById("deleteButton");
             buttonDelete.disabled = true;
-            buttonDelete.classList.add('disabled');
+            buttonDelete.classList.add('d-none');
         }
 
 

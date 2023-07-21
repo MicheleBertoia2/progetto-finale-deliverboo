@@ -41,57 +41,107 @@ export default {
         @progress="onProgress"
         @slidechange="onSlideChange">
         <swiper-slide>
-            <div class="kebab">
+            <div class="turco">
+
                 <img src="img/kebab.png" alt="kebab">
-                <span>Kebab</span>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        <span>Turco</span>
+                    </label>
+                </div>
             </div>
         </swiper-slide>
+
         <swiper-slide>
-            <div class="sushi">
+            <div class="giapponese">
                 <img src="img/sushi.png" alt="sushi">
-                <span>Sushi</span>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        <span>Giapponese</span>
+                    </label>
+                </div>
             </div>
         </swiper-slide>
+
         <swiper-slide>
-            <div class="pizza">
+            <div class="italiano">
                 <img src="img/pizza.png" alt="pizza">
-                <span>Pizza</span>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        <span>Italiano</span>
+                    </label>
+                </div>
             </div>
         </swiper-slide>
+
         <swiper-slide>
             <div class="thai">
                 <img src="img/thai.png" alt="thai">
-                <span>Thai</span>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        <span>Thai</span>
+                    </label>
+                </div>
             </div>
         </swiper-slide>
+
         <swiper-slide>
             <div class="messicano">
                 <img src="img/messicano.png" alt="messicano">
-                <span>Messicano</span>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        <span>Messicano</span>
+                    </label>
+                </div>
             </div>
         </swiper-slide>
+
         <swiper-slide>
             <div class="indiano">
                 <img src="img/indiano.png" alt="indiano">
-                <span>Indiano</span>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        <span>Indiano</span>
+                    </label>
+                </div>
             </div>
+
         </swiper-slide>
-        <swiper-slide>
+        <!-- <swiper-slide>
             <div class="greco">
                 <img src="img/greco.png" alt="greco">
                 <span>Greco</span>
             </div>
-        </swiper-slide>
+        </swiper-slide> -->
+
         <swiper-slide>
             <div class="cinese">
                 <img src="img/cinese.png" alt="cinese">
-                <span>Cinese</span>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        <span>Cinese</span>
+                    </label>
+                </div>
             </div>
         </swiper-slide>
+
+
         <swiper-slide>
             <div class="americano"
             ><img src="img/americano.png" alt="americano">
-            <span>Americano</span>
+            <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        <span>Americano</span>
+                    </label>
+                </div>
         </div>
         </swiper-slide>
     </swiper-container>
@@ -116,15 +166,22 @@ img {
     width: 200px;
 }
 
-span{
-        position: absolute;
-        transform: translate(-50%,-50%);
-        top: 130%;
-        left: 50%;
-        font-size: 21px;
+.form-check{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 130%;
+    left: 50%;
+
+        span{
+            font-size: 22px;
+            margin-left: 7px;
+        }
     }
 
-.kebab {
+.turco {
     background-color: #efc4ff;
     border-radius: 10%;
     height: 120px;
@@ -140,7 +197,7 @@ span{
 
 }
 
-.sushi {
+.giapponese {
     background-color: #414bb2;
     border-radius: 10%;
     height: 120px;
@@ -156,7 +213,7 @@ span{
 
 }
 
-.pizza {
+.italiano {
     background-color: #77e334;
     border-radius: 10%;
     height: 120px;
@@ -172,7 +229,7 @@ span{
 }
 
 .thai {
-    background-color: #dbd639;
+    background-color: #08f6ea;
     border-radius: 10%;
     height: 120px;
     width: 200px;
@@ -203,7 +260,7 @@ span{
 }
 
 .indiano {
-    background-color: #57951c;
+    background-color: #dd0d1e;
     border-radius: 10%;
     height: 120px;
     width: 200px;
@@ -217,20 +274,20 @@ span{
     }
 }
 
-.greco {
-    background-color: #08f6ea;
-    border-radius: 10%;
-    height: 120px;
-    width: 200px;
-    position: relative;
+// .greco {
+//     background-color: #08f6ea;
+//     border-radius: 10%;
+//     height: 120px;
+//     width: 200px;
+//     position: relative;
 
-    img {
-        position: absolute;
-        height: 180px;
-        width: 200px;
-        transform: translateY(-15%);
-    }
-}
+//     img {
+//         position: absolute;
+//         height: 180px;
+//         width: 200px;
+//         transform: translateY(-15%);
+//     }
+// }
 
 .cinese {
     background-color: #a708f6;

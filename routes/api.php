@@ -26,5 +26,9 @@ Route::namespace('Api')
             // Route::get('/post-tag/{id}',[PostController::class, 'getPostsByTag']);
             Route::get('/{slug}',[RestaurantController::class, 'getRestaurantDetail']);
             // Route::get('/search/{tosearch}',[PostController::class, 'search']);
+            //route di michele
+             Route::get('/typesearch', [RestaurantController::class, 'restaurantTypesSearch']);
+
+
         });
 
