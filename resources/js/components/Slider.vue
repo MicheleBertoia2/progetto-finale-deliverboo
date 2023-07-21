@@ -41,21 +41,21 @@ export default {
         @progress="onProgress"
         @slidechange="onSlideChange">
         <swiper-slide>
-            <div class="kebab">
+            <div class="turco">
                 <img src="img/kebab.png" alt="kebab">
-                <span>Kebab</span>
+                <span>Turco</span>
             </div>
         </swiper-slide>
         <swiper-slide>
-            <div class="sushi">
+            <div class="giapponese">
                 <img src="img/sushi.png" alt="sushi">
-                <span>Sushi</span>
+                <span>Giapponese</span>
             </div>
         </swiper-slide>
         <swiper-slide>
-            <div class="pizza">
+            <div class="italiano">
                 <img src="img/pizza.png" alt="pizza">
-                <span>Pizza</span>
+                <span>Italiano</span>
             </div>
         </swiper-slide>
         <swiper-slide>
@@ -76,12 +76,12 @@ export default {
                 <span>Indiano</span>
             </div>
         </swiper-slide>
-        <swiper-slide>
+        <!-- <swiper-slide>
             <div class="greco">
                 <img src="img/greco.png" alt="greco">
                 <span>Greco</span>
             </div>
-        </swiper-slide>
+        </swiper-slide> -->
         <swiper-slide>
             <div class="cinese">
                 <img src="img/cinese.png" alt="cinese">
@@ -124,7 +124,7 @@ span{
         font-size: 21px;
     }
 
-.kebab {
+.turco {
     background-color: #efc4ff;
     border-radius: 10%;
     height: 120px;
@@ -140,7 +140,7 @@ span{
 
 }
 
-.sushi {
+.giapponese {
     background-color: #414bb2;
     border-radius: 10%;
     height: 120px;
@@ -156,7 +156,7 @@ span{
 
 }
 
-.pizza {
+.italiano {
     background-color: #77e334;
     border-radius: 10%;
     height: 120px;
@@ -172,7 +172,7 @@ span{
 }
 
 .thai {
-    background-color: #dbd639;
+    background-color: #08f6ea;
     border-radius: 10%;
     height: 120px;
     width: 200px;
@@ -203,7 +203,7 @@ span{
 }
 
 .indiano {
-    background-color: #57951c;
+    background-color: #dd0d1e;
     border-radius: 10%;
     height: 120px;
     width: 200px;
@@ -217,20 +217,20 @@ span{
     }
 }
 
-.greco {
-    background-color: #08f6ea;
-    border-radius: 10%;
-    height: 120px;
-    width: 200px;
-    position: relative;
+// .greco {
+//     background-color: #08f6ea;
+//     border-radius: 10%;
+//     height: 120px;
+//     width: 200px;
+//     position: relative;
 
-    img {
-        position: absolute;
-        height: 180px;
-        width: 200px;
-        transform: translateY(-15%);
-    }
-}
+//     img {
+//         position: absolute;
+//         height: 180px;
+//         width: 200px;
+//         transform: translateY(-15%);
+//     }
+// }
 
 .cinese {
     background-color: #a708f6;
