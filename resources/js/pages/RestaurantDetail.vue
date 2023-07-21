@@ -59,7 +59,7 @@ export default {
         padding: 30px;
         margin: 30px;
         transform: translate(-50%,-50%);
-        top: 60%;
+        top: 55%;
         left: 20%;
     }
 }

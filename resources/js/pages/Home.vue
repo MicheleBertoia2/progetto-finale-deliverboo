@@ -16,6 +16,7 @@ export default {
             restaurants : [],
             title : 'Ecco una selezione di ristoranti per te',
             resTypes : [],
+            typeSelected : [],
         }
     },
 
@@ -53,7 +54,30 @@ export default {
 
                 })
 
-        }
+        },
+        eseguiRicerca() {
+
+
+            axios.get(store.apiUrl + 'restaurants/typesearch')
+            .then(response => {
+
+                // prendo tutti i ristoranti
+                let allRestaurants = response.data.restaurants;
+
+                // li filtro in base agli id dei tipi selezionati
+
+                this.restaurants = allRestaurants.filter(ristorante => {
+                    return ristorante.types.some(type => this.typeSelected.includes(type.id));
+                });
+                this.title = 'risultati';
+                console.log(this.restaurants);
+
+                store.loaded = true;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+  }
 
     },
 
@@ -72,11 +96,24 @@ export default {
     <div class="container-inner ">
 
         <Slider />
-        <ul class="d-flex bg-dark py-3">
+
+        <!-- VECCHIA VERSIONE RICERCA -->
+
+        <!-- <ul class="d-flex bg-dark py-3">
             <li v-for="resType in this.resTypes" :key="resType.id"
                 class="badge badge-success text-white "
                 @click="getRestaurantsType(resType.slug)">{{ resType.name }}</li>
-        </ul>
+        </ul> -->
+
+
+        <!-- nuova versione RICERCA -->
+        <div>
+
+            <label v-for="resType in this.resTypes" :key="resType.id"><input type="checkbox" :id="resType.id" :value="resType.id" v-model="typeSelected" > {{ resType.name }}</label>
+
+
+            <button @click="eseguiRicerca" :disabled="(!this.typeSelected.length > 0)" >Cerca</button>
+        </div>
         <Loader v-if="!store.loaded" />
 
         <div v-else class="container-restaurant">
