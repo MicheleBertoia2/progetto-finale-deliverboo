@@ -11,7 +11,7 @@
                 @csrf
                 {{-- * aggiungere DELETE perchè non è possibile inserire PUT/PATCH nel method del form al posto di POST --}}
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                <button type="submit" class="btn btn-danger mb-2"><i class="fa-solid fa-trash"></i></a>
             </form>
         </h1>
 
@@ -66,7 +66,7 @@
                         @endif
                     </div>
                     {{-- * il button deve essere type="button" oppure diverrà automaticamnete type="submit" --}}
-                    <button type="button" class="btn btn-danger ms-1 " id="deleteButton" onclick="deleteImage()" style="width: 50px; height: 50px;"><span class="fa-solid fa-trash"></span> <input id="inputDeleteImage" type="text" value="empty" name="noImage" style="opacity: 0; border: none; height: 0; width: 0;"></button>
+                    <button type="button" class="btn btn-danger ms-1 " id="deleteButton" onclick="deleteImage()" style="width: 50px; height: 50px;"><span class="fa-solid fa-trash"></span><input id="inputDeleteImage" type="text" value="empty" name="noImage" style="opacity: 0; border: none; height: 0; width: 0;"></button>
                 </div>
             </div>
             <div class="mb-3">
@@ -90,7 +90,7 @@
 
         <div class="mb-3">
             <label for="address" class="form-label">Tipologie del ristorante</label>
-            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+            <div class="btn-group d-block" role="group" aria-label="Basic checkbox toggle button group">
                 @foreach ($types as $type)
                     <input type="checkbox" class="btn-check" id="{{ $type->id }}" autocomplete="off" name="types[]"
                         value="{{ $type->id }}" {{ $restaurant && $restaurant->types->contains($type) ? 'checked' : '' }}>
@@ -123,6 +123,10 @@
                 };
 
                 reader.readAsDataURL(imageInput.files[0]);
+                // abilito il button
+                const buttonDelete = document.getElementById("deleteButton");
+                buttonDelete.disabled = false;
+                buttonDelete.classList.remove('d-none');
             } else {
             //* se clicco sull'input file e carico un'immagine nell'input e successivamente clicco sull'input file e non carico un'immagine nell'input ma clicco "annulla" così viene caricata l'img placeholder
                 //imposto un valore che sarà uguale a quello passato al controller //* utile per quando l'immagine non è obbligatoria (cioè nullable) in questo caso l'immagine non è obbligatoria
@@ -130,6 +134,10 @@
                 fileInput.value = 'empty_input';
                 // Se non è stato selezionato un file, mostra l'immagine di placeholder
                 previewImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
+                // Disabilito il button
+                const buttonDelete = document.getElementById("deleteButton");
+                buttonDelete.disabled = true;
+                buttonDelete.classList.add('d-none');
             }
         }
 
@@ -141,10 +149,12 @@
             // Imposta il name dell'attributo nell'input = image
             document.getElementById('file_input').name = 'image';
 
-            // abilito il button
-            const buttonDelete = document.getElementById("deleteButton");
-            buttonDelete.disabled = false;
-            buttonDelete.classList.remove('disabled');
+            if(!fileInput.value == 'empty_input'){
+                // abilito il button
+                const buttonDelete = document.getElementById("deleteButton");
+                buttonDelete.disabled = false;
+                buttonDelete.classList.remove('d-none');
+            }
 
             // rimuovo il name noImage
             document.getElementById("inputDeleteImage").name = "";
@@ -170,7 +180,7 @@
             // Disabilito il button
             const buttonDelete = document.getElementById("deleteButton");
             buttonDelete.disabled = true;
-            buttonDelete.classList.add('disabled');
+            buttonDelete.classList.add('d-none');
         }
     </script>
 
