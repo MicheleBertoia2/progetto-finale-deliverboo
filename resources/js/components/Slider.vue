@@ -42,39 +42,76 @@ export default {
         @slidechange="onSlideChange">
         <swiper-slide>
             <div class="turco">
+
                 <img src="img/kebab.png" alt="kebab">
-                <span>Turco</span>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        <span>Turco</span>
+                    </label>
+                </div>
             </div>
         </swiper-slide>
+
         <swiper-slide>
             <div class="giapponese">
                 <img src="img/sushi.png" alt="sushi">
-                <span>Giapponese</span>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        <span>Giapponese</span>
+                    </label>
+                </div>
             </div>
         </swiper-slide>
+
         <swiper-slide>
             <div class="italiano">
                 <img src="img/pizza.png" alt="pizza">
-                <span>Italiano</span>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        <span>Italiano</span>
+                    </label>
+                </div>
             </div>
         </swiper-slide>
+
         <swiper-slide>
             <div class="thai">
                 <img src="img/thai.png" alt="thai">
-                <span>Thai</span>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        <span>Thai</span>
+                    </label>
+                </div>
             </div>
         </swiper-slide>
+
         <swiper-slide>
             <div class="messicano">
                 <img src="img/messicano.png" alt="messicano">
-                <span>Messicano</span>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        <span>Messicano</span>
+                    </label>
+                </div>
             </div>
         </swiper-slide>
+
         <swiper-slide>
             <div class="indiano">
                 <img src="img/indiano.png" alt="indiano">
-                <span>Indiano</span>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        <span>Indiano</span>
+                    </label>
+                </div>
             </div>
+
         </swiper-slide>
         <!-- <swiper-slide>
             <div class="greco">
@@ -82,16 +119,29 @@ export default {
                 <span>Greco</span>
             </div>
         </swiper-slide> -->
+
         <swiper-slide>
             <div class="cinese">
                 <img src="img/cinese.png" alt="cinese">
-                <span>Cinese</span>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        <span>Cinese</span>
+                    </label>
+                </div>
             </div>
         </swiper-slide>
+
+
         <swiper-slide>
             <div class="americano"
             ><img src="img/americano.png" alt="americano">
-            <span>Americano</span>
+            <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        <span>Americano</span>
+                    </label>
+                </div>
         </div>
         </swiper-slide>
     </swiper-container>
@@ -116,12 +166,19 @@ img {
     width: 200px;
 }
 
-span{
-        position: absolute;
-        transform: translate(-50%,-50%);
-        top: 130%;
-        left: 50%;
-        font-size: 21px;
+.form-check{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 130%;
+    left: 50%;
+
+        span{
+            font-size: 22px;
+            margin-left: 7px;
+        }
     }
 
 .turco {
