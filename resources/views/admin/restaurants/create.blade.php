@@ -62,7 +62,7 @@
 
         <div class="mb-3">
             <label for="types" class="form-label">Tipologie del ristorante</label>
-            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+            <div class="btn-group d-block" role="group" aria-label="Basic checkbox toggle button group">
                 @foreach ($types as $type)
                 <input type="checkbox" class="btn-check" id="{{$type->id}}" autocomplete="off" name="types[]" value="{{$type->id}}">
                 <label class="btn btn-outline-dark" for="{{$type->id}}">{{$type->name}}</label>
