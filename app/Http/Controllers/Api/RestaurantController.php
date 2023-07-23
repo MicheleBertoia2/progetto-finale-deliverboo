@@ -40,49 +40,11 @@ class RestaurantController extends Controller
         if((str_contains($restaurants->image, 'http://') || str_contains($restaurants->image, 'https://'))){
             $restaurants->image;
         }else if(str_contains($restaurants->image, "resources/img/placeholder-img.png" )){
-
-
-        // if(str_contains($restaurants->image, "resources/img/placeholder-img.png" )){
-            // $restaurants->image = asset('resources/img/placeholder-img.png');
-            // $restaurants->image = "getImageUrl('img/placeholder-img.png')";
-            // $restaurants->image = getImageUrl('img/placeholder-img.png');
-            // $restaurants->image = "~/img/placeholder-img.png";
-            // $restaurants->image = "~/img/placeholder-img.png";
-            // $restaurants->image = "resources/img/placeholder-img.png";
-
             $restaurants->image = "../../img/placeholder-img.png";
-            // $restaurants->image = "../resources/img/placeholder-img.png";
-            // $restaurants->image = asset("../resources/img/placeholder-img.png");
-            // $restaurants->image = asset("../../img/placeholder-img.png");
-            // $restaurants->image = "`${restaurant.image}`";
-
         }
         else{
-            // $restaurants->image = "../../img/placeholder-img.png";
             $restaurants->image = asset('storage/' . $restaurants->image);
-
-            // $restaurants->image = asset('storage/uploads/placeholder-img.png');
         }
-
-        // }
-        // else if($restaurants->image){
-        //     $restaurants->image = asset('storage/' . $restaurants->image);
-        // }else{
-        //     $restaurants->image = asset('storage/' . $restaurants->image);
-        // }
-
-        // @if(str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))
-        //     <img src="{{  $dish?->image_path }}" alt="{{ $dish->name }}">
-        // @elseif(str_contains($dish->image_path, "resources/img/placeholder-img.png" ))
-        //     <img src="{{ Vite::asset($dish->image_path) }}" alt="{{ $dish->name }}">
-        // @else
-        //     <img src="{{ asset('storage/' . $dish?->image_path) }}" alt="{{ $dish->name }}">
-        // @endif
-
-        // if($restaurants->image) $restaurants->image = asset('storage/' . $restaurants->image) ;
-        // else{
-        //     $restaurants->image = asset('storage/uploads/placeholder-img.png');
-        // }
 
         return response()->json($restaurants);
 }

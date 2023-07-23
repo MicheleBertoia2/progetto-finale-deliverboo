@@ -12,8 +12,8 @@ export default {
     data(){
         return{
             store,
-            // restaurant:[],
-            restaurant:{},
+            restaurant:[],
+            // restaurant:{},
         }
     },
     methods:{
@@ -29,12 +29,10 @@ export default {
 
         },
         checkImg(src) {
-
-        // if (this.restaurant && this.restaurant.image && typeof this.restaurant.image === 'string') {
-        if (this.restaurant.image) {
-            return this.restaurant.image.includes(src);
-        }
-            return false;
+            if (this.restaurant.image) {
+                return this.restaurant.image.includes(src);
+            }
+                return false;
 
         },
     },
@@ -48,34 +46,16 @@ export default {
 <div class="main-container">
 
     <div class="container d-flex py-5">
-
-    <div>
-        <img v-if="checkImg('../../img/placeholder-img.png')" src="../../img/placeholder-img.png" alt="placeholder">
-        <img v-else :src="restaurant.image" alt="restaurant-img">
-        <!-- <img v-else :src="`${restaurant.image}`" alt="restaurant-img"> -->
-        <!-- <img :src="`${restaurant.image}`" alt="restaurant-img"> -->
-
-        <!-- <img v-if="checkImg('resources/img/placeholder-img.png')" src="../../img/placeholder-img.png" alt="placeholder"> -->
-        <!-- <img v-if="checkImg('placeholder-img')" src="../../img/placeholder-img.png" alt="placeholder"> -->
-        <!-- <img v-else :src="`${restaurant.image}`" alt="restaurant-img"> -->
-
-        <!-- <img v-else-if="restaurant.image" :src="restaurant.image" alt="restaurant-img"> -->
-        <!-- <img v-else :src="restaurant.image" alt="restaurant-img"> -->
-    </div>
-        <!-- <img src="`resources/img/placeholder-img.png`" alt=""> -->
-        <!-- <img src="/../../img/placeholder-img.png" alt=""> -->
-        <!-- <img src="~/img/placeholder-img.png" alt=""> -->
-        <!-- <img src=getImageUrl('img/placeholder-img.png') alt=""> -->
-        <!-- <img src="./img/placeholder-img.png" alt=""> -->
-        <!-- //* funziona l'immagine dinamica ma non con il placholder (salvato nello storage)  -->
-        <!-- <img :src="restaurant.image" alt=""> -->
-        <!-- <img :src="`${restaurant.image}`" alt=""> -->
-        <!-- //* funziona il placeholder statico  -->
-        <!-- <img src="../../img/placeholder-img.png" alt="placeholder"> -->
+        <div>
+            <img v-if="checkImg('../../img/placeholder-img.png')" src="../../img/placeholder-img.png" alt="placeholder">
+            <img v-else :src="restaurant.image" alt="restaurant-img">
+            <!-- //* funziona l'immagine dinamica ma non con il placholder (salvato nello storage)  -->
+            <!-- <img :src="restaurant.image" alt=""> -->
+            <!-- <img :src="`${restaurant.image}`" alt=""> -->
+            <!-- //* funziona il placeholder statico  -->
+            <!-- <img src="../../img/placeholder-img.png" alt="placeholder"> -->
+        </div>
         <h1>{{ restaurant.name }}</h1>
-
-
-
     </div>
 
 </div>
