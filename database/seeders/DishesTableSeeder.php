@@ -27,7 +27,12 @@ class DishesTableSeeder extends Seeder
             $dish->restaurant_id = Restaurant::inRandomOrder()->first()->id;
             $dish->name = $food->strMeal;
             $dish->slug  = Dish::generateSlug($dish->name);
-            $dish->image_path = Storage::url('uploads/'. $food->strMealThumb);
+            //* per le immagini prese dall'API
+            $dish->image_path = $food->strMealThumb;
+            // if(strpos($food->strMealThumb, 'https://') || strpos($food->strMealThumb, 'http://')){
+                // per le immagini prese dall'API
+                //     $dish->image_path = $food->strMealThumb;
+            // }
             $dish->price  = rand(1,40) + (rand(0,100)/100);
 
             $dish->ingredients = $food->strIngredient1 . ', ' . $food->strIngredient2  . ', ' . $food->strIngredient3 . ', ' . $food->strIngredient4 ;
