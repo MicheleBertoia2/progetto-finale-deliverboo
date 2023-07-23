@@ -4,6 +4,7 @@ import Restaurant from '../components/Restaurant.vue';
 import Slider from '../components/Slider.vue';
 import axios from 'axios';
 import Loader from '../components/Loader.vue';
+import Cart from '../components/Cart.vue';
 import { store } from '../store/store';
 
 
@@ -17,6 +18,13 @@ export default {
             title : 'Ecco una selezione di ristoranti per te',
             resTypes : [],
             typeSelected : [],
+            showModal: false,
+            cartItems: [], //  dati del carrello caricati dal localStorage
+            itemProva : {
+                id : 5,
+                name : 'ravioli',
+                quantity : 1
+            }
         }
     },
 
@@ -24,6 +32,7 @@ export default {
         Restaurant,
         Loader,
         Slider,
+        Cart,
 
     },
 
@@ -77,12 +86,49 @@ export default {
             .catch(error => {
                 console.log(error);
             });
-  }
+        },
+
+        addToCart(item) {
+
+
+
+            // Cerca se l'elemento è già presente nel carrello
+            const existingItem = this.cartItems.find(cartItem => cartItem.id === item.id);
+
+            if (existingItem) {
+                // Se l'elemento è già presente, aumenta la quantità
+                existingItem.quantity++;
+            } else {
+                // Altrimenti aggiungi l'elemento al carrello
+                this.cartItems.push({ ...item, quantity: 1 });
+            }
+
+            // Salva il carrello aggiornato nel localStorage
+            this.saveCartToLocalStorage();
+        },
+
+        removeFromCart(itemId) {
+            // Rimuovi l'elemento dal carrello
+            this.cartItems = this.cartItems.filter(item => item.id !== itemId);
+
+            // Salva il carrello aggiornato nel localStorage
+            this.saveCartToLocalStorage();
+        },
+
+        saveCartToLocalStorage() {
+        // Salva il carrello nel localStorage come stringa JSON
+        localStorage.setItem('cart', JSON.stringify(this.cartItems));
+        },
 
     },
 
     mounted(){
         this.getApi()
+        // Carica il carrello salvato nel localStorage al momento del caricamento della pagina
+        const savedCart = localStorage.getItem('cart');
+        if (savedCart) {
+            this.cartItems = JSON.parse(savedCart);
+            }
     }
 }
 </script>
@@ -91,7 +137,10 @@ export default {
 
     <div class="jumbotron">
             <img src="img/jumbo.png" alt="jumbotron">
-        </div>
+    </div>
+
+    <!-- BOTTONE DI PROVA PER AGGIUNGERE ELEMENTI AL CARRELLO -->
+    <button class="btn btn-success" @click="addToCart(this.itemProva)">prova aggiunta elementi</button>
 
     <div class="container-inner ">
 
@@ -132,6 +181,11 @@ export default {
         </div>
     </div>
 
+    <Cart :modalOpen="showModal" :cartItems="cartItems" @close="showModal = false" />
+
+        <!-- Bottone che apre il modal solo se nel carrello è presente almeno un elemento -->
+    <button class="btn btn-primary btn-cart" v-if="cartItems.length  > 0 " @click="showModal = true">Apri Modal</button>
+    <!-- IMPORTANTE!!!!! CAMBIARE IL V-IF PERCHè ADESSO IL ! SERVE SOLO PER VEDERE IL BOTTONE -->
 
 </template>
 
@@ -182,6 +236,14 @@ ul{
     padding-bottom: 50px;
     height: 100%;
     width: 100%;
+}
+
+.btn-cart{
+    position: fixed;
+    right: 100px;
+    bottom: 100px;
+    z-index: 5;
+
 }
 
 </style>
