@@ -6,13 +6,16 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
-body{
+
+body {
     overflow-y: hidden;
 }
-.myoverflow{
+
+.myoverflow {
     overflow-x: hidden;
     overflow-y: auto;
 }
+
 .container {
     height: 100%;
     position: relative;
@@ -23,17 +26,20 @@ body{
         top: 20px;
     }
 }
-.shadow{
-    -webkit-box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.88);
-box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.88);
+
+.shadow {
+    -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.88);
+    box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.88);
 }
 
 header {
     background-color: #3ABFB4 !important;
-    nav{
+
+    nav {
         box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.7);
 
     }
+
     a {
         color: black !important;
     }
@@ -52,6 +58,7 @@ aside {
     height: 100%;
     width: 200px;
     transition: all .5s;
+
     nav {
         height: 100%;
 
@@ -85,6 +92,7 @@ aside {
                         transition: all .5s;
                         position: absolute;
                         left: 40px;
+
                         &:hover {
                             color: white;
                         }
@@ -120,26 +128,32 @@ aside {
     display: flex;
     flex-direction: column;
     align-items: center;
-    img{
-    width: 300px;
+
+    img {
+        width: 300px;
     }
 }
-.mybadge{
+
+.mybadge {
     transition: all .5s;
     color: black;
     background-color: #3ABFB4 !important;
+
     &:hover {
         color: white;
     }
 }
-.mycard{
-    img{
+
+.mycard {
+    img {
         width: 300px;
     }
 }
+
 #password-error {
     opacity: 0;
 }
+
 @include media-breakpoint-down(lg) {
     .btn-group {
         flex-wrap: wrap;
@@ -155,29 +169,50 @@ aside {
 
     aside {
         width: 80px;
+
         nav {
             ul {
-                align-items:normal;
+                align-items: normal;
+
                 a {
                     &:hover {
                         text-decoration: underline;
                     }
 
-                    i{
+                    i {
                         margin-left: -10px;
                         font-size: 1.6rem;
                     }
-                        span {
-                            display: none;
-                        }
+
+                    span {
+                        display: none;
                     }
                 }
             }
         }
+    }
 
-        header {
-            .logo {
-                width: 105px;
-            }
+    header {
+        .logo {
+            width: 105px;
         }
+    }
+}
+
+/* // pulsanti della show in restaurant */
+.mybadge-button {
+    width: 70%;
+}
+
+@media (min-width: 992px) {
+    .mybadge-button {
+        width: 20%;
+        height: 62px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .mybadge-button {
+        height: 40px;
+    }
 }

@@ -3,13 +3,13 @@
 @section('content')
     <section class="overflow-auto p-2 ms-3">
 
-        <h1 class="py-4 d-block text-center">{{ $restaurant->name }}</h1>
+        <h1 class="pt-4 pb-3 d-block text-center">{{ $restaurant->name }}</h1>
+        {{-- <h1 class="py-4 d-block text-center">{{ $restaurant->name }}</h1> --}}
         <div class="d-flex ristorante">
-            <a href="{{ route('admin.dishes.create') }}" class="btn mybadge my-2 me-4 d-block w-50">Aggiungi un nuovo
-                Piatto</a>
-            <div>
-                <div class="d-flex align-items-center mt-2">
-                    <a href="{{ route('admin.dishes.index') }}" class="btn btn-dark me-4">I tuoi Piatti</a>
+            {{-- <a href="{{ route('admin.dishes.create') }}" class="btn mybadge my-2 me-4 d-block w-50">Aggiungi un nuovo
+                Piatto</a> --}}
+                <div class="d-flex align-items-center mt-3 mb-3">
+                    {{-- <a href="{{ route('admin.dishes.index') }}" class="btn btn-dark me-4">I tuoi Piatti</a> --}}
 
                     <a href="{{ route('admin.restaurants.edit', $restaurant) }}" class="btn btn-dark me-2"><i
                         class="fa-solid fa-pencil"></i>
@@ -22,9 +22,8 @@
                     <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                     </form>
                 </div>
-            </div>
 
-            <div class="m-3">
+            <div class="mt-3">
                 @forelse ($restaurant->types as $type)
                 <span class="badge mybadge p-2">
                     {{ $type->name }}
@@ -38,7 +37,7 @@
     </div>
 
 
-        <div class="mycard d-flex flex-wrap m-4 justify-content-center">
+        <div class="mycard d-flex flex-wrap m-4 mt-3 justify-content-center">
             @if (str_contains($restaurant->image, 'http://') || str_contains($restaurant->image, 'https://'))
             <img src="{{ $restaurant?->image }}" alt="{{ $restaurant->name }}" class="py-2 ms-2">
             @elseif(str_contains($restaurant->image, 'resources/img/placeholder-img.png'))
@@ -58,6 +57,11 @@
 
 
 
+        </div>
+
+        <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center mt-4">
+            <a href="{{ route('admin.dishes.index') }}" class="btn mybadge me-4 mybadge-button d-flex justify-content-center align-items-center">I tuoi Piatti</a>
+            <a href="{{ route('admin.dishes.create') }}" class="btn mybadge my-2 me-4 mybadge-button d-flex justify-content-center align-items-center">Aggiungi un nuovo Piatto</a>
         </div>
 
     </section>
