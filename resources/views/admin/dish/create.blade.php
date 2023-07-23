@@ -19,16 +19,16 @@
 
 
             <div class="mb-3">
-                <label for="name" class="form-label">Nome Piatto</label>
+                <label for="name" class="form-label">Nome Piatto*</label>
                 <input required id="name" minlength="2" maxlength="255" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" type="text"
-                    placeholder="Nome Piatto">
+                    placeholder="Esempio: Pizza Margherita">
                 @error('name')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
 
             <div class="mb-3">
-                <label for="description" class="form-label">Descrizione Prodotto</label>
+                <label for="description" class="form-label">Descrizione Piatto</label>
 
                 <textarea id="description"  rows="4" class="form-control @error('description') is-invalid @enderror "
                     name="description" type="text">{!! old('description') !!}</textarea>
@@ -38,25 +38,25 @@
             </div>
 
             <div class="mb-3">
-                <label for="price" class="form-label">Prezzo</label>
+                <label for="price" class="form-label">Prezzo*</label>
                 <input id="price" required minlength="1" pattern="[0-9.]*" class="form-control @error('price') is-invalid @enderror" name="price"
-                    type="text" value="{{ old('price') }}" placeholder="inserisci il prezzo">
+                    type="text" value="{{ old('price') }}" placeholder="Esempio: 5.00">
                 @error('price')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
 
             <div class="mb-3">
-                <label for="ingredients" class="form-label">Ingredienti</label>
+                <label for="ingredients" class="form-label">Ingredienti*</label>
                 <input id="ingredients" required class="form-control @error('ingredients') is-invalid @enderror" name="ingredients"
-                    type="text" value="{{ old('ingredients') }}" placeholder="Ingredienti">
+                    type="text" value="{{ old('ingredients') }}" placeholder="Esempio: Mozzarella, pomodoro">
                 @error('ingredients')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
 
             <div class="mb-3">
-                <label for="image_path" class="form-label">Immagine</label>
+                <label for="image_path" class="form-label">Immagine*</label>
                 <input onchange="showImagePreview(event)" type="text" class="" id="input-no-path-selected" name="noPathSelected"
                 value="" style="opacity: 0; border: none; height: 0; width: 0;">
                 <input required onchange="showImagePreview(event), handleFileSelection(event)" type="file" value="{{ old('image_path') }}" class="form-control @error('image_path') is-invalid @enderror" id="file_input" name="image_path">
