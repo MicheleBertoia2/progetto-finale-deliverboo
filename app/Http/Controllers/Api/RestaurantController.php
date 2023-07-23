@@ -28,21 +28,35 @@ class RestaurantController extends Controller
 
 
 
-    public function restaurantTypesSearch(Request $request)
+    public function restaurantTypesSearch()
     {
         $restaurants = Restaurant::with('types')->get();
 
         return response()->json(compact('restaurants'));
     }
-    public function getRestaurantDetail ($slug){
-        $restaurants = Restaurant::where('slug', $slug)->with('types','dishes')->first();
 
-        if($restaurants->image) $restaurants->image = asset('storage/' . $restaurants->image) ;
-        else{
-            $restaurants->image = asset('storage/uploads/placeholder-img.png');
+    public function getRestaurantDetail ($slug){
+        // $restaurants = Restaurant::where('slug', $slug)->with('types','dishes')->first();
+
+        // if($restaurants->image) $restaurants->image = asset('storage/' . $restaurants->image) ;
+        // else{
+        //     $restaurants->image = asset('storage/uploads/placeholder-img.png');
+        // }
+
+        // return response()->json($restaurants);
+        $restaurant = Restaurant::where('slug', $slug)->with('types', 'dishes')->first();
+
+        if (!$restaurant) {
+            return response()->json(['error' => 'Ristorante non trovato'], 404);
         }
 
-        return response()->json($restaurants);
+        if ($restaurant->image) {
+            $restaurant->image = asset('storage/' . $restaurant->image);
+        } else {
+            $restaurant->image = asset('storage/uploads/placeholder-img.png');
+        }
+
+    return response()->json($restaurant);
 }
 
     /**

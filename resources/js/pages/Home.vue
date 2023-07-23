@@ -42,30 +42,17 @@ export default {
             store.loaded = false;
             axios.get(endpoint)
                 .then(res => {
-                    console.log(res.data,);
 
                     this.restaurants = res.data.restaurants;
                     this.resTypes = res.data.types;
-                    console.log(res.data.restaurants);
                     store.loaded = true;
                 })
 
             },
 
-        getRestaurantsType($slug){
-            store.loaded = false;
-            axios.get(store.apiUrl + 'restaurants/type/' + $slug)
-                .then(res => {
-                    this.restaurants = res.data.restaurants;
-                    this.title = 'Risultati per tipo: ' + $slug;
 
-                    store.loaded = true;
-
-                })
-
-        },
         eseguiRicerca() {
-
+            console.log(this.typeSelected);
 
             axios.get(store.apiUrl + 'restaurants/typesearch')
             .then(response => {
@@ -79,7 +66,7 @@ export default {
                     return ristorante.types.some(type => this.typeSelected.includes(type.id));
                 });
                 this.title = 'risultati';
-                console.log(this.restaurants);
+
 
                 store.loaded = true;
             })
