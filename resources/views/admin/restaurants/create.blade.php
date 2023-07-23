@@ -44,7 +44,7 @@
                 <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt="img">
             </div>
             {{-- * il button deve essere type="button" oppure diverrà automaticamnete type="submit" --}}
-            <button type="button" class="btn btn-danger ms-1 " id="deleteButton" onclick="deleteImage()" style="width: 50px; height: 50px;"><span class="fa-solid fa-trash"></span><input id="inputDeleteImage" type="text" value="empty" name="noImage" style="opacity: 0; border: none; height: 0; width: 0;"></button>
+            <button type="button" class="btn btn-danger ms-1 d-none" id="deleteButton" onclick="deleteImage()" style="width: 50px; height: 50px;"><span class="fa-solid fa-trash"></span><input id="inputDeleteImage" type="text" value="empty" name="noImage" style="opacity: 0; border: none; height: 0; width: 0;"></button>
         </div>
         <div class="mb-3">
             <label for="address" class="form-label">Indirizzo</label>
