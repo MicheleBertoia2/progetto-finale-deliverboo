@@ -19,7 +19,7 @@ export default {
             resTypes : [],
             typeSelected : [],
             showModal: false,
-            cartItems: [], //  dati del carrello caricati dal localStorage
+
             itemProva : {
                 id : 5,
                 name : 'ravioli',
@@ -88,37 +88,7 @@ export default {
             });
         },
 
-        addToCart(item) {
 
-
-
-            // Cerca se l'elemento è già presente nel carrello
-            const existingItem = this.cartItems.find(cartItem => cartItem.id === item.id);
-
-            if (existingItem) {
-                // Se l'elemento è già presente, aumenta la quantità
-                existingItem.quantity++;
-            } else {
-                // Altrimenti aggiungi l'elemento al carrello
-                this.cartItems.push({ ...item, quantity: 1 });
-            }
-
-            // Salva il carrello aggiornato nel localStorage
-            this.saveCartToLocalStorage();
-        },
-
-        removeFromCart(itemId) {
-            // Rimuovi l'elemento dal carrello
-            this.cartItems = this.cartItems.filter(item => item.id !== itemId);
-
-            // Salva il carrello aggiornato nel localStorage
-            this.saveCartToLocalStorage();
-        },
-
-        saveCartToLocalStorage() {
-        // Salva il carrello nel localStorage come stringa JSON
-        localStorage.setItem('cart', JSON.stringify(this.cartItems));
-        },
 
     },
 
@@ -127,7 +97,7 @@ export default {
         // Carica il carrello salvato nel localStorage al momento del caricamento della pagina
         const savedCart = localStorage.getItem('cart');
         if (savedCart) {
-            this.cartItems = JSON.parse(savedCart);
+            store.cartItems = JSON.parse(savedCart);
             }
     }
 }
@@ -140,7 +110,8 @@ export default {
     </div>
 
     <!-- BOTTONE DI PROVA PER AGGIUNGERE ELEMENTI AL CARRELLO -->
-    <button class="btn btn-success" @click="addToCart(this.itemProva)">prova aggiunta elementi</button>
+    <button class="btn btn-success" @click="store.addToCart(this.itemProva)">prova aggiunta elementi</button>
+    <button class="btn btn-danger" @click="store.removeFromCart(this.itemProva.id)">prova svuotamento elementi</button>
 
     <div class="container-inner ">
 
@@ -181,10 +152,10 @@ export default {
         </div>
     </div>
 
-    <Cart :modalOpen="showModal" :cartItems="cartItems" @close="showModal = false" />
+    <Cart :modalOpen="showModal" :cartItems="store.cartItems" @close="showModal = false" />
 
         <!-- Bottone che apre il modal solo se nel carrello è presente almeno un elemento -->
-    <button class="btn btn-primary btn-cart" v-if="cartItems.length  > 0 " @click="showModal = true">Apri Modal</button>
+    <button class="btn btn-primary btn-cart" v-if="store.cartItems.length  > 0 " @click="showModal = true">Apri Modal</button>
     <!-- IMPORTANTE!!!!! CAMBIARE IL V-IF PERCHè ADESSO IL ! SERVE SOLO PER VEDERE IL BOTTONE -->
 
 </template>
