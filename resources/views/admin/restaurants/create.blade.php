@@ -38,6 +38,10 @@
         value="" style="opacity: 0; border: none; height: 0; width: 0;">
         <input onchange="showImagePreview(event), handleFileSelection(event)" type="file" class="form-control @error('image') is-invalid @enderror" id="file_input" name="">
 
+        {{-- stato dell'immagine mostrata --}}
+        <div class="mt-3" id="placeholderText" style="display: block;">Esempio immagine:</div>
+        <div class="mt-3" id="imgUploaded" style="display: none;">Nuova immagine da caricare:</div>
+
         <div class="d-flex align-items-end flex-wrap">
             <div>
         {{-- <img height="300px" class="mt-3 bg-white px-5" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt=""> --}}
@@ -100,6 +104,13 @@
                 const buttonDelete = document.getElementById("deleteButton");
                 buttonDelete.disabled = false;
                 buttonDelete.classList.remove('d-none');
+
+                // mostro il div con il testo "Nuova immagine da caricare:"
+                const placeholderText = document.getElementById('placeholderText');
+                const imgUploaded = document.getElementById('imgUploaded');
+
+                placeholderText.style.display = 'none';
+                imgUploaded.style.display = 'block';
             } else {
             //* se clicco sull'input file e carico un'immagine nell'input e successivamente clicco sull'input file e non carico un'immagine nell'input ma clicco "annulla" così viene caricata l'img placeholder
                 //imposto un valore che sarà uguale a quello passato al controller //* utile per quando l'immagine non è obbligatoria (cioè nullable) in questo caso l'immagine non è obbligatoria
@@ -107,10 +118,18 @@
                 fileInput.value = 'empty_input';
                 // Se non è stato selezionato un file, mostra l'immagine di placeholder
                 previewImage.src = "{{ Vite::asset('resources/img/placeholder-img.png') }}";
+
                 // Disabilito il button
                 const buttonDelete = document.getElementById("deleteButton");
                 buttonDelete.disabled = true;
                 buttonDelete.classList.add('d-none');
+
+                // mostro il div con il testo "Esempio immagine: placeholder-img.png"
+                const placeholderText = document.getElementById('placeholderText');
+                const imgUploaded = document.getElementById('imgUploaded');
+
+                placeholderText.style.display = 'block';
+                imgUploaded.style.display = 'none';
             }
         }
 
@@ -150,6 +169,13 @@
             const buttonDelete = document.getElementById("deleteButton");
             buttonDelete.disabled = true;
             buttonDelete.classList.add('d-none');
+
+            // mostro il div con il testo "Esempio immagine: placeholder-img.png"
+            const placeholderText = document.getElementById('placeholderText');
+            const imgUploaded = document.getElementById('imgUploaded');
+
+            placeholderText.style.display = 'block';
+            imgUploaded.style.display = 'none';
         }
 </script>
 
