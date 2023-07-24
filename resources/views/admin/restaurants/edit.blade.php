@@ -51,6 +51,17 @@
                     value="{{ old('image', $restaurant?->image) }}">
                 {{-- <img height="300px" class="mt-3 bg-white px-5" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt=""> --}}
                 {{-- <img class="w-25 mt-3 bg-white {{ $restaurant->image ? '' : 'px-5'}}" id="prev-img" src="{{ $restaurant->image ? asset('storage/' . $restaurant->image) : Vite::asset('resources\img\placeholder-img.png') }}" alt="{{ $restaurant->image == false ? "Nessuna immagine" : $restaurant->name }}"> --}}
+                {{-- stato dell'immagine mostrata --}}
+                @if (str_contains($restaurant->image, 'http://') || str_contains($restaurant->image, 'https://'))
+                    <div class="mt-3" id="oldImg">Immagine caricata in precedenza:</div>
+                @elseif(str_contains($restaurant->image, "resources/img/placeholder-img.png" ))
+                    <div class="mt-3" id="placeholderText">Esempio immagine:</div>
+                @else
+                    <div class="mt-3" id="oldImg">Immagine caricata in precedenza:</div>
+                @endif
+                <div class="mt-3" id="placeholderText" style="display: none;">Esempio immagine:</div>
+                <div class="mt-3" id="imgUploaded" style="display: none;">Nuova immagine da caricare:</div>
+
                 <div class="d-flex align-items-end flex-wrap">
                     <div>
                         @if (str_contains($restaurant->image, 'http://') || str_contains($restaurant->image, 'https://'))
@@ -66,7 +77,7 @@
                         @endif
                     </div>
                     {{-- * il button deve essere type="button" oppure diverrà automaticamnete type="submit" --}}
-                    <button type="button" class="btn btn-danger ms-1 {{ str_contains($restaurant->image, 'resources/img/placeholder-img.png') ? 'd-none' : '' }}" id="deleteButton" onclick="deleteImage()" style="width: 50px; height: 50px;"><span class="fa-solid fa-trash"></span><input id="inputDeleteImage" type="text" value="empty" name="noImage" style="opacity: 0; border: none; height: 0; width: 0;"></button>
+                    <button type="button" class="btn btn-danger ms-3 {{ str_contains($restaurant->image, 'resources/img/placeholder-img.png') ? 'd-none' : '' }}" id="deleteButton" onclick="deleteImage()" style="width: 50px; height: 50px;"><span class="fa-solid fa-trash"></span><input id="inputDeleteImage" type="text" value="empty" name="noImage" style="opacity: 0; border: none; height: 0; width: 0;"></button>
                 </div>
             </div>
             <div class="mb-3">
@@ -127,6 +138,15 @@
                 const buttonDelete = document.getElementById("deleteButton");
                 buttonDelete.disabled = false;
                 buttonDelete.classList.remove('d-none');
+
+                // mostro il div con il testo "Immagine inserita"
+                const placeholderText = document.getElementById('placeholderText');
+                const imgUploaded = document.getElementById('imgUploaded');
+                const oldImg = document.getElementById('oldImg');
+
+                oldImg.style.display = 'none';
+                placeholderText.style.display = 'none';
+                imgUploaded.style.display = 'block';
             } else {
             //* se clicco sull'input file e carico un'immagine nell'input e successivamente clicco sull'input file e non carico un'immagine nell'input ma clicco "annulla" così viene caricata l'img placeholder
                 //imposto un valore che sarà uguale a quello passato al controller //* utile per quando l'immagine non è obbligatoria (cioè nullable) in questo caso l'immagine non è obbligatoria
@@ -138,6 +158,12 @@
                 const buttonDelete = document.getElementById("deleteButton");
                 buttonDelete.disabled = true;
                 buttonDelete.classList.add('d-none');
+
+                // mostro il div con il testo "Esempio immagine: placeholder-img.png"
+                const placeholderText = document.getElementById('placeholderText');
+                const imgUploaded = document.getElementById('imgUploaded');
+                placeholderText.style.display = 'block';
+                imgUploaded.style.display = 'none';
             }
         }
 
@@ -181,7 +207,35 @@
             const buttonDelete = document.getElementById("deleteButton");
             buttonDelete.disabled = true;
             buttonDelete.classList.add('d-none');
+
+            // mostro il div con il testo "Esempio immagine: placeholder-img.png"
+            const placeholderText = document.getElementById('placeholderText');
+            const imgUploaded = document.getElementById('imgUploaded');
+            const oldImg = document.getElementById('oldImg');
+
+            oldImg.style.display = 'none';
+            placeholderText.style.display = 'block';
+            imgUploaded.style.display = 'none';
         }
+
+        function showImageName(event){
+            const placeholderText = document.getElementById('placeholderText');
+            const imgUploaded = document.getElementById('imgUploaded');
+            const oldImg = document.getElementById('oldImg');
+            const textInput = document.getElementById("text_input");
+
+            if (textInput.value.includes('placeholder-img.png')) {
+                placeholderText.style.display = 'block';
+                oldImg.style.display = 'none';
+            } else {
+                placeholderText.style.display = 'none';
+                oldImg.style.display = 'block';
+            }
+        }
+
+        // Esegue la funzione al caricamento della pagina
+        document.addEventListener('DOMContentLoaded', showImageName(event));
+
     </script>
 
 @endsection
