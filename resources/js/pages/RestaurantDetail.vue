@@ -22,7 +22,6 @@ export default {
             closingTime: '',
             hover:false,
             click: false,
-            isAdded: false,
         }
     },
 
@@ -35,7 +34,14 @@ export default {
                     //prova
                     this.restaurant.dishes.forEach(dish => {
                     dish.showDetail = false;
-                    dish.isAdded = false;
+                    const cartItem = store.cartItems.find(item => item.id === dish.id);
+                        if (cartItem) {
+                            dish.isAdded = true;
+                        } else {
+                            dish.isAdded = false;
+                        }
+
+                    dish.quantity = 1;
                     });
                 })
                 .catch(error => {
@@ -89,17 +95,32 @@ export default {
             dish.showDetail = !dish.showDetail;
             event.preventDefault();
         },
+        // prendo l'emit e faccio l'update delle variabili del piatto e del localstorage
+        updateIsAdded(removedItem) {
+        const dish = this.restaurant.dishes.find(dish => dish.id === removedItem.id);
+        if (dish) {
+            dish.isAdded = false;
+            this.store.removeFromCart(dish.id);
+            localStorage.setItem('cart', JSON.stringify(this.store.cartItems));
+        }
+        },
     },
     mounted() {
+        const savedCart = localStorage.getItem('cart');
         this.getApi();
         this.getRAndomKm();
         this.getTiming();
         this.getClosingTime();
         this.getDelivery();
-        const savedCart = localStorage.getItem('cart');
         if (savedCart) {
             store.cartItems = JSON.parse(savedCart);
-            }
+            // controllo i piatti per cambiare quelli che sono nel carrello
+
+
+
+
+        }
+
     }
 }
 </script>
@@ -168,7 +189,7 @@ export default {
     </div>
 
     <!-- CARRELLO-->
-    <Cart :modalOpen="store.showModal" :cartItems="store.cartItems" @close="store.showModal = false" />
+    <Cart :modalOpen="store.showModal" :cartItems="store.cartItems" @close="store.showModal = false" @item-removed="updateIsAdded" />
     <BtnCart />
 
 </template>
