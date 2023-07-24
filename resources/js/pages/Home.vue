@@ -6,6 +6,7 @@ import axios from 'axios';
 import Loader from '../components/Loader.vue';
 import Cart from '../components/Cart.vue';
 import { store } from '../store/store';
+import BtnCart from '../components/BtnCart.vue';
 
 
 export default {
@@ -18,13 +19,9 @@ export default {
             title : 'Ecco una selezione di ristoranti per te',
             resTypes : [],
             typeSelected : [],
-            showModal: false,
 
-            itemProva : {
-                id : 5,
-                name : 'ravioli',
-                quantity : 1
-            }
+
+
         }
     },
 
@@ -33,6 +30,7 @@ export default {
         Loader,
         Slider,
         Cart,
+        BtnCart,
 
     },
 
@@ -96,9 +94,7 @@ export default {
             <img src="img/jumbo.jpg" alt="jumbotron">
     </div>
 
-    <!-- BOTTONE DI PROVA PER AGGIUNGERE ELEMENTI AL CARRELLO -->
-    <button class="btn btn-success" @click="store.addToCart(this.itemProva)">prova aggiunta elementi</button>
-    <button class="btn btn-danger" @click="store.removeFromCart(this.itemProva.id)">prova svuotamento elementi</button>
+
 
     <div class="container-inner ">
 
@@ -139,11 +135,9 @@ export default {
         </div>
     </div>
 
-    <Cart :modalOpen="showModal" :cartItems="store.cartItems" @close="showModal = false" />
+    <Cart :modalOpen="store.showModal" :cartItems="store.cartItems" @close="store.showModal = false" />
 
-        <!-- Bottone che apre il modal solo se nel carrello è presente almeno un elemento -->
-    <button class="btn btn-primary btn-cart" v-if="store.cartItems.length  > 0 " @click="showModal = true">Apri Modal</button>
-    <!-- IMPORTANTE!!!!! CAMBIARE IL V-IF PERCHè ADESSO IL ! SERVE SOLO PER VEDERE IL BOTTONE -->
+    <BtnCart/>
 
 </template>
 
@@ -196,12 +190,5 @@ ul{
     width: 100%;
 }
 
-.btn-cart{
-    position: fixed;
-    right: 100px;
-    bottom: 100px;
-    z-index: 5;
-
-}
 
 </style>

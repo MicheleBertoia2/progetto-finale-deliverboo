@@ -38,6 +38,7 @@ class RestaurantController extends Controller
     public function getRestaurantDetail ($slug){
         $restaurants = Restaurant::where('slug', $slug)->with('types','dishes')->first();
 
+
         if((str_contains($restaurants->image, 'http://') || str_contains($restaurants->image, 'https://'))){
             $restaurants->image;
         }else if(str_contains($restaurants->image, "resources/img/placeholder-img.png" ) || $restaurants->image == null){
@@ -47,7 +48,8 @@ class RestaurantController extends Controller
             $restaurants->image = asset('storage/' . $restaurants->image);
         }
 
-        return response()->json($restaurants);
+    return response()->json($restaurants);
+
 }
 
     /**
