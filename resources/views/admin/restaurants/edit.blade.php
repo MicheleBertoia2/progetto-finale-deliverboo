@@ -139,7 +139,7 @@
                 buttonDelete.disabled = false;
                 buttonDelete.classList.remove('d-none');
 
-                // mostro il div con il testo "Immagine inserita"
+                // mostro il div con il testo "Nuova immagine da caricare:"
                 const placeholderText = document.getElementById('placeholderText');
                 const imgUploaded = document.getElementById('imgUploaded');
                 const oldImg = document.getElementById('oldImg');
