@@ -13,9 +13,9 @@
                     <h4>{{ item.name }}</h4>
                     <p>{{ item.description }}</p>
                     <div class="quantity-interface d-flex">
-                        <div><i class="fa-solid fa-minus" @click="modifyQuantity(item,false)"></i></div>
+                        <div><i class="fa-solid fa-minus" @click="store.modifyQuantity(item,false)"></i></div>
                         <div>{{ item.quantity }}</div>
-                        <div><i class="fa-solid fa-plus" @click="modifyQuantity(item,true)"></i></div>
+                        <div><i class="fa-solid fa-plus" @click="store.modifyQuantity(item,true)"></i></div>
                         <div><i class="fa-solid fa-close" @click="removeFromCartAndEmit(item.id),item.isAdded = false"></i></div>
                     </div>
                 </div>
@@ -51,13 +51,7 @@
         this.$emit("close");
       },
 
-      modifyQuantity(item,bool){
-        if (item.quantity > 1 && bool == false) {
-            item.quantity --;
-        } else if (bool == true){
-            item.quantity ++;
-        }
-      },
+
 
       removeFromCartAndEmit(itemId){
         this.store.removeFromCart(itemId)

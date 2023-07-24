@@ -25,6 +25,15 @@ export default {
         }
     },
 
+    computed:{
+        cartQuantity() {
+            return function (dish) {
+            const cartItemToShow = this.store.cartItems.find(cartItem => cartItem.id === dish.id);
+            return cartItemToShow ? cartItemToShow.quantity : 0;
+            };
+        },
+    },
+
     methods: {
         getApi() {
             axios.get(store.apiUrl + 'restaurants/' + this.$route.params.slug)
@@ -37,11 +46,12 @@ export default {
                     const cartItem = store.cartItems.find(item => item.id === dish.id);
                         if (cartItem) {
                             dish.isAdded = true;
+                            dish.quantity = cartItem.quantity;
                         } else {
                             dish.isAdded = false;
+                            dish.quantity = 1;
                         }
 
-                    dish.quantity = 1;
                     });
                 })
                 .catch(error => {
@@ -172,7 +182,13 @@ export default {
                             <p class="card-text">{{ dish.ingredients }}</p>
                             <a href="#" @click="clickingtrue(dish)" class="btn mybadge">Dettaglio Prodotto</a>
                             <button class="btn btn-dark ms-3" @click="store.addToCart(dish),dish.isAdded=true" v-if="!dish.isAdded"><i class="fa-solid fa-cart-shopping"></i></button>
-                            <button v-else class="btn btn-dark ms-3"  @click="dish.isAdded=false, store.removeFromCart(dish.id)"><i class="fa-solid fa-check"></i></button>
+
+                            <div v-else class="quantity-interface d-flex">
+                                <div><i class="fa-solid fa-minus" @click="store.modifyQuantity(dish,false)"></i></div>
+                                <div>{{ cartQuantity(dish) }}</div>
+                                <div><i class="fa-solid fa-plus" @click="store.modifyQuantity(dish,true)"></i></div>
+                                <div><i class="fa-solid fa-close" @click="dish.isAdded=false, store.removeFromCart(dish.id)"></i></div>
+                            </div>
                         </div>
                     </div>
                 <span :class="{'hidden': !dish.showDetail, 'back': dish.showDetail}"

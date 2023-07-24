@@ -40,5 +40,15 @@ export const store = reactive({
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
     },
 
+    modifyQuantity(item,bool){
+        const cartItemToChange = this.cartItems.find(cartItem => cartItem.id === item.id)
+        if (cartItemToChange.quantity > 1 && bool == false) {
+            cartItemToChange.quantity --;
+        } else if (bool == true){
+            cartItemToChange.quantity ++;
+        }
+        this.saveCartToLocalStorage();
+      },
+
 
 });
