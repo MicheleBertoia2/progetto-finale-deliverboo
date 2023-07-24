@@ -49,7 +49,7 @@ class RestaurantController extends Controller
         if (!$restaurant) {
             return response()->json(['error' => 'Ristorante non trovato'], 404);
         }
-
+      
         if ($restaurant->image) {
             $restaurant->image = asset('storage/' . $restaurant->image);
         } else {
