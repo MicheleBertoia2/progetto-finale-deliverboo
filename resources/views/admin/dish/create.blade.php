@@ -38,7 +38,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="price" class="form-label">Prezzo*</label>
+                <label for="price" class="form-label">Prezzo* (valuta in €)</label>
                 <input id="price" required minlength="1" pattern="[0-9.]*" class="form-control @error('price') is-invalid @enderror" name="price"
                     type="text" value="{{ old('price') }}" placeholder="Esempio: 5.00">
                 @error('price')

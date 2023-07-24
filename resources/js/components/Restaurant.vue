@@ -21,8 +21,9 @@ export default {
 
         </router-link>
             <div class="info">
-                <p><i class="fa-solid fa-star"></i></p>
-                <p><i class="fa-solid fa-truck"></i></p>
+                <!-- <p><i class="fa-solid fa-star"></i></p> -->
+                <!-- icona camion -->
+                <!-- <p><i class="fa-solid fa-truck"></i></p> -->
                 <!-- <p>{{restaurant.slug}} questo é lo slug</p> -->
             </div>
     </div>
@@ -34,7 +35,7 @@ export default {
 <style lang="scss" scoped>
 .restaurant{
         margin: 15px;
-        border-radius: 10%;
+        border-radius: 10px;
         background-color: white;
         max-width: 450px;
         flex: 1 0 380px;
@@ -82,8 +83,9 @@ export default {
                 }
             }
         .bg-restaurant{
-            border-top-left-radius: 10%;
-            border-top-right-radius: 10%;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            // border-radius: 10px;
             background:
                 linear-gradient(
                 rgba(0, 0, 0, 0.3),

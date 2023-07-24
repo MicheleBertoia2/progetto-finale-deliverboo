@@ -22,13 +22,13 @@ export default {
                 <div class="collapse navbar-collapse " id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <router-link :to="{ name: 'home' }" class="nav-link">home</router-link>
+                            <router-link :to="{ name: 'home' }" class="nav-link">Home</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link :to="{ name: 'about' }" class="nav-link">chi siamo</router-link>
+                            <router-link :to="{ name: 'about' }" class="nav-link">Chi siamo</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link :to="{ name: 'contacts' }" class="nav-link">contatti</router-link>
+                            <router-link :to="{ name: 'contacts' }" class="nav-link">Contatti</router-link>
                         </li>
 
                     </ul>
@@ -39,7 +39,7 @@ export default {
                         <li class="nav-item">
                             <a class="nav-link">Login</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mt-1">
                             <i class="fa-solid fa-cart-shopping nav-link"></i>
                         </li>
                     </ul>
