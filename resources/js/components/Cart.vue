@@ -8,7 +8,7 @@
           <ul v-if="store.cartItems.length > 0">
             <li v-for="(item, index) in cartItems" :key="index" class="d-flex">
                 <div class="imagebox">
-                    <img :src="item.image_path" :alt="item.name">
+                    <img :src="store.getFullImageUrl(item.image_path)" :alt="item.name">
                 </div>
                 <div class="info">
                     <h4>{{ item.name }}</h4>

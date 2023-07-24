@@ -179,6 +179,8 @@ export default {
                     <div class="d-flex dish" :class="{'hidden': dish.showDetail}">
                         <img v-if="dish.image_path.includes('http://') || dish.image_path.includes('https://')" :src="dish.image_path" class="card-img-top" alt="...">
                         <img v-else :src="getImageUrl(dish.image_path)" class="card-img-top" alt="...">
+                        <!-- a me  questa sotto  funziona -->
+                        <!-- <img :src="store.getFullImageUrl(dish.image_path)" class="card-img-top" alt="..."> -->
                         <div class="card-body">
                             <h5 class="card-title">{{ dish.name }}</h5>
                             <p class="card-text">{{ dish.ingredients }}</p>

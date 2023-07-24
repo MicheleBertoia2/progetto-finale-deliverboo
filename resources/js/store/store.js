@@ -10,7 +10,7 @@ export const store = reactive({
 
     showModal: false,
 
-
+    // FUNZIONI PER IL CARRELLO
     addToCart(item) {
 
         const restaurantId = item.restaurant_id;
@@ -64,7 +64,18 @@ export const store = reactive({
         this.cartItems = [];
         this.saveCartToLocalStorage();
 
-    }
+    },
+    // FINE  FUNZIONI PER  IL CARRELLO
+
+    getFullImageUrl(imagePath) {
+        if (imagePath.startsWith('/storage/uploads/http')) {
+          // Se l'immagine è salvata nel disco di archiviazione di Laravel
+          return imagePath.replace('/storage/uploads/', '');
+        } else {
+          // Altrimenti, l'immagine è un URL completo
+          return imagePath;
+        }
+      },
 
 
 });
