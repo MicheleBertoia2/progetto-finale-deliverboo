@@ -74,7 +74,7 @@
                     {{-- stato dell'immagine mostrata --}}
                     <div class="mt-3" id="oldImg" style="display: none;">Immagine caricata in precedenza:</div>
                     <div class="mt-3" id="placeholderText" style="display: none;">Esempio immagine:</div>
-                    <div class="mt-3" id="imgUploaded" style="display: none;">Immagine inserita:</div>
+                    <div class="mt-3" id="imgUploaded" style="display: none;">Nuova immagine da caricare:</div>
 
                 <div class="d-flex align-items-end">
                     <div>

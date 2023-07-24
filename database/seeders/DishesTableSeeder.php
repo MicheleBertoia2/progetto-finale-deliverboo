@@ -29,13 +29,6 @@ class DishesTableSeeder extends Seeder
             $dish->slug  = Dish::generateSlug($dish->name);
             //* per le immagini prese dall'API
             $dish->image_path = $food->strMealThumb;
-            // oppure se c'è bisogno di un controllo
-            // if(strpos($food->strMealThumb, 'https://') || strpos($food->strMealThumb, 'http://')){
-                // per le immagini prese dall'API
-                //     $dish->image_path = $food->strMealThumb;
-            // }
-            // prima
-            //     $dish->image_path = Storage::url('uploads/'. $food->strMealThumb);
             $dish->price  = rand(1,40) + (rand(0,100)/100);
 
             $dish->ingredients = $food->strIngredient1 . ', ' . $food->strIngredient2  . ', ' . $food->strIngredient3 . ', ' . $food->strIngredient4 ;
