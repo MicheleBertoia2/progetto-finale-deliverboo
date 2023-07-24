@@ -12,19 +12,25 @@ export const store = reactive({
 
     addToCart(item) {
 
-        // Cerca se l'elemento è già presente nel carrello
-        const existingItem = this.cartItems.find(cartItem => cartItem.id === item.id);
+        const restaurantId = item.restaurant_id; // Assumendo che ci sia un identificatore univoco per ogni ristorante (es. "restaurantId" nella tua struttura dati)
+        const isCartEmpty = this.cartItems.length === 0;
 
-        if (existingItem) {
-            // Se l'elemento è già presente, aumenta la quantità
+        if (isCartEmpty || this.cartItems.every(cartItem => cartItem.restaurantId === restaurantId)) {
+            const existingItem = this.cartItems.find(cartItem => cartItem.id === item.id);
+
+            if (existingItem) {
             existingItem.quantity++;
-        } else {
-            // Altrimenti aggiungi l'elemento al carrello
+            } else {
             this.cartItems.push({ ...item, quantity: 1 });
-        }
+            }
 
-        // Salva il carrello aggiornato nel localStorage
-        this.saveCartToLocalStorage();
+            this.saveCartToLocalStorage();
+        } else {
+            // Mostra un messaggio di errore o svuota il carrello
+
+
+            alert('Puoi ordinare piatti solo da un unico ristorante');
+        }
     },
 
     removeFromCart(itemId) {
