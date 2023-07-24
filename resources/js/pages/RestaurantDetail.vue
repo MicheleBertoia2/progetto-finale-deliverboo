@@ -22,8 +22,10 @@ export default {
             closingTime: '',
             hover:false,
             click: false,
+            isAdded: false,
         }
     },
+
     methods: {
         getApi() {
             axios.get(store.apiUrl + 'restaurants/' + this.$route.params.slug)
@@ -33,6 +35,7 @@ export default {
                     //prova
                     this.restaurant.dishes.forEach(dish => {
                     dish.showDetail = false;
+                    dish.isAdded = false;
                     });
                 })
                 .catch(error => {
@@ -147,7 +150,8 @@ export default {
                             <h5 class="card-title">{{ dish.name }}</h5>
                             <p class="card-text">{{ dish.ingredients }}</p>
                             <a href="#" @click="clickingtrue(dish)" class="btn mybadge">Dettaglio Prodotto</a>
-                            <button class="btn btn-dark ms-3" @click="store.addToCart(dish)"><i class="fa-solid fa-cart-shopping"></i></button>
+                            <button class="btn btn-dark ms-3" @click="store.addToCart(dish),dish.isAdded=true" v-if="!dish.isAdded"><i class="fa-solid fa-cart-shopping"></i></button>
+                            <button v-else class="btn btn-dark ms-3"  @click="dish.isAdded=false, store.removeFromCart(dish.id)"><i class="fa-solid fa-check"></i></button>
                         </div>
                     </div>
                 <span :class="{'hidden': !dish.showDetail, 'back': dish.showDetail}"

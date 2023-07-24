@@ -21,11 +21,7 @@ export default {
             typeSelected : [],
 
 
-            itemProva : {
-                id : 5,
-                name : 'ravioli',
-                quantity : 1
-            }
+
         }
     },
 
@@ -98,9 +94,7 @@ export default {
             <img src="img/jumbo.jpg" alt="jumbotron">
     </div>
 
-    <!-- BOTTONE DI PROVA PER AGGIUNGERE ELEMENTI AL CARRELLO -->
-    <button class="btn btn-success" @click="store.addToCart(this.itemProva)">prova aggiunta elementi</button>
-    <button class="btn btn-danger" @click="store.removeFromCart(this.itemProva.id)">prova svuotamento elementi</button>
+
 
     <div class="container-inner ">
 
