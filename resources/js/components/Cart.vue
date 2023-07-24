@@ -14,10 +14,10 @@
                     <h4>{{ item.name }}</h4>
                     <p>{{ item.description }}</p>
                     <div class="quantity-interface d-flex">
-                        <div class="btn btn-secondary"><i class="fa-solid fa-minus" @click="store.modifyQuantity(item,false)"></i></div>
+                        <div class="btn btn-secondary" @click="store.modifyQuantity(item,false)"><i class="fa-solid fa-minus"></i></div>
                         <div class="text-center px-3 py-1 border border-black">{{ item.quantity }}</div>
-                        <div class="btn btn-secondary"><i class="fa-solid fa-plus" @click="store.modifyQuantity(item,true)"></i></div>
-                        <div class="btn btn-danger"><i class="fa-solid fa-close" @click="removeFromCartAndEmit(item.id),item.isAdded = false"></i></div>
+                        <div class="btn btn-secondary" @click="store.modifyQuantity(item,true)"><i class="fa-solid fa-plus" ></i></div>
+                        <div class="btn btn-danger" @click="removeFromCartAndEmit(item.id),item.isAdded = false"><i class="fa-solid fa-close" ></i></div>
                     </div>
                 </div>
 

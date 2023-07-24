@@ -46,7 +46,7 @@ class RestaurantController extends Controller
         }
         else{
             $restaurants->image = asset('storage/' . $restaurants->image);
-
+        }
 
     return response()->json($restaurants);
 

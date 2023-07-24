@@ -186,10 +186,10 @@ export default {
                             <button  class="btn btn-dark ms-3" @click="store.addToCart(dish),dish.isAdded=true" v-if="!dish.isAdded && isAllItemsFromCurrentRestaurant"><i class="fa-solid fa-cart-shopping"></i></button>
 
                             <div v-else-if="dish.isAdded" class="quantity-interface d-flex">
-                                <div class="btn btn-secondary"><i class="fa-solid fa-minus" @click="store.modifyQuantity(dish,false)"></i></div>
+                                <div class="btn btn-secondary" @click="store.modifyQuantity(dish,false)"><i class="fa-solid fa-minus" ></i></div>
                                 <div >{{ cartQuantity(dish) }}</div>
-                                <div class="btn btn-secondary"><i class="fa-solid fa-plus" @click="store.modifyQuantity(dish,true)"></i></div>
-                                <div class="btn btn-danger"><i class="fa-solid fa-close" @click="dish.isAdded=false, store.removeFromCart(dish.id)"></i></div>
+                                <div class="btn btn-secondary" @click="store.modifyQuantity(dish,true)"><i class="fa-solid fa-plus" ></i></div>
+                                <div class="btn btn-danger"  @click="dish.isAdded=false, store.removeFromCart(dish.id)"><i class="fa-solid fa-close" ></i></div>
                             </div>
 
                             <div v-else class="bg-tertiary">Puoi ordinare solo da un ristorante</div>
