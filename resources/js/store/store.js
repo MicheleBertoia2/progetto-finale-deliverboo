@@ -7,15 +7,17 @@ export const store = reactive({
     loaded: false,
 
     cartItems: [],
+
     showModal: false,
 
 
     addToCart(item) {
 
-        const restaurantId = item.restaurant_id; // Assumendo che ci sia un identificatore univoco per ogni ristorante (es. "restaurantId" nella tua struttura dati)
+        const restaurantId = item.restaurant_id;
+
         const isCartEmpty = this.cartItems.length === 0;
 
-        if (isCartEmpty || this.cartItems.every(cartItem => cartItem.restaurantId === restaurantId)) {
+        if (isCartEmpty || this.cartItems.every(cartItem => cartItem.restaurant_id === restaurantId)) {
             const existingItem = this.cartItems.find(cartItem => cartItem.id === item.id);
 
             if (existingItem) {
@@ -37,6 +39,8 @@ export const store = reactive({
         // Rimuovi l'elemento dal carrello
         this.cartItems = this.cartItems.filter(item => item.id !== itemId);
 
+
+
         // Salva il carrello aggiornato nel localStorage
         this.saveCartToLocalStorage();
     },
@@ -54,7 +58,13 @@ export const store = reactive({
             cartItemToChange.quantity ++;
         }
         this.saveCartToLocalStorage();
-      },
+    },
+
+    emptyCart(){
+        this.cartItems = [];
+        this.saveCartToLocalStorage();
+
+    }
 
 
 });

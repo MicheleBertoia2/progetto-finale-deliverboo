@@ -32,6 +32,13 @@ export default {
             return cartItemToShow ? cartItemToShow.quantity : 0;
             };
         },
+
+        isAllItemsFromCurrentRestaurant() {
+            if (this.store.cartItems.length === 0) {
+                return true; // Consideriamo il carrello vuoto come "tutti gli elementi del ristorante corrente"
+            }
+            return this.store.cartItems.every(item => item.restaurant_id === this.restaurant.id);
+        }
     },
 
     methods: {
@@ -124,9 +131,6 @@ export default {
         this.getDelivery();
         if (savedCart) {
             store.cartItems = JSON.parse(savedCart);
-            // controllo i piatti per cambiare quelli che sono nel carrello
-
-
 
 
         }
@@ -181,14 +185,16 @@ export default {
                             <h5 class="card-title">{{ dish.name }}</h5>
                             <p class="card-text">{{ dish.ingredients }}</p>
                             <a href="#" @click="clickingtrue(dish)" class="btn mybadge">Dettaglio Prodotto</a>
-                            <button class="btn btn-dark ms-3" @click="store.addToCart(dish),dish.isAdded=true" v-if="!dish.isAdded"><i class="fa-solid fa-cart-shopping"></i></button>
+                            <button  class="btn btn-dark ms-3" @click="store.addToCart(dish),dish.isAdded=true" v-if="!dish.isAdded && isAllItemsFromCurrentRestaurant"><i class="fa-solid fa-cart-shopping"></i></button>
 
-                            <div v-else class="quantity-interface d-flex">
-                                <div><i class="fa-solid fa-minus" @click="store.modifyQuantity(dish,false)"></i></div>
-                                <div>{{ cartQuantity(dish) }}</div>
-                                <div><i class="fa-solid fa-plus" @click="store.modifyQuantity(dish,true)"></i></div>
-                                <div><i class="fa-solid fa-close" @click="dish.isAdded=false, store.removeFromCart(dish.id)"></i></div>
+                            <div v-else-if="dish.isAdded" class="quantity-interface d-flex">
+                                <div class="btn btn-secondary"><i class="fa-solid fa-minus" @click="store.modifyQuantity(dish,false)"></i></div>
+                                <div >{{ cartQuantity(dish) }}</div>
+                                <div class="btn btn-secondary"><i class="fa-solid fa-plus" @click="store.modifyQuantity(dish,true)"></i></div>
+                                <div class="btn btn-danger"><i class="fa-solid fa-close" @click="dish.isAdded=false, store.removeFromCart(dish.id)"></i></div>
                             </div>
+
+                            <div v-else class="bg-tertiary">Puoi ordinare solo da un ristorante</div>
                         </div>
                     </div>
                 <span :class="{'hidden': !dish.showDetail, 'back': dish.showDetail}"

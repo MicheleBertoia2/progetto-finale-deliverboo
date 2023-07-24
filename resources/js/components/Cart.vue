@@ -4,7 +4,8 @@
         <div class="mb-modal">
           <!-- Contenuto del modal, ad esempio il carrello -->
           <h2>Carrello</h2>
-          <ul>
+          <div class="btn btn-danger" @click="this.store.emptyCart()">Svuota Carrello</div>
+          <ul v-if="store.cartItems.length > 0">
             <li v-for="(item, index) in cartItems" :key="index" class="d-flex">
                 <div class="imagebox">
                     <img :src="item.image_path" :alt="item.name">
@@ -13,15 +14,16 @@
                     <h4>{{ item.name }}</h4>
                     <p>{{ item.description }}</p>
                     <div class="quantity-interface d-flex">
-                        <div><i class="fa-solid fa-minus" @click="store.modifyQuantity(item,false)"></i></div>
-                        <div>{{ item.quantity }}</div>
-                        <div><i class="fa-solid fa-plus" @click="store.modifyQuantity(item,true)"></i></div>
-                        <div><i class="fa-solid fa-close" @click="removeFromCartAndEmit(item.id),item.isAdded = false"></i></div>
+                        <div class="btn btn-secondary"><i class="fa-solid fa-minus" @click="store.modifyQuantity(item,false)"></i></div>
+                        <div class="text-center px-3 py-1 border border-black">{{ item.quantity }}</div>
+                        <div class="btn btn-secondary"><i class="fa-solid fa-plus" @click="store.modifyQuantity(item,true)"></i></div>
+                        <div class="btn btn-danger"><i class="fa-solid fa-close" @click="removeFromCartAndEmit(item.id),item.isAdded = false"></i></div>
                     </div>
                 </div>
 
             </li>
           </ul>
+          <div v-else><p>Non ci sono elementi nel carrello!</p></div>
           <div class="mb-btn-close" @click="closeModal"><i class="fa-solid fa-close"></i></div>
         </div>
       </div>

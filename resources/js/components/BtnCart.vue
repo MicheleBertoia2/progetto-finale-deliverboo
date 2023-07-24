@@ -11,9 +11,9 @@ export default {
 </script>
 
 <template>
-  <div class="btn-cart">
+  <div v-if="store.cartItems.length  > 0 " class="btn-cart">
         <div class="number">{{ store.cartItems.length }}</div>
-        <button class="btn btn-primary" v-if="store.cartItems.length  > 0 " @click="store.showModal = true"><i class="fa-solid fa-cart-shopping"></i></button>
+        <button class="btn btn-primary"  @click="store.showModal = true"><i class="fa-solid fa-cart-shopping"></i></button>
     </div>
 </template>
 
