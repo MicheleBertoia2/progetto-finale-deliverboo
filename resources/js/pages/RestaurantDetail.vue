@@ -1,12 +1,15 @@
 <script>
 import axios from 'axios';
 import { store } from '../store/store';
+import Cart  from  '../components/Cart.vue';
+import BtnCart from '../components/BtnCart.vue';
 
 
 export default {
     name: 'RestaurantDetail',
     components: {
-
+        Cart,
+        BtnCart,
     },
 
     data() {
@@ -21,6 +24,23 @@ export default {
             click: false,
         }
     },
+
+    computed:{
+        cartQuantity() {
+            return function (dish) {
+            const cartItemToShow = this.store.cartItems.find(cartItem => cartItem.id === dish.id);
+            return cartItemToShow ? cartItemToShow.quantity : 0;
+            };
+        },
+
+        isAllItemsFromCurrentRestaurant() {
+            if (this.store.cartItems.length === 0) {
+                return true; // Consideriamo il carrello vuoto come "tutti gli elementi del ristorante corrente"
+            }
+            return this.store.cartItems.every(item => item.restaurant_id === this.restaurant.id);
+        }
+    },
+
     methods: {
         getApi() {
             axios.get(store.apiUrl + 'restaurants/' + this.$route.params.slug)
@@ -30,6 +50,15 @@ export default {
                     //prova
                     this.restaurant.dishes.forEach(dish => {
                     dish.showDetail = false;
+                    const cartItem = store.cartItems.find(item => item.id === dish.id);
+                        if (cartItem) {
+                            dish.isAdded = true;
+                            dish.quantity = cartItem.quantity;
+                        } else {
+                            dish.isAdded = false;
+                            dish.quantity = 1;
+                        }
+
                     });
                 })
                 .catch(error => {
@@ -82,13 +111,29 @@ export default {
             dish.showDetail = !dish.showDetail;
             event.preventDefault();
         },
+        // prendo l'emit e faccio l'update delle variabili del piatto e del localstorage
+        updateIsAdded(removedItem) {
+        const dish = this.restaurant.dishes.find(dish => dish.id === removedItem.id);
+        if (dish) {
+            dish.isAdded = false;
+            this.store.removeFromCart(dish.id);
+            localStorage.setItem('cart', JSON.stringify(this.store.cartItems));
+        }
+        },
     },
     mounted() {
+        const savedCart = localStorage.getItem('cart');
         this.getApi();
         this.getRAndomKm();
         this.getTiming();
         this.getClosingTime();
         this.getDelivery();
+        if (savedCart) {
+            store.cartItems = JSON.parse(savedCart);
+
+
+        }
+
     }
 }
 </script>
@@ -138,7 +183,16 @@ export default {
                             <h5 class="card-title">{{ dish.name }}</h5>
                             <p class="card-text">{{ dish.ingredients }}</p>
                             <a href="#" @click="clickingtrue(dish)" class="btn mybadge">Dettaglio Prodotto</a>
-                            <a href="#" class="btn btn-dark ms-3"><i class="fa-solid fa-cart-shopping"></i></a>
+                            <button  class="btn btn-dark ms-3" @click="store.addToCart(dish),dish.isAdded=true" v-if="!dish.isAdded && isAllItemsFromCurrentRestaurant"><i class="fa-solid fa-cart-shopping"></i></button>
+
+                            <div v-else-if="dish.isAdded" class="quantity-interface d-flex">
+                                <div class="btn btn-secondary"><i class="fa-solid fa-minus" @click="store.modifyQuantity(dish,false)"></i></div>
+                                <div >{{ cartQuantity(dish) }}</div>
+                                <div class="btn btn-secondary"><i class="fa-solid fa-plus" @click="store.modifyQuantity(dish,true)"></i></div>
+                                <div class="btn btn-danger"><i class="fa-solid fa-close" @click="dish.isAdded=false, store.removeFromCart(dish.id)"></i></div>
+                            </div>
+
+                            <div v-else class="bg-tertiary">Puoi ordinare solo da un ristorante</div>
                         </div>
                     </div>
                 <span :class="{'hidden': !dish.showDetail, 'back': dish.showDetail}"
@@ -153,6 +207,11 @@ export default {
 
         </div>
     </div>
+
+    <!-- CARRELLO-->
+    <Cart :modalOpen="store.showModal" :cartItems="store.cartItems" @close="store.showModal = false" @item-removed="updateIsAdded" />
+    <BtnCart />
+
 </template>
 
 
