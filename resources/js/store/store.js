@@ -7,6 +7,7 @@ export const store = reactive({
     loaded: false,
 
     cartItems: [],
+    showModal: false,
 
 
     addToCart(item) {

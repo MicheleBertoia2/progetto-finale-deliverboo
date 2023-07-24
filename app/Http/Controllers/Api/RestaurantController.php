@@ -36,7 +36,7 @@ class RestaurantController extends Controller
     }
 
     public function getRestaurantDetail ($slug){
-        // $restaurants = Restaurant::where('slug', $slug)->with('types','dishes')->first();
+        $restaurants = Restaurant::where('slug', $slug)->with('types','dishes')->first();
 
         // if($restaurants->image) $restaurants->image = asset('storage/' . $restaurants->image) ;
         // else{
@@ -57,7 +57,7 @@ class RestaurantController extends Controller
         if (!$restaurant) {
             return response()->json(['error' => 'Ristorante non trovato'], 404);
         }
-      
+
         if ($restaurant->image) {
             $restaurant->image = asset('storage/' . $restaurant->image);
         } else {
@@ -65,7 +65,7 @@ class RestaurantController extends Controller
 
         }
 
-    return response()->json($restaurant);
+    return response()->json($restaurants);
 }
 
     /**

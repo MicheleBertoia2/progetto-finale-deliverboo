@@ -1,12 +1,15 @@
 <script>
 import axios from 'axios';
 import { store } from '../store/store';
+import Cart  from  '../components/Cart.vue';
+import BtnCart from '../components/BtnCart.vue';
 
 
 export default {
     name: 'RestaurantDetail',
     components: {
-
+        Cart,
+        BtnCart,
     },
 
     data() {
@@ -90,6 +93,10 @@ export default {
         this.getTiming();
         this.getClosingTime();
         this.getDelivery();
+        const savedCart = localStorage.getItem('cart');
+        if (savedCart) {
+            store.cartItems = JSON.parse(savedCart);
+            }
     }
 }
 </script>
@@ -140,7 +147,7 @@ export default {
                             <h5 class="card-title">{{ dish.name }}</h5>
                             <p class="card-text">{{ dish.ingredients }}</p>
                             <a href="#" @click="clickingtrue(dish)" class="btn mybadge">Dettaglio Prodotto</a>
-                            <a href="#" class="btn btn-dark ms-3"><i class="fa-solid fa-cart-shopping"></i></a>
+                            <button class="btn btn-dark ms-3" @click="store.addToCart(dish)"><i class="fa-solid fa-cart-shopping"></i></button>
                         </div>
                     </div>
                 <span :class="{'hidden': !dish.showDetail, 'back': dish.showDetail}"
@@ -155,6 +162,11 @@ export default {
 
         </div>
     </div>
+
+    <!-- CARRELLO-->
+    <Cart :modalOpen="store.showModal" :cartItems="store.cartItems" @close="store.showModal = false" />
+    <BtnCart />
+
 </template>
 
 
