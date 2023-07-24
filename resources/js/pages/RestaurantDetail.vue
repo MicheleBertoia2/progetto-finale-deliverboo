@@ -17,8 +17,6 @@ export default {
             timing: 0,
             delivery: '',
             closingTime: '',
-            hover:false,
-            click: false,
         }
     },
     methods: {
@@ -72,12 +70,6 @@ export default {
             // Aggiungo "storage/" al percorso dell'immagine
             return `storage/${imagePath}`;
         },
-        hoveringfalse(){
-        this.hover = false
-        },
-        flagChangeFalse(){
-            this.flag = false
-        },
         clickingtrue(dish) {
             dish.showDetail = !dish.showDetail;
             event.preventDefault();
@@ -127,13 +119,13 @@ export default {
             </div>
         </div>
 
-        <div class="containers dishes">
+        <div class="py-5">
             <h2 class="text-center">I Nostri Piatti</h2>
-            <div class="dishes d-flex container flex-wrap">
+            <div class="dishes d-flex containers flex-wrap py-5">
                 <div v-for="(dish, i) in restaurant.dishes" :key="i" class="cards d-flex mt-5 ms-4">
-                    <div class="d-flex dish" :class="{'hidden': dish.showDetail}">
-                        <img v-if="dish.image_path.includes('http://') || dish.image_path.includes('https://')" :src="dish.image_path" class="card-img-top" alt="...">
-                        <img v-else :src="getImageUrl(dish.image_path)" class="card-img-top" alt="...">
+                    <div class="d-flex dish " :class="{'hidden': dish.showDetail}">
+                        <img v-if="dish.image_path.includes('http://') || dish.image_path.includes('https://')" :src="dish.image_path" class="card-img-top imgdishes" alt="...">
+                        <img v-else :src="getImageUrl(dish.image_path)" class="card-img-top imgdishes" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ dish.name }}</h5>
                             <p class="card-text">{{ dish.ingredients }}</p>
@@ -141,11 +133,33 @@ export default {
                             <a href="#" class="btn btn-dark ms-3"><i class="fa-solid fa-cart-shopping"></i></a>
                         </div>
                     </div>
-                <span :class="{'hidden': !dish.showDetail, 'back': dish.showDetail}"
+                    <!-- @mouseleave="clickingtrue(dish)" -->
+                <section :class="{'hidden': !dish.showDetail, 'back': dish.showDetail}"
                 @mouseleave="clickingtrue(dish)"
-                class=" detail-dish">
-                    ciao gigiiiiiiiii
-                </span>
+                class="detail-dish">
+                        <!-- <span class="exit d-flex justify-content-evenly w-100 ">
+                            <button class=" btn btn-dark" @click="clickingtrue(dish)">
+                                X
+                            </button>
+                        </span> -->
+                        <img v-if="dish.image_path.includes('http://') || dish.image_path.includes('https://')" :src="dish.image_path"  alt="..."
+                        class="detail-img">
+                        <img v-else  class="detail-img" :src="getImageUrl(dish.image_path)"  alt="...">
+                        <h5 class="card-title text-center">{{ dish.name }}</h5>
+                        <div class="card-body">
+                            <p class="card-text"><strong>Ingredienti: </strong>{{ dish.ingredients }}</p>
+                            <p class="card-text">{{ dish.description }}</p>
+                        </div>
+                        <div class="detaildish-cart">
+                            <span class="add">
+                                <i class="fa-solid fa-minus"></i>
+                                <h5>1</h5>
+                                <i class="fa-solid fa-plus"></i>
+                            </span>
+                            <button class="btn btn-dark p-1">Aggiungi per {{ dish.price }}&euro;</button>
+                        </div>
+
+                </section>
 
 
                 </div>
@@ -159,6 +173,7 @@ export default {
 <style lang="scss" scoped>
 .main-container {
     .back{
+        top:0px;
         right: 0px !important;
     }
     .my-cnt {
@@ -183,15 +198,13 @@ export default {
         }
 
         .info-locale {
+            margin-left: 15px;
+            color: #585C5C;
+            font-size: .9rem;
             h1 {
                 color: black;
                 text-transform: capitalize;
             }
-
-
-            margin-left: 15px;
-            color: #585C5C;
-            font-size: .9rem;
         }
     }
 
@@ -225,24 +238,71 @@ export default {
     }
     .dishes {
         background-color: #F9FAFA;
+        margin: 0px auto;
         .cards {
             position: relative;
             .dish{
                 transition: all .5s;
+
             }
-            img {
+            .imgdishes,img{
                 width: 150px;
                 border-radius: 15px;
             }
         }
         .detail-dish {
+            bottom: 0;
+            position: relative;
+            overflow: auto;
+            border-radius: 15px;
             position: absolute;
             z-index: 10;
             right: 800px;
             transition: all .5s;
             background-color: #3ABFB4;
-            width: 350px;
-            height: 350px;
+            width: 445px;
+            height: 450px;
+            border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-items: center;
+            .exit{
+                position: sticky;
+                right: 20px;
+                top: 20px;
+                width: 50px;
+                button{
+                    width: 40px;
+                }
+            }
+            .detail-img, img{
+                width: 100%;
+                object-fit: cover;
+                height: 300px;
+                padding: 15px;
+                border-radius: 30px;
+            }
+            .detaildish-cart{
+                width: 100%;
+                height: 90px;
+                background-color: #F9FAFA;
+                display: flex;
+                flex-direction: column;
+                padding-bottom: 20px;
+                padding-top: 10px;
+                align-items: center;
+                justify-content: center;
+                position: sticky;
+                bottom: 0;
+                button{
+                    width: 80%;
+                }
+            }
+            .add{
+                width: 100%;
+                display: flex;
+                justify-content:space-evenly
+            }
         }
     }
 
@@ -263,4 +323,18 @@ export default {
 
         }
     }
-}</style>
+    @media screen and (max-width: 930px) {
+        .dishes {
+            justify-content: center;
+
+        }
+    }
+    @media screen and (max-width: 1404px) {
+        .dishes {
+            justify-content: space-evenly;
+
+        }
+    }
+
+}
+</style>
