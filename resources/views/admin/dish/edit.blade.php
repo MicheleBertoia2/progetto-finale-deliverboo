@@ -71,6 +71,11 @@
                 <input onchange="showImagePreview(event), handleFileSelection(event)" type="file"
                     value="{{ old('image_path', $dish?->image_path) }}"
                     class="form-control @error('image_path') is-invalid @enderror" id="file_input" name="">
+                    {{-- stato dell'immagine mostrata --}}
+                    <div class="mt-3" id="oldImg" style="display: none;">Immagine caricata in precedenza:</div>
+                    <div class="mt-3" id="placeholderText" style="display: none;">Esempio immagine:</div>
+                    <div class="mt-3" id="imgUploaded" style="display: none;">Immagine inserita:</div>
+
                 <div class="d-flex align-items-end">
                     <div>
                         @if (str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))
@@ -133,10 +138,20 @@
                 };
 
                 reader.readAsDataURL(imageInput.files[0]);
+
                 // abilito il button
                 const buttonDelete = document.getElementById("deleteButton");
                 buttonDelete.disabled = false;
                 buttonDelete.classList.remove('d-none');
+
+                // mostro il div con il testo "Immagine inserita"
+                const placeholderText = document.getElementById('placeholderText');
+                const imgUploaded = document.getElementById('imgUploaded');
+                const oldImg = document.getElementById('oldImg');
+
+                oldImg.style.display = 'none';
+                placeholderText.style.display = 'none';
+                imgUploaded.style.display = 'block';
             } else {
             //* se clicco sull'input file e carico un'immagine nell'input e successivamente clicco sull'input file e non carico un'immagine nell'input ma clicco "annulla" così viene caricata l'img placeholder
                 //imposto un valore che sarà uguale a quello passato al controller //* utile per quando l'immagine non è obbligatoria (cioè nullable) in questo caso l'immagine non è obbligatoria
@@ -148,6 +163,12 @@
                 const buttonDelete = document.getElementById("deleteButton");
                 buttonDelete.disabled = true;
                 buttonDelete.classList.add('d-none');
+
+                // mostro il div con il testo "Esempio immagine: placeholder-img.png"
+                const placeholderText = document.getElementById('placeholderText');
+                const imgUploaded = document.getElementById('imgUploaded');
+                placeholderText.style.display = 'block';
+                imgUploaded.style.display = 'none';
             }
         }
 
@@ -195,8 +216,34 @@
             const buttonDelete = document.getElementById("deleteButton");
             buttonDelete.disabled = true;
             buttonDelete.classList.add('d-none');
+
+            // mostro il div con il testo "Esempio immagine: placeholder-img.png"
+            const placeholderText = document.getElementById('placeholderText');
+            const imgUploaded = document.getElementById('imgUploaded');
+            const oldImg = document.getElementById('oldImg');
+
+            oldImg.style.display = 'none';
+            placeholderText.style.display = 'block';
+            imgUploaded.style.display = 'none';
         }
 
+        function showImageName(event){
+            const placeholderText = document.getElementById('placeholderText');
+            const imgUploaded = document.getElementById('imgUploaded');
+            const oldImg = document.getElementById('oldImg');
+            const textInput = document.getElementById("text_input");
+
+            if (textInput.value.includes('placeholder-img.png')) {
+                placeholderText.style.display = 'block';
+                oldImg.style.display = 'none';
+            } else {
+                placeholderText.style.display = 'none';
+                oldImg.style.display = 'block';
+            }
+        }
+
+        // Esegue la funzione al caricamento della pagina
+        document.addEventListener('DOMContentLoaded', showImageName(event));
 
     </script>
 @endsection
