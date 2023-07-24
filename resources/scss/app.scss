@@ -163,6 +163,9 @@ aside {
         display: block;
         margin-bottom: 5px;
     }
+    .restaurant_container{
+        display: block !important;
+    }
 }
 
 @include media-breakpoint-down(sm) {

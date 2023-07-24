@@ -4,6 +4,7 @@ import Restaurant from '../components/Restaurant.vue';
 import Slider from '../components/Slider.vue';
 import axios from 'axios';
 import Loader from '../components/Loader.vue';
+import Cart from '../components/Cart.vue';
 import { store } from '../store/store';
 
 
@@ -17,6 +18,13 @@ export default {
             title : 'Ecco una selezione di ristoranti per te',
             resTypes : [],
             typeSelected : [],
+            showModal: false,
+
+            itemProva : {
+                id : 5,
+                name : 'ravioli',
+                quantity : 1
+            }
         }
     },
 
@@ -24,6 +32,7 @@ export default {
         Restaurant,
         Loader,
         Slider,
+        Cart,
 
     },
 
@@ -33,30 +42,17 @@ export default {
             store.loaded = false;
             axios.get(endpoint)
                 .then(res => {
-                    console.log(res.data,);
 
                     this.restaurants = res.data.restaurants;
                     this.resTypes = res.data.types;
-                    console.log(res.data.restaurants);
                     store.loaded = true;
                 })
 
             },
 
-        getRestaurantsType($slug){
-            store.loaded = false;
-            axios.get(store.apiUrl + 'restaurants/type/' + $slug)
-                .then(res => {
-                    this.restaurants = res.data.restaurants;
-                    this.title = 'Risultati per tipo: ' + $slug;
 
-                    store.loaded = true;
-
-                })
-
-        },
         eseguiRicerca() {
-
+            console.log(this.typeSelected);
 
             axios.get(store.apiUrl + 'restaurants/typesearch')
             .then(response => {
@@ -70,19 +66,26 @@ export default {
                     return ristorante.types.some(type => this.typeSelected.includes(type.id));
                 });
                 this.title = 'risultati';
-                console.log(this.restaurants);
+
 
                 store.loaded = true;
             })
             .catch(error => {
                 console.log(error);
             });
-  }
+        },
+
+
 
     },
 
     mounted(){
         this.getApi()
+        // Carica il carrello salvato nel localStorage al momento del caricamento della pagina
+        const savedCart = localStorage.getItem('cart');
+        if (savedCart) {
+            store.cartItems = JSON.parse(savedCart);
+            }
     }
 }
 </script>
@@ -91,7 +94,11 @@ export default {
 
     <div class="jumbotron">
             <img src="img/jumbo.jpg" alt="jumbotron">
-        </div>
+    </div>
+
+    <!-- BOTTONE DI PROVA PER AGGIUNGERE ELEMENTI AL CARRELLO -->
+    <button class="btn btn-success" @click="store.addToCart(this.itemProva)">prova aggiunta elementi</button>
+    <button class="btn btn-danger" @click="store.removeFromCart(this.itemProva.id)">prova svuotamento elementi</button>
 
     <div class="container-inner ">
 
@@ -132,6 +139,11 @@ export default {
         </div>
     </div>
 
+    <Cart :modalOpen="showModal" :cartItems="store.cartItems" @close="showModal = false" />
+
+        <!-- Bottone che apre il modal solo se nel carrello è presente almeno un elemento -->
+    <button class="btn btn-primary btn-cart" v-if="store.cartItems.length  > 0 " @click="showModal = true">Apri Modal</button>
+    <!-- IMPORTANTE!!!!! CAMBIARE IL V-IF PERCHè ADESSO IL ! SERVE SOLO PER VEDERE IL BOTTONE -->
 
 </template>
 
@@ -182,6 +194,14 @@ ul{
     padding-bottom: 50px;
     height: 100%;
     width: 100%;
+}
+
+.btn-cart{
+    position: fixed;
+    right: 100px;
+    bottom: 100px;
+    z-index: 5;
+
 }
 
 </style>
