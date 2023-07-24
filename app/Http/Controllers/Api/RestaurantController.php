@@ -43,8 +43,16 @@ class RestaurantController extends Controller
         //     $restaurants->image = asset('storage/uploads/placeholder-img.png');
         // }
 
+        if((str_contains($restaurants->image, 'http://') || str_contains($restaurants->image, 'https://'))){
+            $restaurants->image;
+        }else if(str_contains($restaurants->image, "resources/img/placeholder-img.png" )){
+            $restaurants->image = "../../img/placeholder-img.png";
+        }
+        else{
+            $restaurants->image = asset('storage/' . $restaurants->image);
+
         // return response()->json($restaurants);
-        $restaurant = Restaurant::where('slug', $slug)->with('types', 'dishes')->first();
+        /* $restaurant = Restaurant::where('slug', $slug)->with('types', 'dishes')->first();
 
         if (!$restaurant) {
             return response()->json(['error' => 'Ristorante non trovato'], 404);
@@ -53,7 +61,8 @@ class RestaurantController extends Controller
         if ($restaurant->image) {
             $restaurant->image = asset('storage/' . $restaurant->image);
         } else {
-            $restaurant->image = asset('storage/uploads/placeholder-img.png');
+            $restaurant->image = asset('storage/uploads/placeholder-img.png'); */
+
         }
 
     return response()->json($restaurant);

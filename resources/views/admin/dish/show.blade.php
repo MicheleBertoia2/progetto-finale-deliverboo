@@ -20,9 +20,9 @@
                 </form>
         </div>
         <div class="m-3">
-            <span class="badge mybadge ">
-                prezzo:{{$dish->price}}</span>
-            <span class="badge mybadge">Visibile:
+            <span class="badge mybadge p-2">
+                Prezzo: {{$dish->price}}€</span>
+            <span class="badge mybadge p-2">Visibile:
                 {{ $dish->is_visible ? 'Si' : 'No' }}
         </span>
         </div>
@@ -38,7 +38,7 @@
             @endif
 
         </div>
-        <div class="body">
+        <div class="body mt-2">
             <p class="card-text"><strong>Descrizione: </strong>{{$dish->description}}</p>
             <p class="card-text"><strong>Ingredienti: </strong>{{$dish->ingredients}}</p>
         </div>

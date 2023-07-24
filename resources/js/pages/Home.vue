@@ -93,7 +93,7 @@ export default {
 <template>
 
     <div class="jumbotron">
-            <img src="img/jumbo.png" alt="jumbotron">
+            <img src="img/jumbo.jpg" alt="jumbotron">
     </div>
 
     <!-- BOTTONE DI PROVA PER AGGIUNGERE ELEMENTI AL CARRELLO -->
