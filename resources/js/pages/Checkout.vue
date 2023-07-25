@@ -1,16 +1,19 @@
 <script>
 
+import {store} from '../store/store';
+
 
 export default {
     name:'Checkout',
     data(){
         return{
+            store,
             orderTotal : 100,
             order: [],
         }
     },
     mounted (){
-        this.order = localStorage.getItem('cart');
+        this.order = JSON.parse(localStorage.getItem('cart'));
         console.log(this.order);
         var button = document.querySelector('#submit-button');
 
@@ -57,13 +60,36 @@ export default {
 <template>
   <div class="container-inner">
 
-    <h1 class="my-5">Checkout</h1>
 
-    <div id="dropin-wrapper">
-        <div id="checkout-message"></div>
-        <div id="dropin-container"></div>
-        <button id="submit-button">Submit payment</button>
+    <div class="container">
+        <h1 class="my-5">Checkout</h1>
+
+        <div class="order-review my-3">
+            <h3>Rivedi il tuo Ordine</h3>
+            <ul>
+                <li v-for="item in this.order" :key="item.id" class="d-flex">
+                    <div class="imagebox">
+                        <!-- <img :src="store.getFullImageUrl(item.image_path)" :alt="item.name"> -->
+                    </div>
+                    <div class="info">
+                        <h5>{{ item.name }}</h5>
+                        <div class="text-center px-3 py-1 border border-black">{{ item.quantity }}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="total">
+            <h5>Totale: {{ orderTotal }} €</h5>
+        </div>
+
+        <div id="dropin-wrapper">
+            <div id="checkout-message"></div>
+            <div id="dropin-container"></div>
+            <button id="submit-button">Submit payment</button>
+        </div>
     </div>
+
 
 
 </div>
