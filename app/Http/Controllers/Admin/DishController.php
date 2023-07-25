@@ -71,7 +71,14 @@ class DishController extends Controller
      */
     public function show(Dish $dish)
     {
-        return view('admin.dish.show', compact('dish'));
+        $user = Auth::user();
+        $restaurant = $user->restaurant;
+        if($dish->restaurant_id == $restaurant->id){
+
+            return view('admin.dish.show', compact('dish'));
+        }else{
+            return redirect()->route('admin.dishes.index');
+        }
     }
 
     /**
@@ -82,7 +89,14 @@ class DishController extends Controller
      */
     public function edit(Dish $dish)
     {
-        return view('admin.dish.edit', compact('dish'));
+        $user = Auth::user();
+        $restaurant = $user->restaurant;
+        if($dish->restaurant_id == $restaurant->id){
+
+            return view('admin.dish.edit', compact('dish'));
+        }else{
+            return redirect()->route('admin.dishes.index');
+        }
     }
 
     /**
