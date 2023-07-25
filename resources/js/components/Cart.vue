@@ -24,7 +24,12 @@
             </li>
           </ul>
           <div v-else><p>Non ci sono elementi nel carrello!</p></div>
-          <div class="mb-btn-close" @click="closeModal"><i class="fa-solid fa-close"></i></div>
+          <div class="mb-btn-close" @click="closeModal"><i class="fa-solid fa-close"></i>
+            </div>
+
+            <div v-if="store.cartItems.length > 0" class="btn btn-success">
+                <router-link :to="{ name: 'checkout' }" class="nav-link">Procedi con l'ordine</router-link>
+            </div>
         </div>
       </div>
     </transition>
