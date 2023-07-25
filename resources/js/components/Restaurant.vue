@@ -21,7 +21,8 @@ export default {
                     {{ restaurant.name }}
                 </div>
                 <div class="d-flex justify-content-center align-items-center flex-wrap mt-1">
-                    <div v-for="type in restaurant.types" :key="type" class="badge badge-dark textTypes m-3 d-flex justify-content-center flex-wrap">
+                    <div v-for="type in restaurant.types" :key="type" class="greenBadge p-2 textTypes m-3 d-flex justify-content-center flex-wrap">
+                    <!-- <div v-for="type in restaurant.types" :key="type" class="badge badge-dark textTypes m-3 d-flex justify-content-center flex-wrap"> -->
                         <div class="">{{ type.name }}</div>
                     </div>
                 </div>
@@ -113,7 +114,8 @@ export default {
                 // display: flex;
                 // justify-content: center;
                 width: 350px;
-                color: white;
+                // color: white;
+                color: black;
                 font-size: 25px;
                 font-weight: bold;
                 // position: absolute;
@@ -123,8 +125,10 @@ export default {
                 // justify-content: center;
                 // width: 350px;
                 text-decoration: none;
-                color: white;
-                font-size: 18px;
+                // color: white;
+                // color: #000;
+                // font-size: 18px;
+                font-size: 15px;
                 font-weight: bold;
                 // position: absolute;
                 // right: 11%;
@@ -134,13 +138,30 @@ export default {
             }
             .myBadge{
                 border-radius: 10px;
-                background-color: rgba(255, 255, 255, 0.521);
+                // background-color: rgba(255, 255, 255, 0.521);
+                background-color: rgba(255, 255, 255, 0.6);
+
             }
         }
     }
     .text-decoration-none{
         text-decoration: none !important;
     }
+    .greenBadge {
+    transition: all .5s;
+    // color: black;
+    // background-color: #3ABFB4 !important;
+    color: #fff;
+    background-color: rgb(0 0 0 / 80%) !important;
+    // height: 40px;
+    font-size: 2rem;
+    margin: 40px 50px;
+    border-radius: 15px;
+
+    // &:hover {
+        // color: white;
+    // }
+}
 </style>
 
 
