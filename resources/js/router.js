@@ -5,6 +5,7 @@ import Contacts from './pages/Contacts.vue'
 import About from './pages/About.vue'
 import Error404 from './pages/Error404.vue'
 import RestaurantDetail from './pages/RestaurantDetail.vue'
+import Checkout from './pages/Checkout.vue'
 
 const meta = {
     enterClass: 'animate__animated animate__bounceInLeft',
@@ -39,6 +40,12 @@ const router = createRouter({
             path: '/:slug',
             name: 'RestaurantDetail',
             component: RestaurantDetail,
+            meta
+        },
+        {
+            path: '/checkout',
+            name: 'Checkout',
+            component: Checkout,
             meta
         },
         {
