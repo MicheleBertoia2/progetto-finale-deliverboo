@@ -8,19 +8,46 @@ export default {
     data(){
         return{
             store,
-            orderTotal : 100,
+            orderTotal : 0,
             order: [],
+            page: 1,
+            customer: {
+                name: "",
+                email: "",
+                phone: "",
+                address: "",
+            },
         }
     },
+
+    methods: {
+        calculateOrderTotal() {
+            let total = 0;
+            for (const item of this.order) {
+                total += parseFloat(item.price) * item.quantity;
+            }
+            this.orderTotal = total;
+            },
+
+
+
+    },
+
     mounted (){
         this.order = JSON.parse(localStorage.getItem('cart'));
-        console.log(this.order);
+        this.calculateOrderTotal();
+
+
+
+        // BRAINTREE DROP-IN
         var button = document.querySelector('#submit-button');
 
         braintree.dropin.create({
         // Insert your tokenization key here
         authorization: 'sandbox_q7wkxr96_rntzhj86v4qk7kgg',
-        container: '#dropin-container'
+        container: '#dropin-container',
+        locale: 'it_IT',
+        amount: this.orderTotal,
         }, function (createErr, instance) {
         button.addEventListener('click', function () {
             instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
@@ -64,7 +91,7 @@ export default {
     <div class="container">
         <h1 class="my-5">Checkout</h1>
 
-        <div class="order-review my-3">
+        <div class="order-review my-3" v-if="this.page === 1">
             <h3>Rivedi il tuo Ordine</h3>
             <ul>
                 <li v-for="item in this.order" :key="item.id" class="d-flex">
@@ -77,16 +104,48 @@ export default {
                     </div>
                 </li>
             </ul>
+            <div class="total">
+                <h5>Totale: {{ orderTotal.toFixed(2) }} €</h5>
+            </div>
+            <button class="btn btn-primary" @click="this.page++">Avanti</button>
         </div>
 
-        <div class="total">
-            <h5>Totale: {{ orderTotal }} €</h5>
-        </div>
 
-        <div id="dropin-wrapper">
-            <div id="checkout-message"></div>
-            <div id="dropin-container"></div>
-            <button id="submit-button">Submit payment</button>
+        <div class="container" v-show="this.page === 2">
+
+            <form action="#" method="POST" >
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="name" v-model="customer.name" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" v-model="customer.email" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Telefono</label>
+                    <input type="tel" class="form-control" id="phone" v-model="customer.phone" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="address" class="form-label">Indirizzo</label>
+                    <input type="text" class="form-control" id="address" v-model="customer.address" required />
+                </div>
+
+
+            </form>
+
+            <div id="dropin-wrapper" >
+                <div id="checkout-message"></div>
+                <div id="dropin-container"></div>
+                <div class="amount-label">Totale: {{ orderTotal.toFixed(2) }} €</div>
+                <button id="submit-button" class="btn btn-primary">Submit payment</button>
+            </div>
+            <button class="btn btn-primary" @click="this.page--">Indietro</button>
+
         </div>
     </div>
 
@@ -98,5 +157,41 @@ export default {
 
 
 <style>
+  /* Stile del Drop-in UI */
+  .braintree-sheet {
+    /* Regola le dimensioni e il posizionamento dell'iframe */
+    width: 100%;
+    height: 100%;
+
+
+    /* Personalizza i colori di sfondo e del testo */
+    background-color: #f9f9f9;
+    color: #333;
+
+    /* Personalizza i font */
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+
+    /* Personalizza i margini e i padding */
+    margin: 0;
+    padding: 10px;
+
+    /* Personalizza il bordo e l'ombra */
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Personalizza gli elementi figli all'interno dell'iframe */
+  .braintree-sheet label {
+    /* Personalizza le etichette dei campi di input */
+    font-weight: bold;
+  }
+
+
+[data-braintree-id="toggle"] {
+  display: none;
+}
+
+
 
 </style>
