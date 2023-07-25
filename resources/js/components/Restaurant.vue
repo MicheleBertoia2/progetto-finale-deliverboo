@@ -4,6 +4,9 @@ export default {
     name: 'Restaurant',
     props:{
         restaurant : Object
+    },
+    created() {
+        console.log(this.restaurant);
     }
 }
 </script>
@@ -12,19 +15,24 @@ export default {
 <template>
 
     <div class="restaurant">
-        <router-link  :to="{name: 'RestaurantDetail', params:{slug: restaurant.slug}}">
-            <div class="bg-restaurant">
-                <div class="badge text dark center ">
+        <router-link  :to="{name: 'RestaurantDetail', params:{slug: restaurant.slug}}" class="text-decoration-none">
+            <div class="bg-restaurant d-flex flex-column justify-content-center align-items-center flex-wrap">
+                <div class="myBadge text dark d-flex justify-content-center align-items-center">
                     {{ restaurant.name }}
+                </div>
+                <div class="d-flex justify-content-center align-items-center flex-wrap mt-1">
+                    <div v-for="type in restaurant.types" :key="type" class="badge badge-dark textTypes m-3 d-flex justify-content-center flex-wrap">
+                        <div class="">{{ type.name }}</div>
+                    </div>
                 </div>
             </div>
 
+
+
         </router-link>
             <div class="info">
-                <!-- <p><i class="fa-solid fa-star"></i></p> -->
                 <!-- icona camion -->
-                <!-- <p><i class="fa-solid fa-truck"></i></p> -->
-                <!-- <p>{{restaurant.slug}} questo é lo slug</p> -->
+                <p>{{ restaurant.address }}  <i class="fa-solid fa-truck"></i></p>
             </div>
     </div>
 
@@ -52,8 +60,8 @@ export default {
 
                     .badge{
                         color:black;
-                        margin-left: 3px;
-                        margin-bottom: 6px;
+                        // margin-left: 3px;
+                        // margin-bottom: 6px;
                     }
 
                     .badge-turco{
@@ -102,19 +110,36 @@ export default {
                 transform: translate(-50%, -50%);
                 }
             .text{
-                display: flex;
-                justify-content: center;
+                // display: flex;
+                // justify-content: center;
                 width: 350px;
                 color: white;
                 font-size: 25px;
                 font-weight: bold;
-                position: absolute;
+                // position: absolute;
             }
-            .badge{
+            .textTypes{
+                // display: flex;
+                // justify-content: center;
+                // width: 350px;
+                text-decoration: none;
+                color: white;
+                font-size: 18px;
+                font-weight: bold;
+                // position: absolute;
+                // right: 11%;
+                // top: 60%;
+                border-radius: 10px;
+                background-color: rgba(255, 255, 255, 0.521);
+            }
+            .myBadge{
                 border-radius: 10px;
                 background-color: rgba(255, 255, 255, 0.521);
             }
         }
+    }
+    .text-decoration-none{
+        text-decoration: none !important;
     }
 </style>
 

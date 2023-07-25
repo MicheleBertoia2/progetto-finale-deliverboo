@@ -19,7 +19,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::inRandomOrder()->take(5)->get();
+        $restaurants = Restaurant::inRandomOrder()->with('types','dishes')->take(5)->get();
         $types = Type::all();
         $dishes = Dish::all();
 
