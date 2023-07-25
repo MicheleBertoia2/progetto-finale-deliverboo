@@ -109,13 +109,13 @@ export default {
 
 
         <!-- nuova versione RICERCA -->
-        <div class="d-flex justify-content-evenly align-items-center py-3">
+        <div class="d-flex flex-wrap justify-content-evenly align-items-center py-3">
             <!-- //* prima -->
             <!-- <label v-for="resType in this.resTypes" :key="resType.id"> -->
             <!-- //* prima -->
             <!-- <input type="checkbox" :id="resType.id" :value="resType.id" v-model="typeSelected" >{{ resType.name }}</label> -->
 
-            <div v-for="(resType, index) in this.resTypes" :key="resType.id" class="custom-checkbox mx-4 d-flex flex-column">
+            <div v-for="(resType, index) in this.resTypes" :key="resType.id" class="mx-4 d-flex flex-column">
 
                 <!-- labels //* funziona-->
                 <label class="d-flex justify-content-center align-items-center" style="height: 130px; width: 130px; background-color: #3ABFB4; border-radius: 10px;" :for="resType.id">

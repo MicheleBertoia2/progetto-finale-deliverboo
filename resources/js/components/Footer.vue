@@ -22,7 +22,7 @@ export default {
             <div class="col">
                 <p>Aggiungi il tuo locale</p>
                 <p>Contratti collettivi</p>
-                <p>COpportunità di carriera</p>
+                <p>Opportunità di carriera</p>
                 <p>Soci</p>
             </div>
         </div>
