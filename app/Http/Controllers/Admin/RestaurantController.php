@@ -13,6 +13,7 @@ use App\Models\Type;
 
 class RestaurantController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -115,6 +116,8 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
+        $user = Auth::user();
+        $restaurant = $user->restaurant;
         $types = Type::all();
 
         return view('admin.restaurants.edit', compact('restaurant','types'));
@@ -198,6 +201,8 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
+        $user = Auth::user();
+        $restaurant = $user->restaurant;
         $restaurant->delete();
 
         return redirect()->route('admin.home')->with('deleted', "Il ristorante: $restaurant->name è stato eliminato con successo");
