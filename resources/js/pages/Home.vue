@@ -48,31 +48,28 @@ export default {
 
             },
 
-
         eseguiRicerca() {
-            console.log(this.typeSelected);
+        console.log(this.typeSelected);
 
-            axios.get(store.apiUrl + 'restaurants/typesearch')
+        axios.get(store.apiUrl + 'restaurants/typesearch')
             .then(response => {
+            // prendo tutti i ristoranti dalla chiamata dell'API
+            let allRestaurants = response.data.restaurants;
 
-                // prendo tutti i ristoranti
-                let allRestaurants = response.data.restaurants;
+            // li filtro in base agli id dei tipi selezionati
+            this.restaurants = allRestaurants.filter(ristorante => {
+                // utilizzo il metodo `every()` per verificare se ogni id della tipologia selezionata è incluso nell'array delle tipologie del ristorante corrente
+                // il metodo `every()` restituisce true solo se tutti gli elementi dell'array soddisfano la condizione specificata
+                return this.typeSelected.every(typeId => ristorante.types.some(type => type.id === typeId));
+            });
 
-                // li filtro in base agli id dei tipi selezionati
-                this.restaurants = allRestaurants.filter(ristorante => {
-                    return ristorante.types.some(type => this.typeSelected.includes(type.id));
-                });
-                this.title = 'Risultati';
-
-
-                store.loaded = true;
+            this.title = 'Risultati';
+            store.loaded = true;
             })
             .catch(error => {
-                console.log(error);
+            console.log(error);
             });
         },
-
-
 
     },
 
