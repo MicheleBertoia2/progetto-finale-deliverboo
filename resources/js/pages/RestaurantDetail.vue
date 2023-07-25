@@ -132,7 +132,7 @@ export default {
 
 <template>
 
-    <div class="main-container pb-5 pt-3">
+    <div class="main-container pb-5 pt-3" >
 
         <div class="container py-5 restaurant-container">
 
@@ -164,17 +164,17 @@ export default {
             </div>
         </div>
 
-        <div class="py-5">
+        <div class="py-5" >
             <h2 class="text-center">I Nostri Piatti</h2>
             <div class="dishes d-flex containers flex-wrap py-5">
-                <div v-for="(dish, i) in restaurant.dishes" :key="i" class="cards d-flex mt-5 ms-4">
+                <div v-for="(dish, i) in restaurant.dishes" :key="i" class="cards d-flex mt-5 ms-4" >
                     <div class="d-flex dish " :class="{'hidden': dish.showDetail}">
                         <img v-if="dish.image_path.includes('http://') || dish.image_path.includes('https://')" :src="dish.image_path" class="card-img-top imgdishes" alt="...">
                         <img v-else :src="getImageUrl(dish.image_path)" class="card-img-top imgdishes" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ dish.name }}</h5>
                             <p class="card-text">{{ dish.ingredients }}</p>
-                            <a href="#" @click="clickingtrue(dish)" class="btn mybadge">Dettaglio Prodotto</a>
+                            <a href="#" @click="clickingtrue(dish)"  class="btn mybadge">Dettaglio Prodotto</a>
                             <button  class="btn btn-dark ms-3" @click="store.addToCart(dish),dish.isAdded=true" v-if="!dish.isAdded && isAllItemsFromCurrentRestaurant"><i class="fa-solid fa-cart-shopping"></i></button>
 
                             <div v-else-if="dish.isAdded" class="quantity-interface d-flex">
@@ -187,33 +187,37 @@ export default {
                             <div v-else class="bg-tertiary">Puoi ordinare solo da un ristorante</div>
                         </div>
                     </div>
-                    <!-- @mouseleave="clickingtrue(dish)" -->
-                <section :class="{'hidden': !dish.showDetail, 'back': dish.showDetail}"
-                @mouseleave="clickingtrue(dish)"
-                class="detail-dish">
-                        <!-- <span class="exit d-flex justify-content-evenly w-100 ">
-                            <button class=" btn btn-dark" @click="clickingtrue(dish)">
-                                X
-                            </button>
-                        </span> -->
-                        <img v-if="dish.image_path.includes('http://') || dish.image_path.includes('https://')" :src="dish.image_path"  alt="..."
-                        class="detail-img">
-                        <img v-else  class="detail-img" :src="getImageUrl(dish.image_path)"  alt="...">
-                        <h5 class="card-title text-center">{{ dish.name }}</h5>
-                        <div class="card-body">
-                            <p class="card-text"><strong>Ingredienti: </strong>{{ dish.ingredients }}</p>
-                            <p class="card-text">{{ dish.description }}</p>
-                        </div>
-                        <div class="detaildish-cart">
-                            <span class="add">
-                                <i class="fa-solid fa-minus"></i>
-                                <h5>1</h5>
-                                <i class="fa-solid fa-plus"></i>
-                            </span>
-                            <button class="btn btn-dark p-1">Aggiungi per {{ dish.price }}&euro;</button>
-                        </div>
+                    <div class="overlay" v-if="restaurant.dishes.some(dish => dish.showDetail)">
+                    </div>
 
-                </section>
+
+                    <!-- @mouseleave="clickingtrue(dish)" -->
+                        <section :class="{'hidden': !dish.showDetail, 'back': dish.showDetail}"
+
+                        class="detail-dish">
+                                <span class="exit d-flex justify-content-evenly w-100 ">
+                                    <button class=" btn btn-dark" @click="clickingtrue(dish)">
+                                        X
+                                    </button>
+                                </span>
+                                <img v-if="dish.image_path.includes('http://') || dish.image_path.includes('https://')" :src="dish.image_path"  alt="..."
+                                class="detail-img">
+                                <img v-else  class="detail-img" :src="getImageUrl(dish.image_path)"  alt="...">
+                                <h5 class="card-title text-center">{{ dish.name }}</h5>
+                                <div class="card-body">
+                                    <p class="card-text"><strong>Ingredienti: </strong>{{ dish.ingredients }}</p>
+                                    <p class="card-text">{{ dish.description }}</p>
+                                </div>
+                                <div class="detaildish-cart">
+                                    <span class="add">
+                                        <i class=" fa-solid fa-minus"></i>
+                                        <h5>1</h5>
+                                        <i class="fa-solid fa-plus"></i>
+                                    </span>
+                                    <button class="btn btn-dark p-1">Aggiungi per {{ dish.price }}&euro;</button>
+                                </div>
+
+                        </section>
 
 
                 </div>
@@ -231,10 +235,19 @@ export default {
 
 <style lang="scss" scoped>
 .main-container {
-    .back{
-        top:0px;
-        right: 0px !important;
+    .disabled{
+        pointer-events: none;
     }
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.363);
+        z-index: 5;
+        pointer-events: none;
+        }
     .my-cnt {
         position: relative;
         margin-top: 10px;
@@ -270,7 +283,8 @@ export default {
     .restaurant-container {
         display: flex;
         justify-content: space-between;
-
+        /* provp a mettere relastiev qui per centrare il dettaglio del prodotto */
+        position: relative;
         .delivery {
             p {
                 i {
@@ -280,6 +294,7 @@ export default {
                 color: #585C5C;
             }
         }
+
     }
     .types {
         font-size: 1.3rem;
@@ -299,7 +314,7 @@ export default {
         background-color: #F9FAFA;
         margin: 0px auto;
         .cards {
-            position: relative;
+            /*position: relative;*/
             .dish{
                 transition: all .5s;
 
@@ -311,16 +326,18 @@ export default {
         }
         .detail-dish {
             bottom: 0;
-            position: relative;
             overflow: auto;
             border-radius: 15px;
-            position: absolute;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             z-index: 10;
-            right: 800px;
+            /*right: 800px;*/
             transition: all .5s;
             background-color: #3ABFB4;
-            width: 445px;
-            height: 450px;
+            width: 430px;
+            height: 600px;
             border: 1px solid black;
             display: flex;
             flex-direction: column;
@@ -375,6 +392,10 @@ export default {
     .hidden{
         opacity: 0;
         pointer-events: none;
+    }
+    .back{
+        top: 50% !important;
+        right: 50% !important;
     }
     @media screen and (max-width: 768px) {
         .restaurant-container {
