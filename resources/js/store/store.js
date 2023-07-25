@@ -6,6 +6,17 @@ export const store = reactive({
 
     loaded: false,
 
+    typesImages: [
+        'kebab.png',
+        'sushi.png',
+        'pizza.png',
+        'thai.png',
+        'messicano.png',
+        'indiano.png',
+        'cinese.png',
+        'americano.png'
+    ],
+
     cartItems: [],
 
     showModal: false,

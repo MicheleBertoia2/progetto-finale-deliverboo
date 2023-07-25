@@ -59,11 +59,10 @@ export default {
                 let allRestaurants = response.data.restaurants;
 
                 // li filtro in base agli id dei tipi selezionati
-
                 this.restaurants = allRestaurants.filter(ristorante => {
                     return ristorante.types.some(type => this.typeSelected.includes(type.id));
                 });
-                this.title = 'risultati';
+                this.title = 'Risultati';
 
 
                 store.loaded = true;
@@ -91,14 +90,14 @@ export default {
 <template>
 
     <div class="jumbotron">
-            <img src="img/jumbo.jpg" alt="jumbotron">
+        <img src="img/jumbo.jpg" alt="jumbotron">
     </div>
 
 
 
-    <div class="container-inner ">
+    <div class="container-inner">
 
-        <Slider />
+        <!-- <Slider /> -->
 
         <!-- VECCHIA VERSIONE RICERCA -->
 
@@ -110,17 +109,36 @@ export default {
 
 
         <!-- nuova versione RICERCA -->
-        <div>
+        <div class="d-flex justify-content-evenly align-items-center py-3">
+            <!-- //* prima -->
+            <!-- <label v-for="resType in this.resTypes" :key="resType.id"> -->
+            <!-- //* prima -->
+            <!-- <input type="checkbox" :id="resType.id" :value="resType.id" v-model="typeSelected" >{{ resType.name }}</label> -->
 
-            <label v-for="resType in this.resTypes" :key="resType.id"><input type="checkbox" :id="resType.id" :value="resType.id" v-model="typeSelected" > {{ resType.name }}</label>
+            <div v-for="(resType, index) in this.resTypes" :key="resType.id" class="custom-checkbox mx-4 d-flex flex-column">
 
+                <!-- labels //* funziona-->
+                <label class="d-flex justify-content-center align-items-center" style="height: 130px; width: 130px; background-color: #3ABFB4; border-radius: 10px;" :for="resType.id">
+                        <!-- immagini -->
+                        <img :src="`img/${store.typesImages[index]}`" alt="Type Image">
+                </label>
 
-            <button @click="eseguiRicerca" :disabled="(!this.typeSelected.length > 0)" >Cerca</button>
+                <div class="d-flex">
+                <!-- checkbox + nome tipologia-->
+                    <input class="me-2" @change="eseguiRicerca" type="checkbox" :id="resType.id" :value="resType.id" v-model="typeSelected"><span>{{ resType.name }}</span>
+                    <!-- prima -->
+                    <!-- <input class="me-2" type="checkbox" :id="resType.id" :value="resType.id" v-model="typeSelected"><span>{{ resType.name }}</span> -->
+                </div>
+            </div>
+            <!-- prima -->
+            <!-- <button class="btn mybadge" @click="eseguiRicerca" :disabled="(!this.typeSelected.length > 0)" >Cerca</button> -->
         </div>
         <Loader v-if="!store.loaded" />
 
         <div v-else class="container-restaurant">
-            <span class="badge bg-pink">{{ title }}</span>
+            <!-- <span class="badge bg-pink">{{ title }}</span> -->
+            <!-- <span class="badge mybadge">{{ title }}</span> -->
+            <h1>{{ title }}</h1>
 
             <div v-if="restaurants.length > 0" class="wrapper">
 
@@ -146,11 +164,12 @@ export default {
 <style lang="scss" scoped>
 
 .jumbotron {
-    height: 550px;
-    width: 100vw;
+    height: 600px;
+    width: 100%;
     img {
-        height: 100%;
+        object-fit: cover;
         width: 100%;
+        height: 100%;
     }
 }
 
@@ -160,12 +179,45 @@ export default {
     min-height: 400px;
     width: 100%;
 }
-.badge{
-    background-color: #f05167;
-    color: black;
-    font-size: 30px;
-    margin: 50px;
+
+//* sezione CHECKBOX
+
+.custom-checkbox{
+    width: 100%;
 }
+
+.mybadge {
+    transition: all .5s;
+    color: black;
+    background-color: #3ABFB4 !important;
+    // height: 40px;
+    font-size: 2rem;
+    margin: 40px 50px;
+    border-radius: 15px;
+
+    // &:hover {
+        // color: white;
+    // }
+}
+//* // CHECKBOX
+
+
+// .badge{
+//     background-color: #3ABFB4;
+//     background-color: #f05167;
+//     color: black;
+//     font-size: 30px;
+//     margin: 50px;
+// }
+
+.btn-dark {
+    transition: all .5s;
+
+    &:hover {
+        color: #3ABFB4 !important;
+    }
+}
+
 
 ul{
     li{
@@ -175,7 +227,15 @@ ul{
 
 
 .container-restaurant{
-    background-image: url("/img/pattern-anguria.jpg");
+    // background-image: url("/img/pattern-anguria.jpg");
+    background-image: url("/img/bg-60.jpg");
+
+    overflow-y: auto;
+    background-position: center;
+    height: 700px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+
     h1{
         padding: 50px;
     }
@@ -185,8 +245,8 @@ ul{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding-bottom: 50px;
-    height: 100%;
+    padding-bottom: 20px;
+    // height: 100%;
     width: 100%;
 }
 

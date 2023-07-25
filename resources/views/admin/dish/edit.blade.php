@@ -39,7 +39,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="price" class="form-label">Prezzo*</label>
+                <label for="price" class="form-label">Prezzo* (valuta in €)</label>
                 <input id="price" pattern="[0-9.]*" minlength="1" required class="form-control @error('price') is-invalid @enderror" name="price"
                     type="text" placeholder="Esempio: 5.00"
                     value="{{ old('price', $dish->price) }}">
@@ -144,7 +144,7 @@
                 buttonDelete.disabled = false;
                 buttonDelete.classList.remove('d-none');
 
-                // mostro il div con il testo "Immagine inserita"
+                // mostro il div con il testo "Nuova immagine da caricare:"
                 const placeholderText = document.getElementById('placeholderText');
                 const imgUploaded = document.getElementById('imgUploaded');
                 const oldImg = document.getElementById('oldImg');
