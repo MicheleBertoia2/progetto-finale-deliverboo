@@ -79,14 +79,13 @@ export const store = reactive({
     // FINE  FUNZIONI PER  IL CARRELLO
 
     getFullImageUrl(imagePath) {
-        if (imagePath.startsWith('/storage/uploads/http')) {
-          // Se l'immagine è salvata nel disco di archiviazione di Laravel
-          return imagePath.replace('/storage/uploads/', '');
+        if (imagePath.startsWith('uploads/')) {
+            // Se l'immagine è salvata nel disco di archiviazione di Laravel
+            return imagePath.replace('uploads/', 'storage/uploads/');
         } else {
-          // Altrimenti, l'immagine è un URL completo
-          return imagePath;
+            // Altrimenti, l'immagine è un URL completo
+            return imagePath;
         }
-      },
-
+    },
 
 });
