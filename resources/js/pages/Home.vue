@@ -34,28 +34,49 @@ export default {
             swiperBreakpoints: {
                 // Configurazione per schermi con larghezza fino a 320px (dispositivi mobili)
                 320: {
-                slidesPerView: 3, // Mostra 3 slide
-                spaceBetween: 1, // Spazio tra le slide
+                slidesPerView: 2, // Mostra 3 slide
+                spaceBetween: 60, // Spazio tra le slide
                 },
                 // Configurazione per schermi con larghezza fino a 425px (dispositivi mobili)
                 425: {
-                slidesPerView: 4, // Mostra 4 slide
-                spaceBetween: 1, // Spazio tra le slide
+                slidesPerView: 3, // Mostra 4 slide
+                spaceBetween: 60, // Spazio tra le slide
                 },
                 // Configurazione per schermi con larghezza fino a 510px (dispositivi mobili)
                 510: {
-                slidesPerView: 5, // Mostra 5 slide
-                spaceBetween: 1, // Spazio tra le slide
+                slidesPerView: 3, // Mostra 5 slide
+                spaceBetween: 80, // Spazio tra le slide
+                },
+
+                570: {
+                slidesPerView: 3, // Mostra 5 slide
+                spaceBetween: 90, // Spazio tra le slide
                 },
                 // Configurazione per schermi con larghezza fino a 640px (dispositivi mobili)
                 640: {
-                slidesPerView: 6, // Mostra 6 slide
-                spaceBetween: 1, // Spazio tra le slide
+                slidesPerView: 4, // Mostra 6 slide
+                spaceBetween: 60, // Spazio tra le slide
+                },
+
+                700: {
+                slidesPerView: 4, // Mostra 6 slide
+                spaceBetween: 60, // Spazio tra le slide
+
+                },
+
+                820: {
+                slidesPerView: 7, // Mostra 6 slide
+                spaceBetween: 30, // Spazio tra le slide
+                },
+                // configurazuiione da 915 in giú
+                915: {
+                slidesPerView: 6, // Mostra 7 slide
+                spaceBetween: 60, // Spazio tra le slide
                 },
                 // Configurazione per schermi con larghezza da 768px a 991px (tablet)
                 991: {
                 slidesPerView: 7, // Mostra 7 slide
-                spaceBetween: 1, // Spazio tra le slide
+                spaceBetween: 50, // Spazio tra le slide
                 },
                 // Configurazione per schermi con larghezza superiore a 1200px (desktop)
                 1200: {

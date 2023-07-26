@@ -214,7 +214,7 @@ export default {
                                 <h5 class=" text-center">{{ dish.name }}</h5>
                                 <div class="card-body">
                                     <span class=""><strong>Ingredienti: </strong>{{ dish.ingredients }}</span>
-                                    <p class="card-text">{{ dish.description }}</p>
+                                    <p class="card-text mt-1">{{ dish.description }}</p>
                                 </div>
                                 <div class="detaildish-cart">
                                     <span class="add">

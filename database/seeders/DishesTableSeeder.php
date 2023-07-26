@@ -17,7 +17,7 @@ class DishesTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i < 40; $i++) {
+        for ($i=0; $i < 60; $i++) {
             //recuperro una ricetta di  un piatto  a random da questa api
             $url = 'https://www.themealdb.com/api/json/v1/1/random.php';
             $data = json_decode(file_get_contents($url)) ;
