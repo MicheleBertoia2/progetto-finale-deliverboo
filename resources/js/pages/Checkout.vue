@@ -11,6 +11,7 @@ export default {
             orderTotal : 0,
             order: [],
             page: 1,
+            isPayed: false,
             customer: {
                 name: "",
                 email: "",
@@ -48,9 +49,13 @@ export default {
         container: '#dropin-container',
         locale: 'it_IT',
         amount: this.orderTotal,
-        }, function (createErr, instance) {
-        button.addEventListener('click', function () {
-            instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
+        }, (createErr, instance) =>{
+        button.addEventListener('click', (event) => {
+            instance.requestPaymentMethod((requestPaymentMethodErr, payload) =>{
+                if (payload) {
+                    this.isPayed = true
+                }
+                console.log(this.isPayed);
             // When the user clicks on the 'Submit payment' button this code will send the
             // encrypted payment information in a variable called a payment method nonce
             $.ajax({
@@ -59,6 +64,7 @@ export default {
                 data: {'paymentMethodNonce': payload.nonce}
             }).done(function(result) {
                 // Tear down the Drop-in UI
+                console.log(result);
                 instance.teardown(function (teardownErr) {
                 if (teardownErr) {
                     console.error('Could not tear down Drop-in UI!');
@@ -113,7 +119,7 @@ export default {
 
         <div class="container" v-show="this.page === 2">
 
-            <form action="#" method="POST" >
+            <!-- <form action="#" method="POST" >
 
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome</label>
@@ -136,14 +142,14 @@ export default {
                 </div>
 
 
-            </form>
-
+            </form> -->
             <div id="dropin-wrapper" >
                 <div id="checkout-message"></div>
                 <div id="dropin-container"></div>
                 <div class="amount-label">Totale: {{ orderTotal.toFixed(2) }} €</div>
                 <button id="submit-button" class="btn btn-primary">Submit payment</button>
             </div>
+
             <button class="btn btn-primary" @click="this.page--">Indietro</button>
 
         </div>
