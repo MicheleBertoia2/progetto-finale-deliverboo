@@ -37,7 +37,7 @@ export default {
     mounted (){
         this.order = JSON.parse(localStorage.getItem('cart'));
         this.calculateOrderTotal();
-
+        const thisVue = this
 
 
         // BRAINTREE DROP-IN
@@ -52,10 +52,7 @@ export default {
         }, (createErr, instance) =>{
         button.addEventListener('click', (event) => {
             instance.requestPaymentMethod((requestPaymentMethodErr, payload) =>{
-                if (payload) {
-                    this.isPayed = true
-                }
-                console.log(this.isPayed);
+
             // When the user clicks on the 'Submit payment' button this code will send the
             // encrypted payment information in a variable called a payment method nonce
             $.ajax({
@@ -64,7 +61,6 @@ export default {
                 data: {'paymentMethodNonce': payload.nonce,}
             }).done(function(result) {
                 // Tear down the Drop-in UI
-                console.log(result);
                 instance.teardown(function (teardownErr) {
                 if (teardownErr) {
                     console.error('Could not tear down Drop-in UI!');
@@ -77,6 +73,23 @@ export default {
 
                 if (result.success) {
                 $('#checkout-message').html('<h1>Success</h1><p>Your Drop-in UI is working! Check your <a href="https://sandbox.braintreegateway.com/login">sandbox Control Panel</a> for your test transactions.</p><p>Refresh to try another transaction.</p>');
+                    $.ajax({
+                    type: 'POST',
+                    url: '/api/order-store',
+                    data: {
+                        // faccio un'altra chiamata in post per mandare i dati allo store degli orders
+                        //uso thisVue invece di this perchè ha lo scope diverso
+                        customer: thisVue.customer,
+                        order: thisVue.order,
+                        orderTotal: thisVue.orderTotal,
+
+                    },
+                    }).done((submitResult) => {
+                    console.log(submitResult);
+                    }).fail((submitError) => {
+
+                    console.error(submitError);
+                    });
                 } else {
                 console.log(result);
                 $('#checkout-message').html('<h1>Error</h1><p>Check your console.</p>');
