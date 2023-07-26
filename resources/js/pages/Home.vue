@@ -8,6 +8,17 @@ import Cart from '../components/Cart.vue';
 import { store } from '../store/store';
 import BtnCart from '../components/BtnCart.vue';
 
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue';
+
+// Import Swiper styles
+import 'swiper/css';
+
+import 'swiper/css/navigation';
+
+
+// import required modules
+import { Navigation } from 'swiper/modules';
 
 export default {
     name:'Home',
@@ -19,7 +30,44 @@ export default {
             title : 'Ecco una selezione di ristoranti per te',
             resTypes : [],
             typeSelected : [],
-
+            // Breakpoints per rendere responsive lo slider
+            swiperBreakpoints: {
+                // Configurazione per schermi con larghezza fino a 320px (dispositivi mobili)
+                320: {
+                slidesPerView: 3, // Mostra 3 slide
+                spaceBetween: 1, // Spazio tra le slide
+                },
+                // Configurazione per schermi con larghezza fino a 425px (dispositivi mobili)
+                425: {
+                slidesPerView: 4, // Mostra 4 slide
+                spaceBetween: 1, // Spazio tra le slide
+                },
+                // Configurazione per schermi con larghezza fino a 510px (dispositivi mobili)
+                510: {
+                slidesPerView: 5, // Mostra 5 slide
+                spaceBetween: 1, // Spazio tra le slide
+                },
+                // Configurazione per schermi con larghezza fino a 640px (dispositivi mobili)
+                640: {
+                slidesPerView: 6, // Mostra 6 slide
+                spaceBetween: 1, // Spazio tra le slide
+                },
+                // Configurazione per schermi con larghezza da 768px a 991px (tablet)
+                991: {
+                slidesPerView: 7, // Mostra 7 slide
+                spaceBetween: 1, // Spazio tra le slide
+                },
+                // Configurazione per schermi con larghezza superiore a 1200px (desktop)
+                1200: {
+                slidesPerView: 7, // Mostra 7 slide come prima
+                spaceBetween: 85, // Spazio tra le slide come prima
+                },
+                // Configurazione per schermi con larghezza superiore a 1660px (desktop)
+                1660: {
+                slidesPerView: 7, // Mostra 7 slide come prima
+                spaceBetween: 100, // Spazio tra le slide come prima
+                },
+            }
 
 
         }
@@ -31,7 +79,14 @@ export default {
         Slider,
         Cart,
         BtnCart,
+        Swiper,
+        SwiperSlide,
 
+    },
+    setup() {
+        return {
+        modules: [Navigation],
+        };
     },
 
     methods:{
@@ -106,29 +161,24 @@ export default {
 
 
         <!-- nuova versione RICERCA -->
-        <div class="d-flex flex-wrap justify-content-evenly align-items-center py-3">
-            <!-- //* prima -->
-            <!-- <label v-for="resType in this.resTypes" :key="resType.id"> -->
-            <!-- //* prima -->
-            <!-- <input type="checkbox" :id="resType.id" :value="resType.id" v-model="typeSelected" >{{ resType.name }}</label> -->
-
-            <div v-for="(resType, index) in this.resTypes" :key="resType.id" class="mx-4 d-flex flex-column">
-
-                <!-- labels //* funziona-->
-                <label class="d-flex justify-content-center align-items-center" style="height: 130px; width: 130px; background-color: #3ABFB4; border-radius: 10px;" :for="resType.id">
-                        <!-- immagini -->
-                        <img :src="`img/${store.typesImages[index]}`" alt="Type Image">
-                </label>
-
-                <div class="d-flex">
-                <!-- checkbox + nome tipologia-->
+        <div class="d-flex flex-wrap justify-content-evenly align-items-center py-3 position-relative">
+            <swiper
+                :navigation="true"
+                :slidesPerView="7"
+                :spaceBetween="85"
+                :breakpoints="swiperBreakpoints"
+                class="mySwiper"
+                :modules="swiperModules"
+            >
+                <swiper-slide v-for="(resType, index) in resTypes" :key="resType.id" class="mx-4 d-flex flex-column">
+                    <label class="d-flex justify-content-center align-items-center" style="height: 130px; width: 130px; background-color: #3ABFB4; border-radius: 10px;" :for="resType.id">
+                    <img :src="`img/${store.typesImages[index]}`" alt="Type Image">
+                    </label>
+                    <div class="d-flex">
                     <input class="me-2" @change="eseguiRicerca" type="checkbox" :id="resType.id" :value="resType.id" v-model="typeSelected"><span>{{ resType.name }}</span>
-                    <!-- prima -->
-                    <!-- <input class="me-2" type="checkbox" :id="resType.id" :value="resType.id" v-model="typeSelected"><span>{{ resType.name }}</span> -->
-                </div>
-            </div>
-            <!-- prima -->
-            <!-- <button class="btn mybadge" @click="eseguiRicerca" :disabled="(!this.typeSelected.length > 0)" >Cerca</button> -->
+                    </div>
+                </swiper-slide>
+            </swiper>
         </div>
         <Loader v-if="!store.loaded" />
 
@@ -170,7 +220,6 @@ export default {
     }
 }
 
-
 .container-inner{
     background-color: white;
     min-height: 400px;
@@ -198,7 +247,6 @@ export default {
 }
 //* // CHECKBOX
 
-
 // .badge{
 //     background-color: #3ABFB4;
 //     background-color: #f05167;
@@ -215,13 +263,11 @@ export default {
     }
 }
 
-
 ul{
     li{
         cursor: pointer;
     }
 }
-
 
 .container-restaurant{
     // background-image: url("/img/pattern-anguria.jpg");
@@ -247,5 +293,28 @@ ul{
     width: 100%;
 }
 
+//* slider
+.swiper {
+width: 100%;
+height: 100%;
+}
+
+.swiper-slide {
+text-align: center;
+font-size: 18px;
+background: #fff;
+
+/* Center slide text vertically */
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.swiper-slide img {
+display: block;
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
 
 </style>
