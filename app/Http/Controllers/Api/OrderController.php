@@ -18,9 +18,18 @@ class OrderController extends Controller
     }
 
     public function payment(Request $request){
-        dd($request->all());
 
-        return view('guest.payment');
+
+        try {
+            $data = $request->all();
+
+
+            // return response()->json(['success' => true, 'message' => 'Payment successful']);
+            return response()->json(['success' => true, 'data' => $data]);
+        } catch (\Exception $e) {
+            // Se si verifica un errore, restituisci una risposta di errore
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+        }
     }
     /**
      * Show the form for creating a new resource.

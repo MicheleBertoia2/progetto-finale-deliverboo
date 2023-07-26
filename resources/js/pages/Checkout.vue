@@ -60,8 +60,8 @@ export default {
             // encrypted payment information in a variable called a payment method nonce
             $.ajax({
                 type: 'POST',
-                url: '/checkout',
-                data: {'paymentMethodNonce': payload.nonce}
+                url: '/api/checkout-order',
+                data: {'paymentMethodNonce': payload.nonce,}
             }).done(function(result) {
                 // Tear down the Drop-in UI
                 console.log(result);
@@ -119,7 +119,7 @@ export default {
 
         <div class="container" v-show="this.page === 2">
 
-            <!-- <form action="#" method="POST" >
+            <form  >
 
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome</label>
@@ -142,7 +142,7 @@ export default {
                 </div>
 
 
-            </form> -->
+            </form>
             <div id="dropin-wrapper" >
                 <div id="checkout-message"></div>
                 <div id="dropin-container"></div>

@@ -29,6 +29,7 @@ Route::namespace('Api')
 
 
         });
+        Route::post('/checkout-order',[OrderController::class, 'payment']);
+        Route::post('/order-store',[OrderController::class, 'store']);
 
-Route::post('checkout-order',[OrderController::class, 'payment']);
 

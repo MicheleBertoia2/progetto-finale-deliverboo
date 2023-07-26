@@ -43,7 +43,7 @@ const router = createRouter({
             meta
         },
         {
-            path: '/checkout',
+            path: '/checkout-order',
             name: 'checkout',
             component: Checkout,
             meta
