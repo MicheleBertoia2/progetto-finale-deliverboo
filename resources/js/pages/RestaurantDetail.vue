@@ -20,6 +20,7 @@ export default {
             timing: 0,
             delivery: '',
             closingTime: '',
+            showError: false,
         }
     },
 
@@ -75,6 +76,7 @@ export default {
             const max = 7.0;
             // Genera un numero casuale compreso tra min e max
             this.kmDistanza = (Math.random() * (max - min) + min).toFixed(1);
+
         },
         getTiming() {
             const min = 10;
@@ -184,7 +186,13 @@ export default {
                                 <div class="btn btn-danger"  @click="dish.isAdded=false, store.removeFromCart(dish.id)"><i class="fa-solid fa-close" ></i></div>
                             </div>
 
-                            <div v-else class="bg-tertiary">Puoi ordinare solo da un ristorante</div>
+                            <div v-else class="bg-tertiary ">
+                                <div class="btn btn-danger svuota" @click="this.store.emptyCart()">Svuota</div>
+                                <strong >
+                                    Puoi ordinare solo da un ristorante
+                                </strong>
+                            </div>
+
                         </div>
                     </div>
                     <div class="overlay" v-if="restaurant.dishes.some(dish => dish.showDetail)">
@@ -235,6 +243,12 @@ export default {
 
 <style lang="scss" scoped>
 .main-container {
+    .svuota{
+        position: fixed;
+        right: 1px;
+        bottom: 100px;
+        z-index: 5;
+    }
     .disabled{
         pointer-events: none;
     }
