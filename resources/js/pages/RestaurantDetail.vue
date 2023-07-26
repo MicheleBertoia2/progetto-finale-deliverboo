@@ -203,9 +203,9 @@ export default {
                                 <img v-if="dish.image_path.includes('http://') || dish.image_path.includes('https://')" :src="dish.image_path"  alt="..."
                                 class="detail-img">
                                 <img v-else  class="detail-img" :src="getImageUrl(dish.image_path)"  alt="...">
-                                <h5 class="card-title text-center">{{ dish.name }}</h5>
+                                <h5 class=" text-center">{{ dish.name }}</h5>
                                 <div class="card-body">
-                                    <p class="card-text"><strong>Ingredienti: </strong>{{ dish.ingredients }}</p>
+                                    <span class=""><strong>Ingredienti: </strong>{{ dish.ingredients }}</span>
                                     <p class="card-text">{{ dish.description }}</p>
                                 </div>
                                 <div class="detaildish-cart">
@@ -321,7 +321,22 @@ export default {
             }
             .imgdishes,img{
                 width: 150px;
+                height: 150px;
                 border-radius: 15px;
+            }
+            .card-body{
+                h5, .card-title{
+                    width: 300px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+                p, .card-text{
+                width: 250px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap; /* Assicura che il testo non venga a capo */
+                }
             }
         }
         .detail-dish {
