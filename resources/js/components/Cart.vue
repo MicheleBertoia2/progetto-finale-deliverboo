@@ -24,7 +24,15 @@
             </li>
           </ul>
           <div v-else><p>Non ci sono elementi nel carrello!</p></div>
-          <div class="mb-btn-close" @click="closeModal"><i class="fa-solid fa-close"></i></div>
+          <div class="mb-btn-close" @click="closeModal"><i class="fa-solid fa-close"></i>
+            </div>
+
+            <div v-if="store.cartItems.length > 0">
+                <h5>Totale Provvisorio: {{ orderTotal.toFixed(2) }}€</h5>
+                <div  class="btn btn-success">
+                    <router-link :to="{ name: 'checkout' }" class="nav-link">Procedi con l'ordine</router-link>
+                </div>
+            </div>
         </div>
       </div>
     </transition>
@@ -47,6 +55,15 @@
         type: Array,
         required: true
       }
+    },
+    computed:{
+        orderTotal() {
+            let total = 0;
+            for (const item of this.cartItems) {
+                total += parseFloat(item.price) * item.quantity;
+            }
+            return total;
+        }
     },
     methods: {
       closeModal() {
