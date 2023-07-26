@@ -12,6 +12,7 @@ export default {
             order: [],
             page: 1,
             isPayed: false,
+            errorPay: false,
             customer: {
                 name: "",
                 email: "",
@@ -73,6 +74,7 @@ export default {
 
                 if (result.success) {
                 $('#checkout-message').html('<h1>Success</h1><p>Your Drop-in UI is working! Check your <a href="https://sandbox.braintreegateway.com/login">sandbox Control Panel</a> for your test transactions.</p><p>Refresh to try another transaction.</p>');
+
                     $.ajax({
                     type: 'POST',
                     url: '/api/order-store',
@@ -86,8 +88,12 @@ export default {
                     },
                     }).done((submitResult) => {
                     console.log(submitResult);
+                    thisVue.page++
+                    thisVue.isPayed = true
+                    store.emptyCart()
                     }).fail((submitError) => {
-
+                        thisVue.page++
+                        thisVue.errorPay = true
                     console.error(submitError);
                     });
                 } else {
@@ -165,6 +171,18 @@ export default {
 
             <button class="btn btn-primary" @click="this.page--">Indietro</button>
 
+        </div>
+
+        <div class="container" v-if="this.page === 3">
+            <div v-if="this.isPayed">
+                <h3>Ordine avvenuto con successo!</h3>
+                <div class="btn btn-secondary">
+                    <router-link :to="{ name: 'home' }" class="nav-link">Torna alla Home</router-link>
+                </div>
+            </div>
+            <div v-if="this.errorPay">
+                <h3>Ops! qualcosa è andato storto</h3>
+            </div>
         </div>
     </div>
 
