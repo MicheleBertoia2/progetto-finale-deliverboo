@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -49,9 +50,18 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $form_data = $request->all();
 
-        return response()->json(['form_data' => $form_data]);
+        try {
+            $form_data = $request->all();
+            $new_order = new Order();
+            $new_order->create($form_data);
+
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            // Se si verifica un errore, restituisci una risposta di errore
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+        }
     }
 
     /**
