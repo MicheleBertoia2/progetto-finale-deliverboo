@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="canvas-container">
       <canvas ref="webgl"></canvas>
     </div>
   </template>
@@ -62,8 +62,8 @@
   </script>
 
   <style>
-    div {
+    .canvas-container{
       width: 100%;
-      height: 100%;
+      height: 600px;
     }
   </style>
