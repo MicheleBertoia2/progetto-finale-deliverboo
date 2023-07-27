@@ -23,127 +23,127 @@ class RestaurantTableSeeder extends Seeder
             [
                     "name" => "Ristorante Italiano",
                     "address"=> "Via Roma 1, Milano",
-                    "image" => "https://img.grouponcdn.com/deal/m1kgC9NYdgyitDE6ZXUV/Pa-700x420/v1/t600x362.jpg"
+                    "image" => "https://images.squarespace-cdn.com/content/v1/5982fa4fe58c62cb28091fa4/1578399820670-9PSKMMZQMBNGFTTTJ9PZ/Pizzeria?format=1000w"
             ],
             [
                     "name"=> "Osteria del Gusto",
                     "address"=> "Piazza Duomo 2",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfWtXcG_Oie5DT_tmIkCXUGblgWfGF7eaVYg&usqp=CAU"
+                    "image" => "https://aalsdnxkwq.cloudimg.io/v7/www.mamablip.com/ir/800/storage/trattoria_osteria_3091652187298.jpg"
                     ],
             [
                     "name"=> "Trattoria da Mario",
                     "address"=> "Corso Italia 3",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzJfzFjVVumyxfxiNZNAF6NmTKPm5IgOOQgA&usqp=CAU"
+                    "image" => "https://res.cloudinary.com/tf-lab/image/upload/w_600,h_310,c_fill,g_auto:subject,q_auto,f_auto/restaurant/d3512fdf-90d6-42c9-a93d-b218efa5a04c/fd527b04-9a04-4883-8f3d-29a5d11159b8.jpg"
                     ],
             [
                     "name"=> "Pizzeria Bella Napoli",
                     "address"=> "Viale Montenero 4",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAHdYuFPGgfBr5KneMTGwoYtrQGFl_L0qwkg&usqp=CAU"
+                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/0d/3e/9e/16/ristorante-bella-napoli.jpg"
                     ],
             [
                     "name"=>  "Ristorante La Cucina",
                     "address"=> "Largo Garibaldi 5",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1eeFiOGqGmZUo8K9yaw3yDi-YV4vH37a-Nw&usqp=CAU"
+                    "image" => "https://images.dissapore.com/wp-content/uploads/2015/01/trattorie-firenze.jpg"
                     ],
             [
                     "name"=>  "Ristorante XYZ",
                     "address"=> "Via Example 6",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT_jBbbN4KZinxY20AdSCYPi5Hx3bTk8zOTg&usqp=CAU"
+                    "image" => "https://www.kayak.it/rimg/himg/02/f1/56/expediav2-6550452-c14ebcf3_z-655573.jpg?width=720&height=576&crop=true"
                     ],
             [
                     "name"=> "Hostaria Romana",
                     "address"=> "Via Milano 7",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFnMKfnChQQB33QtuY_geNsxUzVVWjHRqHlw&usqp=CAU"
+                    "image" => "https://www.southbeachmagazine.com/wp-content/uploads/2014/05/hosteris1030-678x381.jpg"
                     ],
             [
                     "name"=> "Antica Trattoria",
                     "address"=> "Corso Vittorio Emanuele 8",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD6eKjf1ceenwYPLNYLVYrEXUEVkDO9PB0VQ&usqp=CAU"
+                    "image" => "https://uniiti.com//images/shops/logos/logo-425-antica-trattoria-1591029070.png"
                     ],
             [
                     "name"=>  "Kebab Express",
                     "address"=>  "Via della Moscova 9",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjtVOr0Gr2y4_wb22DjiZjyugLOrVYZJtaQg&usqp=CAU"
+                    "image" => "https://10619-2.s.cdn12.com/rests/original/101_509549750.jpg"
                     ],
             [
                     "name"=> "Osteria delle Grazie",
                     "address"=> "Via Dante 10",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRIo6AZ3g4V6K2ZsLT2f0dDTH1AnIsLzpx2w&usqp=CAU"
+                    "image" => "https://10619-2.s.cdn12.com/rests/original/109_521519770.jpg"
                     ],
             [
                     "name"=> "Trattoria al Forno",
                     "address"=>  "Via Manzoni 11",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTok34xcEV2_4cNysd09GKTzPSgUOBoKEr2Sw&usqp=CAU"
+                    "image" => "https://mickeyblog.com/wp-content/uploads/2018/10/Trattoria-al-Forno.jpg"
                     ],
             [
                     "name"=> "Pizzeria da Luigi",
                     "address"=> "Corso Buenos Aires 12",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7QJx-oNR9mY-VgY8gJzT17xidGVM-I6X5Og&usqp=CAU"
+                    "image" => "https://magazine.foodpanda.co.th/wp-content/uploads/sites/14/2017/01/Pizzeria-da-Luigi-2.jpg"
                     ],
             [
                     "name"=> "Ristorante del Porto",
                     "address"=> "Via della Repubblica 13",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhRmIrPPlT9RvNrIqUYxDlJwLxXAAClF_8_w&usqp=CAU"
+                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/15/3d/ca/b5/by-night.jpg"
                     ],
             [
                     "name"=> "Sushi Bar",
                     "address"=>  "Via Solferino 14",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTopom8OIZLVPQ8eTH2RuAIWdD2v3EMKsWcUQ&usqp=CAU"
+                    "image" => "https://cdn.vox-cdn.com/uploads/chorus_asset/file/2491428/15863072062_250732fa67_h.0.jpg"
                     ],
             [
-                    "name"=> "Pasticceria Fantasia",
+                    "name"=> "Trattoria Alla Palazzina",
                     "address"=> "Viale Monte Nero 15",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCTi7qSLx61n8QPTQ7J7KXFpfODefKNfMEaQ&usqp=CAU"
+                    "image" => "https://qul.imgix.net/dbc81b35-7f0e-4bf7-a263-2883ad9dd256/220495_landscape.jpg"
                     ],
             [
                     "name"=> "Ristorante la Pergola",
                     "address"=>  "Largo Treves 16",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsFdfOxq0cGamYG0sVM6_xGKNAgovlli9lIQ&usqp=CAU"
+                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/1d/7c/1b/5a/ristorante-la-pergola.jpg"
                     ],
             [
                     "name"=> "Osteria da Enzo",
                     "address"=>   "Piazza della Scala 17",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRIo6AZ3g4V6K2ZsLT2f0dDTH1AnIsLzpx2w&usqp=CAU"
+                    "image" => "https://zero-media.s3.amazonaws.com/uploads/2015/05/roma_trattoria_da_enzo_trastevere_3.jpg"
                     ],
             [
-                    "name"=> "Ristorante La Brace",
+                    "name"=> "Locanda Del Convento ",
                     "address"=> "Via Turati 18",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsBh28Kul6JeVfVPXP2ddZtHHLs2UpZ2-wYg&usqp=CAU"
+                    "image" => "https://10619-2.s.cdn12.com/rests/original/110_522372635.jpg"
                     ],
             [
-                    "name"=> "Trattoria ai 4 Venti",
+                    "name"=> "Ristorante Coria",
                     "address"=> "Corso Magenta 19",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRIo6AZ3g4V6K2ZsLT2f0dDTH1AnIsLzpx2w&usqp=CAU"
+                    "image" => "https://axwwgrkdco.cloudimg.io/v7/__gmpics__/65292bb625f0471ba2caa84ceba0dd70"
                     ],
             [
                     "name"=> "Pizzeria Napoletana",
                     "address"=> "Via Ponte Vetero 20",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs-tnvR-ZsW6XVSkZCPVB8J97MLmELiPjgZg&usqp=CAU"
+                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/1d/9b/4d/3d/particolare-della-sala.jpg"
                     ],
             [
                     "name"=> "Ristorante da Giovanni",
                     "address"=> "Via Vincenzo Monti 21",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuNvQYwOJZi29NVr20_973ivsoSMUGgF6b8w&usqp=CAU"
+                    "image" => "https://www.repstatic.it/content/contenthub/img/2021/11/10/113709586-17965d10-2457-45ea-b17f-119b9bed9fe3.jpg"
                     ],
             [
                     "name"=> "Osteria del Borgo",
                     "address"=> "Viale Premuda 22",
-                    "image" => "https://img.grouponcdn.com/deal/m1kgC9NYdgyitDE6ZXUV/Pa-700x420/v1/t600x362.jpg"
+                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/18/1f/d0/aa/osteria-del-borgo-ristorante.jpg"
                     ],
             [
                     "name"=> "Ristorante Sakura",
                     "address"=>  "Via Ruggero Settimo 23",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi5l164Y2ytjSe5xNQuD-60yvtYMOATXewwg&usqp=CAU"
+                    "image" => "https://sakura-restaurant.it/wp-content/uploads/2023/02/sakura-san-giuliano-milanese-1.jpg"
                     ],
             [
                     "name"=> "Trattoria Le Rose",
                     "address"=> "Piazza Risorgimento 24",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTryboSwFmX1XsemYk2cHLpI2kj-Ews_33QgQ&usqp=CAU"
+                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/1d/bf/ed/b7/caption.jpg"
                     ],
             [
                     "name"=> "Pizzeria Rosa Blu",
                     "address"=> "Viale Abruzzi 25",
-                    "image" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiLxmZ7hOXvXEeCaQxfestTbyXxZxrRA740Q&usqp=CAU"
+                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/05/df/71/e6/pizzeria-ristorante-la.jpg"
             ]
 
             ];
