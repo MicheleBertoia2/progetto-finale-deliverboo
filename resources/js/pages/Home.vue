@@ -351,18 +351,21 @@ ul {
 }
 .swiper-slide.checked {
     .checked-label {
+        box-shadow: 0px 0px 8px 6px rgba(0,0,0,0.29) inset;
+        -webkit-box-shadow: 0px 0px 8px 6px rgba(0,0,0,0.29) inset;
+        -moz-box-shadow: 0px 0px 8px 6px rgba(0,0,0,0.29) inset;
         background-color: #FE99AE;
         transition: all .5s;
     }
-    .checked-label::after {
+   /* .checked-label::after {
         content: '\2714';
         font-family: "Font Awesome";
         font-size: 25px;
         color: #000000;
         position: absolute;
        // top: 115px;
-        /*top: -15px;
-        left: 3px;*/
+        top: -15px;
+        left: 3px;
         //top: -5px;
        // left: 10px;
         top: -35px;
@@ -371,7 +374,7 @@ ul {
         opacity: 1;
         z-index:100;
         transition: all .5s;
-    }
+    }*/
 
     .fa {
         font-size: 12px;
