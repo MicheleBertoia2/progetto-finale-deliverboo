@@ -141,9 +141,9 @@ class RestaurantTableSeeder extends Seeder
                     "image" => "https://media-cdn.tripadvisor.com/media/photo-s/1d/bf/ed/b7/caption.jpg"
                     ],
             [
-                    "name"=> "Pizzeria Rosa Blu",
+                    "name"=> "Ristorante da Bepo",
                     "address"=> "Viale Abruzzi 25",
-                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/05/df/71/e6/pizzeria-ristorante-la.jpg"
+                    "image" => "https://img.italiaonline.it/0WO0N000000IrfUWAS_13646590.JPG"
             ]
 
             ];
