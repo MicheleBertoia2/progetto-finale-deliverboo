@@ -213,8 +213,9 @@ export default {
                                 <img v-if="dish.image_path.includes('http://') || dish.image_path.includes('https://')" :src="dish.image_path"  alt="..."
                                 class="detail-img">
                                 <img v-else  class="detail-img" :src="getImageUrl(dish.image_path)"  alt="...">
-                                <h5 class=" text-center">{{ dish.name }}</h5>
-                                <div class="card-body">
+                                <h5 class=" text-center m-0 mx-1">{{ dish.name }}</h5>
+                                <div class="card-body p-2">
+                                    <span class="price m-0 my-2 badge bg-dark d-block">{{ dish.price }} &euro;</span>
                                     <span class=""><strong>Ingredienti: </strong>{{ dish.ingredients }}</span>
                                     <p class="card-text mt-1">{{ dish.description }}</p>
                                 </div>
@@ -224,7 +225,7 @@ export default {
                                         <h5>{{ cartQuantity(dish) }}</h5>
                                         <i  @click="store.modifyQuantity(dish,true)" class="fa-solid fa-plus"></i>
                                     </span>
-                                    <button  @click="store.addToCart(dish),dish.isAdded=true" class="btn btn-dark p-1">Aggiungi per {{ dish.price }}&euro;</button>
+                                    <button  @click="store.addToCart(dish),dish.isAdded=true" class="btn btn-dark p-1">Aggiungi Al Carrello</button>
                                 </div>
 
                         </section>
@@ -248,7 +249,7 @@ export default {
     .svuota{
         position: fixed;
         right: 1px;
-        bottom: 100px;
+        bottom: 50px;
         z-index: 5;
     }
     .disabled{
@@ -341,6 +342,9 @@ export default {
                 border-radius: 15px;
             }
             .card-body{
+                .price{
+                    font-size: 1.1rem;
+                }
                 h5, .card-title{
                     width: 300px;
                     overflow: hidden;

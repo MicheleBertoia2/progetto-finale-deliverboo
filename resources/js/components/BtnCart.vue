@@ -22,7 +22,7 @@ export default {
     .btn-cart{
     position: fixed;
     right: 100px;
-    bottom: 100px;
+    bottom: 50px;
     z-index: 5;
     .number{
         height: 15px;
