@@ -18,6 +18,90 @@
                   <img class="img-product " src="/img/jumbo.jpg" alt="">
                   <div class="d-flex flex-column justify-content-start details-product ms-2">
                     <div>Nome Prodotto</div>
+                    <div class="text-muted mt-2 small">Quantità: 1</div>
+                    <div class="d-flex ">
+                      <div class="mt-1 mb-3 btn btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
+                      <div class="mt-1 mb-3 btn btn-quantity bg-primary-color d-flex justify-content-center align-items-center ms-2">+</div>
+                    </div>
+                    <div class="bg-danger rounded p-2 remove-product text-white"><i class="fa-solid fa-trash"></i> Rimuovi</div>
+                  </div>
+                  <div class="mt-2">10.00 €</div>
+              </div>
+
+              <div class="d-flex justify-content-start align-items-start h-item mb-3">
+                  <img class="img-product " src="\img\bg-60.jpg" alt="">
+                  <div class="d-flex flex-column justify-content-start details-product ms-2">
+                    <div>Nome Prodotto</div>
+                    <div class="text-muted mt-2 small">Quantità: 1</div>
+                    <div class="d-flex ">
+                      <div class="mt-1 mb-3 btn btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
+                      <div class="mt-1 mb-3 btn btn-quantity bg-primary-color d-flex justify-content-center align-items-center ms-2">+</div>
+                    </div>
+                    <div class="bg-danger rounded p-2 remove-product text-white"><i class="fa-solid fa-trash"></i> Rimuovi</div>
+                  </div>
+                  <div class="mt-2">10.00 €</div>
+              </div>
+
+              <div class="d-flex justify-content-start align-items-start h-item mb-3">
+                  <img class="img-product " src="/img/jumbo.jpg" alt="">
+                  <div class="d-flex flex-column justify-content-start details-product ms-2">
+                    <div>Nome Prodotto</div>
+                    <div class="text-muted mt-2">Quantità: 1</div>
+                    <div class="d-flex ">
+                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
+                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center ms-2">+</div>
+                    </div>
+                    <div class="bg-danger rounded p-2 remove-product text-white"><i class="fa-solid fa-trash"></i> Rimuovi</div>
+                  </div>
+                  <div class="mt-2">10.00 €</div>
+              </div>
+
+              <div class="d-flex justify-content-start align-items-start h-item mb-3">
+                  <img class="img-product " src="\img\bg-60.jpg" alt="">
+                  <div class="d-flex flex-column justify-content-start details-product ms-2">
+                    <div>Nome Prodotto</div>
+                    <div class="text-muted mt-2">Quantità: 1</div>
+                    <div class="d-flex ">
+                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
+                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center ms-2">+</div>
+                    </div>
+                    <div class="bg-danger rounded p-2 remove-product text-white"><i class="fa-solid fa-trash"></i> Rimuovi</div>
+                  </div>
+                  <div class="mt-2">10.00 €</div>
+              </div>
+
+              <div class="d-flex justify-content-start align-items-start h-item mb-3">
+                  <img class="img-product " src="/img/jumbo.jpg" alt="">
+                  <div class="d-flex flex-column justify-content-start details-product ms-2">
+                    <div>Nome Prodotto</div>
+                    <div class="text-muted mt-2">Quantità: 1</div>
+                    <div class="d-flex ">
+                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
+                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center ms-2">+</div>
+                    </div>
+                    <div class="bg-danger rounded p-2 remove-product text-white"><i class="fa-solid fa-trash"></i> Rimuovi</div>
+                  </div>
+                  <div class="mt-2">10.00 €</div>
+              </div>
+
+              <div class="d-flex justify-content-start align-items-start h-item mb-3">
+                  <img class="img-product " src="\img\bg-60.jpg" alt="">
+                  <div class="d-flex flex-column justify-content-start details-product ms-2">
+                    <div>Nome Prodotto</div>
+                    <div class="text-muted mt-2">Quantità: 1</div>
+                    <div class="d-flex ">
+                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
+                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center ms-2">+</div>
+                    </div>
+                    <div class="bg-danger rounded p-2 remove-product text-white"><i class="fa-solid fa-trash"></i> Rimuovi</div>
+                  </div>
+                  <div class="mt-2">10.00 €</div>
+              </div>
+
+              <div class="d-flex justify-content-start align-items-start h-item mb-3">
+                  <img class="img-product " src="/img/jumbo.jpg" alt="">
+                  <div class="d-flex flex-column justify-content-start details-product ms-2">
+                    <div>Nome Prodotto</div>
                     <div class="text-muted mt-2">Quantità: 1</div>
                     <div class="d-flex ">
                       <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
@@ -47,7 +131,7 @@
             <div class="actions-bar d-flex justify-content-between align-items-end mb-2">
               <div class="tot">Totale: 100 €</div>
               <div class="bg-primary-color p-2 rounded mx-2 btn-order">Procedi all'ordine</div>
-              <div class="bg-danger rounded p-2 text-white"><i class="fa-solid fa-trash"></i> Svota Carrello</div>
+              <div class="bg-danger rounded p-2 text-white"><i class="fa-solid fa-trash"></i> Svuota Carrello</div>
             </div>
 
 
@@ -216,6 +300,7 @@
 
   .remove-product{
     width: 50%;
+    cursor: pointer;
   }
 
   .actions-bar{
@@ -223,12 +308,16 @@
   }
 
   .tot{
-    width: 16%;
+    width: 14.5%;
   }
 
   .btn-order{
-    width: 42%;
+    width: 41.5%;
   }
 
+  .container-items{
+    overflow-y: auto;
+    height: calc(100% - 48px - 104px);
+  }
 
   </style>
