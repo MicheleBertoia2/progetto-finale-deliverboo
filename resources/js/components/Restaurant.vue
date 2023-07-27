@@ -6,7 +6,6 @@ export default {
         restaurant : Object
     },
     created() {
-        console.log(this.restaurant);
     }
 }
 </script>
