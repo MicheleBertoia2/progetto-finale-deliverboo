@@ -114,6 +114,7 @@ export default {
             localStorage.setItem('cart', JSON.stringify(this.store.cartItems));
         }
         },
+
     },
     mounted() {
         const savedCart = localStorage.getItem('cart');
@@ -176,12 +177,12 @@ export default {
                             <h5 class="card-title">{{ dish.name }}</h5>
                             <p class="card-text m-0">{{ dish.ingredients }}</p>
                             <h6 class="my-1"><strong>{{ dish.price }} &euro;</strong></h6>
-                            <a href="#" @click="clickingtrue(dish)"  class="btn mybadge">Dettaglio Prodotto </a>
+                            <a href="#" @click="clickingtrue(dish), store.gethiddencart()"  class="btn mybadge">Dettaglio Prodotto </a>
                             <button  class="btn btn-dark ms-3" @click="store.addToCart(dish),dish.isAdded=true" v-if="!dish.isAdded && isAllItemsFromCurrentRestaurant"><i class="fa-solid fa-cart-shopping"></i></button>
-                            <div v-else-if="dish.isAdded" class="quantity-interface d-flex mt-2">
+                            <div v-else-if="dish.isAdded" class="quantity-interface d-flex mt-2 align-items-center">
                                 <div class="btn btn btn-dark" @click="store.modifyQuantity(dish,false)"><i class="fa-solid fa-minus" ></i></div>
 
-                                <div class="mx-2">{{ cartQuantity(dish) }}</div>
+                                <div class="mx-2"><strong>{{ cartQuantity(dish) }}</strong></div>
 
                                 <div class="btn btn btn-dark" @click="store.modifyQuantity(dish,true)"><i class="fa-solid fa-plus" ></i></div>
                                 <div class="btn btn-danger ms-3"  @click="dish.isAdded=false, store.removeFromCart(dish.id)"><i class="fa-solid fa-close" ></i></div>
@@ -205,7 +206,7 @@ export default {
 
                         class="detail-dish">
                                 <span class="exit d-flex justify-content-evenly w-100 ">
-                                    <button class=" btn btn-dark" @click="clickingtrue(dish)">
+                                    <button class=" btn btn-dark" @click="clickingtrue(dish), store.gethiddencart()">
                                         X
                                     </button>
                                 </span>
@@ -402,6 +403,9 @@ export default {
                 bottom: 0;
                 button{
                     width: 80%;
+                }
+                i{
+                    cursor: pointer;
                 }
             }
             .add{
