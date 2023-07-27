@@ -59,36 +59,6 @@
               </div>
             </div>
 
-          <!-- Contenuto del modal, ad esempio il carrello -->
-          <!-- <h2>Carrello</h2> -->
-          <!-- <div class="btn btn-danger" @click="this.store.emptyCart()">Svuota Carrello</div> -->
-          <!-- <ul v-if="store.cartItems.length > 0"> -->
-            <!-- <li v-for="(item, index) in cartItems" :key="index" class="d-flex"> -->
-                <!-- <div class="imagebox"> -->
-                    <!-- <img :src="store.getFullImageUrl(item.image_path)" :alt="item.name"> -->
-                <!-- </div> -->
-                <!-- <div class="info"> -->
-                    <!-- <h4>{{ item.name }}</h4> -->
-                    <!-- <p>{{ item.description }}</p> -->
-                    <!-- <div class="quantity-interface d-flex"> -->
-                        <!-- <div class="btn btn-secondary" @click="store.modifyQuantity(item,false)"><i class="fa-solid fa-minus"></i></div> -->
-                        <!-- <div class="text-center px-3 py-1 border border-black">{{ item.quantity }}</div> -->
-                        <!-- <div class="btn btn-secondary" @click="store.modifyQuantity(item,true)"><i class="fa-solid fa-plus" ></i></div> -->
-                        <!-- <div class="btn btn-danger" @click="removeFromCartAndEmit(item.id),item.isAdded = false"><i class="fa-solid fa-close" ></i></div> -->
-                    <!-- </div> -->
-                <!-- </div> -->
-
-            <!-- </li> -->
-          <!-- </ul> -->
-
-            <!-- <div class="bg-primary-color ms-2 rounded close-button d-flex justify-content-center align-items-center"><i class="fa-solid fa-close"></i></div> -->
-
-            <!-- <div v-if="store.cartItems.length > 0"> -->
-                <!-- <h5>Totale Provvisorio: {{ orderTotal.toFixed(2) }}€</h5> -->
-                <!-- <div  class="btn btn-success"> -->
-                    <!-- <router-link :to="{ name: 'checkout' }" class="nav-link">Procedi con l'ordine</router-link> -->
-                <!-- </div> -->
-            <!-- </div> -->
         </div>
       </div>
     </transition>
@@ -126,8 +96,6 @@
         this.$emit("close");
       },
 
-
-
       removeFromCartAndEmit(itemId){
         this.store.removeFromCart(itemId)
         const item = this.cartItems.find(item => item.id === itemId);
@@ -139,22 +107,24 @@
   };
   </script>
 
-  <style>
+<style>
+/*serve per chiudere il modal lateralmente*/
   .modal-container {
     position: fixed;
     left: 0;
-    z-index: 5;
+    /*z-index: 5;*/
+    z-index: 10;
     bottom: 0;
     top: 0;
-    width: 550px;
+    /*width: 550px;*/
+    width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
   }
 
-
-  /*serve per chiudere il modal lateralmente*/
   .mb-modal {
     /*width: 500px;*/
+    width: 550px;
     height: 100%;
     background-color: #fff;
     padding: 20px;
@@ -303,4 +273,4 @@
     text-align: center;
   }
 }
-  </style>
+</style>
