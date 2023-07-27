@@ -223,7 +223,7 @@ export default {
                                     <span class="add">
                                         <i  @click="store.modifyQuantity(dish,false)" class=" fa-solid fa-minus mt-1"></i>
                                         <h5 class="">{{ cartQuantity(dish) }}</h5>
-                                        <i  @click="store.modifyQuantity(dish,true)" class="fa-solid fa-plus mt-1"></i>
+                                        <i  @click="store.addToCart(dish),dish.isAdded=true" class="fa-solid fa-plus mt-1"></i>
                                     </span>
                                     <button  @click="store.addToCart(dish),dish.isAdded=true" class="btn btn-dark p-1">Aggiungi Al Carrello</button>
                                 </div>

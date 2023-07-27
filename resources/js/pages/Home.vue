@@ -338,7 +338,7 @@ ul {
 .swiper-slide {
     text-align: center;
     font-size: 18px;
-    background: #fff;
+    background: #ffffff00;
     display: flex;
     justify-content: center;
     align-items: center;

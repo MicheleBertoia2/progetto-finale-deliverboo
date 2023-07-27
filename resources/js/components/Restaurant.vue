@@ -17,6 +17,7 @@ export default {
     <div class="restaurant">
         <router-link  :to="{name: 'RestaurantDetail', params:{slug: restaurant.slug}}" class="text-decoration-none">
             <div class="bg-restaurant d-flex flex-column justify-content-center align-items-center flex-wrap">
+                <img  :src="restaurant.image" alt="">
                 <div class="myBadge text dark d-flex justify-content-center align-items-center">
                     {{ restaurant.name }}
                 </div>
@@ -42,12 +43,21 @@ export default {
 
 
 <style lang="scss" scoped>
+img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    object-fit: cover;
+    border-radius: 10px 10px 0px 0px;
+}
 .restaurant{
         margin: 15px;
         border-radius: 10px;
         background-color: white;
         max-width: 450px;
         flex: 1 0 380px;
+        z-index: 100;
         .info{
             margin-top: 10px;
             display: flex;
@@ -98,8 +108,8 @@ export default {
             background:
                 linear-gradient(
                 rgba(0, 0, 0, 0.3),
-                rgba(0, 0, 0, 0.3)),
-                url('img/prova-ristorante.png');
+                rgba(0, 0, 0, 0.3));
+                //url('img/prova-ristorante.png');
             background-size: cover;
             height: 340px;
             position: relative;
