@@ -3,21 +3,25 @@
       <div v-if="modalOpen" class="modal-container" @click.self="closeModal">
         <div class="mb-modal">
             <div class="d-flex justify-content-between align-items-center">
-                <div>Il tuo ordine</div>
-                <div class="d-flex align-items-center">
+                <h4>Il tuo ordine</h4>
+                <div @click="closeModal" class="d-flex align-items-center cursor-pointer">
                     <div>Chiudi Carrello</div>
                     <div class="bg-primary-color ms-2 rounded close-button d-flex justify-content-center align-items-center"><i class="fa-solid fa-close"></i></div>
                 </div>
             </div>
 
-            <div class="my-3">Stai acquistando da: </div>
+          <div class="mt-5" v-if="store.cartItems.length <= 0">
+            <h4 class="text-center">Il carrello è vuoto</h4>
+          </div>
+
+            <div class="my-3 " v-else>Stai acquistando da: <span class="my-strong"></span></div>
 
             <div class="container-items">
-
-              <div class="d-flex justify-content-start align-items-start h-item mb-3">
+              <!-- //* statico -->
+              <!-- <div class="d-flex justify-content-start align-items-start h-item mb-3">
                   <img class="img-product " src="/img/jumbo.jpg" alt="">
                   <div class="d-flex flex-column justify-content-start details-product ms-2">
-                    <div>Nome Prodotto</div>
+                    <div class="my-strong">Nome Prodotto</div>
                     <div class="text-muted mt-2 small">Quantità: 1</div>
                     <div class="d-flex ">
                       <div class="mt-1 mb-3 btn btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
@@ -25,119 +29,35 @@
                     </div>
                     <div class="bg-danger rounded p-2 remove-product text-white"><i class="fa-solid fa-trash"></i> Rimuovi</div>
                   </div>
-                  <div class="mt-2">10.00 €</div>
-              </div>
+                  <div class="mt-2 my-strong">10.00 €</div>
+              </div> -->
 
-              <div class="d-flex justify-content-start align-items-start h-item mb-3">
-                  <img class="img-product " src="\img\bg-60.jpg" alt="">
+              <!-- //* dinamico -->
+              <div v-for="(item, index) in cartItems" :key="index" class="d-flex justify-content-start align-items-start h-item mb-3">
+                  <img class="img-product " :src="store.getFullImageUrl(item.image_path)" :alt="item.name">
                   <div class="d-flex flex-column justify-content-start details-product ms-2">
-                    <div>Nome Prodotto</div>
-                    <div class="text-muted mt-2 small">Quantità: 1</div>
+                    <div class="my-strong">{{ item.name }}</div>
+                    <div class="text-muted mt-2 small">Quantità: {{ item.quantity }}</div>
                     <div class="d-flex ">
-                      <div class="mt-1 mb-3 btn btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
-                      <div class="mt-1 mb-3 btn btn-quantity bg-primary-color d-flex justify-content-center align-items-center ms-2">+</div>
+                      <div @click="store.modifyQuantity(item,false)" class="mt-1 mb-3 btn btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
+                      <div @click="store.modifyQuantity(item,true)" class="mt-1 mb-3 btn btn-quantity bg-primary-color d-flex justify-content-center align-items-center ms-2">+</div>
                     </div>
-                    <div class="bg-danger rounded p-2 remove-product text-white"><i class="fa-solid fa-trash"></i> Rimuovi</div>
+                    <div @click="removeFromCartAndEmit(item.id),item.isAdded = false" class="bg-danger rounded p-2 remove-product text-white"><i class="fa-solid fa-trash"></i> Rimuovi</div>
                   </div>
-                  <div class="mt-2">10.00 €</div>
-              </div>
-
-              <div class="d-flex justify-content-start align-items-start h-item mb-3">
-                  <img class="img-product " src="/img/jumbo.jpg" alt="">
-                  <div class="d-flex flex-column justify-content-start details-product ms-2">
-                    <div>Nome Prodotto</div>
-                    <div class="text-muted mt-2">Quantità: 1</div>
-                    <div class="d-flex ">
-                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
-                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center ms-2">+</div>
-                    </div>
-                    <div class="bg-danger rounded p-2 remove-product text-white"><i class="fa-solid fa-trash"></i> Rimuovi</div>
-                  </div>
-                  <div class="mt-2">10.00 €</div>
-              </div>
-
-              <div class="d-flex justify-content-start align-items-start h-item mb-3">
-                  <img class="img-product " src="\img\bg-60.jpg" alt="">
-                  <div class="d-flex flex-column justify-content-start details-product ms-2">
-                    <div>Nome Prodotto</div>
-                    <div class="text-muted mt-2">Quantità: 1</div>
-                    <div class="d-flex ">
-                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
-                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center ms-2">+</div>
-                    </div>
-                    <div class="bg-danger rounded p-2 remove-product text-white"><i class="fa-solid fa-trash"></i> Rimuovi</div>
-                  </div>
-                  <div class="mt-2">10.00 €</div>
-              </div>
-
-              <div class="d-flex justify-content-start align-items-start h-item mb-3">
-                  <img class="img-product " src="/img/jumbo.jpg" alt="">
-                  <div class="d-flex flex-column justify-content-start details-product ms-2">
-                    <div>Nome Prodotto</div>
-                    <div class="text-muted mt-2">Quantità: 1</div>
-                    <div class="d-flex ">
-                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
-                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center ms-2">+</div>
-                    </div>
-                    <div class="bg-danger rounded p-2 remove-product text-white"><i class="fa-solid fa-trash"></i> Rimuovi</div>
-                  </div>
-                  <div class="mt-2">10.00 €</div>
-              </div>
-
-              <div class="d-flex justify-content-start align-items-start h-item mb-3">
-                  <img class="img-product " src="\img\bg-60.jpg" alt="">
-                  <div class="d-flex flex-column justify-content-start details-product ms-2">
-                    <div>Nome Prodotto</div>
-                    <div class="text-muted mt-2">Quantità: 1</div>
-                    <div class="d-flex ">
-                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
-                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center ms-2">+</div>
-                    </div>
-                    <div class="bg-danger rounded p-2 remove-product text-white"><i class="fa-solid fa-trash"></i> Rimuovi</div>
-                  </div>
-                  <div class="mt-2">10.00 €</div>
-              </div>
-
-              <div class="d-flex justify-content-start align-items-start h-item mb-3">
-                  <img class="img-product " src="/img/jumbo.jpg" alt="">
-                  <div class="d-flex flex-column justify-content-start details-product ms-2">
-                    <div>Nome Prodotto</div>
-                    <div class="text-muted mt-2">Quantità: 1</div>
-                    <div class="d-flex ">
-                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
-                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center ms-2">+</div>
-                    </div>
-                    <div class="bg-danger rounded p-2 remove-product text-white"><i class="fa-solid fa-trash"></i> Rimuovi</div>
-                  </div>
-                  <div class="mt-2">10.00 €</div>
-              </div>
-
-              <div class="d-flex justify-content-start align-items-start h-item mb-3">
-                  <img class="img-product " src="\img\bg-60.jpg" alt="">
-                  <div class="d-flex flex-column justify-content-start details-product ms-2">
-                    <div>Nome Prodotto</div>
-                    <div class="text-muted mt-2">Quantità: 1</div>
-                    <div class="d-flex ">
-                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
-                      <div class="mt-1 mb-3 btn-quantity bg-primary-color d-flex justify-content-center align-items-center ms-2">+</div>
-                    </div>
-                    <div class="bg-danger rounded p-2 remove-product text-white"><i class="fa-solid fa-trash"></i> Rimuovi</div>
-                  </div>
-                  <div class="mt-2">10.00 €</div>
+                  <div class="mt-2 my-strong">{{ item.price }} €</div>
               </div>
 
             </div>
 
-            <div class="actions-bar d-flex align-items-end">
-              <div class="tot me-2 mt-2">Totale: 100 €</div>
+            <div v-if="store.cartItems.length > 0" class="actions-bar d-flex align-items-end">
+              <div class="tot me-2 mt-2 my-strong">Totale: {{ orderTotal.toFixed(2) }} €</div>
               <div class="footer-card d-flex">
-                <div class="btn-footer-card bg-danger rounded p-2 text-white me-2 mt-2"><i class="fa-solid fa-trash"></i> Svuota Carrello</div>
-                <div class="btn-footer-card bg-primary-color p-2 rounded btn-order mt-2">Procedi all'ordine</div>
+                <div class="btn-footer-card bg-danger rounded p-2 text-white me-2 mt-2" @click="this.store.emptyCart()"><i class="fa-solid fa-trash"></i> Svuota Carrello</div>
+                <router-link class="text-decoration-none" :to="{ name: 'checkout' }">
+                  <div class="btn-footer-card bg-primary-color p-2 rounded btn-order mt-2">Procedi all'ordine</div>
+                </router-link>
               </div>
             </div>
-
-
-
 
           <!-- Contenuto del modal, ad esempio il carrello -->
           <!-- <h2>Carrello</h2> -->
@@ -160,9 +80,8 @@
 
             <!-- </li> -->
           <!-- </ul> -->
-          <!-- <div v-else><p>Non ci sono elementi nel carrello!</p></div> -->
-          <!-- <div class="mb-btn-close" @click="closeModal"><i class="fa-solid fa-close"></i> -->
-            <!-- </div> -->
+
+            <!-- <div class="bg-primary-color ms-2 rounded close-button d-flex justify-content-center align-items-center"><i class="fa-solid fa-close"></i></div> -->
 
             <!-- <div v-if="store.cartItems.length > 0"> -->
                 <!-- <h5>Totale Provvisorio: {{ orderTotal.toFixed(2) }}€</h5> -->
@@ -280,6 +199,9 @@
     background-color: #3ABFB4;
     padding: 8px 13px;
     cursor: pointer;
+      &:hover{
+        color: white;
+      }
   }
 
   .h-item{
@@ -302,6 +224,9 @@
   .btn-quantity{
     border-radius: 5px;
     padding: 4px 12px;
+    &:hover{
+      color: white;
+    }
   }
 
   .remove-product{
@@ -323,9 +248,24 @@
 
   .container-items{
     overflow-y: auto;
-    height: calc(100% - 33px - 104px);
+    height: calc(100% - 41px - 104px);
+    /*height: calc(100% - 65px - 104px);*/
   }
 
+  .my-strong{
+    font-weight: bold;
+  }
+
+.btn-footer-card, .cursor-pointer{
+  cursor: pointer;
+}
+
+.text-decoration-none{
+  color: black;
+  &:hover{
+    color: white;
+  }
+}
 
 @media screen and (max-width: 550px) {
   .modal-container {
