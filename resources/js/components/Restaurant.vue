@@ -7,6 +7,12 @@ export default {
     },
     created() {
         console.log(this.restaurant);
+    },
+    methods:{
+        getImageUrl(imagePath) {
+            // Aggiungo "storage/" al percorso dell'immagine
+            return `storage/${imagePath}`;
+        },
     }
 }
 </script>
@@ -17,7 +23,8 @@ export default {
     <div class="restaurant">
         <router-link  :to="{name: 'RestaurantDetail', params:{slug: restaurant.slug}}" class="text-decoration-none">
             <div class="bg-restaurant d-flex flex-column justify-content-center align-items-center flex-wrap">
-                <img  :src="restaurant.image" alt="">
+                <img v-if="restaurant.image.includes('http://') || restaurant.image.includes('https://')" :src="restaurant.image" class="card-img-top imgdishes " alt="...">
+                        <img v-else :src="getImageUrl(restaurant.image)" class="card-img-top imgdishes " alt="...">
                 <div class="myBadge text dark d-flex justify-content-center align-items-center">
                     {{ restaurant.name }}
                 </div>
