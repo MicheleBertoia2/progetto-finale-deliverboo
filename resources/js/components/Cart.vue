@@ -128,11 +128,11 @@
 
             </div>
 
-            <div class="actions-bar d-flex justify-content-between align-items-end">
+            <div class="actions-bar d-flex align-items-end">
               <div class="tot me-2 mt-2">Totale: 100 €</div>
-              <div class="d-flex">
-                <div class="bg-danger rounded p-2 text-white me-2 mt-2"><i class="fa-solid fa-trash"></i> Svuota Carrello</div>
-                <div class="bg-primary-color p-2 rounded btn-order mt-2">Procedi all'ordine</div>
+              <div class="footer-card d-flex">
+                <div class="btn-footer-card bg-danger rounded p-2 text-white me-2 mt-2"><i class="fa-solid fa-trash"></i> Svuota Carrello</div>
+                <div class="btn-footer-card bg-primary-color p-2 rounded btn-order mt-2">Procedi all'ordine</div>
               </div>
             </div>
 
@@ -343,13 +343,24 @@
   .container-items{
     height: calc(100% - 65px - 104px);
   }
+
   .tot{
     width: 100%;
   }
+
   .actions-bar{
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
+  }
+
+  .footer-card{
+    width: 100%;
+  }
+
+  .btn-footer-card{
+    width: 50%;
+    text-align: center;
   }
 }
   </style>
