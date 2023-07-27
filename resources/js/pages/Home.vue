@@ -21,72 +21,89 @@ import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 
 export default {
-    name:'Home',
+    name: 'Home',
 
-    data(){
-        return{
+    data() {
+        return {
             store,
-            restaurants : [],
-            title : 'Ecco una selezione di ristoranti per te',
-            resTypes : [],
-            typeSelected : [],
-            // Breakpoints per rendere responsive lo slider
+            restaurants: [],
+            title: 'Ecco una selezione di ristoranti per te',
+            resTypes: [],
+            typeSelected: [],
+            isNavigationVisible: true,
             swiperBreakpoints: {
                 // Configurazione per schermi con larghezza fino a 320px (dispositivi mobili)
+                220: {
+                    slidesPerView: 1, // Mostra 3 slide
+                    spaceBetween: 60, // Spazio tra le slide
+                },
                 320: {
-                slidesPerView: 2, // Mostra 3 slide
-                spaceBetween: 60, // Spazio tra le slide
+                    slidesPerView: 2, // Mostra 3 slide
+                    spaceBetween: 60, // Spazio tra le slide
                 },
                 // Configurazione per schermi con larghezza fino a 425px (dispositivi mobili)
                 425: {
-                slidesPerView: 3, // Mostra 4 slide
-                spaceBetween: 60, // Spazio tra le slide
+                    slidesPerView: 2, // Mostra 4 slide
+                    spaceBetween: 70, // Spazio tra le slide
                 },
                 // Configurazione per schermi con larghezza fino a 510px (dispositivi mobili)
                 510: {
-                slidesPerView: 3, // Mostra 5 slide
-                spaceBetween: 80, // Spazio tra le slide
+                    slidesPerView: 3, // Mostra 5 slide
+                    spaceBetween: 80, // Spazio tra le slide
                 },
 
                 570: {
-                slidesPerView: 3, // Mostra 5 slide
-                spaceBetween: 90, // Spazio tra le slide
+                    slidesPerView: 3, // Mostra 5 slide
+                    spaceBetween: 90, // Spazio tra le slide
                 },
                 // Configurazione per schermi con larghezza fino a 640px (dispositivi mobili)
                 640: {
-                slidesPerView: 4, // Mostra 6 slide
-                spaceBetween: 60, // Spazio tra le slide
+                    slidesPerView: 4, // Mostra 6 slide
+                    spaceBetween: 60, // Spazio tra le slide
                 },
 
                 700: {
-                slidesPerView: 4, // Mostra 6 slide
-                spaceBetween: 60, // Spazio tra le slide
+                    slidesPerView: 4, // Mostra 6 slide
+                    spaceBetween: 60, // Spazio tra le slide
 
                 },
 
                 820: {
-                slidesPerView: 7, // Mostra 6 slide
-                spaceBetween: 30, // Spazio tra le slide
+                    slidesPerView: 5, // Mostra 6 slide
+                    spaceBetween: 30, // Spazio tra le slide
                 },
                 // configurazuiione da 915 in giú
                 915: {
-                slidesPerView: 6, // Mostra 7 slide
-                spaceBetween: 60, // Spazio tra le slide
+                    slidesPerView: 5, // Mostra 7 slide
+                    spaceBetween: 60, // Spazio tra le slide
                 },
                 // Configurazione per schermi con larghezza da 768px a 991px (tablet)
                 991: {
-                slidesPerView: 7, // Mostra 7 slide
-                spaceBetween: 50, // Spazio tra le slide
+                    slidesPerView: 5, // Mostra 7 slide
+                    spaceBetween: 70, // Spazio tra le slide
+                },
+                1030: {
+                    slidesPerView: 5, // Mostra 7 slide
+                    spaceBetween: 70, // Spazio tra le slide
+                },
+                1085: {
+                    slidesPerView: 5, // Mostra 7 slide
+                    spaceBetween: 90, // Spazio tra le slide
                 },
                 // Configurazione per schermi con larghezza superiore a 1200px (desktop)
                 1200: {
-                slidesPerView: 7, // Mostra 7 slide come prima
-                spaceBetween: 85, // Spazio tra le slide come prima
+                    slidesPerView: 5, // Mostra 7 slide come prima
+                    spaceBetween: 120, // Spazio tra le slide come prima
+                },
+
+                1415: {
+                    slidesPerView: 5, // Mostra 7 slide come prima
+                    spaceBetween: 150, // Spazio tra le slide come prima
                 },
                 // Configurazione per schermi con larghezza superiore a 1660px (desktop)
                 1660: {
-                slidesPerView: 7, // Mostra 7 slide come prima
-                spaceBetween: 100, // Spazio tra le slide come prima
+                    slidesPerView: 7, // Mostra 7 slide come prima
+                    spaceBetween: 100, // Spazio tra le slide come prima
                 },
             }
 
@@ -102,17 +119,16 @@ export default {
         BtnCart,
         Swiper,
         SwiperSlide,
-
     },
     setup() {
         return {
-        modules: [Navigation],
+            modules: [Navigation],
         };
     },
 
-    methods:{
+    methods: {
 
-        getApi(endpoint = store.apiUrl + 'restaurants'){
+        getApi(endpoint = store.apiUrl + 'restaurants') {
             store.loaded = false;
             axios.get(endpoint)
                 .then(res => {
@@ -122,46 +138,54 @@ export default {
                     store.loaded = true;
                 })
 
-            },
+        },
 
         eseguiRicerca() {
-        console.log(this.typeSelected);
+            console.log(this.typeSelected);
 
-        axios.get(store.apiUrl + 'restaurants/typesearch')
-            .then(response => {
-            // prendo tutti i ristoranti dalla chiamata dell'API
-            let allRestaurants = response.data.restaurants;
+            axios.get(store.apiUrl + 'restaurants/typesearch')
+                .then(response => {
+                    // prendo tutti i ristoranti dalla chiamata dell'API
+                    let allRestaurants = response.data.restaurants;
 
-            // li filtro in base agli id dei tipi selezionati
-            this.restaurants = allRestaurants.filter(ristorante => {
-                // utilizzo il metodo `every()` per verificare se ogni id della tipologia selezionata è incluso nell'array delle tipologie del ristorante corrente
-                // il metodo `every()` restituisce true solo se tutti gli elementi dell'array soddisfano la condizione specificata
-                return this.typeSelected.every(typeId => ristorante.types.some(type => type.id === typeId));
-            });
+                    // li filtro in base agli id dei tipi selezionati
+                    this.restaurants = allRestaurants.filter(ristorante => {
+                        // utilizzo il metodo `every()` per verificare se ogni id della tipologia selezionata è incluso nell'array delle tipologie del ristorante corrente
+                        // il metodo `every()` restituisce true solo se tutti gli elementi dell'array soddisfano la condizione specificata
+                        return this.typeSelected.every(typeId => ristorante.types.some(type => type.id === typeId));
+                    });
 
-            this.title = 'Risultati';
-            store.loaded = true;
-            })
-            .catch(error => {
-            console.log(error);
-            });
+                    this.title = 'Risultati';
+                    store.loaded = true;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+        onWindowResize() {
+            this.isNavigationVisible = window.innerWidth >= 768;
         },
 
     },
 
-    mounted(){
+    mounted() {
+
+        window.addEventListener('resize', this.onWindowResize);
+        this.onWindowResize();
         this.getApi()
         // Carica il carrello salvato nel localStorage al momento del caricamento della pagina
         const savedCart = localStorage.getItem('cart');
         if (savedCart) {
             store.cartItems = JSON.parse(savedCart);
-            }
-    }
+        }
+    },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.onWindowResize);
+    },
 }
 </script>
 
 <template>
-
     <div class="jumbotron">
         <img src="img/jumbo.jpg" alt="jumbotron">
     </div>
@@ -182,21 +206,17 @@ export default {
 
 
         <!-- nuova versione RICERCA -->
-        <div class="d-flex flex-wrap justify-content-evenly align-items-center py-3 position-relative">
-            <swiper
-                :navigation="true"
-                :slidesPerView="7"
-                :spaceBetween="85"
-                :breakpoints="swiperBreakpoints"
-                class="mySwiper"
-                :modules="swiperModules"
-            >
-                <swiper-slide v-for="(resType, index) in resTypes" :key="resType.id" class="mx-4 d-flex flex-column">
-                    <label class="d-flex justify-content-center align-items-center" style="height: 130px; width: 130px; background-color: #3ABFB4; border-radius: 10px;" :for="resType.id">
-                    <img :src="`img/${store.typesImages[index]}`" alt="Type Image">
+        <div class="d-flex flex-wrap justify-content-evenly align-items-center position-relative">
+            <swiper  :navigation="isNavigationVisible" :slidesPerView="7" :spaceBetween="30" :breakpoints="swiperBreakpoints"
+                class="mySwiper" :modules="swiperModules">
+                <swiper-slide  v-for="(resType, index) in resTypes" :key="resType.id" class="mx-4 d-flex flex-column "
+                    :class="{ 'checked': typeSelected.includes(resType.id) }">
+                    <label @click="changeCheck()" class="d-flex justify-content-center align-items-center checked-label" :for="resType.id">
+                        <img  :src="`img/${store.typesImages[index]}`" alt="Type Image">
                     </label>
-                    <div class="d-flex">
-                    <input class="me-2" @change="eseguiRicerca" type="checkbox" :id="resType.id" :value="resType.id" v-model="typeSelected"><span>{{ resType.name }}</span>
+                    <div class="d-flex type-container mb-4">
+                        <input class="me-2" @change="eseguiRicerca" type="checkbox" :id="resType.id" :value="resType.id"
+                            v-model="typeSelected"><span class="type-name badge myBadge ">{{ resType.name }}</span>
                     </div>
                 </swiper-slide>
             </swiper>
@@ -204,13 +224,11 @@ export default {
         <Loader v-if="!store.loaded" />
 
         <div v-else class="container-restaurant">
-            <!-- <span class="badge bg-pink">{{ title }}</span> -->
-            <!-- <span class="badge mybadge">{{ title }}</span> -->
             <h1>{{ title }}</h1>
 
             <div v-if="restaurants.length > 0" class="wrapper">
 
-                <Restaurant v-for="restaurant in this.restaurants" :key="restaurant" :restaurant="restaurant"/>
+                <Restaurant v-for="restaurant in this.restaurants" :key="restaurant" :restaurant="restaurant" />
 
             </div>
             <div v-else class="wrapper">
@@ -223,8 +241,7 @@ export default {
 
     <Cart :modalOpen="store.showModal" :cartItems="store.cartItems" @close="store.showModal = false" />
 
-    <BtnCart/>
-
+    <BtnCart />
 </template>
 
 
@@ -234,6 +251,7 @@ export default {
 .jumbotron {
     height: 600px;
     width: 100%;
+
     img {
         object-fit: cover;
         width: 100%;
@@ -241,7 +259,7 @@ export default {
     }
 }
 
-.container-inner{
+.container-inner {
     background-color: white;
     min-height: 400px;
     width: 100%;
@@ -249,33 +267,13 @@ export default {
 
 //* sezione CHECKBOX
 
-.custom-checkbox{
+.custom-checkbox {
     width: 100%;
 }
-
-.mybadge {
-    transition: all .5s;
-    color: black;
-    background-color: #3ABFB4 !important;
-    // height: 40px;
-    font-size: 2rem;
-    margin: 40px 50px;
-    border-radius: 15px;
-
-    // &:hover {
-        // color: white;
-    // }
+.myBadge{
+    background-color: rgba(0, 0, 0, 0.87);
+    color: #f3f3f3ec;
 }
-//* // CHECKBOX
-
-// .badge{
-//     background-color: #3ABFB4;
-//     background-color: #f05167;
-//     color: black;
-//     font-size: 30px;
-//     margin: 50px;
-// }
-
 .btn-dark {
     transition: all .5s;
 
@@ -283,14 +281,13 @@ export default {
         color: #3ABFB4 !important;
     }
 }
-
-ul{
-    li{
+ul {
+    li {
         cursor: pointer;
     }
 }
 
-.container-restaurant{
+.container-restaurant {
     // background-image: url("/img/pattern-anguria.jpg");
     background-image: url("/img/bg-60.jpg");
 
@@ -301,12 +298,11 @@ ul{
     background-size: 100%;
     background-repeat: no-repeat;
 
-    h1{
+    h1 {
         padding: 50px;
     }
 }
-
-.wrapper{
+.wrapper {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -317,26 +313,98 @@ ul{
 
 //* slider
 .swiper {
-width: 100%;
-height: 100%;
+    width: 100%;
+    //cambio da 100% a height fissa
+    height: 180px;
+    label{
+        position: relative;
+        img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+    .type-container{
+        position: relative;
+    }
+    .type-name{
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+        top: 15px;
+    }
 }
-
 .swiper-slide {
-text-align: center;
-font-size: 18px;
-background: #fff;
-
-/* Center slide text vertically */
-display: flex;
-justify-content: center;
-align-items: center;
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
-.swiper-slide img {
-display: block;
-width: 100%;
-height: 100%;
-object-fit: cover;
+.swiper-slide .checked-label {
+    height: 80px;
+    width: 150px;
+    background-color: #3ABFB4;
+    border-radius: 10px;
+    cursor:pointer;
 }
+.swiper-slide.checked {
+    .checked-label {
+        box-shadow: 0px 0px 8px 6px rgba(0,0,0,0.29) inset;
+        -webkit-box-shadow: 0px 0px 8px 6px rgba(0,0,0,0.29) inset;
+        -moz-box-shadow: 0px 0px 8px 6px rgba(0,0,0,0.29) inset;
+        background-color: #FE99AE;
+        transition: all .5s;
+    }
+   /* .checked-label::after {
+        content: '\2714';
+        font-family: "Font Awesome";
+        font-size: 25px;
+        color: #000000;
+        position: absolute;
+       // top: 115px;
+        top: -15px;
+        left: 3px;
+        //top: -5px;
+       // left: 10px;
+        top: -35px;
+        left: 50%;
+        transform: translate(-50%);
+        opacity: 1;
+        z-index:100;
+        transition: all .5s;
+    }*/
 
+    .fa {
+        font-size: 12px;
+        color: white;
+        position: absolute;
+        top: 2px;
+        left: 3px;
+        opacity: 0; // Nasconde l'icona inizialmente
+        transition: opacity 0.2s;
+        }
+    }
+    input[type="checkbox"] {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        line-height: 0;
+        overflow: hidden;
+        width: 0;
+        height: 0;
+        padding: 0;
+        margin: 0;
+    }
+
+
+@media screen and (max-width: 767px) {
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        display: none;
+    }
+}
 </style>
