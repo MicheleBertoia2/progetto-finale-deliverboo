@@ -211,7 +211,7 @@ export default {
                 class="mySwiper" :modules="swiperModules">
                 <swiper-slide  v-for="(resType, index) in resTypes" :key="resType.id" class="mx-4 d-flex flex-column "
                     :class="{ 'checked': typeSelected.includes(resType.id) }">
-                    <label @click="changeCheck()" class="d-flex justify-content-center align-items-center checked-label" :for="resType.id">
+                    <label  class="d-flex justify-content-center align-items-center checked-label" :for="resType.id">
                         <img  :src="`img/${store.typesImages[index]}`" alt="Type Image">
                     </label>
                     <div class="d-flex type-container mb-4">
