@@ -128,10 +128,12 @@
 
             </div>
 
-            <div class="actions-bar d-flex justify-content-between align-items-end mb-2">
-              <div class="tot">Totale: 100 €</div>
-              <div class="bg-primary-color p-2 rounded mx-2 btn-order">Procedi all'ordine</div>
-              <div class="bg-danger rounded p-2 text-white"><i class="fa-solid fa-trash"></i> Svuota Carrello</div>
+            <div class="actions-bar d-flex justify-content-between align-items-end">
+              <div class="tot me-2 mt-2">Totale: 100 €</div>
+              <div class="d-flex">
+                <div class="bg-danger rounded p-2 text-white me-2 mt-2"><i class="fa-solid fa-trash"></i> Svuota Carrello</div>
+                <div class="bg-primary-color p-2 rounded btn-order mt-2">Procedi all'ordine</div>
+              </div>
             </div>
 
 
@@ -224,13 +226,16 @@
     left: 0;
     z-index: 5;
     bottom: 0;
+    top: 0;
     width: 550px;
-    height: 100vh;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
   }
 
+
+  /*serve per chiudere il modal lateralmente*/
   .mb-modal {
-    width: 500px;
+    /*width: 500px;*/
     height: 100%;
     background-color: #fff;
     padding: 20px;
@@ -290,7 +295,8 @@
 
   .details-product{
     height: 150px;
-    width: 215px;
+    /*width: 215px;*/
+    width: 45%;
   }
 
   .btn-quantity{
@@ -312,12 +318,38 @@
   }
 
   .btn-order{
-    width: 41.5%;
+    /*width: 41.5%;*/
   }
 
   .container-items{
     overflow-y: auto;
-    height: calc(100% - 48px - 104px);
+    height: calc(100% - 33px - 104px);
   }
 
+
+@media screen and (max-width: 550px) {
+  .modal-container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 515px) {
+  .remove-product{
+    width: 53%;
+  }
+}
+
+@media screen and (max-width: 332px) {
+  .container-items{
+    height: calc(100% - 65px - 104px);
+  }
+  .tot{
+    width: 100%;
+  }
+  .actions-bar{
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+}
   </style>
