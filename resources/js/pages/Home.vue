@@ -31,6 +31,7 @@ export default {
             resTypes: [],
             typeSelected: [],
             isNavigationVisible: true,
+            currentPage: 1,
             swiperBreakpoints: {
                 // Configurazione per schermi con larghezza fino a 320px (dispositivi mobili)
                 220: {
@@ -135,6 +136,7 @@ export default {
 
                     this.restaurants = res.data.restaurants;
                     this.resTypes = res.data.types;
+                    this.title ='Ecco una selezione di ristoranti per te';
                     store.loaded = true;
                 })
 
@@ -142,30 +144,59 @@ export default {
 
         eseguiRicerca() {
             console.log(this.typeSelected);
+            if (this.typeSelected.length === 0) {
+                this.getApi()
+            }else{
 
-            axios.get(store.apiUrl + 'restaurants/typesearch')
-                .then(response => {
-                    // prendo tutti i ristoranti dalla chiamata dell'API
-                    let allRestaurants = response.data.restaurants;
+                axios.get(store.apiUrl + 'restaurants/typesearch')
+                    .then(response => {
+                        // prendo tutti i ristoranti dalla chiamata dell'API
+                        let allRestaurants = response.data.restaurants;
 
-                    // li filtro in base agli id dei tipi selezionati
-                    this.restaurants = allRestaurants.filter(ristorante => {
-                        // utilizzo il metodo `every()` per verificare se ogni id della tipologia selezionata è incluso nell'array delle tipologie del ristorante corrente
-                        // il metodo `every()` restituisce true solo se tutti gli elementi dell'array soddisfano la condizione specificata
-                        return this.typeSelected.every(typeId => ristorante.types.some(type => type.id === typeId));
+                        // li filtro in base agli id dei tipi selezionati
+                        this.restaurants = allRestaurants.filter(ristorante => {
+                            // utilizzo il metodo `every()` per verificare se ogni id della tipologia selezionata è incluso nell'array delle tipologie del ristorante corrente
+                            // il metodo `every()` restituisce true solo se tutti gli elementi dell'array soddisfano la condizione specificata
+                            return this.typeSelected.every(typeId => ristorante.types.some(type => type.id === typeId));
+                        });
+
+                        this.title = 'Risultati';
+                        store.loaded = true;
+                    })
+                    .catch(error => {
+                        console.log(error);
                     });
+            }
 
-                    this.title = 'Risultati';
-                    store.loaded = true;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
         },
         onWindowResize() {
             this.isNavigationVisible = window.innerWidth >= 768;
         },
+        nextPage() {
+            if (this.currentPage < this.totalPages) {
+            this.currentPage++;
+            }
+        },
+        prevPage() {
+            if (this.currentPage > 1) {
+            this.currentPage--;
+            }
+        }
 
+    },
+
+    computed:{
+        paginatedRestaurants() {
+            const pageSize = 6;
+            const currentPage = this.currentPage;
+            const startIndex = (currentPage - 1) * pageSize;
+            const endIndex = startIndex + pageSize;
+            return this.restaurants.slice(startIndex, endIndex);
+        },
+        totalPages() {
+            const pageSize = 6;
+            return Math.ceil(this.restaurants.length / pageSize);
+        }
     },
 
     mounted() {
@@ -226,15 +257,20 @@ export default {
         <div v-else class="container-restaurant">
             <h1>{{ title }}</h1>
 
-            <div v-if="restaurants.length > 0" class="wrapper">
+            <div v-if="paginatedRestaurants.length > 0" class="wrapper">
 
-                <Restaurant v-for="restaurant in this.restaurants" :key="restaurant" :restaurant="restaurant" />
+                <Restaurant v-for="restaurant in paginatedRestaurants" :key="restaurant" :restaurant="restaurant" />
 
             </div>
             <div v-else class="wrapper">
 
                 <h2>Non ci sono risultati</h2>
 
+            </div>
+            <div class="pagination">
+                <button @click="prevPage" :disabled="currentPage === 1">Previous</button>
+                <div class="page">{{ this.currentPage }}</div>
+                <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
             </div>
         </div>
     </div>
@@ -398,6 +434,37 @@ ul {
         padding: 0;
         margin: 0;
     }
+
+    .pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    background-color: #3ABFB4;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .pagination .page{
+    margin: 0 5px;
+    padding: 5px 10px;
+    background-color: #3ABFB4;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+  }
+
+  .pagination button:disabled {
+    background-color: #ccc;
+  }
 
 
 @media screen and (max-width: 767px) {
