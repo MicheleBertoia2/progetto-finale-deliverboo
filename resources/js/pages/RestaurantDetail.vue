@@ -37,7 +37,7 @@ export default {
                 return true; // Consideriamo il carrello vuoto come "tutti gli elementi del ristorante corrente"
             }
             return this.store.cartItems.every(item => item.restaurant_id === this.restaurant.id);
-        }
+        },
     },
 
     methods: {
@@ -125,7 +125,6 @@ export default {
         if (savedCart) {
             store.cartItems = JSON.parse(savedCart);
 
-
         }
 
     }
@@ -142,8 +141,8 @@ export default {
                 <router-link class="arrow badge bg-dark" :to="{ name: 'home' }"><i class="fa-solid fa-arrow-left"></i>
                     Indietro</router-link>
                 <div>
-                    <img v-if="checkImgRestaurant('../../img/placeholder-img.png')" src="../../img/placeholder-img.png" alt="placeholder">
-                    <img v-else :src="restaurant.image" alt="restaurant-img">
+                    <img class="rounded" v-if="checkImgRestaurant('../../img/placeholder-img.png')" src="../../img/placeholder-img.png" alt="placeholder">
+                    <img v-else class="rounded" :src="restaurant.image" alt="restaurant-img">
                     <!-- //* funziona l'immagine dinamica ma non con il placholder (salvato nello storage)  -->
                     <!-- <img :src="restaurant.image" alt=""> -->
                     <!-- <img :src="`${restaurant.image}`" alt=""> -->
@@ -171,19 +170,21 @@ export default {
             <div class="dishes d-flex containers flex-wrap py-5">
                 <div v-for="(dish, i) in restaurant.dishes" :key="i" class="cards d-flex mt-5 ms-4" >
                     <div class="d-flex dish " :class="{'hidden': dish.showDetail}">
-                        <img v-if="dish.image_path.includes('http://') || dish.image_path.includes('https://')" :src="dish.image_path" class="card-img-top imgdishes" alt="...">
-                        <img v-else :src="getImageUrl(dish.image_path)" class="card-img-top imgdishes" alt="...">
+                        <img v-if="dish.image_path.includes('http://') || dish.image_path.includes('https://')" :src="dish.image_path" class="card-img-top imgdishes " alt="...">
+                        <img v-else :src="getImageUrl(dish.image_path)" class="card-img-top imgdishes " alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ dish.name }}</h5>
-                            <p class="card-text">{{ dish.ingredients }}</p>
-                            <a href="#" @click="clickingtrue(dish)"  class="btn mybadge">Dettaglio Prodotto</a>
+                            <p class="card-text m-0">{{ dish.ingredients }}</p>
+                            <h6 class="my-1"><strong>{{ dish.price }} &euro;</strong></h6>
+                            <a href="#" @click="clickingtrue(dish)"  class="btn mybadge">Dettaglio Prodotto </a>
                             <button  class="btn btn-dark ms-3" @click="store.addToCart(dish),dish.isAdded=true" v-if="!dish.isAdded && isAllItemsFromCurrentRestaurant"><i class="fa-solid fa-cart-shopping"></i></button>
+                            <div v-else-if="dish.isAdded" class="quantity-interface d-flex mt-2">
+                                <div class="btn btn btn-dark" @click="store.modifyQuantity(dish,false)"><i class="fa-solid fa-minus" ></i></div>
 
-                            <div v-else-if="dish.isAdded" class="quantity-interface d-flex">
-                                <div class="btn btn-secondary" @click="store.modifyQuantity(dish,false)"><i class="fa-solid fa-minus" ></i></div>
-                                <div >{{ cartQuantity(dish) }}</div>
-                                <div class="btn btn-secondary" @click="store.modifyQuantity(dish,true)"><i class="fa-solid fa-plus" ></i></div>
-                                <div class="btn btn-danger"  @click="dish.isAdded=false, store.removeFromCart(dish.id)"><i class="fa-solid fa-close" ></i></div>
+                                <div class="mx-2">{{ cartQuantity(dish) }}</div>
+
+                                <div class="btn btn btn-dark" @click="store.modifyQuantity(dish,true)"><i class="fa-solid fa-plus" ></i></div>
+                                <div class="btn btn-danger ms-3"  @click="dish.isAdded=false, store.removeFromCart(dish.id)"><i class="fa-solid fa-close" ></i></div>
                             </div>
 
                             <div v-else class="bg-tertiary ">
@@ -218,11 +219,11 @@ export default {
                                 </div>
                                 <div class="detaildish-cart">
                                     <span class="add">
-                                        <i class=" fa-solid fa-minus"></i>
-                                        <h5>1</h5>
-                                        <i class="fa-solid fa-plus"></i>
+                                        <i  @click="store.modifyQuantity(dish,false)" class=" fa-solid fa-minus"></i>
+                                        <h5>{{ cartQuantity(dish) }}</h5>
+                                        <i  @click="store.modifyQuantity(dish,true)" class="fa-solid fa-plus"></i>
                                     </span>
-                                    <button class="btn btn-dark p-1">Aggiungi per {{ dish.price }}&euro;</button>
+                                    <button  @click="store.addToCart(dish),dish.isAdded=true" class="btn btn-dark p-1">Aggiungi per {{ dish.price }}&euro;</button>
                                 </div>
 
                         </section>
