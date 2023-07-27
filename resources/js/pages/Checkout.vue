@@ -19,6 +19,29 @@ export default {
                 phone: "",
                 address: "",
             },
+            isFieldTouched: {
+                name: false,
+                email: false,
+                phone: false,
+                address: false,
+            },
+        }
+    },
+
+    computed:{
+        // computed con regole di validazione del form
+        isFormValid() {
+        const isNameValid = this.customer.name.trim().length >= 3;
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const isEmailValid = emailPattern.test(this.customer.email.trim());
+
+        const phonePattern = /^\d{10}$/;
+        const isPhoneValid = phonePattern.test(this.customer.phone.trim());
+
+        const isAddressValid = this.customer.address.trim().length >= 8;
+
+        return isNameValid && isEmailValid && isPhoneValid && isAddressValid;
         }
     },
 
@@ -29,7 +52,41 @@ export default {
                 total += parseFloat(item.price) * item.quantity;
             }
             this.orderTotal = total;
-            },
+        },
+        // metodiper mostrare il messaggio di errore solo se il  campo viene toccato
+        validateName() {
+        this.isFieldTouched.name = true;
+
+        // se il campo è valido resetto la proprietà isTouched per nascondere l'errore, vale per tutti i controlli
+        if (this.customer.name.trim().length >= 3) {
+            this.isFieldTouched.name = false;
+        }
+        },
+
+        validateEmail() {
+        this.isFieldTouched.email = true;
+
+        if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.customer.email.trim())) {
+            this.isFieldTouched.email = false;
+        }
+        },
+
+        validatePhone() {
+        this.isFieldTouched.phone = true;
+
+        if (/^\d{10}$/.test(this.customer.phone.trim())) {
+            this.isFieldTouched.phone = false;
+        }
+        },
+
+        validateAddress() {
+        this.isFieldTouched.address = true;
+
+        if (this.customer.address.trim().length >= 8) {
+            this.isFieldTouched.address = false;
+        }
+        },
+
 
 
 
@@ -37,73 +94,80 @@ export default {
 
     mounted (){
         this.order = JSON.parse(localStorage.getItem('cart'));
-        this.calculateOrderTotal();
-        const thisVue = this
+        if (this.order.length === 0) {
+            this.$router.push({ name: 'home' });
+
+        }else{this.calculateOrderTotal();
+            const thisVue = this
 
 
-        // BRAINTREE DROP-IN
-        var button = document.querySelector('#submit-button');
+            // BRAINTREE DROP-IN
+            var button = document.querySelector('#submit-button');
 
-        braintree.dropin.create({
-        // Insert your tokenization key here
-        authorization: 'sandbox_q7wkxr96_rntzhj86v4qk7kgg',
-        container: '#dropin-container',
-        locale: 'it_IT',
-        amount: this.orderTotal,
-        }, (createErr, instance) =>{
-        button.addEventListener('click', (event) => {
-            instance.requestPaymentMethod((requestPaymentMethodErr, payload) =>{
+            braintree.dropin.create({
+            // Insert your tokenization key here
+            authorization: 'sandbox_q7wkxr96_rntzhj86v4qk7kgg',
+            container: '#dropin-container',
+            locale: 'it_IT',
+            amount: this.orderTotal,
+            }, (createErr, instance) =>{
+            button.addEventListener('click', (event) => {
+                instance.requestPaymentMethod((requestPaymentMethodErr, payload) =>{
 
-            // When the user clicks on the 'Submit payment' button this code will send the
-            // encrypted payment information in a variable called a payment method nonce
-            $.ajax({
-                type: 'POST',
-                url: '/api/checkout-order',
-                data: {'paymentMethodNonce': payload.nonce,}
-            }).done(function(result) {
-                // Tear down the Drop-in UI
-                instance.teardown(function (teardownErr) {
-                if (teardownErr) {
-                    console.error('Could not tear down Drop-in UI!');
-                } else {
-                    console.info('Drop-in UI has been torn down!');
-                    // Remove the 'Submit payment' button
-                    $('#submit-button').remove();
-                }
-                });
-
-                if (result.success) {
-                $('#checkout-message').html('<h1>Success</h1><p>Your Drop-in UI is working! Check your <a href="https://sandbox.braintreegateway.com/login">sandbox Control Panel</a> for your test transactions.</p><p>Refresh to try another transaction.</p>');
-
-                    $.ajax({
+                // When the user clicks on the 'Submit payment' button this code will send the
+                // encrypted payment information in a variable called a payment method nonce
+                $.ajax({
                     type: 'POST',
-                    url: '/api/order-store',
-                    data: {
-                        // faccio un'altra chiamata in post per mandare i dati allo store degli orders
-                        //uso thisVue invece di this perchè ha lo scope diverso
-                        customer: thisVue.customer,
-                        order: thisVue.order,
-                        orderTotal: thisVue.orderTotal,
-
-                    },
-                    }).done((submitResult) => {
-                    console.log(submitResult);
-                    thisVue.page++
-                    thisVue.isPayed = true
-                    store.emptyCart()
-                    }).fail((submitError) => {
-                        thisVue.page++
-                        thisVue.errorPay = true
-                    console.error(submitError);
+                    url: '/api/checkout-order',
+                    data: {'paymentMethodNonce': payload.nonce,}
+                }).done(function(result) {
+                    // Tear down the Drop-in UI
+                    instance.teardown(function (teardownErr) {
+                    if (teardownErr) {
+                        console.error('Could not tear down Drop-in UI!');
+                    } else {
+                        console.info('Drop-in UI has been torn down!');
+                        // Remove the 'Submit payment' button
+                        $('#submit-button').remove();
+                    }
                     });
-                } else {
-                console.log(result);
-                $('#checkout-message').html('<h1>Error</h1><p>Check your console.</p>');
-                }
+
+                    if (result.success) {
+                    $('#checkout-message').html('<h1>Success</h1><p>Your Drop-in UI is working! Check your <a href="https://sandbox.braintreegateway.com/login">sandbox Control Panel</a> for your test transactions.</p><p>Refresh to try another transaction.</p>');
+
+                        $.ajax({
+                        type: 'POST',
+                        url: '/api/order-store',
+                        data: {
+                            // faccio un'altra chiamata in post per mandare i dati allo store degli orders
+                            //uso thisVue invece di this perchè ha lo scope diverso
+                            customer_name: thisVue.customer.name,
+                            customer_mail: thisVue.customer.email,
+                            customer_address: thisVue.customer.address,
+                            customer_phone: thisVue.customer.phone,
+                            restaurant_id: thisVue.order[0].restaurant_id,
+                            total_price: thisVue.orderTotal.toFixed(2),
+
+                        },
+                        }).done((submitResult) => {
+                        console.log(submitResult);
+                        thisVue.page++
+                        thisVue.isPayed = true
+                        store.emptyCart()
+                        }).fail((submitError) => {
+                            thisVue.page++
+                            thisVue.errorPay = true
+                        console.error(submitError);
+                        });
+                    } else {
+                    console.log(result);
+                    $('#checkout-message').html('<h1>Error</h1><p>Check your console.</p>');
+                    }
+                });
+                });
             });
             });
-        });
-        });
+        }
     }
 
 }
@@ -113,7 +177,7 @@ export default {
   <div class="container-inner">
 
 
-    <div class="container">
+    <div class="container" v-show="this.order.length > 0">
         <h1 class="my-5">Checkout</h1>
 
         <div class="order-review my-3" v-if="this.page === 1">
@@ -142,22 +206,26 @@ export default {
 
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="name" v-model="customer.name" required />
+                    <input type="text" class="form-control" id="name" v-model="customer.name" @input="validateName" required />
+                    <small v-if="!isNameValid && isFieldTouched.name" class="text-danger">Il nome deve avere almeno 3 caratteri.</small>
                 </div>
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" v-model="customer.email" required />
+                    <input type="email" class="form-control" id="email" v-model="customer.email" @input="validateEmail" required />
+                    <small v-if="!isEmailValid && isFieldTouched.email" class="text-danger">Inserisci un indirizzo email valido.</small>
                 </div>
 
                 <div class="mb-3">
                     <label for="phone" class="form-label">Telefono</label>
-                    <input type="tel" class="form-control" id="phone" v-model="customer.phone" required />
+                    <input type="tel" class="form-control" id="phone" v-model="customer.phone" @input="validatePhone" required />
+                    <small v-if="!isPhoneValid && isFieldTouched.phone" class="text-danger">Il numero di telefono deve essere composto da 10 cifre.</small>
                 </div>
 
                 <div class="mb-3">
                     <label for="address" class="form-label">Indirizzo</label>
-                    <input type="text" class="form-control" id="address" v-model="customer.address" required />
+                    <input type="text" class="form-control" id="address" v-model="customer.address" @input="validateAddress" required />
+                    <small v-if="!isAddressValid && isFieldTouched.address" class="text-danger">L'indirizzo deve avere almeno 8 caratteri.</small>
                 </div>
 
 
@@ -166,7 +234,7 @@ export default {
                 <div id="checkout-message"></div>
                 <div id="dropin-container"></div>
                 <div class="amount-label">Totale: {{ orderTotal.toFixed(2) }} €</div>
-                <button id="submit-button" class="btn btn-primary">Submit payment</button>
+                <button id="submit-button" class="btn btn-primary" :disabled="!this.isFormValid">Submit payment</button>
             </div>
 
             <button class="btn btn-primary" @click="this.page--">Indietro</button>
