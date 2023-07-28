@@ -30,10 +30,11 @@ export default {
                     </a> -->
                     <!-- <i class="fa-regular fa-hand-pointer"></i> -->
                 </span>
-                <div v-if="store.cartItems.length  > 0 " class="btn-cart ms-3">
-                    <div class="number">{{ store.cartItems.length }}</div>
+                <div  class="btn-cart ms-3">
+                    <div v-if="store.cartItems.length  > 0 " class="number">{{ store.cartItems.length }}</div>
                     <button    @click="store.showModal = true"><i class="fa-solid fa-cart-shopping"></i></button>
                 </div>
+
             </div>
             </nav>
         </header>
