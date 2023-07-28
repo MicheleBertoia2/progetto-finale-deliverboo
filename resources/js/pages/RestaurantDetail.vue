@@ -171,8 +171,8 @@ export default {
             <div class="dishes d-flex containers flex-wrap py-5">
                 <div v-for="(dish, i) in restaurant.dishes" :key="i" class="cards d-flex mt-5 ms-4" >
                     <div class="d-flex dish " :class="{'hidden': dish.showDetail}">
-                        <img v-if="dish.image_path.includes('http://') || dish.image_path.includes('https://')" :src="dish.image_path" class="card-img-top imgdishes " alt="...">
-                        <img v-else :src="getImageUrl(dish.image_path)" class="card-img-top imgdishes " alt="...">
+                        <img v-if="dish.image_path.includes('http://') || dish.image_path.includes('https://')" :src="dish.image_path" class="card-img-top imgdishes " :alt="dish.name">
+                        <img v-else :src="getImageUrl(dish.image_path)" class="card-img-top imgdishes " :alt="dish.name">
                         <div class="card-body">
                             <h5 class="card-title">{{ dish.name }}</h5>
                             <p class="card-text m-0">{{ dish.ingredients }}</p>
@@ -210,9 +210,9 @@ export default {
                                         X
                                     </button>
                                 </span>
-                                <img v-if="dish.image_path.includes('http://') || dish.image_path.includes('https://')" :src="dish.image_path"  alt="..."
+                                <img v-if="dish.image_path.includes('http://') || dish.image_path.includes('https://')" :src="dish.image_path"  :alt="dish.name"
                                 class="detail-img">
-                                <img v-else  class="detail-img" :src="getImageUrl(dish.image_path)"  alt="...">
+                                <img v-else  class="detail-img" :src="getImageUrl(dish.image_path)"  :alt="dish.name">
                                 <h5 class=" text-center m-0 mx-1">{{ dish.name }}</h5>
                                 <div class="card-body p-2">
                                     <span class="price m-0 my-2 badge bg-dark d-block">{{ dish.price }} &euro;</span>

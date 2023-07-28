@@ -330,7 +330,7 @@ ul {
     // overflow-y: auto;
     // height: 700px;
     background-position: center;
-    height: 1070px;
+    min-height: 1070px;
     // height: 100%;
     background-size: cover;
     background-repeat: no-repeat;

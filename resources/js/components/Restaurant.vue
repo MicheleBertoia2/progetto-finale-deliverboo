@@ -13,6 +13,12 @@ export default {
             // Aggiungo "storage/" al percorso dell'immagine
             return `storage/${imagePath}`;
         },
+        checkImgRestaurant(src) {
+            if (this.restaurant.image) {
+                return this.restaurant.image.includes(src);
+            }
+                return false;
+        },
     }
 }
 </script>
@@ -23,8 +29,12 @@ export default {
     <div class="restaurant">
         <router-link  :to="{name: 'RestaurantDetail', params:{slug: restaurant.slug}}" class="text-decoration-none">
             <div class="bg-restaurant d-flex flex-column justify-content-center align-items-center flex-wrap">
-                <img v-if="restaurant.image.includes('http://') || restaurant.image.includes('https://')" :src="restaurant.image" class="card-img-top imgdishes " alt="...">
-                        <img v-else :src="getImageUrl(restaurant.image)" class="card-img-top imgdishes " alt="...">
+                <img v-if="restaurant.image.includes('http://') || restaurant.image.includes('https://')" :src="restaurant.image" class="card-img-top imgdishes " :alt="restaurant.name">
+                <img v-else-if="checkImgRestaurant('img/placeholder-img.png')" src="../../img/placeholder-img.png" class="card-img-top imgdishes " :alt="restaurant.name">
+                <img v-else :src="getImageUrl(restaurant.image)" class="card-img-top imgdishes " :alt="restaurant.name">
+                <!-- <img v-else-if="restaurant.image.includes('resources/img/placeholder-img')" src="/../../resources/img/placeholder-img.png" class="card-img-top imgdishes " :alt="restaurant.name"> -->
+                <!-- <img class="rounded" v-if="checkImgRestaurant('img/placeholder-img.png')" src="../../img/placeholder-img.png" alt="placeholder"> -->
+                <!-- <img v-else class="rounded" :src="restaurant.image" alt="restaurant-img"> -->
                 <div class="myBadge text dark d-flex justify-content-center align-items-center">
                     {{ restaurant.name }}
                 </div>
