@@ -32,13 +32,13 @@ export default {
                 <img v-if="restaurant.image.startsWith('http://') || restaurant.image.startsWith('https://')" :src="restaurant.image" class="card-img-top imgdishes " :alt="restaurant.name">
                 <img v-else-if="checkImgRestaurant('img/placeholder-img.png')" src="../../img/placeholder-img.png" class="card-img-top imgdishes " :alt="restaurant.name">
                 <img v-else :src="getImageUrl(restaurant.image)" class="card-img-top imgdishes " :alt="restaurant.name">
-                <div class="myBadge text dark d-flex justify-content-center align-items-center">
+                <div class="myBadge text dark d-flex justify-content-center align-items-center text-center">
                     {{ restaurant.name }}
                 </div>
-                <div class="d-flex justify-content-center align-items-center flex-wrap mt-1">
+                <div class="d-flex justify-content-center align-items-center flex-wrap mt-1 text-center">
                     <div v-for="type in restaurant.types" :key="type" class="greenBadge p-2 textTypes m-3 d-flex justify-content-center flex-wrap">
                     <!-- <div v-for="type in restaurant.types" :key="type" class="badge badge-dark textTypes m-3 d-flex justify-content-center flex-wrap"> -->
-                        <div class="">{{ type.name }}</div>
+                        <div class="text-center">{{ type.name }}</div>
                     </div>
                 </div>
             </div>
