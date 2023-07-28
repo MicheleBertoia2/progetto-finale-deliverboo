@@ -64,7 +64,7 @@ img{
         background-color: white;
         max-width: 450px;
         flex: 1 0 380px;
-        z-index: 100;
+        z-index: 1;
         .info{
             margin-top: 10px;
             display: flex;
