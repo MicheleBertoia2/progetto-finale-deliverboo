@@ -4,10 +4,10 @@
           <canvas ref="webgl" class="w-100 h-100"></canvas>
         </div>
         <div class="slogan-container">
-          <h1 class="slogan">Fantasmi nello stomaco?</h1>
+          <img src="/img/slogan.png" alt="">
         </div>
-        <div class="logo-container ">
-          <h1 class="logo flicker-in-1">DeliveBOO</h1>
+        <div class="logo-container flicker-in-1">
+            <img src="/img/logojumbo.png" alt="">
         </div>
     </div>
   </template>
@@ -158,21 +158,20 @@
       position: relative;
       width: 100%;
       height: 500px;
-      background-color: transparent;
+      background-color: #242a2c;
     }
     .slogan-container {
     position: absolute;
     top: 270px;
-    right: 250px;
-    color: blue;
-    font-size: 24px;
+    right: 10%;
+    width: 40%;
     }
     .logo-container {
     position: absolute;
     top: 370px;
-    right: 250px;
-    color: blue;
-    font-size: 24px;
+    right: 10%;
+    width: 40%;
+
     }
 
     /* animazioni*/
