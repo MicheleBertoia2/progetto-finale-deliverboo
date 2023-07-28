@@ -7,6 +7,7 @@ import Loader from '../components/Loader.vue';
 import Cart from '../components/Cart.vue';
 import { store } from '../store/store';
 import BtnCart from '../components/BtnCart.vue';
+import GhostScene from '../components/GhostScene.vue';
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -120,6 +121,7 @@ export default {
         BtnCart,
         Swiper,
         SwiperSlide,
+        GhostScene,
     },
     setup() {
         return {
@@ -217,9 +219,14 @@ export default {
 </script>
 
 <template>
-    <div class="jumbotron">
+
+    <!-- BELO JUMBO -->
+    <GhostScene/>
+
+    <!-- BRUTO  VECHIO JUMBO -->
+    <!-- <div class="jumbotron">
         <img src="img/jumbo.jpg" alt="jumbotron">
-    </div>
+    </div> -->
 
 
 

@@ -22,36 +22,36 @@ const router = createRouter({
             path: '/',
             name: 'home',
             component: Home,
-            meta
+
         },
         {
             path: '/contatti',
             name: 'contacts',
             component: Contacts,
-            meta
+
         },
         {
             path: '/chi-siamo',
             name: 'about',
             component: About,
-            meta
+
         },
         {
             path: '/:slug',
             name: 'RestaurantDetail',
             component: RestaurantDetail,
-            meta
+
         },
         {
             path: '/checkout-order',
             name: 'checkout',
             component: Checkout,
-            meta
+
         },
         {
             path: '/:pathMatch(.*)*',
             component: Error404,
-            meta
+
         }
     ]
 });
