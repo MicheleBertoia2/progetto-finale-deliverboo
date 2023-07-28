@@ -174,94 +174,103 @@ export default {
 </script>
 
 <template>
-  <div class="container-inner">
+    <div class="container-inner">
 
 
-    <div class="container" v-show="this.order.length > 0">
-        <h1 class="my-5">Checkout</h1>
+        <div class="container" v-show="this.order.length > 0">
+            <h1 class="my-5">Checkout</h1>
 
-        <div class="order-review my-3" v-if="this.page === 1">
-            <h3>Rivedi il tuo Ordine</h3>
-            <ul>
-                <li v-for="item in this.order" :key="item.id" class="d-flex">
-                    <div class="imagebox">
-                        <!-- <img :src="store.getFullImageUrl(item.image_path)" :alt="item.name"> -->
+            <div class="order-review my-3 page-1" v-if="this.page === 1">
+                <h3 class="mb-3">Rivedi il tuo Ordine</h3>
+                <ul class="d-flex flex-wrap">
+                    <li v-for="item in this.order" :key="item.id" class="d-flex">
+                        <div class="imagebox m-2">
+                            <img :src="store.getFullImageUrl(item.image_path)" :alt="item.name" style="width: 150px;">
+                        </div>
+                        <div class="info p-2">
+                            <h5>{{ item.name }}</h5>
+                            <span class="text-center">Quantità: <strong>
+                                x{{ item.quantity }}
+                            </strong>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+                <div class="total mb-3">
+                    <h5>Totale: {{ orderTotal.toFixed(2) }} €</h5>
+                </div>
+                <span class="mb-5">
+                    <button class="btn btn-dark">Indietro</button>
+                    <button class="btn btn-dark ms-3" @click="this.page++">Avanti</button>
+                </span>
+
+            </div>
+
+
+            <div class="container page-2 mb-5" v-show="this.page === 2">
+
+                <form  >
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="name" v-model="customer.name" @input="validateName" required />
+                        <small v-if="!isNameValid && isFieldTouched.name" class="text-danger">Il nome deve avere almeno 3 caratteri.</small>
                     </div>
-                    <div class="info">
-                        <h5>{{ item.name }}</h5>
-                        <div class="text-center px-3 py-1 border border-black">{{ item.quantity }}</div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" v-model="customer.email" @input="validateEmail" required />
+                        <small v-if="!isEmailValid && isFieldTouched.email" class="text-danger">Inserisci un indirizzo email valido.</small>
                     </div>
-                </li>
-            </ul>
-            <div class="total">
-                <h5>Totale: {{ orderTotal.toFixed(2) }} €</h5>
-            </div>
-            <button class="btn btn-primary" @click="this.page++">Avanti</button>
-        </div>
+
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Telefono</label>
+                        <input type="tel" class="form-control" id="phone" v-model="customer.phone" @input="validatePhone" required />
+                        <small v-if="!isPhoneValid && isFieldTouched.phone" class="text-danger">Il numero di telefono deve essere composto da 10 cifre.</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Indirizzo</label>
+                        <input type="text" class="form-control" id="address" v-model="customer.address" @input="validateAddress" required />
+                        <small v-if="!isAddressValid && isFieldTouched.address" class="text-danger">L'indirizzo deve avere almeno 8 caratteri.</small>
+                    </div>
 
 
-        <div class="container" v-show="this.page === 2">
-
-            <form  >
-
-                <div class="mb-3">
-                    <label for="name" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="name" v-model="customer.name" @input="validateName" required />
-                    <small v-if="!isNameValid && isFieldTouched.name" class="text-danger">Il nome deve avere almeno 3 caratteri.</small>
+                </form>
+                <div id="dropin-wrapper " >
+                    <div id="checkout-message"></div>
+                    <div id="dropin-container"></div>
+                    <div class="amount-label mb-3">Totale: {{ orderTotal.toFixed(2) }} €</div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" v-model="customer.email" @input="validateEmail" required />
-                    <small v-if="!isEmailValid && isFieldTouched.email" class="text-danger">Inserisci un indirizzo email valido.</small>
-                </div>
+                <button class="btn btn-dark" @click="this.page--">Indietro</button>
+                <button id="submit-button" class="btn btn-dark ms-3" :disabled="!this.isFormValid">Submit payment</button>
 
-                <div class="mb-3">
-                    <label for="phone" class="form-label">Telefono</label>
-                    <input type="tel" class="form-control" id="phone" v-model="customer.phone" @input="validatePhone" required />
-                    <small v-if="!isPhoneValid && isFieldTouched.phone" class="text-danger">Il numero di telefono deve essere composto da 10 cifre.</small>
-                </div>
-
-                <div class="mb-3">
-                    <label for="address" class="form-label">Indirizzo</label>
-                    <input type="text" class="form-control" id="address" v-model="customer.address" @input="validateAddress" required />
-                    <small v-if="!isAddressValid && isFieldTouched.address" class="text-danger">L'indirizzo deve avere almeno 8 caratteri.</small>
-                </div>
-
-
-            </form>
-            <div id="dropin-wrapper" >
-                <div id="checkout-message"></div>
-                <div id="dropin-container"></div>
-                <div class="amount-label">Totale: {{ orderTotal.toFixed(2) }} €</div>
-                <button id="submit-button" class="btn btn-primary" :disabled="!this.isFormValid">Submit payment</button>
             </div>
 
-            <button class="btn btn-primary" @click="this.page--">Indietro</button>
+            <div class="container page-3 mb-5" v-if="this.page === 3">
+                <div v-if="this.isPayed">
+                    <h3 class="mb-5 slide-in-right"> <i class="fa-solid fa-check"></i> Operazione avvenuta con successo!</h3>
+                    <span class="d-block p-2">
+                        <h6 class="slide-in-right">Il Tuo Ordine Arriverà a Breve, Buon Appetito.</h6>
+                        <img class="mt-5 shake-vertical ms-4" src="img/logosingle.png" alt="">
+                    </span>
 
-        </div>
-
-        <div class="container" v-if="this.page === 3">
-            <div v-if="this.isPayed">
-                <h3>Ordine avvenuto con successo!</h3>
-                <div class="btn btn-secondary">
-                    <router-link :to="{ name: 'home' }" class="nav-link">Torna alla Home</router-link>
+                    <div class="btn btn-dark mt-3">
+                        <router-link :to="{ name: 'home' }" class="btn btn-dark">Torna alla Home</router-link>
+                    </div>
                 </div>
-            </div>
-            <div v-if="this.errorPay">
-                <h3>Ops! qualcosa è andato storto</h3>
+                <div v-if="this.errorPay">
+                    <h3>Ops! qualcosa è andato storto</h3>
+                </div>
             </div>
         </div>
     </div>
-
-
-
-</div>
 </template>
 
 
 
-<style>
+<style lang="scss">
   /* Stile del Drop-in UI */
   .braintree-sheet {
     /* Regola le dimensioni e il posizionamento dell'iframe */
@@ -295,6 +304,120 @@ export default {
 
 [data-braintree-id="toggle"] {
   display: none;
+}
+.btn-dark:hover{
+    color: #3ABFB4 !important;
+}
+.page-1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px auto;
+    min-height: 400px;
+    img{
+        border-radius: 5px;
+    }
+    ul{
+        width: 100%;
+    }
+}
+.page-2{
+    min-height: 600px;
+}
+.page-3{
+
+    padding: 15px;
+    min-height: 600px;
+    .slide-in-right {
+	-webkit-animation: slide-in-right 1s ease-in-out both;
+	animation: slide-in-right 1s ease-in-out both;
+    }
+    @-webkit-keyframes slide-in-right {
+    0% {
+        -webkit-transform: translateX(1000px);
+                transform: translateX(1000px);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: translateX(0);
+                transform: translateX(0);
+        opacity: 1;
+    }
+    }
+    @keyframes slide-in-right {
+    0% {
+        -webkit-transform: translateX(1000px);
+                transform: translateX(1000px);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: translateX(0);
+                transform: translateX(0);
+        opacity: 1;
+    }
+    }
+
+    .shake-vertical {
+	                -webkit-animation: shake-vertical 3s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+	                animation: shake-vertical 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+                }
+                    @-webkit-keyframes shake-vertical {
+                    0%,
+                    100% {
+                        -webkit-transform: translateY(0);
+                                transform: translateY(0);
+                    }
+                    10%,
+                    30%,
+                    50%,
+                    70% {
+                        -webkit-transform: translateY(-8px);
+                                transform: translateY(-8px);
+                    }
+                    20%,
+                    40%,
+                    60% {
+                        -webkit-transform: translateY(8px);
+                                transform: translateY(8px);
+                    }
+                    80% {
+                        -webkit-transform: translateY(6.4px);
+                                transform: translateY(6.4px);
+                    }
+                    90% {
+                        -webkit-transform: translateY(-6.4px);
+                                transform: translateY(-6.4px);
+                    }
+                    }
+                    @keyframes shake-vertical {
+                    0%,
+                    100% {
+                        -webkit-transform: translateY(0);
+                                transform: translateY(0);
+                    }
+                    10%,
+                    30%,
+                    50%,
+                    70% {
+                        -webkit-transform: translateY(-8px);
+                                transform: translateY(-8px);
+                    }
+                    20%,
+                    40%,
+                    60% {
+                        -webkit-transform: translateY(8px);
+                                transform: translateY(8px);
+                    }
+                    80% {
+                        -webkit-transform: translateY(6.4px);
+                                transform: translateY(6.4px);
+                    }
+                    90% {
+                        -webkit-transform: translateY(-6.4px);
+                                transform: translateY(-6.4px);
+                    }
+
+                }
 }
 
 
