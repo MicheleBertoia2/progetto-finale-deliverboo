@@ -19,7 +19,7 @@ export default {
                     <router-link :to="{ name: 'home' }" class="nav-link"> <img src="img/logosingle.png" alt="logo" width="55" ></router-link>
             </div>
             <div class="">
-                <router-link :to="{ name: 'home' }" class="nav-link">
+                <router-link  :to="{ name: 'home' }" class="nav-link">
                 <img src="img/logoscritta2.png" alt="logo" width="160" >
                 </router-link>
             </div>
@@ -45,6 +45,7 @@ export default {
         width: 100%;
         height: 75px;
         position: fixed;
+        top:0;
         z-index: 15;
         -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.88);
         box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.88);
