@@ -6,7 +6,7 @@ export default {
         restaurant : Object
     },
     created() {
-        console.log(this.restaurant);
+
     },
     methods:{
         getImageUrl(imagePath) {
@@ -19,6 +19,7 @@ export default {
             }
                 return false;
         },
+
     }
 }
 </script>
