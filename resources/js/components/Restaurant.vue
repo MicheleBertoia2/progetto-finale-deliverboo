@@ -6,6 +6,20 @@ export default {
         restaurant : Object
     },
     created() {
+
+    },
+    methods:{
+        getImageUrl(imagePath) {
+            // Aggiungo "storage/" al percorso dell'immagine
+            return `storage/${imagePath}`;
+        },
+        checkImgRestaurant(src) {
+            if (this.restaurant.image) {
+                return this.restaurant.image.includes(src);
+            }
+                return false;
+        },
+
     }
 }
 </script>
@@ -16,6 +30,12 @@ export default {
     <div class="restaurant">
         <router-link  :to="{name: 'RestaurantDetail', params:{slug: restaurant.slug}}" class="text-decoration-none">
             <div class="bg-restaurant d-flex flex-column justify-content-center align-items-center flex-wrap">
+                <img v-if="restaurant.image.includes('http://') || restaurant.image.includes('https://')" :src="restaurant.image" class="card-img-top imgdishes " :alt="restaurant.name">
+                <img v-else-if="checkImgRestaurant('img/placeholder-img.png')" src="../../img/placeholder-img.png" class="card-img-top imgdishes " :alt="restaurant.name">
+                <img v-else :src="getImageUrl(restaurant.image)" class="card-img-top imgdishes " :alt="restaurant.name">
+                <!-- <img v-else-if="restaurant.image.includes('resources/img/placeholder-img')" src="/../../resources/img/placeholder-img.png" class="card-img-top imgdishes " :alt="restaurant.name"> -->
+                <!-- <img class="rounded" v-if="checkImgRestaurant('img/placeholder-img.png')" src="../../img/placeholder-img.png" alt="placeholder"> -->
+                <!-- <img v-else class="rounded" :src="restaurant.image" alt="restaurant-img"> -->
                 <div class="myBadge text dark d-flex justify-content-center align-items-center">
                     {{ restaurant.name }}
                 </div>
@@ -41,12 +61,21 @@ export default {
 
 
 <style lang="scss" scoped>
+img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    object-fit: cover;
+    border-radius: 10px 10px 0px 0px;
+}
 .restaurant{
         margin: 15px;
         border-radius: 10px;
         background-color: white;
         max-width: 450px;
         flex: 1 0 380px;
+        z-index: 1;
         .info{
             margin-top: 10px;
             display: flex;
@@ -97,8 +126,8 @@ export default {
             background:
                 linear-gradient(
                 rgba(0, 0, 0, 0.3),
-                rgba(0, 0, 0, 0.3)),
-                url('img/prova-ristorante.png');
+                rgba(0, 0, 0, 0.3));
+                //url('img/prova-ristorante.png');
             background-size: cover;
             height: 340px;
             position: relative;

@@ -3,7 +3,7 @@ import { reactive } from "vue";
 export const store = reactive({
 
     apiUrl: 'http://127.0.0.1:8000/api/',
-
+    hiddencart: false,
     loaded: false,
 
     typesImages: [
@@ -21,6 +21,9 @@ export const store = reactive({
 
     showModal: false,
 
+    gethiddencart(){
+        this.hiddencart = ! this.hiddencart
+    },
     // FUNZIONI PER IL CARRELLO
     addToCart(item) {
 
