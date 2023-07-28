@@ -141,10 +141,10 @@ class RestaurantTableSeeder extends Seeder
                     "description" => "Concediti l'autenticità della pizza napoletana alla Pizzeria Napoletana, in Via Ponte Vetero 20. Una celebrazione dell'eredità culinaria di Napoli.",
                     ],
             [
-                    "name"=> "Ristorante da Giovanni",
+                    "name"=> "La Tana Da Mario",
                     "address"=> "Via Vincenzo Monti 21",
-                    "image" => "https://www.repstatic.it/content/contenthub/img/2021/11/10/113709586-17965d10-2457-45ea-b17f-119b9bed9fe3.jpg",
-                    "description" => "Delizia con l'arte culinaria italiana al Ristorante da Giovanni, in Via Vincenzo Monti 21. Un luogo in cui tradizione e innovazione si incontrano.",
+                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/14/70/3e/a5/photo2jpg.jpg",
+                    "description" => "Delizia con l'arte culinaria italiana al Ristorante La Tana Da Mario, in Via Vincenzo Monti 21. Un luogo in cui tradizione e innovazione si incontrano.",
                     ],
             [
                     "name"=> "Osteria del Borgo",
