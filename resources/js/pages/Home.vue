@@ -143,7 +143,7 @@ export default {
         },
 
         eseguiRicerca() {
-            console.log(this.typeSelected);
+            this.currentPage = 1;
             if (this.typeSelected.length === 0) {
                 this.getApi()
             }else{
@@ -327,11 +327,8 @@ ul {
     // background-image: url("/img/pattern-anguria.jpg");
     background-image: url("/img/bg-60.jpg");
 
-    // overflow-y: auto;
-    // height: 700px;
+    min-height: 700px;
     background-position: center;
-    min-height: 1070px;
-    // height: 100%;
     background-size: cover;
     background-repeat: no-repeat;
 
