@@ -1,60 +1,92 @@
 
 <script>
+import { store } from '../store/store';
 export default {
-    name: 'Header'
+    name: 'Header',
+    data(){
+        return{
+            store
+        }
+    }
 }
 </script>
 
 
 <template>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-dark-green ">
-            <div class="container-fluid ">
-                <a class="navbar-brand" href="#">
-                    <img src="img/logo.png" alt="logo" width="100" height="70">
-                </a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse " id="navbarText">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <router-link :to="{ name: 'home' }" class="nav-link">Home</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link :to="{ name: 'about' }" class="nav-link">Chi siamo</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link :to="{ name: 'contacts' }" class="nav-link">Contatti</router-link>
-                        </li>
-
-                    </ul>
-                    <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link">Registrati</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">Login</a>
-                        </li>
-                        <li class="nav-item mt-1">
-                            <i class="fa-solid fa-cart-shopping nav-link"></i>
-                        </li>
-                    </ul>
+        <nav class="navbar navbar-expand navbar-light bg-dark-green d-flex justify-content-between container-fluid">
+            <div class="">
+                    <router-link :to="{ name: 'home' }" class="nav-link"> <img src="img/logosingle.png" alt="logo" width="55" ></router-link>
+            </div>
+            <div class="">
+                <router-link :to="{ name: 'home' }" class="nav-link">
+                <img src="img/logoscritta2.png" alt="logo" width="160" >
+                </router-link>
+            </div>
+            <div class="d-flex align-items-center me-4">
+                <span class="go-dashboard">
+                    <!-- <a  href="#">
+                        Sei Un Ristoratore?
+                    </a> -->
+                    <!-- <i class="fa-regular fa-hand-pointer"></i> -->
+                </span>
+                <div v-if="store.cartItems.length  > 0 " class="btn-cart ms-3">
+                    <div class="number">{{ store.cartItems.length }}</div>
+                    <button    @click="store.showModal = true"><i class="fa-solid fa-cart-shopping"></i></button>
                 </div>
             </div>
-        </nav>
-
-
-
-
-    </header>
-</template>
+            </nav>
+        </header>
+    </template>
 
 <style lang="scss" scoped>
+    nav{
+        width: 100%;
+        height: 75px;
+        position: fixed;
+        z-index: 15;
+        -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.88);
+        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.88);
+        .go-dashboard{
+            position: relative;
+                i{
+                    position: absolute;
+                    left: 138px;
+                    top: 18px;
+                }
+            }
 
+            a{
+                text-decoration: none;
+                color: rgb(0, 0, 0);
+                font-size: .9rem;
+            }
+            i{
+                font-size: 1.4rem;
+                color: black;
+            }
+
+        button{
+            position: relative;
+            border: none;
+            background-color: rgba(240, 248, 255, 0);
+        }
+        .number{
+            height: 15px;
+            width: 15px;
+            line-height: 5px;
+            background-color: #FFF;
+            color: rgb(0, 0, 0);
+            padding: 5px;
+            font-size: 10px;
+            border-radius: 50%;
+            position: absolute;
+            top: 14px;
+            right: 25px;
+            font-weight: bold;
+        }
+
+    }
 
 
 .bg-dark-green {
