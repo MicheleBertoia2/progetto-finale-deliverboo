@@ -327,9 +327,8 @@ ul {
     // background-image: url("/img/pattern-anguria.jpg");
     background-image: url("/img/bg-60.jpg");
 
-    // overflow-y: auto;
+    min-height: 700px;
     background-position: center;
-    height: 1100px;
     background-size: cover;
     background-repeat: no-repeat;
 

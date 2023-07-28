@@ -115,7 +115,7 @@
   };
   </script>
 
-<style>
+<style lang="scss">
 /*serve per chiudere il modal lateralmente*/
   .modal-container {
     position: fixed;
@@ -166,7 +166,7 @@
   }
 
   .bg-primary-color{
-    background-color: #3ABFB4;
+    background-color: #3ABFB4 !important;
   }
 
   .fa-close{
@@ -203,7 +203,7 @@
     border-radius: 5px;
     padding: 4px 12px;
     &:hover{
-      color: white;
+      color: white !important;
     }
   }
 
