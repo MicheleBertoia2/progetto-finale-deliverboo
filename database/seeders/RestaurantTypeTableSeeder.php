@@ -48,6 +48,20 @@ class RestaurantTypeTableSeeder extends Seeder
                 "id" => 1,
             ],
             [
+                "name"=> "Ristorante La Pergola",
+                "address"=> "Via Roma 10, Milano",
+                "image" => "https://www.example.com/images/la-pergola.jpg",
+                "description" => "Un'esperienza culinaria unica nel cuore di Milano, presso il Ristorante La Pergola.",
+                "id" => 1,
+            ],
+            [
+                "name"=> "Osteria del Borgo",
+                "address"=> "Via Dante 20, Milano",
+                "image" => "https://www.example.com/images/osteria-del-borgo.jpg",
+                "description" => "Autentica cucina italiana in un'atmosfera accogliente all'Osteria del Borgo.",
+                "id" => 1,
+            ],
+            [
                 "name" => "The Sushi House",
                 "address" => "Via dei Sushi 1, Milano",
                 "image" => "https://images.squarespace-cdn.com/content/v1/5982fa4fe58c62cb28091fa4/1578399820670-9PSKMMZQMBNGFTTTJ9PZ/Pizzeria?format=1000w",
@@ -58,6 +72,20 @@ class RestaurantTypeTableSeeder extends Seeder
                 "address" => "Piazza del Ramen 2, Milano",
                 "image" => "https://aalsdnxkwq.cloudimg.io/v7/www.mamablip.com/ir/800/storage/trattoria_osteria_3091652187298.jpg",
                 "id" => 2,
+            ],
+            [
+                "name"=> "Sushi Fusion",
+                "address"=> "Via Garibaldi 15, Milano",
+                "image" => "https://www.example.com/images/sushi-fusion.jpg",
+                "description" => "Esplora un mix di sapori e tradizioni al Sushi Fusion.",
+                "id" => 2,
+            ],
+            [
+                "name"=> "Golden Wok",
+                "address"=> "Via Vittorio Emanuele 30, Milano",
+                "image" => "https://www.example.com/images/golden-wok.jpg",
+                "description" => "Un viaggio nei sapori della cucina cinese al Golden Wok.",
+                "id" => 3,
             ],
             [
                 "name" => "Chinese Delight",
@@ -84,6 +112,20 @@ class RestaurantTypeTableSeeder extends Seeder
                 "id" => 4,
             ],
             [
+                "name"=> "American Grille",
+                "address"=> "Via XX Settembre 5, Milano",
+                "image" => "https://www.example.com/images/american-grille.jpg",
+                "description" => "Gustosi piatti americani e un'atmosfera retrò all'American Grille.",
+                "id" => 4,
+            ],
+            [
+                "name"=> "Turkish Delights",
+                "address"=> "Via Milano 25, Milano",
+                "image" => "https://www.example.com/images/turkish-delights.jpg",
+                "description" => "I sapori autentici della Turchia vi aspettano ai Turkish Delights.",
+                "id" => 5,
+            ],
+            [
                 "name" => "Turkish Delight",
                 "address" => "Via Cerignola 20, Milano",
                 "image" => "https://uniiti.com//images/shops/logos/logo-425-antica-trattoria-1591029070.png",
@@ -108,7 +150,14 @@ class RestaurantTypeTableSeeder extends Seeder
                 "id" => 6,
             ],
             [
-"name" => "Indian Spice",
+                "name"=> "Mexican Cantina",
+                "address"=> "Via Napoli 10, Milano",
+                "image" => "https://www.example.com/images/mexican-cantina.jpg",
+                "description" => "Autentici sapori messicani in un'atmosfera festosa al Mexican Cantina.",
+                "id" => 6,
+            ],
+            [
+                "name" => "Indian Spice",
                 "address" => "Via Portofino 25, Milano",
                 "image" => "https://magazine.foodpanda.co.th/wp-content/uploads/sites/14/2017/01/Pizzeria-da-Luigi-2.jpg",
                 "id" => 7,
@@ -120,17 +169,19 @@ class RestaurantTypeTableSeeder extends Seeder
                 "id" => 7,
             ],
             [
+                "name"=> "Bangkok Street",
+                "address"=> "Via Padova 22, Milano",
+                "image" => "https://www.example.com/images/bangkok-street.jpg",
+                "description" => "Esplora le autentiche delizie thailandesi al Bangkok Street.",
+                "id" => 8,
+            ],
+            [
                 "name" => "Thai Tastes",
                 "address" => "Via dei Sapori Thailandesi 10, Milano",
                 "image" => "https://cdn.vox-cdn.com/uploads/chorus_asset/file/2491428/15863072062_250732fa67_h.0.jpg",
                 "id" => 8,
             ],
-            [
-                "name" => "Bangkok Street Food",
-                "address" => "Via San Matteo 5, Milano",
-                "image" => "https://qul.imgix.net/dbc81b35-7f0e-4bf7-a263-2883ad9dd256/220495_landscape.jpg",
-                "id" => 8,
-            ],
+
         ];
         //ciclo tutti i ristoranti  e per ognuno ci  attacco un numero random di  tipologia
 
