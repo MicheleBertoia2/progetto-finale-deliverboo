@@ -133,7 +133,7 @@ export default {
                     });
 
                     if (result.success) {
-                    $('#checkout-message').html('<h1>Success</h1><p>Your Drop-in UI is working! Check your <a href="https://sandbox.braintreegateway.com/login">sandbox Control Panel</a> for your test transactions.</p><p>Refresh to try another transaction.</p>');
+
 
                         $.ajax({
                         type: 'POST',
