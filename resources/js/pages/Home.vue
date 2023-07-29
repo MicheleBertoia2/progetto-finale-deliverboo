@@ -292,23 +292,15 @@ export default {
 
     <Cart :modalOpen="store.showModal" :cartItems="store.cartItems" @close="store.showModal = false" />
 
-    <BtnCart />
+    <!-- <BtnCart /> -->
+    <div class="black-to-azure"></div>
 </template>
 
 
 
 <style lang="scss" scoped>
 
-.jumbotron {
-    height: 600px;
-    width: 100%;
 
-    img {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-    }
-}
 
 .container-inner {
     background-color: white;
@@ -339,11 +331,12 @@ ul {
 }
 
 .container-restaurant {
+    padding-bottom: 20px;
     // background-image: url("/img/pattern-anguria.jpg");
-    background-image: url("/img/bg-60.jpg");
+    background-image: url("/img/bg-main.jpg");
 
-    min-height: 700px;
-    background-position: center;
+    min-height: 1250px;
+    background-position:0 100px;
     background-size: cover;
     background-repeat: no-repeat;
 
@@ -481,14 +474,14 @@ ul {
 
   .black-to-azure{
     background-image: url('/public/img/ssspill-2.svg');
-    height: 150px;
+    height: 125px;
     background-position: -3px 0;
     background-repeat: no-repeat;
     background-size: cover;
 }
 .azure-to-black{
     background-image: url('/public/img/ssspill.svg');
-    height: 150px;
+    height: 125px;
     background-position: -3px 0;
     background-repeat: no-repeat;
   background-size: cover;
