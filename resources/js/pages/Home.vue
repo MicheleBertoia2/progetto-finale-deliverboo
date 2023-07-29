@@ -8,6 +8,7 @@ import Cart from '../components/Cart.vue';
 import { store } from '../store/store';
 import BtnCart from '../components/BtnCart.vue';
 import GhostScene from '../components/GhostScene.vue';
+import GhostSceneTouch from '../components/GhostSceneTouch.vue';
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -33,6 +34,7 @@ export default {
             typeSelected: [],
             isNavigationVisible: true,
             currentPage: 1,
+            isTouch: false,
             swiperBreakpoints: {
                 // Configurazione per schermi con larghezza fino a 320px (dispositivi mobili)
                 220: {
@@ -122,6 +124,7 @@ export default {
         Swiper,
         SwiperSlide,
         GhostScene,
+        GhostSceneTouch,
     },
     setup() {
         return {
@@ -201,6 +204,10 @@ export default {
         }
     },
 
+    created(){
+        this.isTouch = 'ontouchstart' in window  || navigator.maxTouchPoints > 0
+    },
+
     mounted() {
 
         window.addEventListener('resize', this.onWindowResize);
@@ -221,7 +228,8 @@ export default {
 <template>
     <div class="azure-to-black"></div>
     <!-- BELO JUMBO -->
-    <GhostScene/>
+    <GhostSceneTouch v-if="this.isTouch"/>
+    <GhostScene v-else/>
 
     <!-- BRUTO  VECHIO JUMBO -->
     <!-- <div class="jumbotron">

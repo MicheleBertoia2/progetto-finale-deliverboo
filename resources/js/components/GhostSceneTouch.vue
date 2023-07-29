@@ -106,7 +106,6 @@
       renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
       renderer.setSize(canvas.offsetWidth, canvas.offsetHeight)
 
-      canvas.addEventListener('mousemove', onMouseMove);
       window.addEventListener('resize', onWindowResize);
 
       // Animation
@@ -114,7 +113,7 @@
         requestAnimationFrame(animate)
         TWEEN.update()
         if (model) {
-        //    model.rotation.y += 0.01
+           model.rotation.y += 0.01
         }
 
         renderer.render(scene, camera)
@@ -123,23 +122,7 @@
       animate()
 
 
-    function onMouseMove(event) {
-        if (animationComplete) {
-            const mouse = {
-                x: (event.clientX / window.innerWidth) * 2 - 1,
-                y: -(event.clientY / window.innerHeight) * 2 + 1,
-            };
 
-            // Resto del codice per il lookAt del modello
-            const direction = new THREE.Vector3(-mouse.x - 1, -mouse.y, 50)
-                .unproject(camera)
-                .sub(camera.position)
-                .normalize();
-
-            model.lookAt(model.position.clone().add(direction));
-
-        }
-    }
 
     function onWindowResize() {
         console.log('ho cambiato');
