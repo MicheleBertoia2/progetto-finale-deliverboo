@@ -474,14 +474,14 @@ ul {
   .black-to-azure{
     background-image: url('/public/img/ssspill-2.svg');
     height: 150px;
-    background-position: -3px 0;
+    background-position: -5px 0;
     background-repeat: no-repeat;
     background-size: cover;
 }
 .azure-to-black{
     background-image: url('/public/img/ssspill.svg');
     height: 150px;
-    background-position: -3px 0;
+    background-position: -5px 0;
     background-repeat: no-repeat;
   background-size: cover;
   }
