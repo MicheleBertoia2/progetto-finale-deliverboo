@@ -120,8 +120,7 @@
   .modal-container {
     position: fixed;
     left: 0;
-    /*z-index: 5;*/
-    z-index: 10;
+    z-index: 25;
     bottom: 0;
     top: 0;
     /*width: 550px;*/
