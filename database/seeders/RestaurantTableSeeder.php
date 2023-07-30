@@ -19,7 +19,7 @@ class RestaurantTableSeeder extends Seeder
      */
     public function run(Faker $faker){
 
-        $data = [
+        /*$data = [
             [
                     "name" => "Ristorante Italiano",
                     "address"=> "Via Roma 1, Milano",
@@ -105,7 +105,7 @@ class RestaurantTableSeeder extends Seeder
                     "description" => "Gusta l'eleganza della cucina giapponese allo Sushi Bar, in Via Solferino 14. Un'oasi di sapori freschi e squisiti.",
                     ],
             [
-                    "name"=> "Trattoria Alla Palazzina",
+                    "name"=> "Trattoria Palazzina",
                     "address"=> "Viale Monte Nero 15",
                     "image" => "https://qul.imgix.net/dbc81b35-7f0e-4bf7-a263-2883ad9dd256/220495_landscape.jpg",
                     "description" => "Regalati l'essenza dell'ospitalità italiana alla Trattoria Alla Palazzina, in Viale Monte Nero 15. Un luogo in cui ogni pasto racconta una storia.",
@@ -149,7 +149,7 @@ class RestaurantTableSeeder extends Seeder
             [
                     "name"=> "Osteria del Borgo",
                     "address"=> "Viale Premuda 22",
-                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/18/1f/d0/aa/osteria-del-borgo-ristorante.jpg",
+            "image" => "https://media-cdn.tripadvisor.com/media/photo-s/18/1f/d0/aa/osteria-del-borgo-ristorante.jpg",
                     "description" => "Rilassati in un'atmosfera affascinante all'Osteria del Borgo, in Viale Premuda 22. Un luogo in cui i sapori vengono gustati con piacere.",
                     ],
             [
@@ -171,7 +171,174 @@ class RestaurantTableSeeder extends Seeder
                     "description" => "Delizia i tuoi sensi con un'esperienza culinaria unica al Ristorante da Bepo, inVia Praderoni 24",
             ]
 
+            ];*/
+
+            $data = [
+                [
+                    "name"=> "Locanda Del Convento ",
+                    "address"=> "Piazzale Trotta, 2",
+                    "image" => "https://10619-2.s.cdn12.com/rests/original/110_522372635.jpg",
+                    "description" => "Torna indietro nel tempo e delizia i sapori del fascino del passato alla Locanda Del Convento, in Piazzale Trotta, 2.",
+                    "id" => 1,
+                ],
+                [
+                    "name"=> "Ristorante Coria",
+                    "address"=> "Via Infermeria 24",
+                    "image" => "https://axwwgrkdco.cloudimg.io/v7/__gmpics__/65292bb625f0471ba2caa84ceba0dd70",
+                    "description" => "Vivi una fusione di sapori e creatività al Ristorante Coria, in Via Infermeria 24. Un luogo che sorprende e delizia.",
+                    "id" => 1,
+                ],
+                [
+                    "name"=> "Trattoria Le Rose",
+                    "address"=> "Piazza Risorgimento 24",
+                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/1d/bf/ed/b7/caption.jpg",
+                    "description" => "Scopri l'essenza dell'ospitalità italiana alla Trattoria Le Rose, su Piazza Risorgimento 24. Un luogo dove calore e sapori si intrecciano.",
+                    "id" => 1,
+                ],
+                [
+                    "name"=> "Ristorante da Bepo",
+                    "address"=> "Via Praderoni 24",
+                    "image" => "https://img.italiaonline.it/0WO0N000000IrfUWAS_13646590.JPG",
+                    "description" => "Delizia i tuoi sensi con un'esperienza culinaria unica al Ristorante da Bepo, inVia Praderoni 24",
+                    "id" => 1,
+                ],
+                [
+                    "name"=> "Ristorante La Pergola",
+                    "address"=> "Via Roma 10, Milano",
+                    "image" => "https://romecavalieri.com/wp-content/uploads/2016/03/La-Pergola-Restaurant-1-e1469604929350.jpg",
+                    "description" => "Un'esperienza culinaria unica nel cuore di Milano, presso il Ristorante La Pergola.",
+                    "id" => 1,
+                ],
+                [
+                    "name"=> "Osteria del Borgo",
+                    "address"=> "Via Dante 20, Milano",
+                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/18/1f/d0/aa/osteria-del-borgo-ristorante.jpg",
+                    "description" => "Autentica cucina italiana in un'atmosfera accogliente all'Osteria del Borgo.",
+                    "id" => 1,
+                ],
+                [
+                    "name" => "The Sushi House",
+                    "address" => "Via dei Sushi 1, Milano",
+                    "image" => "https://www.californiabeaches.com/wp-content/uploads/2016/03/lopiano012-1000x668.jpg",
+                    "id" => 2,
+                ],
+                [
+                    "name" => "The Ramen Bar",
+                    "address" => "Piazza del Ramen 2, Milano",
+                    "image" => "https://theramenbar.ie/images/photos/large/28.jpg",
+                    "id" => 2,
+                ],
+                [
+                    "name"=> "Sushi Fusion",
+                    "address"=> "Via Garibaldi 15, Milano",
+                    "image" => "https://portamialsushi.it/wp-content/uploads/2022/03/Iyi-Fusion-Experience-Sushi-Milano.-scaled.jpg",
+                    "description" => "Esplora un mix di sapori e tradizioni al Sushi Fusion.",
+                    "id" => 2,
+                ],
+                [
+                    "name"=> "Golden Wok",
+                    "address"=> "Via Vittorio Emanuele 30, Milano",
+                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/10/46/9c/39/esterno.jpg",
+                    "description" => "Un viaggio nei sapori della cucina cinese al Golden Wok.",
+                    "id" => 3,
+                ],
+                [
+                    "name" => "Chinese Delight",
+                    "address" => "Via della Cina 10, Milano",
+                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/0e/f8/85/c3/chinese-delight.jpg",
+                    "id" => 3,
+                ],
+                [
+                    "name" => "Golden Dragon",
+                    "address" => "Via del Drago d'Oro 5, Milano",
+                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/03/a6/a4/c7/golden-dragon-chinese.jpg",
+                    "id" => 3,
+                ],
+                [
+                    "name" => "American Diner",
+                    "address" => "Via dei Casali 13, Milano",
+                    "image" => "https://www.1950americandiner.it/media/diners-gallerie/Pontedera_2.jpg",
+                    "id" => 4,
+                ],
+                [
+                    "name" => "Burger Joint",
+                    "address" => "Via del Bisonte 23, Milano",
+                    "image" => "https://static.wixstatic.com/media/6818fc_b9d42479002e4b6d9b64fbe9de3e2b51~mv2.jpg/v1/fill/w_640,h_350,al_t,q_80,usm_0.66_1.00_0.01,enc_auto/6818fc_b9d42479002e4b6d9b64fbe9de3e2b51~mv2.jpg",
+                    "id" => 4,
+                ],
+                [
+                    "name"=> "American Grille",
+                    "address"=> "Via XX Settembre 5, Milano",
+                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/1b/e2/fd/96/20200828-193003-largejpg.jpg",
+                    "description" => "Gustosi piatti americani e un'atmosfera retrò all'American Grille.",
+                    "id" => 4,
+                ],
+                [
+                    "name"=> "Turkish Delights",
+                    "address"=> "Via Milano 25, Milano",
+                    "image" => "https://eatsouthbank.com.au/wp-content/uploads/2015/06/Ahmets_NewShoot_2022_7.jpg",
+                    "description" => "I sapori autentici della Turchia vi aspettano ai Turkish Delights.",
+                    "id" => 5,
+                ],
+                [
+                    "name" => "Cappadocia",
+                    "address" => "Via Cerignola 20, Milano",
+                    "image" => "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Cappadocia_Turkish_Restaurant.jpg/640px-Cappadocia_Turkish_Restaurant.jpg",
+                    "id" => 5,
+                ],
+                [
+                    "name" => "Meydan",
+                    "address" => "Via Foggia, Milano",
+                    "image" => "https://meydan-kebap.com/wp-content/uploads/2021/03/IMG_4364.jpg",
+                    "id" => 5,
+                ],
+                [
+                    "name" => "Mexican Grill",
+                    "address" => "Via del Messico 50, Milano",
+                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/13/97/43/ea/front-entrance.jpg",
+                    "id" => 6,
+                ],
+                [
+                    "name" => "El Mariachi",
+                    "address" => "Via San Severo 15, Milano",
+                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/07/41/2f/34/exterior.jpg",
+                    "id" => 6,
+                ],
+                [
+                    "name"=> "Mexican Cantina",
+                    "address"=> "Via Napoli 10, Milano",
+                    "image" => "https://www.lauraperuchi.com/wp-content/uploads/2017/02/32760965701_14fa5221d1_c.jpg",
+                    "description" => "Autentici sapori messicani in un'atmosfera festosa al Mexican Cantina.",
+                    "id" => 6,
+                ],
+                [
+                    "name" => "Indian Spice",
+                    "address" => "Via Portofino 25, Milano",
+                    "image" => "https://welcomesaudi.com/uploads/0000/64/2021/10/11/1-indian-spices-restaurant-jeddah.jpg",
+                    "id" => 7,
+                ],
+                [
+                    "name" => "Taj Mahal",
+                    "address" => "Via Casalnuovo 28, Milano",
+                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/11/25/46/27/taj-mahal-restaurant.jpg",
+                    "id" => 7,
+                ],
+                [
+                    "name"=> "Bangkok Street",
+                    "address"=> "Via Padova 22, Milano",
+                    "image" => "https://media-cdn.tripadvisor.com/media/photo-s/1a/b6/0d/a4/mat.jpg",
+                    "description" => "Esplora le autentiche delizie thailandesi al Bangkok Street.",
+                    "id" => 8,
+                ],
+                [
+                    "name" => "Thai Taste",
+                    "address" => "Via dei Sapori Thailandesi 10, Milano",
+                    "image" => "https://media.timeout.com/images/104681299/image.jpg",
+                    "id" => 8,
+                ],
             ];
+
+
             $users = User::all();
         foreach ($data as $index=>$restaurant){
             $new_restaurant = New Restaurant();

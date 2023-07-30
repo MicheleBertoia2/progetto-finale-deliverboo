@@ -336,8 +336,10 @@ ul {
     // background-image: url("/img/pattern-anguria.jpg");
     background-image: url("/img/bg-main.jpg");
 
+
     min-height: 1250px;
     background-position:0 100px;
+
     background-size: cover;
     background-repeat: no-repeat;
 
@@ -475,15 +477,20 @@ ul {
 
   .black-to-azure{
     background-image: url('/public/img/ssspill-2.svg');
+
     height: 125px;
     background-position: -3px 0;
+
     background-repeat: no-repeat;
     background-size: cover;
 }
 .azure-to-black{
     background-image: url('/public/img/ssspill.svg');
+
     height: 125px;
     background-position: -3px 0;
+
+
     background-repeat: no-repeat;
   background-size: cover;
   }
