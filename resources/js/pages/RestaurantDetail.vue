@@ -189,10 +189,11 @@ export default {
                             </div>
 
                             <div v-else class="bg-tertiary ">
-                                <div class="btn btn-danger svuota" @click="this.store.emptyCart()">Svuota</div>
                                 <strong >
                                     Puoi ordinare solo da un ristorante
                                 </strong>
+                                <div class="btn btn-danger" @click="this.store.emptyCart">Svuota</div>
+
                             </div>
 
                         </div>
@@ -220,12 +221,25 @@ export default {
                                     <p class="card-text mt-1">{{ dish.description }}</p>
                                 </div>
                                 <div class="detaildish-cart">
-                                    <span class="add">
-                                        <i  @click="store.modifyQuantity(dish,false)" class=" fa-solid fa-minus mt-1"></i>
-                                        <h5 class="">{{ cartQuantity(dish) }}</h5>
-                                        <i  @click="store.addToCart(dish),dish.isAdded=true" class="fa-solid fa-plus mt-1"></i>
-                                    </span>
-                                    <button  @click="store.addToCart(dish),dish.isAdded=true" class="btn btn-dark p-1">Aggiungi Al Carrello</button>
+                                    <button v-if="!dish.isAdded && isAllItemsFromCurrentRestaurant" @click="store.addToCart(dish),dish.isAdded=true" class="btn btn-dark p-1">Aggiungi Al Carrello</button>
+                                    <div v-else-if="dish.isAdded" class="w-75">
+                                        <div class="d-flex">
+
+                                            <div class="bg-dark text-white p-1 w-100 text-center">Aggiunto <i class="fa-solid fa-check"></i></div>
+                                            <button @click="dish.isAdded=false, store.removeFromCart(dish.id)" class="btn btn-danger w-25">
+                                                <i class="fa-solid fa-close"></i>
+                                            </button>
+                                        </div>
+                                        <span class="add">
+                                            <i  @click="store.modifyQuantity(dish,false)" class=" fa-solid fa-minus mt-1"></i>
+                                            <h5 class="">{{ cartQuantity(dish) }}</h5>
+                                            <i  @click="store.addToCart(dish),dish.isAdded=true" class="fa-solid fa-plus mt-1"></i>
+                                        </span>
+                                    </div>
+                                    <div v-else class="btn btn-danger py-1 px-2" @click="store.emptyCart">
+                                        <p>Puoi ordinare solo da un ristorante</p>
+                                        <p>Clicca qui per svuotare il carrello</p>
+                                    </div>
                                 </div>
 
                         </section>
@@ -262,7 +276,7 @@ export default {
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.363);
-        z-index: 5;
+        z-index: 15;
         pointer-events: none;
         }
     .my-cnt {
@@ -367,7 +381,7 @@ export default {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 10;
+            z-index: 20;
             /*right: 800px;*/
             transition: all .5s;
             background-color: #3ABFB4;
@@ -379,6 +393,7 @@ export default {
             justify-items: center;
             .exit{
                 position: sticky;
+                margin-bottom: 7px;
                 right: 20px;
                 top: 20px;
                 width: 50px;
@@ -395,7 +410,7 @@ export default {
             }
             .detaildish-cart{
                 width: 100%;
-                height: 90px;
+                // height: 90px;
                 background-color: #F9FAFA;
                 display: flex;
                 flex-direction: column;
@@ -413,9 +428,9 @@ export default {
                 }
             }
             .add{
-                width: 60%;
                 display: flex;
                 justify-content:space-evenly;
+
             }
         }
     }

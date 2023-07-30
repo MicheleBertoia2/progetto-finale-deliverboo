@@ -292,7 +292,7 @@ export default {
 
     <Cart :modalOpen="store.showModal" :cartItems="store.cartItems" @close="store.showModal = false" />
 
-    <!-- <BtnCart /> -->
+    <BtnCart />
     <div class="black-to-azure"></div>
 </template>
 
