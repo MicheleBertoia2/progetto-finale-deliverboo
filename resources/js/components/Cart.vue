@@ -12,14 +12,14 @@
 
           <div class="" v-if="store.cartItems.length <= 0">
             <h4 class="text-center mt-5 mb-3">Il carrello è vuoto</h4>
-            <div class="text-decoration-none text-center d-flex justify-content-center">
+            <!-- <div class="text-decoration-none text-center d-flex justify-content-center">
             <router-link class="text-decoration-none text-center d-flex justify-content-center" :to="{ name: 'home' }">
               <div class="btn-footer-card bg-primary-color p-2 rounded btn-order mt-2 w-32 mx-2">Torna alla Home</div>
             </router-link>
             <div class="text-decoration-none text-center d-flex justify-content-center">
               <div @click="closeModal" class="btn-footer-card bg-primary-color p-2 rounded btn-order mt-2 w-32 mx-2">Chiudi Carrello</div>
             </div>
-            </div>
+            </div> -->
           </div>
 
             <div class="my-3 " v-else>Stai acquistando da: <span class="my-strong"></span></div>
