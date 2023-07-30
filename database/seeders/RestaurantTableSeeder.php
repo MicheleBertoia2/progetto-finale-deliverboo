@@ -105,7 +105,7 @@ class RestaurantTableSeeder extends Seeder
                     "description" => "Gusta l'eleganza della cucina giapponese allo Sushi Bar, in Via Solferino 14. Un'oasi di sapori freschi e squisiti.",
                     ],
             [
-                    "name"=> "Trattoria Alla Palazzina",
+                    "name"=> "Trattoria Palazzina",
                     "address"=> "Viale Monte Nero 15",
                     "image" => "https://qul.imgix.net/dbc81b35-7f0e-4bf7-a263-2883ad9dd256/220495_landscape.jpg",
                     "description" => "Regalati l'essenza dell'ospitalità italiana alla Trattoria Alla Palazzina, in Viale Monte Nero 15. Un luogo in cui ogni pasto racconta una storia.",

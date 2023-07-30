@@ -71,7 +71,7 @@
                     </div>
                     <div>
                     {{-- * il button deve essere type="button" oppure diverrà automaticamnete type="submit" --}}
-                    <button type="button" class="btn btn-danger ms-3 mt-3 d-none" id="deleteButton" onclick="deleteImage()"
+                    <button type="button" class="btn btn-danger ms-2 mt-3 d-none" id="deleteButton" onclick="deleteImage()"
                     style="width: 50px; height: 50px;"><span class="fa-solid fa-trash"></span><input id="inputDeleteImage" type="hidden" name="noImage" style="opacity: 0; border: none; height: 0; width: 0;"></button>
                     </div>
                 </div>
