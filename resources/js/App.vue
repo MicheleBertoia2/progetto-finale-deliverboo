@@ -8,13 +8,17 @@ export default {
     components: {
         Header,
         Footer
-    }
+    },
+
+
+
+
 }
 </script>
 
 <template>
 
-    <div>
+    <div >
 
         <Header />
 
