@@ -45,26 +45,31 @@
                   <img class="img-product " :src="store.getFullImageUrl(item.image_path)" :alt="item.name">
                   <div class="d-flex flex-column justify-content-start details-product ms-2">
                     <div class="my-strong card-titles">{{ item.name }}</div>
-                    <div class="text-muted mt-2 small">Quantità: {{ item.quantity }}</div>
+                    <div class="text-muted mt-2 small">Quantità:
+                        <strong class=" text-dark">
+                            {{ item.quantity }}
+                        </strong>
+                    </div>
                     <div class="d-flex ">
                       <div @click="store.modifyQuantity(item,false)" class="mt-1 mb-3 btn btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
                       <div @click="store.modifyQuantity(item,true)" class="mt-1 mb-3 btn btn-quantity bg-primary-color d-flex justify-content-center align-items-center ms-2">+</div>
                     </div>
                     <div @click="removeFromCartAndEmit(item.id),item.isAdded = false" class="bg-danger rounded p-2 remove-product text-white"><i class="fa-solid fa-trash"></i> Rimuovi</div>
-                  </div>
-                  <div class="mt-2 my-strong">{{ item.price }} €</div>
-              </div>
+                    </div>
+                    <div class="mt-2 my-strong">{{ item.price }} €</div>
+            </div>
 
             </div>
 
             <div v-if="store.cartItems.length > 0" class="actions-bar d-flex align-items-end">
-              <div class="tot me-2 mt-2 my-strong">Totale: {{ orderTotal.toFixed(2) }} €</div>
-              <div class="footer-card d-flex">
-                <div class="btn-footer-card bg-danger rounded p-2 text-white me-2 mt-2" @click="this.store.emptyCart()"><i class="fa-solid fa-trash"></i> Svuota Carrello</div>
+                <div class="ms-5 mb-1 my-strong">Totale: {{ orderTotal.toFixed(2) }}€</div>
+
+                <!-- <div class="btn-footer-card bg-danger rounded p-2 text-white me-2 mt-2" @click="this.store.emptyCart()"><i class="fa-solid fa-trash"></i> Svuota Carrello</div> -->
                 <router-link class="text-decoration-none" :to="{ name: 'checkout' }">
-                  <div class="btn-footer-card bg-primary-color p-2 rounded btn-order mt-2">Procedi all'ordine</div>
+                <div class="btn-footer-card bg-primary-color p-2 rounded btn-order ms-5 mt-2">Procedi all'ordine</div>
                 </router-link>
-              </div>
+
+
             </div>
 
         </div>
