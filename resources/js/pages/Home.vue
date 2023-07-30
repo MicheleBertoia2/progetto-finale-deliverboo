@@ -212,6 +212,7 @@ export default {
 
         window.addEventListener('resize', this.onWindowResize);
         this.onWindowResize();
+        store.showModal = false
         this.getApi()
         // Carica il carrello salvato nel localStorage al momento del caricamento della pagina
         const savedCart = localStorage.getItem('cart');

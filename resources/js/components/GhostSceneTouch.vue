@@ -66,7 +66,7 @@
         (gltf) => {
           model = gltf.scene
           model.position.set(0, -2.5, 0)
-          model.rotation.y = Math.PI / 4
+        //   model.rotation.y = Math.PI / 4
 
 
           model.scale.set(1.5, 1.5, 1.5)
@@ -111,9 +111,17 @@
       // Animation
       const animate = () => {
         requestAnimationFrame(animate)
+        const timestamp = performance.now()
+        const elapsedTime = timestamp * 0.001;
         TWEEN.update()
         if (model) {
-           model.rotation.y += 0.01
+
+           const amplitude = 0.2; // Puoi regolare questo valore per controllare l'ampiezza del movimento
+            const frequency = 0.1; // Puoi regolare questo valore per controllare la frequenza del movimento
+            const verticalMovement = (amplitude * Math.sin(2 * Math.PI * frequency * elapsedTime)) -2.5;
+
+            // Sposta il modello lungo l'asse Y
+            model.position.y = verticalMovement;
         }
 
         renderer.render(scene, camera)

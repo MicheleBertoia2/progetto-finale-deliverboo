@@ -200,7 +200,7 @@ export default {
                     <h5>Totale: {{ orderTotal.toFixed(2) }} €</h5>
                 </div>
                 <span class="mb-5">
-                    <button class="btn btn-dark">Indietro</button>
+                    <button class="btn btn-dark" @click="this.$router.go(-1)">Indietro</button>
                     <button class="btn btn-dark ms-3" @click="this.page++">Avanti</button>
                 </span>
 
