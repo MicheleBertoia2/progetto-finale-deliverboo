@@ -8,6 +8,7 @@ import Cart from '../components/Cart.vue';
 import { store } from '../store/store';
 import BtnCart from '../components/BtnCart.vue';
 import GhostScene from '../components/GhostScene.vue';
+import GhostSceneTouch from '../components/GhostSceneTouch.vue';
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -33,6 +34,7 @@ export default {
             typeSelected: [],
             isNavigationVisible: true,
             currentPage: 1,
+            isTouch: false,
             swiperBreakpoints: {
                 // Configurazione per schermi con larghezza fino a 320px (dispositivi mobili)
                 220: {
@@ -122,6 +124,7 @@ export default {
         Swiper,
         SwiperSlide,
         GhostScene,
+        GhostSceneTouch,
     },
     setup() {
         return {
@@ -201,10 +204,15 @@ export default {
         }
     },
 
+    created(){
+        this.isTouch = 'ontouchstart' in window  || navigator.maxTouchPoints > 0
+    },
+
     mounted() {
 
         window.addEventListener('resize', this.onWindowResize);
         this.onWindowResize();
+        store.showModal = false
         this.getApi()
         // Carica il carrello salvato nel localStorage al momento del caricamento della pagina
         const savedCart = localStorage.getItem('cart');
@@ -221,7 +229,8 @@ export default {
 <template>
     <div class="azure-to-black"></div>
     <!-- BELO JUMBO -->
-    <GhostScene/>
+    <GhostSceneTouch v-if="this.isTouch"/>
+    <GhostScene v-else/>
 
     <!-- BRUTO  VECHIO JUMBO -->
     <!-- <div class="jumbotron">
@@ -285,22 +294,14 @@ export default {
     <Cart :modalOpen="store.showModal" :cartItems="store.cartItems" @close="store.showModal = false" />
 
     <BtnCart />
+    <div class="black-to-azure"></div>
 </template>
 
 
 
 <style lang="scss" scoped>
 
-.jumbotron {
-    height: 600px;
-    width: 100%;
 
-    img {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-    }
-}
 
 .container-inner {
     background-color: white;
@@ -331,11 +332,14 @@ ul {
 }
 
 .container-restaurant {
+    padding-bottom: 20px;
     // background-image: url("/img/pattern-anguria.jpg");
-    background-image: url("/img/bg-60.jpg");
+    background-image: url("/img/bg-main.jpg");
 
-    min-height: 1070px;
-    background-position: center;
+
+    min-height: 1250px;
+    background-position:0 100px;
+
     background-size: cover;
     background-repeat: no-repeat;
 
@@ -473,15 +477,20 @@ ul {
 
   .black-to-azure{
     background-image: url('/public/img/ssspill-2.svg');
-    height: 150px;
-    background-position: -5px 0;
+
+    height: 125px;
+    background-position: -3px 0;
+
     background-repeat: no-repeat;
     background-size: cover;
 }
 .azure-to-black{
     background-image: url('/public/img/ssspill.svg');
-    height: 150px;
-    background-position: -5px 0;
+
+    height: 125px;
+    background-position: -3px 0;
+
+
     background-repeat: no-repeat;
   background-size: cover;
   }

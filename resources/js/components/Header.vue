@@ -5,16 +5,30 @@ export default {
     name: 'Header',
     data(){
         return{
-            store
+            store,
+            scrolled: false,
         }
-    }
+    },
+    methods:{
+        handleScroll() {
+      const scrollY = window.scrollY;
+
+      this.scrolled = scrollY > 0;
+        }
+    },
+    mounted() {
+        window.addEventListener('scroll', this.handleScroll);
+    },
+    beforeDestroy() {
+        window.removeEventListener('scroll', this.handleScroll);
+    },
 }
 </script>
 
 
 <template>
     <header>
-        <nav class="navbar navbar-expand navbar-light bg-dark-green d-flex justify-content-between container-fluid">
+        <nav class="navbar navbar-expand navbar-light bg-dark-green d-flex justify-content-between container-fluid" :class="{'scrolled' : scrolled}">
             <div class="">
                     <router-link :to="{ name: 'home' }" class="nav-link"> <img src="img/logosingle.png" alt="logo" width="55" ></router-link>
             </div>
@@ -47,8 +61,11 @@ export default {
         position: fixed;
         top:0;
         z-index: 15;
-        -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.88);
-        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.88);
+        &.scrolled{
+
+            -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.88);
+            box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.88);
+        }
         .go-dashboard{
             position: relative;
                 i{
