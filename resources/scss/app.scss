@@ -157,12 +157,12 @@ aside {
 //orders
 .accordion{
     .accordion-button:not(.collapsed) {
-        background-color: #3ABFB4;
+        background-color: #35948c;
     }
 
     /* Sfondo del pulsante dell'accordion quando è aperto */
     .accordion-button.collapsed {
-        background-color: #3ABFB4;
+        background-color: #35948c;
     }
 
     /* Sfondo della tabella interna dell'accordion */
@@ -186,15 +186,27 @@ aside {
     }
     table{
         background-color: #3ABFB4 !important;
+
         tbody tr {
             border-bottom: none;
             border-color: rgba(240, 248, 255, 0);
+            td{
+                background-color: #35948c;
+            }
         }
         th {
-            background-color: #3ABFB4;
+            background-color: #35948c;
         }
         td {
             padding: 15px 0px;
+            background-color: #3ABFB4;
+        }
+    }
+    .table-body{
+        th{
+            background-color: #3ABFB4 !important;
+        }
+        td{
             background-color: #3ABFB4;
         }
     }

@@ -32,12 +32,12 @@
             <div id="collapse{{ $order->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
 
-                    <table class="table">
+                    <table class="table table-body">
                         <thead>
-                            <tr>
-                                <th scope="col">email</th>
-                                <th scope="col">Prezzo</th>
-                                <th scope="col">Data Ordine</th>
+                            <tr class="tr-body">
+                                <th scope="col ">email</th>
+                                <th scope="col ">Prezzo</th>
+                                <th scope="col ">Data Ordine</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,34 +55,5 @@
         @endforeach
     </div>
 
-
-
-        {{-- <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nome </th>
-                    <th scope="col">Indirizzo </th>
-                    <th scope="col">Mail </th>
-                    <th scope="col">Dettaglio</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($orders as $order)
-                    <tr>
-                        <th scope="row">{{$order->id}}</th>
-                        <td>{{$order->customer_name}}</td>
-                        <td>{{$order->customer_address}}</td>
-                        <td>{{$order->customer_mail}}</td>
-                        <td>
-                            <a href="{{ route('admin.orders.show', $order) }}" class="btn btn-dark"><i
-                                class="fa-solid fa-eye"></i>
-                            </a>
-                        </td>
-                    </tr>
-                @endforeach
-
-            </tbody>
-        </table> --}}
     </div>
 @endsection
