@@ -192,7 +192,7 @@ export default {
                                 <strong >
                                     Puoi ordinare solo da un ristorante
                                 </strong>
-                                <div class="btn btn-danger" @click="this.store.emptyCart">Svuota</div>
+                                <div class="btn btn-danger" @click="this.store.emptyCart">Svuota Carrello</div>
 
                             </div>
 
