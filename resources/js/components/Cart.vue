@@ -41,10 +41,10 @@
               </div> -->
 
               <!-- //* dinamico -->
-              <div v-for="(item, index) in cartItems" :key="index" class="d-flex justify-content-start align-items-start h-item mb-3">
+              <div v-for="(item, index) in cartItems" :key="index" class="d-flex justify-content-start align-items-start h-item my-3">
                   <img class="img-product " :src="store.getFullImageUrl(item.image_path)" :alt="item.name">
                   <div class="d-flex flex-column justify-content-start details-product ms-2">
-                    <div class="my-strong">{{ item.name }}</div>
+                    <div class="my-strong card-titles">{{ item.name }}</div>
                     <div class="text-muted mt-2 small">Quantità: {{ item.quantity }}</div>
                     <div class="d-flex ">
                       <div @click="store.modifyQuantity(item,false)" class="mt-1 mb-3 btn btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
@@ -117,6 +117,12 @@
 
 <style lang="scss">
 /*serve per chiudere il modal lateralmente*/
+.card-titles{
+        width: 180px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
   .modal-container {
     position: fixed;
     left: 0;
