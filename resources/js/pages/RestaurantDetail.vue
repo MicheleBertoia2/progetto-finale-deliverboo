@@ -223,19 +223,21 @@ export default {
                                 <div class="detaildish-cart">
                                     <button v-if="!dish.isAdded && isAllItemsFromCurrentRestaurant" @click="store.addToCart(dish),dish.isAdded=true" class="btn btn-dark p-1">Aggiungi Al Carrello</button>
                                     <div v-else-if="dish.isAdded" class="w-75">
-                                        <div class="d-flex">
 
-                                            <div class="bg-dark text-white p-1 w-100 text-center">Aggiunto <i class="fa-solid fa-check"></i></div>
-                                            <button @click="dish.isAdded=false, store.removeFromCart(dish.id)" class="btn btn-danger w-25">
-                                                <i class="fa-solid fa-close"></i>
-                                            </button>
-                                        </div>
                                         <span class="add">
                                             <i  @click="store.modifyQuantity(dish,false)" class=" fa-solid fa-minus mt-1"></i>
                                             <h5 class="">{{ cartQuantity(dish) }}</h5>
                                             <i  @click="store.addToCart(dish),dish.isAdded=true" class="fa-solid fa-plus mt-1"></i>
                                         </span>
+                                        <div class="d-flex">
+
+                                        <div class="bg-dark text-white p-1 w-100 text-center rounded">Aggiunto <i class="fa-solid fa-check"></i></div>
+                                        <button @click="dish.isAdded=false, store.removeFromCart(dish.id)" class="btn btn-danger w-25 ms-2">
+                                            <i class="fa-solid fa-close"></i>
+                                        </button>
+                                        </div>
                                     </div>
+
                                     <div v-else class="btn btn-danger py-1 px-2" @click="store.emptyCart">
                                         <p>Puoi ordinare solo da un ristorante</p>
                                         <p>Clicca qui per svuotare il carrello</p>
