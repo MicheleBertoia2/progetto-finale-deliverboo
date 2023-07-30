@@ -20,7 +20,7 @@ class OrderController extends Controller
         $user = Auth::user();
         $res_id = $user->restaurant->id;
 
-        $orders = Order::where('restaurant_id', $res_id)->get();
+        $orders = Order::where('restaurant_id', $res_id)->orderByDesc('created_at')->get();
 
         return view('admin.order.index', compact('orders'));
     }
@@ -52,9 +52,16 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Order $order)
     {
-        //
+        $user = Auth::user();
+        $restaurant = $user->restaurant;
+        if($order->restaurant_id == $restaurant->id){
+
+            return view('admin.order.show', compact('order'));
+        }else{
+            return redirect()->route('admin.orders.show');
+        }
     }
 
     /**

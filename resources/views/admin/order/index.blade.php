@@ -1,17 +1,70 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>I Miei Ordini:</h1>
+<h1 class="m-5">I Miei Ordini:</h1>
 
-    <div class="container w-75">
-        <table class="table table-striped">
+<div class="container w-75">
+    <div class="accordion " id="accordionExample">
+        @foreach ($orders as $order)
+        <div class="accordion-item my-4">
+            <h2 class="accordion-header">
+                <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $order->id }}" aria-expanded="true" aria-controls="collapse{{ $order->id }}">
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Indirizzo </th>
+                                <th scope="col">Telefono </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    <th scope="row">{{$order->id}}</th>
+                                    <td>{{$order->customer_name}}</td>
+                                    <td>{{$order->customer_address}}</td>
+                                    <td>{{$order->customer_phone}}</td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </button>
+            </h2>
+            <div id="collapse{{ $order->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">email</th>
+                                <th scope="col">Prezzo</th>
+                                <th scope="col">Data Ordine</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr >
+                                <td >{{$order->customer_mail}}</td>
+                                <td>{{$order->total_price}} &euro;</td>
+                                <td>{{$order->created_at}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+
+
+
+        {{-- <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nome </th>
                     <th scope="col">Indirizzo </th>
                     <th scope="col">Mail </th>
-                    <th scope="col">Telefono </th>
+                    <th scope="col">Dettaglio</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,11 +74,15 @@
                         <td>{{$order->customer_name}}</td>
                         <td>{{$order->customer_address}}</td>
                         <td>{{$order->customer_mail}}</td>
-                        <td>{{$order->customer_phone}}</td>
+                        <td>
+                            <a href="{{ route('admin.orders.show', $order) }}" class="btn btn-dark"><i
+                                class="fa-solid fa-eye"></i>
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
 
             </tbody>
-        </table>
+        </table> --}}
     </div>
 @endsection

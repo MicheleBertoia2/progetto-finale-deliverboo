@@ -35,9 +35,10 @@ body {
 header {
     background-color: #3ABFB4 !important;
 
+
     nav {
         box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.7);
-
+        z-index: 1;
     }
 
     a {
@@ -152,6 +153,68 @@ aside {
 
 #password-error {
     opacity: 0;
+}
+//orders
+.accordion{
+    .accordion-button:not(.collapsed) {
+        background-color: #3ABFB4;
+    }
+
+    /* Sfondo del pulsante dell'accordion quando è aperto */
+    .accordion-button.collapsed {
+        background-color: #3ABFB4;
+    }
+
+    /* Sfondo della tabella interna dell'accordion */
+    .accordion-body {
+        background-color: #3ABFB4;
+        border-radius: 15px;
+    }
+    .accordion-item:not(.collapsed) {
+        background-color: #3ABFB4;
+    }
+    .accordion-item {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    .accordion-item:not(.collapsed) {
+        border-radius: 15px;
+    }
+    button{
+        background-color: #3ABFB4;
+        border-radius: 15px;
+    }
+    table{
+        background-color: #3ABFB4 !important;
+        tbody tr {
+            border-bottom: none;
+            border-color: rgba(240, 248, 255, 0);
+        }
+        th {
+            background-color: #3ABFB4;
+        }
+        td {
+            padding: 15px 0px;
+            background-color: #3ABFB4;
+        }
+    }
+}
+.accordion-button::after {
+    margin-left: 20px;
+
+}
+
+/* Rimuovi il cambio di colore del background */
+.accordion-button:not(.collapsed) {
+    transition: all .5s;
+    -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.88);
+    box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.88);
+}
+
+/* Rimuovi il bordino blu quando l'accordion è attivo */
+.accordion-button:focus {
+    box-shadow: none !important;
+    outline: none !important;
 }
 
 @include media-breakpoint-down(lg) {
