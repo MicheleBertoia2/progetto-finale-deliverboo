@@ -69,7 +69,7 @@ img{
 .restaurant{
         margin: 15px;
         border-radius: 10px;
-        background-color: white;
+        background-color: #F1F3F4;
         max-width: 450px;
         flex: 1 0 380px;
         z-index: 1;

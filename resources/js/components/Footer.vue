@@ -27,11 +27,9 @@ export default {
                             Login
                         </a>
                     </li>
-                    <img class="shake-vertical" src="img/logosingle.png" alt="">
                 </ul>
             </div>
-            <div class=" col" style="padding: 15px; max-width: 150px;">
-                <h5>Metodi Di Pagamento</h5>
+            <div class=" col" style="padding: 15px; max-width: 300px;">
                 <span class="payment">
                     <img src="img/maestro.svg" alt="maestro">
                     <img src="img/mastercard.svg" alt="mastercard">
@@ -86,13 +84,13 @@ footer{
         max-width: 1000px;
         .col{
             border-radius: 5px;
-            height: 250px;
-            background-color: #319990;
+            height: 150px;
+            background-color: #F1F3F4;
             margin: 10px;
             ul{
                 padding: 15px;
                 font-weight: 800;
-                .shake-vertical {
+                /*.shake-vertical {
 	                -webkit-animation: shake-vertical 3s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
 	                animation: shake-vertical 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
                 }
@@ -152,7 +150,7 @@ footer{
                                 transform: translateY(-6.4px);
                     }
 
-                }
+                }*/
                 li{
                     font-weight: 400;
                     padding: 5px 0px;
@@ -169,10 +167,11 @@ footer{
             }
 
             .payment{
+                width: 100%;
                 display: flex;
                 flex-wrap: wrap;
                 img{
-                    width: 80px;
+                    width: 100px;
                 }
             }
         }
