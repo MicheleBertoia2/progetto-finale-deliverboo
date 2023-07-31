@@ -69,7 +69,7 @@
         //   model.rotation.y = Math.PI / 4
 
 
-          model.scale.set(1.5, 1.5, 1.5)
+          model.scale.set(1, 1, 1)
           scene.add(model)
 
           //animazione iniziale
