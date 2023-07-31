@@ -24,6 +24,8 @@ export default {
     right: 100px;
     bottom: 50px;
     z-index: 5;
+    opacity: 0;
+    pointer-events: none;
     .number{
         height: 15px;
         width: 15px;
@@ -37,7 +39,7 @@ export default {
         position: absolute;
         top: -10px;
         right:  0;
-
+        opacity: 0;
     }
 
 }
