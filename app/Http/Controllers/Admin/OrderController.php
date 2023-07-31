@@ -22,7 +22,7 @@ class OrderController extends Controller
 
         $orders = Order::where('restaurant_id', $res_id)->orderByDesc('created_at')->get();
 
-        return view('admin.order.index', compact('orders'));
+        return view('admin.order.index', compact('orders','user'));
     }
 
     /**
@@ -58,7 +58,7 @@ class OrderController extends Controller
         $restaurant = $user->restaurant;
         if($order->restaurant_id == $restaurant->id){
 
-            return view('admin.order.show', compact('order'));
+            return view('admin.order.show', compact('order','user'));
         }else{
             return redirect()->route('admin.orders.show');
         }

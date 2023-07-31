@@ -20,7 +20,7 @@ class DishController extends Controller
         $user = Auth::user();
         $res_id  = $user->restaurant->id;
         $dishes = Dish::where('restaurant_id', $res_id)->get();
-        return view('admin.dish.index', compact('dishes'));
+        return view('admin.dish.index', compact('dishes','user'));
     }
 
 
@@ -31,7 +31,9 @@ class DishController extends Controller
      */
     public function create()
     {
-        return view('admin.dish.create');
+        $user = Auth::user();
+
+        return view('admin.dish.create', compact('user'));
     }
 
     /**
@@ -43,6 +45,7 @@ class DishController extends Controller
      */
     public function store(DishRequest $request)
     {
+
         $form_data = $request->all();
         $form_data['slug'] = Dish::generateSlug($form_data['name']);
 
@@ -60,7 +63,7 @@ class DishController extends Controller
         $new_dish->fill($form_data);
         $new_dish->save();
 
-        return redirect()->route('admin.dishes.show', $new_dish);
+        return redirect()->route('admin.dishes.show', ['dish' => $new_dish, 'user' => $user]);
     }
 
     /**
@@ -75,9 +78,9 @@ class DishController extends Controller
         $restaurant = $user->restaurant;
         if($dish->restaurant_id == $restaurant->id){
 
-            return view('admin.dish.show', compact('dish'));
+            return view('admin.dish.show', compact('dish','user'));
         }else{
-            return redirect()->route('admin.dishes.index');
+            return redirect()->route('admin.dishes.index', compact('user'));
         }
     }
 
@@ -93,9 +96,9 @@ class DishController extends Controller
         $restaurant = $user->restaurant;
         if($dish->restaurant_id == $restaurant->id){
 
-            return view('admin.dish.edit', compact('dish'));
+            return view('admin.dish.edit', compact('dish', 'user'));
         }else{
-            return redirect()->route('admin.dishes.index');
+            return redirect()->route('admin.dishes.index', compact('user'));
         }
     }
 
@@ -108,6 +111,8 @@ class DishController extends Controller
      */
     public function update(DishRequest $request, Dish $dish)
     {
+        $user = Auth::user();
+
         $form_data = $request->all();
 
         if($form_data['name'] !== $dish->name){
@@ -153,7 +158,7 @@ class DishController extends Controller
 
         // dd($form_data);
         $dish->update($form_data);
-        return redirect()->route('admin.dishes.show', compact('dish', 'oldImagePath'));
+        return redirect()->route('admin.dishes.show', compact('dish', 'oldImagePath', 'user'));
     }
 
     /**
@@ -164,9 +169,11 @@ class DishController extends Controller
      */
     public function destroy(Dish $dish)
     {
+        $user = Auth::user();
+
         Storage::disk('public')->delete($dish->image_path);
         $dish->delete();
 
-        return redirect()->route('admin.dishes.index');
+        return redirect()->route('admin.dishes.index', compact('user'));
     }
 }

@@ -18,7 +18,7 @@ class DashboardController extends Controller
         //$n_dish = Dish::where('restaurant_id', Auth::id())->count();
         if(!$has_restaurant){
 
-            return view('admin.home');
+            return view('admin.home', compact('user'));
         }
         else{
             return redirect()->route('admin.restaurants.show', $user->restaurant);

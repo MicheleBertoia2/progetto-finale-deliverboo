@@ -36,9 +36,11 @@ class RestaurantController extends Controller
      */
     public function create()
     {
+        $user = Auth::user();
+
         $types = Type::all();
 
-        return view('admin.restaurants.create', compact('types'));
+        return view('admin.restaurants.create', compact('types','user'));
     }
 
     /**
@@ -49,6 +51,7 @@ class RestaurantController extends Controller
      */
     public function store(RestaurantRequest $request)
     {
+        $user = Auth::user();
 
         //* per creare un nuovo progetto e salvare i dati nel database al click del button submit del form in create
         $form_data = $request->all();
@@ -89,7 +92,7 @@ class RestaurantController extends Controller
             $new_restaurant->types()->attach($form_data['types']);
         }
 
-        return redirect()->route('admin.restaurants.show', $new_restaurant);
+        return redirect()->route('admin.restaurants.show',['restaurant' => $new_restaurant, 'user' => $user]);
     }
 
     /**
@@ -105,7 +108,7 @@ class RestaurantController extends Controller
         // if(!$restaurant->id === $exact_restaurant_id){
         //     $restaurant->id = $exact_restaurant_id;
         // }
-        return view('admin.restaurants.show', compact('restaurant'));
+        return view('admin.restaurants.show', compact('restaurant','user'));
     }
 
     /**
@@ -120,7 +123,7 @@ class RestaurantController extends Controller
         $restaurant = $user->restaurant;
         $types = Type::all();
 
-        return view('admin.restaurants.edit', compact('restaurant','types'));
+        return view('admin.restaurants.edit', compact('restaurant','types','user'));
     }
 
     /**
@@ -132,6 +135,8 @@ class RestaurantController extends Controller
      */
     public function update(RestaurantRequest $request, Restaurant $restaurant)
     {
+        $user = Auth::user();
+
         //* prendo tutti i dati fillable salvati in request
         $form_data = $request->all();
 
@@ -190,7 +195,7 @@ class RestaurantController extends Controller
             $restaurant->types()->detach();
         }
 
-        return redirect()->route('admin.restaurants.show', compact('restaurant', 'oldImagePath'));
+        return redirect()->route('admin.restaurants.show', compact('restaurant', 'oldImagePath','user'));
     }
 
     /**
@@ -205,6 +210,6 @@ class RestaurantController extends Controller
         $restaurant = $user->restaurant;
         $restaurant->delete();
 
-        return redirect()->route('admin.home')->with('deleted', "Il ristorante: $restaurant->name è stato eliminato con successo");
+        return redirect()->route('admin.home',compact('user'))->with('deleted', "Il ristorante: $restaurant->name è stato eliminato con successo");
     }
 }
