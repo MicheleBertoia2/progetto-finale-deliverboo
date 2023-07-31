@@ -4,10 +4,11 @@
           <canvas ref="webgl" class="w-100 h-100"></canvas>
         </div>
         <div class="slogan-container">
-          <img src="/img/slogan.png" alt="">
+          <img src="/img/fantasminellostomaco.png" alt="">
         </div>
         <div class="logo-container flicker-in-1">
-            <img src="/img/logojumbo.png" alt="">
+            <!-- <img src="/img/logojumbo.png" alt=""> -->
+            <img src="img/logoscritta2.png" alt="">
         </div>
     </div>
   </template>
@@ -169,17 +170,25 @@
   <style>
     .slogan-container {
         position: absolute;
-        top: 420px;
+        top: 40% !important;
         right: 10%;
         width: 50%;
         background-color: transparent;
     }
     .logo-container {
         position: absolute;
-        top: 520px;
+        top: 50% !important;
         right: 10%;
         width: 50%;
         background-color: transparent;
+
+    }
+    .slogan-container img{
+        filter: invert(100%);
+    }
+
+    .logo-container img{
+        filter: invert(100%);
 
     }
     .canvas-container{
