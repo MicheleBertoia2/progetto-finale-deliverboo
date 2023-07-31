@@ -235,7 +235,8 @@
 
   .container-items{
     overflow-y: auto;
-    height: calc(100% - 41px - 104px);
+    height: calc(100% - 97px);
+    /*height: calc(100% - 41px - 104px);*/
     /*height: calc(100% - 65px - 104px);*/
   }
 

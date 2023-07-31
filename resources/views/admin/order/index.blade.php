@@ -44,7 +44,11 @@
                             <tr >
                                 <td >{{$order->customer_mail}}</td>
                                 <td>{{$order->total_price}} &euro;</td>
-                                <td>{{ date_format(date_create($order->created_at), 'd/m/Y H:i') }}</td>
+                                <td>{{
+                                    (new DateTime($order->created_at, new DateTimeZone('UTC')))
+                                    ->setTimezone(new DateTimeZone('Europe/Rome'))
+                                    ->format('d/m/Y H:i')
+                                }}</td>
                             </tr>
                         </tbody>
                     </table>
