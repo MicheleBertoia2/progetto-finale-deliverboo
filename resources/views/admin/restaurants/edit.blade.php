@@ -62,7 +62,7 @@
                 <div class="mt-3" id="placeholderText" style="display: none;">Esempio immagine:</div>
                 <div class="mt-3" id="imgUploaded" style="display: none;">Nuova immagine da caricare:</div>
 
-                <div class="d-flex align-items-end flex-wrap">
+                <div class="d-flex align-items-end flex-wrap div-img">
                     <div>
                         @if (str_contains($restaurant->image, 'http://') || str_contains($restaurant->image, 'https://'))
                             <img height="300px" class="mt-3 bg-white" id="prev-img"

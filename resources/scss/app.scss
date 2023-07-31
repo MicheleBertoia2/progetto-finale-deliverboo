@@ -282,6 +282,13 @@ aside {
     width: 70%;
 }
 
+@media (max-width: 815px) {
+    .div-img{
+        img{
+            width: 100%;
+        }
+    }
+}
 @media (min-width: 992px) {
     .mybadge-button {
         width: 20%;

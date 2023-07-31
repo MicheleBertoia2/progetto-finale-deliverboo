@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container p-5">
+    <div class="container p-5 form-img">
         <h1 class="py-4">Crea un nuovo piatto</h1>
 
         @if ($errors->any())
@@ -65,7 +65,7 @@
                 <div class="mt-3" id="placeholderText" style="display: block;">Esempio immagine:</div>
                 <div class="mt-3" id="imgUploaded" style="display: none;">Nuova immagine da caricare:</div>
 
-                <div class="d-flex align-items-end">
+                <div class="d-flex align-items-end flex-wrap div-img" >
                     <div>
                         <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt="">
                     </div>

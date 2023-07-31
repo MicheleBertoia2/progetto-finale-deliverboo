@@ -76,7 +76,7 @@
                     <div class="mt-3" id="placeholderText" style="display: none;">Esempio immagine:</div>
                     <div class="mt-3" id="imgUploaded" style="display: none;">Nuova immagine da caricare:</div>
 
-                <div class="d-flex align-items-end">
+                <div class="d-flex align-items-end flex-wrap div-img">
                     <div>
                         @if (str_contains($dish->image_path, 'http://') || str_contains($dish->image_path, 'https://'))
                             <img height="300px" class="mt-3 bg-white" id="prev-img"

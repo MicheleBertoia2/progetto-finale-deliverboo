@@ -42,7 +42,7 @@
         <div class="mt-3" id="placeholderText" style="display: block;">Esempio immagine:</div>
         <div class="mt-3" id="imgUploaded" style="display: none;">Nuova immagine da caricare:</div>
 
-        <div class="d-flex align-items-end flex-wrap">
+        <div class="d-flex align-items-end flex-wrap div-img">
             <div>
         {{-- <img height="300px" class="mt-3 bg-white px-5" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt=""> --}}
                 <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ Vite::asset('resources\img\placeholder-img.png') }}" alt="img">
