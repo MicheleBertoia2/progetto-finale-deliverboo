@@ -186,6 +186,12 @@ img{
     // &:hover {
         // color: white;
     // }
+    }
+
+    @media (max-width: 376px) {
+        .restaurant {
+            max-width: 360px;
+    }
 }
 </style>
 
