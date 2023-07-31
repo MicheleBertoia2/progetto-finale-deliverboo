@@ -215,7 +215,7 @@ export default {
                                 class="detail-img">
                                 <img v-else  class="detail-img" :src="getImageUrl(dish.image_path)"  :alt="dish.name">
                                 <h5 class=" text-center m-0 mx-1">{{ dish.name }}</h5>
-                                <div class="card-body p-2">
+                                <div class="card-body p-3">
                                     <span class="price m-0 my-2 badge bg-dark d-block">{{ dish.price }} &euro;</span>
                                     <span class=""><strong>Ingredienti: </strong>{{ dish.ingredients }}</span>
                                     <p class="card-text mt-1">{{ dish.description }}</p>
@@ -229,9 +229,9 @@ export default {
                                             <h5 class="">{{ cartQuantity(dish) }}</h5>
                                             <i  @click="store.addToCart(dish),dish.isAdded=true" class="fa-solid fa-plus mt-1"></i>
                                         </span>
-                                        <div class="d-flex">
+                                        <div class="d-flex justify-content-center">
 
-                                        <div class="bg-dark text-white p-1 w-100 text-center rounded">Aggiunto <i class="fa-solid fa-check"></i></div>
+                                        <div class="bg-dark text-white p-1 added text-center rounded">Aggiunto <i class="fa-solid fa-check ms-1"></i></div>
                                         <button @click="dish.isAdded=false, store.removeFromCart(dish.id)" class="btn btn-danger w-25 ms-2">
                                             <i class="fa-solid fa-close"></i>
                                         </button>
@@ -378,7 +378,7 @@ export default {
         .detail-dish {
             bottom: 0;
             overflow: auto;
-            border-radius: 15px;
+            border-radius: 10px;
             position: fixed;
             top: 50%;
             left: 50%;
@@ -389,10 +389,21 @@ export default {
             background-color: #3ABFB4;
             width: 430px;
             height: 600px;
-            border: 1px solid black;
+            -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.88);
+            box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.88);
             display: flex;
             flex-direction: column;
             justify-items: center;
+            .added{
+                width: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: all .5s;
+                &:hover{
+                    color: #3ABFB4 !important;
+                }
+            }
             .exit{
                 position: sticky;
                 margin-bottom: 7px;
@@ -452,11 +463,29 @@ export default {
         top: 50% !important;
         right: 50% !important;
     }
+    @media screen and (max-width: 512px) {
+        .card-body{
+            h5, .card-title{
+                    width: 150px !important;
+                }
+                p, .card-text{
+                    width: 150px !important;
+                }
+
+        }
+
+    }
+    @media screen and (max-width: 440px) {
+        .detail-dish {
+            width: 95% !important;
+        }
+
+    }
     @media screen and (max-width: 768px) {
         .restaurant-container {
             display: block;
-
         }
+
     }
     @media screen and (max-width: 930px) {
         .dishes {

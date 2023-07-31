@@ -183,6 +183,14 @@ footer{
             margin: 2px;
         }
     }
+    @media screen and (max-width: 768px) {
+        .payment {
+            img{
+                width: 50px !important;
+            }
+        }
+
+    }
 }
 
 </style>
