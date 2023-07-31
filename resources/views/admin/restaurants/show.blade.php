@@ -14,13 +14,18 @@
                     <a href="{{ route('admin.restaurants.edit', $restaurant) }}" class="btn btn-dark me-2"><i
                         class="fa-solid fa-pencil"></i>
                     </a>
-                    <form action="{{ route('admin.restaurants.destroy', $restaurant) }}" method="POST" class="d-inline"
+                    {{-- <form action="{{ route('admin.restaurants.destroy', $restaurant) }}" method="POST" class="d-inline"
                     onsubmit="return confirm('Confermi l\'eliminazione del ristorante: {{ $restaurant->name }} ?')">
                     @csrf
-                    {{-- * aggiungere DELETE perchè non è possibile inserire PUT/PATCH nel method del form al posto di POST --}}
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-                    </form>
+                    </form> --}}
+                    @include('admin.partials.form-delete',[
+                                'title'=>'Eliminazione Ristorante',
+                                'id'=> $restaurant->id,
+                                'message'=> "Confermi l'eliminazione del ristorante: $restaurant->name?",
+                                'route' => route('admin.restaurants.destroy', $restaurant)
+                            ])
                 </div>
 
             <div class="mt-3">
