@@ -8,7 +8,7 @@
                     <span>Home</span>
                 </a>
             </li>
-
+            @if($user->restaurant)
             <li>
                 <a href="{{ route('admin.dishes.index') }}">
                     <i class="fa-solid fa-utensils"></i> <span>Elenco Piatti</span>
@@ -20,12 +20,13 @@
                     <i class="fa-solid fa-folder-plus"></i> <span>Aggiungi un Piatto</span>
                 </a>
             </li>
-
             <li>
                 <a href="{{ route('admin.orders.index') }}">
                     <i class="fa-solid fa-truck"></i> <span>Ordini</span>
                 </a>
             </li>
+            @endif
+
 
         </ul>
     </nav>

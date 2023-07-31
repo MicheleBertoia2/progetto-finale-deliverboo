@@ -10,14 +10,20 @@
             <a href="{{ route('admin.dishes.edit', $dish) }}" class="btn btn-dark"><i
                 class="fa-solid fa-pencil"></i>
             </a>
-            <form class="d-inline" action="{{ route('admin.dishes.destroy', $dish) }}"
+            {{-- <form class="d-inline" action="{{ route('admin.dishes.destroy', $dish) }}"
                     method="POST"
                     onsubmit="return confirm('Confermi l\'eliminazione del carattere:  {{ $dish->name }} ?')">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger" title="delete"><i
                             class="fa-solid fa-trash"></i></button>
-                </form>
+                </form> --}}
+                @include('admin.partials.form-delete',[
+                    'title'=>'Eliminazione Piatto',
+                    'id'=> $dish->id,
+                    'message'=> "Confermi l'eliminazione del piatto $dish->name?",
+                    'route' => route('admin.dishes.destroy', $dish)
+                ])
         </div>
         <div class="m-3">
             <span class="badge mybadge p-2">
