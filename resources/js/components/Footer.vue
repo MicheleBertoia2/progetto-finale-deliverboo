@@ -37,18 +37,15 @@ export default {
                 </span>
 
             </div>
-            <div class=" col" style="max-width: 150px;">
-                <ul>
-                    <h5>
+            <div class=" col team-3" style="max-width: 200px; min-width: 200px;">
+                <ul >
+                    <h6>
                         Team 3
-                    </h5>
-                    <li>
-                        <a target="_blank">
-                            Chi Siamo
-                        </a>
-                    </li>
-
-
+                    </h6>
+                            <li><a target="_blank" href="https://www.linkedin.com/in/marco-de-marie-580a82281/">Marco De Marie</a></li>
+                            <li><a target="_blank" href="https://www.linkedin.com/in/giacomo-arena-94287a256/">Giacomo Arena</a></li>
+                            <li><a target="_blank" href="https://www.linkedin.com/in/michele-bertoia-dev/">Michele Bertoia</a></li>
+                            <li><a target="_blank" href="https://www.linkedin.com/in/michele-pilla/">Michele Pilla</a></li>
                 </ul>
             </div>
         </div>
@@ -78,6 +75,18 @@ footer{
     width: 100%;
     // -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.88);
     // box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.88);
+            .team-3{
+                padding: 0px !important;
+                li{
+                    line-height: 15px;
+                }
+                a{
+                    font-size: 15px;
+                    &:hover{
+                        font-size: 18px;
+                    }
+                }
+            }
     .row{
         display: flex;
         justify-content: center;
@@ -90,76 +99,18 @@ footer{
             ul{
                 padding: 15px;
                 font-weight: 800;
-                /*.shake-vertical {
-	                -webkit-animation: shake-vertical 3s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
-	                animation: shake-vertical 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
-                }
-                    @-webkit-keyframes shake-vertical {
-                    0%,
-                    100% {
-                        -webkit-transform: translateY(0);
-                                transform: translateY(0);
-                    }
-                    10%,
-                    30%,
-                    50%,
-                    70% {
-                        -webkit-transform: translateY(-8px);
-                                transform: translateY(-8px);
-                    }
-                    20%,
-                    40%,
-                    60% {
-                        -webkit-transform: translateY(8px);
-                                transform: translateY(8px);
-                    }
-                    80% {
-                        -webkit-transform: translateY(6.4px);
-                                transform: translateY(6.4px);
-                    }
-                    90% {
-                        -webkit-transform: translateY(-6.4px);
-                                transform: translateY(-6.4px);
-                    }
-                    }
-                    @keyframes shake-vertical {
-                    0%,
-                    100% {
-                        -webkit-transform: translateY(0);
-                                transform: translateY(0);
-                    }
-                    10%,
-                    30%,
-                    50%,
-                    70% {
-                        -webkit-transform: translateY(-8px);
-                                transform: translateY(-8px);
-                    }
-                    20%,
-                    40%,
-                    60% {
-                        -webkit-transform: translateY(8px);
-                                transform: translateY(8px);
-                    }
-                    80% {
-                        -webkit-transform: translateY(6.4px);
-                                transform: translateY(6.4px);
-                    }
-                    90% {
-                        -webkit-transform: translateY(-6.4px);
-                                transform: translateY(-6.4px);
-                    }
 
-                }*/
                 li{
                     font-weight: 400;
                     padding: 5px 0px;
                 a{
-                    color: rgb(0, 0, 0);
+                    color: rgb(78, 75, 75);
                     text-decoration: none;
                     transition: all .5s;
+                    font-weight: 500;
                     &:hover{
-                        color: rgb(247, 247, 247);
+                        color: black;
+                        font-size: 19px;
                     }
                     }
                 list-style: none;
@@ -183,13 +134,20 @@ footer{
             margin: 2px;
         }
     }
+    @media screen and (max-width: 992px) {
+        .payment {
+            img{
+                width: 90px !important;
+            }
+        }
+
+    }
     @media screen and (max-width: 768px) {
         .payment {
             img{
                 width: 50px !important;
             }
         }
-
     }
 }
 
