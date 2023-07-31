@@ -21,7 +21,7 @@
             </div> -->
           </div>
 
-            <div class="my-3 " v-else>Stai acquistando da: <span class="my-strong"></span></div>
+            <div class="my-3 " v-else></div>
 
             <div class="container-items">
               <!-- //* statico -->
