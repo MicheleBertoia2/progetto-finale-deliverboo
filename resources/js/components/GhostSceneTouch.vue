@@ -8,7 +8,7 @@
 
         </div>
         <div class="logo-container flicker-in-1">
-            <img src="img/logoscritta2.png" alt="">
+             <img src="img/logoscritta2.png" alt="">
         </div>
     </div>
   </template>
@@ -158,20 +158,28 @@
 
   </script>
 
-  <style>
+    <style lang="scss" scoped>
     .slogan-container {
         position: absolute;
-        top: 420px;
+        top: 39% !important;
         right: 10%;
         width: 50%;
         background-color: transparent;
     }
     .logo-container {
         position: absolute;
-        top: 520px;
+        top: 56% !important;
         right: 10%;
         width: 50%;
         background-color: transparent;
+
+}
+    .slogan-container img{
+        filter: invert(100%);
+    }
+
+    .logo-container img{
+        filter: invert(100%);
 
     }
     .canvas-container{

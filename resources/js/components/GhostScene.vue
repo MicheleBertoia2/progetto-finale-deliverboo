@@ -167,17 +167,17 @@
 
   </script>
 
-  <style>
+  <style lang="scss" scoped>
     .slogan-container {
         position: absolute;
-        top: 40% !important;
+        top: 39% !important;
         right: 10%;
         width: 50%;
         background-color: transparent;
     }
     .logo-container {
         position: absolute;
-        top: 50% !important;
+        top: 56% !important;
         right: 10%;
         width: 50%;
         background-color: transparent;
@@ -201,6 +201,8 @@
     }
 
     .mb-wrapper{
+        height: 100%;
+        position: relative;
         background-color: #242a2c;
       background-image: url('/public/img/bg-black-pattern.svg');
 
