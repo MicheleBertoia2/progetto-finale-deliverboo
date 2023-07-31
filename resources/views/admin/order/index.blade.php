@@ -44,7 +44,7 @@
                             <tr >
                                 <td >{{$order->customer_mail}}</td>
                                 <td>{{$order->total_price}} &euro;</td>
-                                <td>{{$order->created_at}}</td>
+                                <td>{{ date_format(date_create($order->created_at), 'd/m/Y H:i') }}</td>
                             </tr>
                         </tbody>
                     </table>
