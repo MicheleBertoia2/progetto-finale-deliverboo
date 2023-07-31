@@ -5,7 +5,6 @@
             <div class="d-flex justify-content-between align-items-center">
                 <h4>Il tuo ordine</h4>
                 <div @click="closeModal" class="d-flex align-items-center cursor-pointer">
-                    <div>Chiudi Carrello</div>
                     <div class="bg-primary-color ms-2 rounded close-button d-flex justify-content-center align-items-center"><i class="fa-solid fa-close"></i></div>
                 </div>
             </div>
@@ -54,7 +53,7 @@
                       <div @click="store.modifyQuantity(item,false)" class="mt-1 mb-3 btn btn-quantity bg-primary-color d-flex justify-content-center align-items-center">-</div>
                       <div @click="store.modifyQuantity(item,true)" class="mt-1 mb-3 btn btn-quantity bg-primary-color d-flex justify-content-center align-items-center ms-2">+</div>
                     </div>
-                    <div @click="removeFromCartAndEmit(item.id),item.isAdded = false" class="bg-danger rounded p-2 remove-product text-white"><i class="fa-solid fa-trash"></i> Rimuovi</div>
+                    <div @click="removeFromCartAndEmit(item.id),item.isAdded = false" class="trash-b bg-danger rounded p-2 remove-product text-white"><i class="fa-solid fa-trash"></i> <span class="remove">Rimuovi</span></div>
                     </div>
                     <div class="mt-2 my-strong">{{ item.price }} €</div>
             </div>
@@ -259,18 +258,45 @@
     color: white;
   }
 }
+@media screen and (max-width: 768px) {
+        .restaurant-container {
+            display: block;
 
-@media screen and (max-width: 550px) {
-  .modal-container {
-    width: 100%;
-  }
+        }
+    }
+@media screen and (max-width: 445px) {
+        .details-product{
+            height: 150px;
+            width: 130px;
+        }
+        .trash-b{
+            width: 33px;
+        }
+        .remove{
+            display: none;
+        }
+    }
+
+@media screen and (max-width: 555px) {
+    .mb-modal {
+        width: 100%;
+    }
+    .trash-b{
+        width: 33px;
+    }
+    .remove{
+            display: none;
+        }
+        .card-titles{
+        width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 }
 
 @media screen and (max-width: 515px) {
-  .remove-product{
-    width: 53%;
-  }
-}
+    }
 
 @media screen and (max-width: 332px) {
   .container-items{
