@@ -215,10 +215,15 @@ export default {
                                 class="detail-img">
                                 <img v-else  class="detail-img" :src="getImageUrl(dish.image_path)"  :alt="dish.name">
                                 <h5 class=" text-center m-0 mx-1">{{ dish.name }}</h5>
-                                <div class="card-body p-3">
+                                <div class="card-bodys p-3">
                                     <span class="price m-0 my-2 badge bg-dark d-block">{{ dish.price }} &euro;</span>
-                                    <span class=""><strong>Ingredienti: </strong>{{ dish.ingredients }}</span>
-                                    <p class="card-text mt-1">{{ dish.description }}</p>
+                                    <span class="d-flex flex-column flex-wrap ">
+                                        <strong>Ingredienti: </strong>
+                                        {{ dish.ingredients }}
+                                    </span>
+                                    <span class="infos">
+                                        <strong>Descrizione: </strong> {{ dish.description }}
+                                    </span>
                                 </div>
                                 <div class="detaildish-cart">
                                     <button v-if="!dish.isAdded && isAllItemsFromCurrentRestaurant" @click="store.addToCart(dish),dish.isAdded=true" class="btn btn-dark p-1">Aggiungi Al Carrello</button>
@@ -358,8 +363,12 @@ export default {
                 border-radius: 15px;
             }
             .card-body{
+                width: 100%;
                 .price{
                     font-size: 1.1rem;
+                }
+                span{
+                    width: 100% !important;
                 }
                 h5, .card-title{
                     width: 300px;
@@ -375,6 +384,10 @@ export default {
                 }
             }
         }
+        .detail-dish .card-bodys .infos {
+            word-wrap: break-word;
+        }
+
         .detail-dish {
             bottom: 0;
             overflow: auto;
@@ -394,6 +407,16 @@ export default {
             display: flex;
             flex-direction: column;
             justify-items: center;
+            .card-bodys{
+                width: 100%;
+                .price{
+                    font-size: 1.1rem;
+                }
+                .infos{
+                    width: 30px !important;
+                }
+
+            }
             .added{
                 width: 50%;
                 display: flex;
@@ -465,6 +488,7 @@ export default {
     }
     @media screen and (max-width: 512px) {
         .card-body{
+            width: 100%;
             h5, .card-title{
                     width: 150px !important;
                 }

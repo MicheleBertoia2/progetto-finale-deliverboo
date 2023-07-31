@@ -4,10 +4,11 @@
           <canvas ref="webgl" class="w-100 h-100"></canvas>
         </div>
         <div class="slogan-container">
-          <img src="/img/slogan.png" alt="">
+            <img src="/img/fantasminellostomaco.png" alt="">
+
         </div>
         <div class="logo-container flicker-in-1">
-            <img src="/img/logojumbo.png" alt="">
+            <img src="img/logoscritta2.png" alt="">
         </div>
     </div>
   </template>
@@ -69,7 +70,7 @@
         //   model.rotation.y = Math.PI / 4
 
 
-          model.scale.set(1.5, 1.5, 1.5)
+          model.scale.set(1, 1, 1)
           scene.add(model)
 
           //animazione iniziale
