@@ -338,7 +338,7 @@ ul {
 
 
     min-height: 1250px;
-    background-position:0 100px;
+    background-position:0 130px;
 
     background-size: cover;
     background-repeat: no-repeat;
@@ -510,7 +510,7 @@ ul {
     }
 }
 
-@media (min-width: 1401px) {
+@media (min-width: 1501px) {
     .container-restaurant {
         min-height: 1550px;
     }
