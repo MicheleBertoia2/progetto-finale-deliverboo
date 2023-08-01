@@ -171,8 +171,8 @@ export default {
             <div class="dishes d-flex containers flex-wrap py-5">
                 <div v-for="(dish, i) in restaurant.dishes" :key="i" class="cards d-flex mt-5 ms-4" >
                     <div class="d-flex dish " :class="{'hidden': dish.showDetail}">
-                        <img v-if="dish.image_path.includes('http://') || dish.image_path.includes('https://')" :src="dish.image_path" class="card-img-top imgdishes " :alt="dish.name">
-                        <img v-else :src="getImageUrl(dish.image_path)" class="card-img-top imgdishes " :alt="dish.name">
+                        <img style="object-fit: cover;" v-if="dish.image_path.includes('http://') || dish.image_path.includes('https://')" :src="dish.image_path" class="card-img-top imgdishes " :alt="dish.name">
+                        <img style="object-fit: cover;" v-else :src="getImageUrl(dish.image_path)" class="card-img-top imgdishes " :alt="dish.name">
                         <div class="card-body">
                             <h5 class="card-title">{{ dish.name }}</h5>
                             <p class="card-text m-0">{{ dish.ingredients }}</p>

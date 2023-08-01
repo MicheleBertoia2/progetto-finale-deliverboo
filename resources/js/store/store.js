@@ -8,7 +8,7 @@ export const store = reactive({
     loaded: false,
 
     typesImages: [
-        'pizza2.png',
+        'pizza3.png',
         'sushi.png',
         'cinese.png',
         'americano.png',

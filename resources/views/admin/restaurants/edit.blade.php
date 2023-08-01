@@ -65,19 +65,19 @@
                 <div class="d-flex align-items-end flex-wrap div-img">
                     <div>
                         @if (str_contains($restaurant->image, 'http://') || str_contains($restaurant->image, 'https://'))
-                            <img height="300px" class="mt-3 bg-white" id="prev-img"
+                            <img height="300px" class="mb-1 mt-3 bg-white" id="prev-img"
                                 src="{{ $restaurant->image ? $restaurant->image : Vite::asset('resources\img\placeholder-img.png') }}"
                                 alt="{{ $restaurant->image == false ? 'Nessuna immagine' : $restaurant->name }}">
                         @elseif(str_contains($restaurant->image, "resources/img/placeholder-img.png" ))
-                            <img height="300px" class="mt-3 bg-white" id="prev-img" src="{{ Vite::asset($restaurant->image) }}" alt="{{ $restaurant->name }}">
+                            <img height="300px" class="mb-1 mt-3 bg-white" id="prev-img" src="{{ Vite::asset($restaurant->image) }}" alt="{{ $restaurant->name }}">
                         @else
-                            <img height="300px" class="mt-3 bg-white" id="prev-img"
+                            <img height="300px" class="mb-1 mt-3 bg-white" id="prev-img"
                                 src="{{ $restaurant->image ? asset('storage/' . $restaurant->image) : Vite::asset('resources\img\placeholder-img.png') }}"
                                 alt="{{ $restaurant->image == false ? 'Nessuna immagine' : $restaurant->name }}">
                         @endif
                     </div>
                     {{-- * il button deve essere type="button" oppure diverrà automaticamnete type="submit" --}}
-                    <button type="button" class="btn btn-danger ms-2 {{ str_contains($restaurant->image, 'resources/img/placeholder-img.png') ? 'd-none' : '' }}" id="deleteButton" onclick="deleteImage()" style="width: 50px; height: 50px;"><span class="fa-solid fa-trash"></span><input id="inputDeleteImage" type="text" value="empty" name="noImage" style="opacity: 0; border: none; height: 0; width: 0;"></button>
+                    <button type="button" class="mb-1 btn btn-danger mt-1 ms-md-1  {{ str_contains($restaurant->image, 'resources/img/placeholder-img.png') ? 'd-none' : '' }}" id="deleteButton" onclick="deleteImage()" style="width: 50px; height: 50px;"><span class="fa-solid fa-trash"></span><input id="inputDeleteImage" type="text" value="empty" name="noImage" style="opacity: 0; border: none; height: 0; width: 0;"></button>
                 </div>
             </div>
             <div class="mb-3">

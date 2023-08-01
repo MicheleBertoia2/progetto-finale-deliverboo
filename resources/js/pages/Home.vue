@@ -512,7 +512,13 @@ ul {
 
 @media (min-width: 1501px) {
     .container-restaurant {
-        min-height: 1550px;
+        min-height: 50px;
+        background-position:0 100px;
     }
 }
+// @media (min-width: 1501px) {
+//     .container-restaurant {
+//         min-height: 1550px;
+//     }
+// }
 </style>
